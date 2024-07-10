@@ -26,6 +26,7 @@ const Tabs = () => {
         <li><NavLink className={({isActive})=>isActive?"active-item":"panding-item"} to="/todo" style={lsStyle}>todo</NavLink></li>
         <li><NavLink className={({isActive})=>isActive?"active-item":"panding-item"} to="/style" style={lsStyle}>style</NavLink></li>
         <li><NavLink className={({isActive})=>isActive?"active-item":"panding-item"} to="/console" style={lsStyle}>ConsolePage</NavLink></li>
+        <li><NavLink className={({isActive})=>isActive?"active-item":"panding-item"} to="/hyougen" style={lsStyle}>hyougen</NavLink></li>
       </ul>
     </div>
   );
