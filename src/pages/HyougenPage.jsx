@@ -29,8 +29,9 @@ const HyougenPage = () => {
       }
 
       try {
-        const response = await fetch(process.env.REACT_APP_API_URL, {
-          method: 'POST',
+        // const response = await fetch(process.env.REACT_APP_API_URL, {
+          const response = await fetch('https://sakubun-otasuke.onrender.com', {
+        method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ prompt: userMessage }),
         });
