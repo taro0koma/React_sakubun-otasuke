@@ -29,6 +29,7 @@ import StylePage from "./pages/StylePage";
 import ConsolePage from "./pages/ConsolePage";
 import HyougenPage from "./pages/HyougenPage";
 const App = () => {
+  console.log(process.env.REACT_APP_API_URL);
 
   // const buttonStyle={background:"#9369ff",color:"white",borderRadius:30}
   
