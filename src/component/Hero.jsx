@@ -2,7 +2,7 @@ const Hero = (props) => {
   return (
     <div>
       {/* <button onClick={props.item}>Submit</button> */}
-      <img src="src\coma.png" />
+      <img src="https://react-sakubun-otasuke.vercel.app/images/coma.png" alt="image"/>
     </div>
   );
 };
