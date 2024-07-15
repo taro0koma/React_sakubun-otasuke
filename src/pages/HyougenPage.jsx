@@ -124,17 +124,6 @@ const HyougenPage = () => {
     <div id="app">
       <Tabs/>
       <h1>表現ぴったり探し</h1>
-      <div id="chat_container" ref={chatContainerRef}>
-        {messages.map((msg) => (
-          <div key={msg.id} className={`wrapper ${msg.isAi ? 'ai' : ''}`}>
-            <div className="chat">
-              <div className="message" id={msg.id}>
-                {msg.value}
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
       <div id="inputarea">
         <form ref={formRef}>
           <textarea
@@ -147,6 +136,17 @@ const HyougenPage = () => {
             <img src="assets/send.svg" alt="実行する" />
           </button>
         </form>
+        <div id="chat_container" ref={chatContainerRef}>
+        {messages.map((msg) => (
+          <div key={msg.id} className={`wrapper ${msg.isAi ? 'ai' : ''}`}>
+            <div className="chat">
+              <div className="message" id={msg.id}>
+                {msg.value}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
       </div>
     </div>
   );

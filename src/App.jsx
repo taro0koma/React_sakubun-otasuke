@@ -4,22 +4,6 @@ import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
 import NotFound from "./pages/NotFound";
 import ImagePage from "./pages/ImagePage";
-// const App = () => {
-
-//   return (
-//     <div>
-//       <BrowserRouter>
-//       <Routes>
-//         <Route path="/" element={<HomePage/>} />
-//         <Route path="/about/:id/:name" element={<AboutPage/>} />
-//         <Route path="/contact" element={<ContactPage/>} />
-//         <Route path="/*" element={<NotFound/>} />
-//       </Routes>
-//       </BrowserRouter>
-//     </div>
-//   );
-// };
-// export default App;
 import React from 'react';
 import HeadlinePage from "./pages/HeadlinePage";
 import NumberPage from "./pages/NumberPage";
