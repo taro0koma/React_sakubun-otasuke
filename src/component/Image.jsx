@@ -16,7 +16,7 @@ const ImagePage = () => {
     let fName = firstName.value;
     let lName = lastName.value;
     if (kao===true){
-    myImg.current.src = "src/eye-cloes.png"
+    myImg.current.src = "https://react-sakubun-otasuke.vercel.app/imges/eye-cloes.png"
     myImg.current.setAttribute('height',"300px")
     myImg.current.setAttribute('width','300px')
     kao=false;

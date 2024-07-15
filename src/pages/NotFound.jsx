@@ -14,7 +14,7 @@ const NotFound = () => {
   console.error("Notfound");
   return (
     <div style={divStyle}>
-      <img src="/src/notfound.png"></img>
+      <img src="https://react-sakubun-otasuke.vercel.app/images/notfound.png"></img>
       <h1 style={NotFoundStyle}>404</h1>
       <p style={mojiStyle}>Not found<br/>URL,ファイル名にタイプミスがないかご確認ください。</p>
       <a style={mojiStyle} href="/">←作文お助けアプリのトップページ</a>
