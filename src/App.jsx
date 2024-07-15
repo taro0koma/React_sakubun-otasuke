@@ -10,7 +10,7 @@ import NumberPage from "./pages/NumberPage";
 import KeyPage from "./pages/KeyPage";
 import TodoPage from "./pages/TodoPage";
 import StylePage from "./pages/StylePage";
-// import ConsolePage from "./pages/ConsolePage";
+import ConsolePage from "./pages/ConsolePage";
 import HyougenPage from "./pages/HyougenPage";
 const App = () => {
 
@@ -29,7 +29,7 @@ const App = () => {
          <Route path="/key" element={<KeyPage/>} />
          <Route path="/todo" element={<TodoPage/>} />
          <Route path="/style" element={<StylePage/>} />
-         {/* <Route path="/console" element={<ConsolePage/>} /> */}
+         <Route path="/console" element={<ConsolePage/>} />
          <Route path="/hyougen" element={<HyougenPage/>} />
          <Route path="/*" element={<NotFound/>} />
        </Routes>
