@@ -71,7 +71,7 @@ const Tabs = () => {
           <li><NavLink className={({isActive})=>isActive?"active-item":"panding-item"} to="/key" style={lsStyle}>key</NavLink></li>
           <li><NavLink className={({isActive})=>isActive?"active-item":"panding-item"} to="/todo" style={lsStyle}>todo</NavLink></li>
           <li><NavLink className={({isActive})=>isActive?"active-item":"panding-item"} to="/style" style={lsStyle}>段落の組み立て</NavLink></li>
-          <li><NavLink className={({isActive})=>isActive?"active-item":"panding-item"} to="/console" style={lsStyle}>書き出しおみくじ</NavLink></li>
+          {/* <li><NavLink className={({isActive})=>isActive?"active-item":"panding-item"} to="/console" style={lsStyle}>書き出しおみくじ</NavLink></li> */}
           <li><NavLink className={({isActive})=>isActive?"active-item":"panding-item"} to="/hyougen" style={lsStyle}>表現ぴったり探し</NavLink></li>
 
         </ul>
