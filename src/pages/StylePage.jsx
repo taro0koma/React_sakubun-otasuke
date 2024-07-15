@@ -2,6 +2,10 @@ import React, { useState, useRef, useEffect } from "react";
 import Tabs from "../component/Tabs";
 
 const StylePage = () => {
+  let ok = "no";
+  const [dataArray, setDataArray] = useState([]);
+  const regex = /\[([\s\S]*?)\]/; // 「[」から「]」までの部分にマッチする正規表現
+
   const gradeJapan = {
     "grade": "とくに制限なし",
     "s1": "小学１年生",
@@ -41,6 +45,7 @@ const StylePage = () => {
   const [messages, setMessage] = useState("");
   const [answers, setAnswer] = useState("");
   const chatContainerRef = useRef(null);
+  
 
   const InputOnChange = (property, value) => {
     setFormObj((prevObj) => ({
@@ -66,6 +71,7 @@ const StylePage = () => {
       });
 
       if (response.ok) {
+        ok = "ok"
         console.log(userMemo);
         const data = await response.json();
         const parsedData = data.bot.trim();
@@ -90,8 +96,12 @@ const StylePage = () => {
   };
 
   const addAnswer = (value) => {
-    console.log(value);
-    setAnswer(value);
+    let match = value.match(regex);
+    let extractedArrayString = match[0]; // マッチした部分全体を取得
+    let array = eval(extractedArrayString); // evalで文字列を配列として評価
+    console.log(array[1]);
+    setAnswer(array);
+    setDataArray(array);
     scrollChatToBottom();
   };
 
@@ -184,6 +194,29 @@ const StylePage = () => {
       chatContainer.scrollTop = chatContainer.scrollHeight;
     }
   };
+  const hyou = () =>{
+    if (Array.isArray(dataArray) && dataArray.length > 0){
+    return(
+      <table>
+      <thead>
+        <tr>
+          <th style={{whiteSpace:"nowrap"}}>段落番号</th>
+          <th>こんな内容の段落を書いてみるのがおすすめ！</th>
+        </tr>
+      </thead>
+      <tbody>
+        {dataArray.map((item, index) => (
+          <tr key={index}>
+            <td>{index + 1}</td>
+            <td>{item}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    )
+  }
+}
+  
 
   return (
     <div className="container">
@@ -228,48 +261,13 @@ const StylePage = () => {
         </select>
         <br />
         {renderAdditionalQuestions()}
-        {/* <h5>入力欄</h5>
-        <input
-          onChange={(e) => {
-            InputOnChange("fName", e.target.value);
-          }}
-          value={formObj.fName}
-          placeholder="１番目に書きたいこと"
-        />
-        <input
-          onChange={(e) => {
-            InputOnChange("nName", e.target.value);
-          }}
-          value={formObj.nName}
-          placeholder="２番目にか書きたいこと"
-        />
-        <input
-          onChange={(e) => {
-            InputOnChange("lName", e.target.value);
-          }}
-          value={formObj.lName}
-          placeholder="３番目に書きたいこと" 
-        />*/}
+        
         <br />
         <button type="submit">段落の組み立て教えて！</button>
         <p>{messages}</p>
       </form>
-      {/* <table>
-        <thead>
-          <tr>
-            <th>No</th>
-            <th>Content</th>
-          </tr>
-        </thead>
-        <tbody>
-          {messages.map((msg, index) => (
-            <tr key={index}>
-              <td>{index + 1}</td>
-              <td>{msg.value}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table> */}
+      
+      {hyou()}
       <div id="chat_container" ref={chatContainerRef}>
         {answers}
       </div>
