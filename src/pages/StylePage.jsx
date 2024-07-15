@@ -201,7 +201,7 @@ const StylePage = () => {
       <thead>
         <tr>
           <th style={{whiteSpace:"nowrap"}}>段落番号</th>
-          <th>こんな内容の段落を書いてみるのがおすすめ！</th>
+          <th>こんな内容をふくらませて段落を書いてみるのがおすすめ！</th>
         </tr>
       </thead>
       <tbody>
