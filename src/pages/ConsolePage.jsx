@@ -21,15 +21,21 @@ const gradeJapan = {
   k2: "高校２年生",
   k3: "高校３年生",
 };
+// const [formObj, setFormObj] = useState({
+//   grade: " ",
+// });
+
 
 const ConsolePage = () => {
+  
   const [kakidashis, setKakidashis] = useState([]);
 
   useEffect(() => {
     getKakidashis();
   }, []);
   async function getKakidashis() {
-    const { data, error } = await supabase.from("sakubunKakidashi").select();
+    const { data, error } = await supabase.from("sakubunKakidashi").select('*').eq('types','自分の経験から入る');
+    console.log(data);
     if (error) {
       console.error("フェッチでエラーが発生しました：", error);
     } else {
@@ -38,10 +44,13 @@ const ConsolePage = () => {
     }
   }
 
+  
+  
   return (
     <div>
       <Tabs />
       <h1>書き出しおみくじ</h1>
+      
       <ul>
         {kakidashis.map((kakidashi) => (
           <li key={kakidashi.id}>
