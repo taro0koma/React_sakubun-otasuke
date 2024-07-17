@@ -33,16 +33,83 @@ const HomePage = () => {
           <img style={{width:"100%", height:"auto"}}
             src="https://react-sakubun-otasuke.vercel.app/images/sakubunnigate.png"/>
         </figure>
+        <div class="right" style={{margin:"0 0 0 20px", padding:0}}>
+        <p class="title" style={{margin:0, padding:0, fontWeight:"bold", fontSize:"18px"}}>あるところに<br />作文の苦手なKさんがいました・・</p>
         <p class="text">
-          ここにテキストが入りますここにテキストが入りますここにテキストが入りますここにテキストが入りますここにテキストが入りますここにテキストが入ります
+        本をたくさん読めば語彙が増えるとか、作文や国語が得意になると言われているが、思い通りにいかない困っている人に「作文おたすけアプリ」の使い方とおすすめポイントを案内します。
         </p>
+        </div>
       </div>
-      <img src="https://react-sakubun-otasuke.vercel.app/images/wantyan1.png" />
-      <br />
-      <img src="https://react-sakubun-otasuke.vercel.app/images/mapwakatta.png" />
-      <br />
-      <img src="https://react-sakubun-otasuke.vercel.app/images/wantyan2.png" />
-      <br />
+
+
+      <div class="flex" style={{display:"flex", width:640, margin:0, padding:0}}>
+        <figure class="image" style={{width:640, margin:0, padding:0}}>
+          <img style={{width:"100%", height:"auto"}}
+            src="https://react-sakubun-otasuke.vercel.app/images/wantyan1.png"/>
+        </figure>
+        <div class="right" style={{margin:"0 0 0 20px", padding:0}}>
+        <p class="title" style={{margin:0, padding:0, fontWeight:"bold", fontSize:"18px"}}>あるところに<br />作文の苦手なKさんがいました・・</p>
+        <p class="text">
+        本をたくさん読めば語彙が増えるとか、作文や国語が得意になると言われているが、思い通りにいかない困っている人に「作文おたすけアプリ」の使い方とおすすめポイントを案内します。
+        </p>
+        </div>
+      </div>
+
+
+      <div class="flex" style={{display:"flex", width:640, margin:0, padding:0}}>
+        <figure class="image" style={{width:640, margin:0, padding:0}}>
+          <img style={{width:"100%", height:"auto"}}
+            src="https://react-sakubun-otasuke.vercel.app/images/mapwaku.png"/>
+        </figure>
+        <div class="right" style={{margin:"0 0 0 20px", padding:0}}>
+        <p class="title" style={{margin:0, padding:0, fontWeight:"bold", fontSize:"18px"}}>あるところに<br />作文の苦手なKさんがいました・・</p>
+        <p class="text">
+        本をたくさん読めば語彙が増えるとか、作文や国語が得意になると言われているが、思い通りにいかない困っている人に「作文おたすけアプリ」の使い方とおすすめポイントを案内します。
+        </p>
+        </div>
+      </div>
+
+      <div class="flex" style={{display:"flex", width:640, margin:0, padding:0}}>
+        <figure class="image" style={{width:640, margin:0, padding:0}}>
+          <img style={{width:"100%", height:"auto"}}
+            src="https://react-sakubun-otasuke.vercel.app/images/wantyan2.png"/>
+        </figure>
+        <div class="right" style={{margin:"0 0 0 20px", padding:0}}>
+        <p class="title" style={{margin:0, padding:0, fontWeight:"bold", fontSize:"18px"}}>あるところに<br />作文の苦手なKさんがいました・・</p>
+        <p class="text">
+        本をたくさん読めば語彙が増えるとか、作文や国語が得意になると言われているが、思い通りにいかない困っている人に「作文おたすけアプリ」の使い方とおすすめポイントを案内します。
+        </p>
+        </div>
+      </div>
+
+
+      <div class="flex" style={{display:"flex", width:640, margin:0, padding:0}}>
+        <figure class="image" style={{width:640, margin:0, padding:0}}>
+          <img style={{width:"100%", height:"auto"}}
+            src="https://react-sakubun-otasuke.vercel.app/images/mapwaku.png"/>
+        </figure>
+        <div class="right" style={{margin:"0 0 0 20px", padding:0}}>
+        <p class="title" style={{margin:0, padding:0, fontWeight:"bold", fontSize:"18px"}}>あるところに<br />作文の苦手なKさんがいました・・</p>
+        <p class="text">
+        本をたくさん読めば語彙が増えるとか、作文や国語が得意になると言われているが、思い通りにいかない困っている人に「作文おたすけアプリ」の使い方とおすすめポイントを案内します。
+        </p>
+        </div>
+      </div>
+
+
+      <div class="flex" style={{display:"flex", width:640, margin:0, padding:0}}>
+        <figure class="image" style={{width:640, margin:0, padding:0}}>
+          <img style={{width:"100%", height:"auto"}}
+            src="https://react-sakubun-otasuke.vercel.app/images/mapwaku.png"/>
+        </figure>
+        <div class="right" style={{margin:"0 0 0 20px", padding:0}}>
+        <p class="title" style={{margin:0, padding:0, fontWeight:"bold", fontSize:"18px"}}>あるところに<br />作文の苦手なKさんがいました・・</p>
+        <p class="text">
+        本をたくさん読めば語彙が増えるとか、作文や国語が得意になると言われているが、思い通りにいかない困っている人に「作文おたすけアプリ」の使い方とおすすめポイントを案内します。
+        </p>
+        </div>
+      </div>
+
       <img src="https://react-sakubun-otasuke.vercel.app/images/wakatta.png" />
       <br />
       <img src="https://react-sakubun-otasuke.vercel.app/images/wantyan3.png" />
