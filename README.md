@@ -1,8 +1,8 @@
-# React + Vite
+# React + Vite　作文お助けアプリ
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+このサイトは自分でいい作文を書けるようになるよう作成したサイトです。
 
-Currently, two official plugins are available:
+現在、２つの公式プラグインが利用可能です：
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
