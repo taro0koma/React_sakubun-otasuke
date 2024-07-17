@@ -1,3 +1,4 @@
+
 // import React, { useState } from "react";
 // import { createClient } from "@supabase/supabase-js";
 // import Tabs from "../component/Tabs";
@@ -8,28 +9,29 @@
 // );
 
 // const ContactPage = () => {
-//   const [kSelectedOption, setkSelectedOption] = useState("");
-//   const [gSelectedOption, setgSelectedOption] = useState("");
+//   const [selectedOption, setSelectedOption] = useState("");
+//   const [selectedGrade, setSelectedGrade] = useState("");
 //   const [submittedOption, setSubmittedOption] = useState("");
+//   const [submittedGrade, setSubmittedGrade] = useState("");
 //   const [kimochis, setKimochis] = useState([]);
 //   const [aiResponse, setAiResponse] = useState("");
 
-//   const handleChange = (e) => {
-//     setkSelectedOption(e.target.value);
+//   const handleChangeOption = (e) => {
+//     setSelectedOption(e.target.value);
 //   };
 
-//   const ghandleChange = (e) => {
-//     setgSelectedOption(e.target.value);
+//   const handleChangeGrade = (e) => {
+//     setSelectedGrade(e.target.value);
 //   };
+
 //   const handleSubmit = (e) => {
 //     e.preventDefault();
-//     setSubmittedOption(kSelectedOption);
-//     getKimochis(kSelectedOption);
-//     setSubmittedOption(gSelectedOption);
-//     getKimochis(gSelectedOption);
+//     setSubmittedOption(selectedOption);
+//     setSubmittedGrade(selectedGrade);
+//     getKimochis(selectedOption, selectedGrade);
 //   };
 
-//   async function getKimochis(option) {
+//   async function getKimochis(option, grade) {
 //     let { data, error } = await supabase
 //       .from("sakubunKimochi")
 //       .select("*")
@@ -40,13 +42,13 @@
 //       setKimochis(data);
 //       if (data.length > 0) {
 //         const examples = data.map((kimochi) => kimochi.examples).join("\n");
-//         fetchAIResponse(option, examples);
+//         fetchAIResponse(option, grade, examples);
 //       }
 //     }
 //   }
 
-//   async function fetchAIResponse(option, examples) {
-//     const userMessage = `下記の言葉に基づいて${option}\nという意味合いで、言葉を10個拡張してください：\n\n${examples}※改行のある箇条書きで書くこと`;
+//   async function fetchAIResponse(option, grade, examples) {
+//     const userMessage = `下記の言葉を${option}、${grade}向けにいう意味合いでどんなときにも使える拡張した言葉を10個つくり、それを改行のある1．２．などの表示になるよう箇条書きにしてください。：\n\n${examples}`;
 //     try {
 //       const response = await fetch(process.env.REACT_APP_API_URL + "/danraku", {
 //         method: "POST",
@@ -73,13 +75,13 @@
 //       <div className="p-4">
 //         <form onSubmit={handleSubmit} className="space-y-4">
 //           <div>
-//             <label htmlFor="dropdown" className="block mb-2">
+//             <label htmlFor="dropdownOption" className="block mb-2">
 //               Select an option:
 //             </label>
 //             <select
-//               id="dropdown"
-//               value={kSelectedOption}
-//               onChange={handleChange}
+//               id="dropdownOption"
+//               value={selectedOption}
+//               onChange={handleChangeOption}
 //               className="p-2 border border-gray-300 rounded"
 //             >
 //               <option value="">--Select--</option>
@@ -89,18 +91,24 @@
 //               <option value="感激">感激</option>
 //               <option value="こわい">こわい</option>
 //             </select>
+//           </div>
+//           <div>
+//             <label htmlFor="dropdownGrade" className="block mb-2">
+//               学年を選択してください:
+//             </label>
 //             <select
-//               id="dropdown"
-//               value={gSelectedOption}
-//               onChange={ghandleChange}
+//               id="dropdownGrade"
+//               value={selectedGrade}
+//               onChange={handleChangeGrade}
 //               className="p-2 border border-gray-300 rounded"
 //             >
-//               <option value="">--Select--</option>
-//               <option value="ほっとした">ほっとした</option>
-//               <option value="おどろいた">おどろいた</option>
-//               <option value="うれしい">うれしい</option>
-//               <option value="感激">感激</option>
-//               <option value="こわい">こわい</option>
+//               <option value="">--Select Grade--</option>
+//               <option value="1年生">1年生</option>
+//               <option value="2年生">2年生</option>
+//               <option value="3年生">3年生</option>
+//               <option value="4年生">4年生</option>
+//               <option value="5年生">5年生</option>
+//               <option value="6年生">6年生</option>
 //             </select>
 //           </div>
 //           <button
@@ -130,6 +138,7 @@
 // };
 
 // export default ContactPage;
+
 import React, { useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import Tabs from "../component/Tabs";
@@ -141,21 +150,28 @@ const supabase = createClient(
 
 const ContactPage = () => {
   const [selectedOption, setSelectedOption] = useState("");
+  const [selectedGrade, setSelectedGrade] = useState("");
   const [submittedOption, setSubmittedOption] = useState("");
+  const [submittedGrade, setSubmittedGrade] = useState("");
   const [kimochis, setKimochis] = useState([]);
   const [aiResponse, setAiResponse] = useState("");
 
-  const handleChange = (e) => {
+  const handleChangeOption = (e) => {
     setSelectedOption(e.target.value);
+  };
+
+  const handleChangeGrade = (e) => {
+    setSelectedGrade(e.target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmittedOption(selectedOption);
-    getKimochis(selectedOption);
+    setSubmittedGrade(selectedGrade);
+    getKimochis(selectedOption, selectedGrade);
   };
 
-  async function getKimochis(option) {
+  async function getKimochis(option, grade) {
     let { data, error } = await supabase
       .from("sakubunKimochi")
       .select("*")
@@ -166,13 +182,13 @@ const ContactPage = () => {
       setKimochis(data);
       if (data.length > 0) {
         const examples = data.map((kimochi) => kimochi.examples).join("\n");
-        fetchAIResponse(option, examples);
+        fetchAIResponse(option, grade, examples);
       }
     }
   }
 
-  async function fetchAIResponse(option, examples) {
-    const userMessage = `下記の言葉を${option}\nをいう意味合いで拡張した言葉を10個つくり、それを改行のある箇条書きにしてください。：\n\n${examples}`;
+  async function fetchAIResponse(option, grade, examples) {
+    const userMessage = `下記の言葉を${option}という意味合いで${grade}向けにどんなときにも使える拡張した言葉を10個つくり、それを改行のある1．２．などの表示になるよう箇条書きにしてください。〇〇を埋めずに載せてください！！：\n\n${examples}`;
     try {
       const response = await fetch(process.env.REACT_APP_API_URL + "/danraku", {
         method: "POST",
@@ -183,7 +199,8 @@ const ContactPage = () => {
       if (response.ok) {
         const data = await response.json();
         const parsedData = data.bot.trim();
-        setAiResponse(parsedData);
+        const formattedData = parsedData.replace(/\n/g, "<br />");
+        setAiResponse(formattedData);
       } else {
         console.error("AIのレスポンスの取得に失敗しました。");
       }
@@ -199,13 +216,13 @@ const ContactPage = () => {
       <div className="p-4">
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="dropdown" className="block mb-2">
+            <label htmlFor="dropdownOption" className="block mb-2">
               Select an option:
             </label>
             <select
-              id="dropdown"
+              id="dropdownOption"
               value={selectedOption}
-              onChange={handleChange}
+              onChange={handleChangeOption}
               className="p-2 border border-gray-300 rounded"
             >
               <option value="">--Select--</option>
@@ -214,6 +231,25 @@ const ContactPage = () => {
               <option value="うれしい">うれしい</option>
               <option value="感激">感激</option>
               <option value="こわい">こわい</option>
+            </select>
+          </div>
+          <div>
+            <label htmlFor="dropdownGrade" className="block mb-2">
+              学年を選択してください:
+            </label>
+            <select
+              id="dropdownGrade"
+              value={selectedGrade}
+              onChange={handleChangeGrade}
+              className="p-2 border border-gray-300 rounded"
+            >
+              <option value="">--Select Grade--</option>
+              <option value="1年生">1年生</option>
+              <option value="2年生">2年生</option>
+              <option value="3年生">3年生</option>
+              <option value="4年生">4年生</option>
+              <option value="5年生">5年生</option>
+              <option value="6年生">6年生</option>
             </select>
           </div>
           <button
