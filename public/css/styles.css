@@ -1,0 +1,32 @@
+/* 全体のコンテナを中央寄せ */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* セットごとのスタイル */
+.set {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* 画像のスタイル */
+.set img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+/* 見出しのスタイル */
+.set h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+/* テキストのスタイル */
+.set p {
+  font-size: 16px;
+}
