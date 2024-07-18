@@ -23,7 +23,7 @@ const App = () => {
       <BrowserRouter>
        <Routes>
          <Route path="/" element={<HomePage/>} />
-         <Route path="/about/:id/:name" element={<AboutPage/>} />
+         <Route path="/mapmake" element={<AboutPage/>} />
          <Route path="/contact" element={<ContactPage/>} />
          <Route path="/image" element={<ImagePage/>} />
          <Route path="/headline" element={<HeadlinePage/>} />

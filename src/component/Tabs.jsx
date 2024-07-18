@@ -80,10 +80,10 @@ const Tabs = () => {
               className={({ isActive }) =>
                 isActive ? "active-item" : "panding-item"
               }
-              to="/about/10/ariyan"
+              to="/mapmake"
               style={lsStyle}
             >
-              about
+              イメージマップの作り方
             </NavLink>
           </li>
           <li>
