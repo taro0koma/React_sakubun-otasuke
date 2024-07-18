@@ -1,8 +1,8 @@
 import React from "react";
 import Hero from "../component/Hero";
 import Tabs from "../component/Tabs";
-// import '../../assets/css/styles.css'; 
-import 'https://react-sakubun-otasuke.vercel.app/css/style.css'
+import styles from '../assets/css/styles.module.css'; 
+// import 'https://react-sakubun-otasuke.vercel.app/css/style.css'
 
 const HomePage = () => {
   const items = [
@@ -10,8 +10,8 @@ const HomePage = () => {
       imgSrc:
         "https://react-sakubun-otasuke.vercel.app/images/sakubunnigate.png",
       altText: "作文苦手なのよー！",
-      heading: "あるところに<br/>作文が苦手なKさんがいました。",
-      text: "説明文1",
+      heading: "あるところに\n作文が苦手なKさんがいました。",
+      text: "本をたくさん読めば語彙が増えるとか、作文や国語が得意になると言われているが、思い通りにいかない困っている人に「作文おたすけアプリ」の使い方とおすすめポイントを案内します。",
     },
     {
       imgSrc: "https://react-sakubun-otasuke.vercel.app/images/wantyan1.png",
@@ -89,10 +89,13 @@ const HomePage = () => {
       <Tabs />
       <h1>Home</h1>
       <Hero />
-      <h3>使い方</h3>
-      <div className="container">
+      
+      <div className={styles.container}>
+      <h2>作文お助けアプリの使い方</h2>
+      <img src="https://react-sakubun-otasuke.vercel.app/images/coma.png" alt="image"/>
+
         {items.map((item, index) => (
-          <div className="set" key={index}>
+          <div className={styles.set} key={index}>
             <img src={item.imgSrc} alt={item.altText} />
             <h2>{item.heading}</h2>
             <p>{item.text}</p>

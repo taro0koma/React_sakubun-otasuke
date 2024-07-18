@@ -12,6 +12,8 @@ import TodoPage from "./pages/TodoPage";
 import StylePage from "./pages/StylePage";
 import ConsolePage from "./pages/ConsolePage";
 import HyougenPage from "./pages/HyougenPage";
+import '../src/assets/css/index.css'
+
 const App = () => {
 
   // const buttonStyle={background:"#9369ff",color:"white",borderRadius:30}

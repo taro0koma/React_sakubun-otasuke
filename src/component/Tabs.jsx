@@ -51,7 +51,7 @@ const Tabs = () => {
     <div>
       
       <a href="/">
-      <h1>作文アプリ<br/>お助け</h1>
+      <h1 className='logo'>作文<span className='spanLogo'>アプリ</span><br/>おたすけ</h1>
       </a>
       <style jsx="true">
         

@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+  letter-spacing: 2px !important;
+}
+.logo{
+  color: #4b4b4b !important;
+}
+span.spanLogo{
+  color: white !important;
+  background-color: #4b4b4b !important;
+  font-size: 20px;
+  padding: 10px 13px;
+  margin: 5px;
+  border-radius: 30px;
+  font-weight: bold;
+}
