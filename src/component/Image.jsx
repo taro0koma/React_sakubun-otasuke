@@ -16,12 +16,12 @@ const ImagePage = () => {
     let fName = firstName.value;
     let lName = lastName.value;
     if (kao===true){
-    myImg.current.src = "https://react-sakubun-otasuke.vercel.app/images/eye-cloes.png"
+    myImg.current.src = process.env.REACT_APP_API_URL+"/images/eye-cloes.png"
     myImg.current.setAttribute('height',"300px")
     myImg.current.setAttribute('width','300px')
     kao=false;
   }else{
-    myImg.current.src = "https://react-sakubun-otasuke.vercel.app/images/eye-open.png"
+    myImg.current.src = process.env.REACT_APP_API_URL+"/images/eye-open.png"
     myImg.current.setAttribute('height',"300px")
     myImg.current.setAttribute('width','300px')
     kao=true;

@@ -4,8 +4,8 @@ const NotFoundStyle={
   fontSize:50,
 }
 const mojiStyle={
-  marginRight:50,
-  marginLeft:50
+  margin:"10px 30px",
+  fontSize:20,
 }
 const divStyle={
   textAlign:"center"
@@ -14,9 +14,9 @@ const NotFound = () => {
   console.error("Notfound");
   return (
     <div style={divStyle}>
-      <img src="https://react-sakubun-otasuke.vercel.app/images/notfound.png"></img>
-      <h1 style={NotFoundStyle}>404</h1>
-      <p style={mojiStyle}>Not found<br/>URL,ファイル名にタイプミスがないかご確認ください。</p>
+      <img src="https://react-sakubun-otasuke.vercel.app/images/notfound.png" style={{margin:"40px 0 0 0"}}></img>
+      <h1 style={NotFoundStyle}>404<br/>Not found</h1>
+      <p style={mojiStyle}>URL,ファイル名に<br/>タイプミスがないかご確認ください。</p>
       <a style={mojiStyle} href="/">←作文お助けアプリのトップページ</a>
     </div>
   );

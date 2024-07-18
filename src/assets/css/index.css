@@ -1,19 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&family=Zen+Maru+Gothic:wght@500&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body{
   letter-spacing: 2px !important;
+  font-size: 40px !important;
+  color: #272829 !important;
+  font-family: "Zen Maru Gothic" !important;
 }
-.logo{
-  color: #4b4b4b !important;
+
+p {
+  margin-left: 50px !important;
+  letter-spacing: 4px !important;
+  line-height: 1.8 !important;
+  color: #272829 !important;
+
 }
-span.spanLogo{
+.app{
   color: white !important;
-  background-color: #4b4b4b !important;
-  font-size: 20px;
-  padding: 10px 13px;
-  margin: 5px;
-  border-radius: 30px;
-  font-weight: bold;
+  background: #6f7074 !important;
+  letter-spacing: 2px !important;
+  border-radius: 100px !important;
+  padding: 3px 10px !important;
+  font-size: 18px !important;
+}
+.otasuke{
+  letter-spacing: 1px !important;
+}
+.bold {
+  font-family: "M PLUS Rounded 1c", sans-serif !important;
+  font-weight: 700 !important;
+  font-style: normal !important;
+}
+
+.ex-bold {
+  font-family: "M PLUS Rounded 1c", sans-serif !important;
+  font-weight: 800 !important;
+  font-style: normal !important;
 }
