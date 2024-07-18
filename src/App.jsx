@@ -19,7 +19,7 @@ const App = () => {
   // const buttonStyle={background:"#9369ff",color:"white",borderRadius:30}
   
   return (
-    <div>
+    <div className="main-menu">
       <BrowserRouter>
        <Routes>
          <Route path="/" element={<HomePage/>} />

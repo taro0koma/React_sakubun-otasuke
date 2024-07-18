@@ -51,11 +51,11 @@ const Tabs = () => {
   return (
     <div>
       <a href="/">
-        <p className="ex-bold">
+        <h1 className="left-top-logo">
           作文<span className="app">アプリ</span>
           <br />
           <span className="otasuke">おたすけ</span>
-        </p>
+        </h1>
       </a>
       <style jsx="true"></style>
       <div className="menu-container">

@@ -3,21 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
-  letter-spacing: 2px !important;
-  font-size: 40px !important;
-  color: #272829 !important;
-  font-family: "Zen Maru Gothic" !important;
-}
-
-p {
-  margin-left: 50px !important;
-  letter-spacing: 4px !important;
-  line-height: 1.8 !important;
-  color: #272829 !important;
-
-}
-.app{
+.left-top-logo > .app{
   color: white !important;
   background: #6f7074 !important;
   letter-spacing: 2px !important;
@@ -25,17 +11,19 @@ p {
   padding: 3px 10px !important;
   font-size: 18px !important;
 }
-.otasuke{
+.left-top-logo > .otasuke{
   letter-spacing: 1px !important;
 }
-.bold {
-  font-family: "M PLUS Rounded 1c", sans-serif !important;
-  font-weight: 700 !important;
-  font-style: normal !important;
-}
-
-.ex-bold {
+.left-top-logo {
   font-family: "M PLUS Rounded 1c", sans-serif !important;
   font-weight: 800 !important;
+  font-size: 40px;
   font-style: normal !important;
+  letter-spacing: 4px !important;
+  color: #272829 !important;
+  line-height: 1.3;
+}
+
+.main-menu{
+  margin:16px 0 0 40px;
 }
