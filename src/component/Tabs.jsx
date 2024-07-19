@@ -433,7 +433,6 @@ const Tabs = () => {
       list-style: none;
       padding: 0 !important;
       margin: 0 !important;
-      display: ${isOpen ? 'block' : 'none'};
       background-color: #333333bf;
       position: absolute;
       top: 100%;
@@ -443,8 +442,9 @@ const Tabs = () => {
       background-size: cover;
       font-size: 20px !important;
       opacity: ${isOpen ? 1 : 0};
+      visibility: ${isOpen ? 'visible' : 'hidden'};
       transform: ${isOpen ? 'translateY(0)' : 'translateY(-20px)'};
-      transition: opacity 0.5s ease, transform 0.5s ease;
+      transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s ease;
     }
     .menu-items li {
       padding: 8px;
