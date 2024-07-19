@@ -1,8 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New&display=swap');
 body{
   letter-spacing: 2px !important;
   font-size: 40px !important;
-  color: #272829 !important;
-  font-family: "Zen Maru Gothic" !important;
+  color: #30546a !important;
+  font-family: "Zen Kaku Gothic New", sans-serif !important;
 }
 
 /* 全体のコンテナを中央寄せ */
@@ -20,6 +21,16 @@ body{
   text-align: center;
   margin-bottom: 40px;
   max-width: 500px;
+}
+select{
+  width: 350px !important;
+  background-color: #dbecec !important;
+  border: white !important;
+  color: #28a8b3 !important;
+  font-family: "Zen Kaku Gothic New", sans-serif !important;
+}
+button{
+  background-color: #7769b8 !important;
 }
 
 /* 画像のスタイル */

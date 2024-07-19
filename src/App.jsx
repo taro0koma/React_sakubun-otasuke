@@ -4,7 +4,7 @@ import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
 import NotFound from "./pages/NotFound";
 import ImagePage from "./pages/ImagePage";
-import React from 'react';
+import React, { useState } from 'react';
 import HeadlinePage from "./pages/HeadlinePage";
 import NumberPage from "./pages/NumberPage";
 import KeyPage from "./pages/KeyPage";
