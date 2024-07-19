@@ -5,6 +5,7 @@ const AboutPage = () => {
     <div>
       <Tabs/>
       <h1>イメージマップの<br/>作り方の動画</h1>
+      <p style={{fontSize:20}}>※これはいつかは自分で動画を作ります</p>
       {/* <iframe 
         width="560" 
         height="315" 
