@@ -126,14 +126,15 @@ const HyougenPage = () => {
       <h1>表現ぴったり探し</h1>
       <div id="inputarea">
         <form ref={formRef}>
-          <textarea
+          <input
             name="prompt"
             rows="1"
             cols="1"
             placeholder="探したい言葉を入力してね。(例：楽しい／さみしい)"
-          ></textarea>
+          ></input>
+          <br />
           <button type="submit">
-            <img src="assets/send.svg" alt="実行する" />
+            実行する
           </button>
         </form>
         <div id="chat_container" ref={chatContainerRef}>

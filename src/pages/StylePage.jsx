@@ -117,6 +117,7 @@ const StylePage = () => {
           value={formObj.sFirst}
           placeholder="１番目に書きたいこと"
         />
+        <br />
         <input
           onChange={(e) => {
             InputOnChange("sSecond", e.target.value);
@@ -124,6 +125,7 @@ const StylePage = () => {
           value={formObj.sSecond}
           placeholder="２番目にか書きたいこと"
         />
+        <br />
         <input
           onChange={(e) => {
             InputOnChange("sThird", e.target.value);
@@ -169,6 +171,7 @@ const StylePage = () => {
           value={formObj.bookReviewFirst}
           placeholder="本の内容"
         /> */}
+        <br />
         <input
           onChange={(e) => {
             InputOnChange("bookReviewSecond", e.target.value);
@@ -176,6 +179,7 @@ const StylePage = () => {
           value={formObj.bookReviewSecond}
           placeholder="印象に残ったところ"
         />
+        <br />
         <input
           onChange={(e) => {
             InputOnChange("bookReviewThird", e.target.value);

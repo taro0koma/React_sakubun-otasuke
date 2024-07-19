@@ -512,56 +512,6 @@ const Tabs = () => {
           </li>
           <li>
             <NavLink
-              to="/image"
-              style={lsStyle}
-              onClick={handleLinkClick}
-              className={({ isActive }) => (isActive ? "active-item" : "panding-item")}
-            >
-              image
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/headline"
-              style={lsStyle}
-              onClick={handleLinkClick}
-              className={({ isActive }) => (isActive ? "active-item" : "panding-item")}
-            >
-              headline
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/number"
-              style={lsStyle}
-              onClick={handleLinkClick}
-              className={({ isActive }) => (isActive ? "active-item" : "panding-item")}
-            >
-              number
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/key"
-              style={lsStyle}
-              onClick={handleLinkClick}
-              className={({ isActive }) => (isActive ? "active-item" : "panding-item")}
-            >
-              key
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/todo"
-              style={lsStyle}
-              onClick={handleLinkClick}
-              className={({ isActive }) => (isActive ? "active-item" : "panding-item")}
-            >
-              todo
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
               to="/style"
               style={lsStyle}
               onClick={handleLinkClick}
