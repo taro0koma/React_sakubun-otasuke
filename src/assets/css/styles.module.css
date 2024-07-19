@@ -22,7 +22,7 @@ body{
   margin-bottom: 40px;
   max-width: 500px;
 }
-select{
+select,input{
   width: 350px !important;
   background-color: #dbecec !important;
   border: white !important;
