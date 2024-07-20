@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "/api/basic-auth"
+      "destination": "/index.html"
     }
   ]
 }
