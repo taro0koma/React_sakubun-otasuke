@@ -5,7 +5,7 @@ import dotenv from 'dotenv'
 
 dotenv.config();
 const app = express();
-const port = 5173;
+const port = process.env.PORT || 5173;
 
 // Basic認証設定
 app.use(basicAuth({
@@ -27,7 +27,7 @@ async function startServer() {
 
   // サーバーの起動
   app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${process.env.REACT_APP_API_URL || port}`);
+    console.log(`Server is running on http://localhost:${port}`);
   });
 }
 
