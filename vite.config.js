@@ -11,3 +11,5 @@ export default defineConfig({
   // plugins: [react(),env({prefix:"VITE",mountedPath:"process.env"})],
   plugins: [react(),env({prefix:"REACT_APP_",mountedPath:"process.env"})],
 })
+
+
