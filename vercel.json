@@ -1,9 +1,8 @@
 {
-  "redirects": [
+  "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "/api/redirect-handler",
-      "permanent": true
+      "destination": "/api/basic-auth"
     }
   ]
 }
