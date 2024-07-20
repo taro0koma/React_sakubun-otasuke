@@ -2,7 +2,9 @@
   "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "/index.html"
+      "destination": "/api/basic-auth.js"
     }
-  ]
+  ],
+  "cleanUrls": true,
+  "trailingSlash": false
 }
