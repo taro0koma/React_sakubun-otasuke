@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import env from "vite-plugin-env-compatible";
-// import './src/assets/css/index.css';
 
 // import {VitePluginTailwind} from 'vite-plugin-tailwind';
 
