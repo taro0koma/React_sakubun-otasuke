@@ -27,7 +27,7 @@ async function startServer() {
 
   // サーバーの起動
   app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+    console.log(`Server is running on http://localhost:${process.env.REACT_APP_API_URL || port}`);
   });
 }
 
