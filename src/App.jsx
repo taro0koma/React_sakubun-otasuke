@@ -13,6 +13,7 @@ import StylePage from "./pages/StylePage";
 import ConsolePage from "./pages/ConsolePage";
 import HyougenPage from "./pages/HyougenPage";
 import '../src/assets/css/index.css'
+import LoginPage from "./pages/LoginPage";
 
 const App = () => {
 
@@ -33,6 +34,7 @@ const App = () => {
          <Route path="/style" element={<StylePage/>} />
          <Route path="/console" element={<ConsolePage/>} />
          <Route path="/hyougen" element={<HyougenPage/>} />
+         <Route path="/login" element={<LoginPage/>} />
          <Route path="/*" element={<NotFound/>} />
        </Routes>
        </BrowserRouter>

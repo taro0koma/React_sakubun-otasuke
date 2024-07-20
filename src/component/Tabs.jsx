@@ -540,6 +540,16 @@ const Tabs = () => {
               表現ぴったり探し
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              to="/login"
+              style={lsStyle}
+              onClick={handleLinkClick}
+              className={({ isActive }) => (isActive ? "active-item" : "panding-item")}
+            >
+              ログインページ
+            </NavLink>
+          </li>
         </ul>
       </div>
     </div>
