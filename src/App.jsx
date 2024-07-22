@@ -20,9 +20,18 @@ const App = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  useEffect(() => {
+    // ローカルストレージから認証情報を読み込む
+    const savedAuth = localStorage.getItem('isAuthenticated');
+    if (savedAuth) {
+      setIsAuthenticated(JSON.parse(savedAuth));
+    }
+  }, []);
+
   const handleLogin = () => {
     if (username === process.env.REACT_APP_USER_NAME && password === process.env.REACT_APP_PASSWORD) {
       setIsAuthenticated(true);
+      localStorage.setItem('isAuthenticated', JSON.stringify(true)); // ローカルストレージに保存
     } else {
       alert('Incorrect username or password');
     }
