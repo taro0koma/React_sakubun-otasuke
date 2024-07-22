@@ -32,8 +32,12 @@ const App = () => {
     if (username === process.env.REACT_APP_USER_NAME && password === process.env.REACT_APP_PASSWORD) {
       setIsAuthenticated(true);
       localStorage.setItem('isAuthenticated', JSON.stringify(true)); // ローカルストレージに保存
-    } else {
-      alert('Incorrect username or password');
+      }else if (username === '' || password === '') {
+      alert('ユーザ名とパスワードを入力してください');
+    }else if (username !== process.env.REACT_APP_USER_NAME && password!== process.env.REACT_APP_PASSWORD){
+      alert('ユーザ名とパスワードが間違っています');
+    }else {
+      alert('ユーザ名またはパスワードが間違っています');
     }
   };
 
