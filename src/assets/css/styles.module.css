@@ -24,7 +24,7 @@ body{
 }
 select{
   width: 350px !important;
-  background-color: #dbecec !important;
+  background-color: #f0f0f0 !important;
   border: white !important;
   color: #28a8b3 !important;
   font-family: "Zen Kaku Gothic New", sans-serif !important;
@@ -32,8 +32,9 @@ select{
 input{
   width: 350px !important;
   border: 2px solid #b0b1b8 !important;
-  background-color: #dbecec !important;
+  background-color: #f0f0f0 !important;
   color: #28a8b3 !important;
+  border: white !important;
   font-family: "Zen Kaku Gothic New", sans-serif !important;
 }
 button{
