@@ -64,28 +64,31 @@ h6{
   h2 {
       font-size: 2.4rem !important;/* 24px*/
   }
-  .omikujibako img{
+  .omikujibako{
     max-width: 100% !important;
-    width: 25% !important;
-    height: 25% !important;
+    width: 17% !important;
+    height: 17% !important;
   }
   
 }
 @media (min-width: 444px) {/* 1200px以上*/
-  .omikujibako img{
+  .omikujibako{
     max-width: 100% !important;
     width: 30% !important;
     height: 30% !important;
   }
 }
 @media (max-width:640px){
-  .omikujibako img{
+  .omikujibako{
     max-width: 100% !important;
     width: 10% !important;
     height: 10% !important;
   }
 }
 @media (min-width: 768px) {/* 768px以上*/
+  .nakami{
+    font-size: 15px;
+  }
   h1 {
       font-size: 3.6rem !important;/* 36px*/
   }
@@ -95,14 +98,14 @@ h6{
   h6{
     font-size: 8px;
   }
-  img{
+  .omikujibako{
     max-width: 100% !important;
     width: 25% !important;
     height: 25% !important;
   }
 }
 @media screen and (max-width: 640px) {/* 640px以下*/
-  .omikujibako img{
+  .omikujibako{
     max-width: 200% !important;
     width: 60% !important;
     height: 60% !important;
@@ -157,16 +160,23 @@ h6{
   }
   .white-box {
     position: fixed;
-    top: 220px !important;
+    bottom: 240px !important;
     left: 50%;
     transform: translateX(-50%);
     width: 80%;
-    height: 700px;
-    padding: 30px !important;
-    background-color: #ffffffdd;
+    max-height: 70% !important;
+    height: 70% !important;
+    padding: 20px !important;
+    background-color: #ffffffec;
     display: none;
     z-index: 1000; /* 最前面に表示するためのz-index */
     box-shadow: 23px 24px 100px -51px #666666;
+  }
+  .white-box h4{
+    font-size: 15px !important;
+  }
+  .nakami{
+    font-size: 10px;
   }
 }
 .img-animate {
@@ -183,6 +193,8 @@ h6{
 
 .white-box.show {
   display: block;
+  max-height: 100% !important;
+  height: 80% !important;
 }
 
 
@@ -200,4 +212,101 @@ img{
   max-width: 100% !important;
   width: 100% !important;
   height: 100% !important;
+}
+
+.contact-button-container {
+  text-align: center;
+  margin: 20px;
+}
+
+.contact-button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.contact-button:hover {
+  background-color: #0056b3;
+}
+.notfoundImage img{
+  width: 50% !important;
+  min-width: 200px !important;
+  margin-top: 2px;
+  padding: 10px 0 0 0;
+  margin: auto !important;
+  display: block !important;
+}
+.contact-card {
+  max-width: 600px !important;
+  margin: 20px auto !important;
+  border: 1px solid #ddd !important;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  overflow: hidden !important;
+  transition: box-shadow 0.3s ease !important;
+  text-decoration: none !important;
+}
+
+.contact-card a {
+  text-decoration: none !important;
+  color: inherit !important;
+}
+
+.contact-card-content {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.contact-card-image {
+  width: 150px !important;
+  height: auto !important;
+  object-fit: cover !important; /* 画像の切り取り方を指定 */
+  margin-right: 0 !important; /* 画像とテキストの間に余白を追加 */
+  margin-left: 5px !important;
+}
+
+.contact-card-text {
+  padding: 20px !important;
+}
+
+.contact-card h3 {
+  margin: 0 !important;
+  font-size: 18px !important;
+  color: #333 !important;
+}
+
+.contact-card p {
+  margin: 5px 0 0 !important;
+  font-size: 14px !important;
+  color: #666 !important;
+}
+
+.contact-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+}
+.EmbedBaseLinkCard{
+  margin-top: .5em;
+  font-size: .78em;
+  display: flex;
+  align-items: center;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.EmbedBaseLinkCard{
+  margin-right: 6px;
+  flex-shrink: 0;
+}
+
+.EmbedBaseLinkCard img{
+  width: 10px !important;
+  height: 10px !important;
+  margin-right: 10px !important;
+  margin: 0px;
 }

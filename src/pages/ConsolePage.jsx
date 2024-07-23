@@ -105,8 +105,7 @@ const ConsolePage = () => {
       ) : (
         kakidashis.map((kakidashi) => (
           <div key={kakidashi.id}>
-            <h4>{kakidashi.examplesentence}</h4>
-            <p style={{fontSize:15}}>{kakidashi.types}</p>
+            <h4>{kakidashi.examplesentence}<br/><span className="nakami">-{kakidashi.types}-</span></h4>
           </div>
         ))
       )}

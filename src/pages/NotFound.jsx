@@ -13,8 +13,8 @@ const divStyle={
 const NotFound = () => {
   console.error("Notfound");
   return (
-    <div style={divStyle}>
-      <img src="https://react-sakubun-otasuke.vercel.app/images/notfound.png" style={{margin:"40px 0 0 0"}}></img>
+    <div style={divStyle} className='notfoundImage'>
+      <img src="https://react-sakubun-otasuke.vercel.app/images/notfound.png" style={{margin:"40px 0 0 0", width:10}}></img>
       <h1 style={NotFoundStyle}>404<br/>Not found</h1>
       <p style={mojiStyle}>URL,ファイル名に<br/>タイプミスがないかご確認ください。</p>
       <a style={mojiStyle} href="/">←作文お助けアプリのトップページ</a>

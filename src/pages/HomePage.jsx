@@ -90,7 +90,18 @@ const HomePage = () => {
     <div>
       <Tabs />
       <Hero />
-      
+      <div className="contact-card">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdJvzw5aympJYQrL58b9DbDy-Jqm8Xr1s43S8gfWTG4y8JY0g/viewform?usp=sf_link" target="_blank" rel="noopener noreferrer">
+        <div className="contact-card-content">
+          <img src="/images/formImage.png" alt="お問い合わせフォームプレビュー" className="contact-card-image" />
+          <div className="contact-card-text">
+            <h3>フィードバック</h3>
+            <p>作文お助けアプリのご意見をお聞かせください。</p>
+            <div className="EmbedBaseLinkCard"><img src="https://www.google.com/s2/favicons?sz=14&amp;domain_url=https://docs.google.com" alt="docs.google.com favicon image" width="14" height="14"/>docs.google.com</div>
+          </div>
+        </div>
+      </a>
+    </div>
       <div className={styles.container}>
       <h2>作文お助けアプリの使い方</h2>
       <br />
