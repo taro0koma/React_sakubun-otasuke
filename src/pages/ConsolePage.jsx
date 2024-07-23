@@ -77,7 +77,7 @@ const ConsolePage = () => {
     setTimeout(() => {
       myImg.current.src = "/images/omikuji.png";
       whiteBoxRef.current.classList.remove("show"); // 白い四角を非表示
-    }, 3000); // 1秒後に再読み込み
+    }, 5000); // 1秒後に再読み込み
   };
 
   useEffect(() => {

@@ -156,7 +156,7 @@ h6{
   }
 }
 .img-animate {
-  animation: imgAnimation 3s;
+  animation: imgAnimation 5s;
 }
 
 @keyframes imgAnimation {
