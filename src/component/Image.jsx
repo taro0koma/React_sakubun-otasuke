@@ -16,12 +16,12 @@ const ImagePage = () => {
     let fName = firstName.value;
     let lName = lastName.value;
     if (kao===true){
-    myImg.current.src = process.env.REACT_APP_API_URL+"/images/eye-cloes.png"
+    myImg.current.src = "/images/eye-cloes.png"
     myImg.current.setAttribute('height',"300px")
     myImg.current.setAttribute('width','300px')
     kao=false;
   }else{
-    myImg.current.src = process.env.REACT_APP_API_URL+"/images/eye-open.png"
+    myImg.current.src = "/images/eye-open.png"
     myImg.current.setAttribute('height',"300px")
     myImg.current.setAttribute('width','300px')
     kao=true;
@@ -33,7 +33,7 @@ const ImagePage = () => {
       <h1>イメージページです🎉</h1>
        <input ref={(a)=>firstName=a} placeholder="姓　例：作文" /><br />
        <input ref={(a)=>lastName=a} placeholder="名　例：太郎" /><br />
-      <img ref={myImg} src="src/eye-cloes.png" style={imagepngStyle}/>
+      <img ref={myImg} src="/images/eye-cloes.png" style={imagepngStyle}/>
       <button onClick={change}>クリック！</button>
 
     </div>

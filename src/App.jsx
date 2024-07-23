@@ -42,7 +42,7 @@ const App = () => {
   };
 
   return isAuthenticated ? (
-    <div className="main-menu">
+    <div className="container">
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
