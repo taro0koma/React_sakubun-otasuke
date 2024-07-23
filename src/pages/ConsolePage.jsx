@@ -98,7 +98,7 @@ const ConsolePage = () => {
       <Tabs />
       <h2>書き出しおみくじ</h2>
       <h6>押してね！</h6>
-      <img ref={myImg} src="/images/omikuji.png" alt="おみくじ箱" />
+      <img ref={myImg} src="/images/omikuji.png" alt="おみくじ箱" className="omikujibako"/>
       <div ref={whiteBoxRef} className="white-box">
       {isLoading ? (
         <p>読み込み中...</p>

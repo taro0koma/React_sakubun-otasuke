@@ -3,6 +3,9 @@ import Hero from "../component/Hero";
 import Tabs from "../component/Tabs";
 import styles from '../assets/css/styles.module.css'; 
 // import '/css/style.css'
+ 
+  // width: 100% !important;
+  // height: 100% !important;
 
 const HomePage = () => {
   const items = [
@@ -95,7 +98,7 @@ const HomePage = () => {
 
         {items.map((item, index) => (
           <div className={styles.set} key={index}>
-            <img src={item.imgSrc} alt={item.altText} />
+            <img src={item.imgSrc} alt={item.altText}/>
             <h3>{item.heading}</h3>
             <p>{item.text}</p>
           </div>
