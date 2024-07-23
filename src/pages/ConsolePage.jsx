@@ -72,7 +72,7 @@ const ConsolePage = () => {
 
     setTimeout(() => {
       myImg.current.classList.remove("img-animate"); // アニメーションのクラスを削除
-    }, 3000); // アニメーションの持続時間に合わせる
+    }, 5000); // アニメーションの持続時間に合わせる
 
     setTimeout(() => {
       myImg.current.src = "/images/omikuji.png";
