@@ -95,7 +95,7 @@ const HomePage = () => {
         <div className="contact-card-content">
           <img src="/images/formImage.png" alt="お問い合わせフォームプレビュー" className="contact-card-image" />
           <div className="contact-card-text">
-            <h3>フィードバック</h3>
+            <h3>フィードバックください</h3>
             <p>作文お助けアプリのご意見をお聞かせください。</p>
             <div className="EmbedBaseLinkCard"><img src="https://www.google.com/s2/favicons?sz=14&amp;domain_url=https://docs.google.com" alt="docs.google.com favicon image" width="14" height="14"/>docs.google.com</div>
           </div>

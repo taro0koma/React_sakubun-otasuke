@@ -247,7 +247,6 @@ img{
   margin: 20px auto !important;
   border: 1px solid #ddd !important;
   border-radius: 8px !important;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
   overflow: hidden !important;
   transition: box-shadow 0.3s ease !important;
   text-decoration: none !important;
@@ -277,18 +276,18 @@ img{
 
 .contact-card h3 {
   margin: 0 !important;
-  font-size: 18px !important;
-  color: #333 !important;
+  font-size: 22px !important;
+  color: #585858 !important;
 }
 
 .contact-card p {
-  margin: 5px 0 0 !important;
+  margin: 7px 0 0 !important;
   font-size: 14px !important;
   color: #666 !important;
 }
 
 .contact-card:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+  background-color: #fcfcfc !important;
 }
 .EmbedBaseLinkCard{
   margin-top: .5em;
