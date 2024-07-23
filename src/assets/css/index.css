@@ -71,6 +71,20 @@ h6{
   }
   
 }
+@media (min-width: 444px) {/* 1200px以上*/
+  img{
+    max-width: 100% !important;
+    width: 30% !important;
+    height: 30% !important;
+  }
+}
+@media (max-width:640px){
+  img{
+    max-width: 100% !important;
+    width: 10% !important;
+    height: 10% !important;
+  }
+}
 @media (min-width: 768px) {/* 768px以上*/
   h1 {
       font-size: 3.6rem !important;/* 36px*/
@@ -81,7 +95,11 @@ h6{
   h6{
     font-size: 8px;
   }
-  
+  img{
+    max-width: 100% !important;
+    width: 25% !important;
+    height: 25% !important;
+  }
 }
 @media screen and (max-width: 640px) {/* 640px以下*/
   img{
