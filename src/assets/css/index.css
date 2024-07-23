@@ -86,8 +86,8 @@ h6{
 @media screen and (max-width: 640px) {/* 640px以下*/
   img{
     max-width: 200% !important;
-    width: 80% !important;
-    height: 80% !important;
+    width: 60% !important;
+    height: 60% !important;
   }
   body{
   line-height: 2 !important;
