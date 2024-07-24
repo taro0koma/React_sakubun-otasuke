@@ -4,11 +4,5 @@
       "source": "/(.*)",
       "destination": "/index.html"
     }
-  ],
-  "crons": [
-    {
-      "path": "https://*.vercel.app/api/cron",
-      "schedule": "*/15 * * * *"
-    }
   ]
 }
