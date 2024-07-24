@@ -1,0 +1,61 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 30px; /* 増加させたパディング */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+  max-width: 100%; /* 増加させた最大幅 */
+  width: 95%;
+  height: calc(100vh - 190px);
+  box-sizing: border-box; /* パディングを含めてサイズを設定 */
+}
+
+.close-button {
+  padding: 0;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #f44336;
+  color: white;
+  border: none;
+  border-radius: 50%; /* 完全に丸いボタンにする */
+  width: 30px; /* ボタンの幅 */
+  height: 30px; /* ボタンの高さ */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 1100;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+  margin-bottom: 20px;
+}
+
+.modal-header h2 {
+  margin: 0;
+  padding-right: 40px;
+}
+
+.modal-body {
+  padding-right: 40px;
+}
+.hazinogazou{
+  width: 100px !important;
+  height: 100px !important;
+}
