@@ -7,7 +7,7 @@
   ],
   "crons": [
     {
-      "path": "./api/cron",
+      "path": "https://*.vercel.app/api/cron",
       "schedule": "*/15 * * * *"
     }
   ]
