@@ -1,5 +1,5 @@
 const https = require('https');
-const urls = [ 'https://your-vercel-app.vercel.app/api/page1', 'https://your-vercel-app.vercel.app/api/page2', 'https://your-vercel-app.vercel.app/api/page3', 'https://your-vercel-app.vercel.app/api/page4' ];
+const urls = [ 'https://react-sakubun-otasuke.vercel.app/src/pages/HyougenPage', 'https://react-sakubun-otasuke.vercel.app//src/pages/StylePage', 'https://react-sakubun-otasuke.vercel.app/src/pages/ContactPage', 'https://react-sakubun-otasuke.vercel.app/src/pages/ConsolePage' ];
 const keepAlive = (url) => { const options = { hostname: new URL(url).hostname, path: new URL(url).pathname, method: 'GET', };
 const req = https.request(options, (res) => { console.log(`STATUS: ${res.statusCode} for ${url}`);
 res.on('data', (chunk) => { console.log(`BODY: ${chunk}`); }); });
@@ -12,7 +12,7 @@ setInterval(keepAliveAll, 15 * 60 * 1000);
  // 初回実行 
  keepAliveAll();
 
- 
+
  //#####################################################
  //変更した部分：
  //・このファイルを作った。
