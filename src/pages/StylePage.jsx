@@ -161,6 +161,7 @@ const StylePage = () => {
           <option value="図鑑">図鑑</option>
           <option value="クイズの本">クイズの本</option>
           <option value="想像上の人物の日常が描かれた本">想像上の人物の日常が描かれた本</option>
+          <option value="不思議な世界に行く話">不思議な世界に行く話</option>
         </select>
 
 
