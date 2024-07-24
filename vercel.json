@@ -4,11 +4,5 @@
       "source": "/(.*)",
       "destination": "/index.html"
     }
-  ],
-  "crons": [
-    {
-      "path": "/api/cron",
-      "schedule": "*/15 * * * *"
-    }
   ]
 }
