@@ -132,7 +132,6 @@ const StylePage = () => {
       //作文の場合
       return (
         <>
-        <p className="aka">※現在は作文として段落の組み立てを考えていただくことはできません。今後直します。</p>
           <input
             onChange={(e) => {
               InputOnChange("sFirst", e.target.value);
