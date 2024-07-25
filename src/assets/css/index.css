@@ -222,9 +222,7 @@ h6{
 
 img{
   margin:auto;
-  display:block
-}
-img{
+  display:block;
   max-width: 100% !important;
   width: 100% !important;
   height: 100% !important;
@@ -324,4 +322,65 @@ img{
   height: 10px !important;
   margin-right: 10px !important;
   margin: 0px;
+}
+/* src/assets/css/index.css に追加 */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animated-row {
+  animation: fadeIn 1s ease-in-out;
+}
+td{
+  border-bottom: 8px solid white !important;
+}
+
+#danraku-answer > tr:nth-child(1){
+  background-color: #EDDEFF;
+}
+#danraku-answer > tr:nth-child(2){
+  background-color: #FFDFF3;
+}
+#danraku-answer > tr:nth-child(3){
+  background-color: #FDF0FF;
+}
+#danraku-answer > tr:nth-child(4){
+  background-color: #D1F4FF;
+}
+#danraku-answer > tr:nth-child(5){
+  background-color: #D1FFF9;
+}
+#danraku-answer > tr:nth-child(6){
+  background-color: #FBF0D9;
+}
+#danraku-answer > tr:nth-child(7){
+  background-color: #FF7572;
+}
+.td-index{
+  text-align: center;
+  font-size: 2em;
+}
+.td-item{
+  padding: 40px !important;
+  font-size: 1.4em;
+}
+.td-index span{
+  line-height: 1.9em;
+  font-weight: 600;
+  transform: translateX(25%);
+  display: inline-block;
+  background: white !important;
+  width: 2em !important;
+  height: 2em;
+  border-radius: 100%;
+}
+.aka{
+  color: red;
+  font-weight: 900;
 }

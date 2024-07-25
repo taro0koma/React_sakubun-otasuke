@@ -86,7 +86,7 @@ const ContactPage = () => {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label htmlFor="dropdownOption" className="block mb-2">
-              Select an option:
+              気持ちや感想を入力:
             </label>
             <select
               id="dropdownOption"

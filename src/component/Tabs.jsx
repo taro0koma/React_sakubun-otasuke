@@ -141,7 +141,7 @@ const Tabs = () => {
           </li>
           <li>
             <NavLink
-              to="/contact"
+              to="/kimoti"
               style={lsStyle}
               onClick={handleLinkClick}
               className={({ isActive }) => (isActive ? "active-item" : "panding-item")}
@@ -151,7 +151,7 @@ const Tabs = () => {
           </li>
           <li>
             <NavLink
-              to="/style"
+              to="/danraku"
               style={lsStyle}
               onClick={handleLinkClick}
               className={({ isActive }) => (isActive ? "active-item" : "panding-item")}
@@ -161,7 +161,7 @@ const Tabs = () => {
           </li>
           <li>
             <NavLink
-              to="/console"
+              to="/omikuji"
               style={lsStyle}
               onClick={handleLinkClick}
               className={({ isActive }) => (isActive ? "active-item" : "panding-item")}

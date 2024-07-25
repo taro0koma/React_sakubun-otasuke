@@ -1,5 +1,4 @@
 import React from "react";
-import Hero from "../component/Hero";
 import Tabs from "../component/Tabs";
 import styles from '../assets/css/styles.module.css'; 
 // import '/css/style.css'
@@ -89,7 +88,6 @@ const HomePage = () => {
   return (
     <div>
       <Tabs />
-      <Hero />
       <div className="contact-card">
       <a href="https://docs.google.com/forms/d/e/1FAIpQLSdJvzw5aympJYQrL58b9DbDy-Jqm8Xr1s43S8gfWTG4y8JY0g/viewform?usp=sf_link" target="_blank" rel="noopener noreferrer">
         <div className="contact-card-content">

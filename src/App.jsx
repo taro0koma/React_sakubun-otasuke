@@ -3,11 +3,6 @@ import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
 import NotFound from "./pages/NotFound";
-import ImagePage from "./pages/ImagePage";
-import HeadlinePage from "./pages/HeadlinePage";
-import NumberPage from "./pages/NumberPage";
-import KeyPage from "./pages/KeyPage";
-import TodoPage from "./pages/TodoPage";
 import StylePage from "./pages/StylePage";
 import ConsolePage from "./pages/ConsolePage";
 import HyougenPage from "./pages/HyougenPage";
@@ -47,10 +42,9 @@ const App = () => {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/mapmake" element={<AboutPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/headline" element={<HeadlinePage />} />
-          <Route path="/style" element={<StylePage />} />
-          <Route path="/console" element={<ConsolePage />} />
+          <Route path="/kimoti" element={<ContactPage />} />
+          <Route path="/danraku" element={<StylePage />} />
+          <Route path="/omikuji" element={<ConsolePage />} />
           <Route path="/hyougen" element={<HyougenPage />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
