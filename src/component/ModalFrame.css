@@ -1,3 +1,4 @@
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -13,14 +14,19 @@
 
 .modal-content {
   background: white;
-  padding: 30px; /* 増加させたパディング */
+  padding: 50px 30px 30px 30px; /* 増加させたパディング */
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   position: relative;
   max-width: 100%; /* 増加させた最大幅 */
   width: 95%;
-  height: calc(100vh - 190px);
+  height: calc(100vh - 230px);
   box-sizing: border-box; /* パディングを含めてサイズを設定 */
+  display: flex;
+  justify-content: space-between; /* コンテンツを左右に配置 */
+  align-items: flex-start; /* 上部揃え */
+  max-width: 800px;
+  border-left:40px solid #f43636;
 }
 
 .close-button {
@@ -41,6 +47,7 @@
   cursor: pointer;
   z-index: 1100;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+
 }
 
 .modal-header {
@@ -49,13 +56,28 @@
 
 .modal-header h2 {
   margin: 0;
-  padding-right: 40px;
+  font-weight: bold;
+  font-size: 18px;
 }
 
-.modal-body {
-  padding-right: 40px;
+.modal-body p {
+  margin: 10px 0 0;
 }
-.hazinogazou{
-  width: 100px !important;
-  height: 100px !important;
+
+
+
+.hazinogazou img {
+  max-width: 100% !important;
+  width: 200px !important; /* 画像をコンテナの幅に合わせる */
+  height: auto !important; /* 画像のアスペクト比を維持 */
+}
+
+.modal-text {
+  flex: 1; /* 残りのスペースを占める */
+  padding-left: 20px; /* テキストと画像の間のスペース */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  display: block !important;
+  text-align: left !important;
 }

@@ -1,8 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
 import Tabs from "../component/Tabs";
+import ModalFrame from "../component/ModalFrame";
 
 const StylePage = () => {
   let ok = "no";
+  const [isModalOpen, setIsModalOpen] = useState(true);
+
   const [dataArray, setDataArray] = useState([]);
   const regex = /\[([\s\S]*?)\]/; // 「[」から「]」までの部分にマッチする正規表現
 
@@ -192,6 +195,9 @@ const StylePage = () => {
         )
     }
   }
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
 
   const scrollChatToBottom = () => {
     const chatContainer = chatContainerRef.current;
@@ -227,9 +233,10 @@ const StylePage = () => {
     <div className="container">
       <Tabs />
       <h3>段落の組み立て</h3>
-      <h6>
-        ※思っていたのと違う回答になる場合があります。
-      </h6>
+
+      {isModalOpen && (
+        <ModalFrame title="段落の組み立て" text="～～～～～～" onClose={handleModalClose} />
+      )}
       <br />
       <form onSubmit={FormSubmit}>
         <h5>学年</h5>

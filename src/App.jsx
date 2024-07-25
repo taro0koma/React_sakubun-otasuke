@@ -48,11 +48,7 @@ const App = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/mapmake" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
-          <Route path="/image" element={<ImagePage />} />
           <Route path="/headline" element={<HeadlinePage />} />
-          <Route path="/number" element={<NumberPage />} />
-          <Route path="/key" element={<KeyPage />} />
-          <Route path="/todo" element={<TodoPage />} />
           <Route path="/style" element={<StylePage />} />
           <Route path="/console" element={<ConsolePage />} />
           <Route path="/hyougen" element={<HyougenPage />} />

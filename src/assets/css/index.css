@@ -58,6 +58,14 @@ h6{
   margin: 0px !important;
 }
 @media (min-width: 1200px) {/* 1200px以上*/
+  .hazinogazou {
+    margin: 0 0 0 30px;
+    width: 150px; /* 画像の幅 */
+    height: 400px; /* 画像の高さ */
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
   h1 {
       font-size: 3.6rem !important;/* 36px*/
   }
@@ -105,6 +113,14 @@ h6{
   }
 }
 @media screen and (max-width: 640px) {/* 640px以下*/
+  .hazinogazou {
+    margin: 0 0 0 30px;
+    width: 100px !important; /* 画像の幅 */
+    height: 300px !important; /* 画像の高さ */
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
   .omikujibako{
     max-width: 200% !important;
     width: 60% !important;
