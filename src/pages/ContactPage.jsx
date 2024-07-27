@@ -80,7 +80,7 @@ const ContactPage = () => {
       <Tabs />
       <h1>気持ちや感想</h1>
       {isModalOpen && (
-        <ModalFrame title="気持ちや感想の使い方" text="～～～～～～" onClose={handleModalClose} />
+        <ModalFrame title="気持ちや感想の使い方" text="～～～～～～" onClose={handleModalClose} imageSrc="/images/dousiyowan.png"/>
       )}
       <div className="p-4">
         <form onSubmit={handleSubmit} className="space-y-4">

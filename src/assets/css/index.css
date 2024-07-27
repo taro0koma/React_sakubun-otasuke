@@ -8,13 +8,17 @@
   left: 50%;
   transform: translateX(-50%);
   width: 80%;
-  height: 500px;
+  height: 10em;
   padding: 30px !important;
   background-color: #ffffffdd;
   display: none;
   border-radius: 10px;
   z-index: 1000; /* 最前面に表示するためのz-index */
   box-shadow: 23px 24px 100px -51px #666666;
+  overflow-y: scroll;
+  scrollbar-color: rgb(171, 171, 171) rgb(238, 238, 238);
+  scrollbar-width: thin;
+
 }
 html{
   font-size: 62.5%;
@@ -114,7 +118,7 @@ h6{
 }
 @media screen and (max-width: 640px) {/* 640px以下*/
   .hazinogazou {
-    margin: 0 0 0 30px;
+    margin: 0 0 0 0;
     width: 100px !important; /* 画像の幅 */
     height: 300px !important; /* 画像の高さ */
     display: flex;
@@ -196,7 +200,7 @@ h6{
   }
 }
 .img-animate {
-  animation: imgAnimation 5s;
+  animation: imgAnimation 8s;
 }
 
 @keyframes imgAnimation {
@@ -210,7 +214,8 @@ h6{
 .white-box.show {
   display: block;
   max-height: 100% !important;
-  height: 80% !important;
+  /* height: 80% !important; */
+  height: 28em !important;
 }
 
 
@@ -248,6 +253,7 @@ img{
 .contact-button:hover {
   background-color: #0056b3;
 }
+
 .notfoundImage img{
   width: 50% !important;
   min-width: 200px !important;
@@ -383,4 +389,12 @@ td{
 .aka{
   color: red;
   font-weight: 900;
+}
+.container h3{
+  margin: 10px 30px 0 0;
+  display: inline;
+}
+/* 既存のスタイルに追加 */
+.message {
+  white-space: pre-wrap; /* 改行を適用 */
 }

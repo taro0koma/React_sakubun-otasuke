@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import Tabs from '../component/Tabs';
 
 const HyougenPage = () => {
-  // const apiUrl = process.env.REACT_APP_API_URL;
   const [messages, setMessages] = useState([]); // メッセージの状態管理
   const [loading, setLoading] = useState(false); // ローディング状態の管理
   const chatContainerRef = useRef(null); // チャットコンテナの参照を取得
@@ -31,8 +30,7 @@ const HyougenPage = () => {
 
       try {
         const response = await fetch(process.env.REACT_APP_API_URL, {
-          // const response = await fetch(process.env.VITE_API_URL, {
-        method: 'POST',
+          method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ prompt: userMessage }),
         });
@@ -120,7 +118,6 @@ const HyougenPage = () => {
   };
 
   return (
-    
     <div id="app">
       <Tabs/>
       <h1>表現ぴったり探し</h1>
@@ -138,16 +135,16 @@ const HyougenPage = () => {
           </button>
         </form>
         <div id="chat_container" ref={chatContainerRef}>
-        {messages.map((msg) => (
-          <div key={msg.id} className={`wrapper ${msg.isAi ? 'ai' : ''}`}>
-            <div className="chat">
-              <div className="message" id={msg.id}>
-                {msg.value}
+          {messages.map((msg) => (
+            <div key={msg.id} className={`wrapper ${msg.isAi ? 'ai' : ''}`}>
+              <div className="chat">
+                <div className="message" id={msg.id}>
+                  {msg.value}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -1,12 +1,12 @@
 import React from 'react';
 import './ModalFrame.css'; // CSSファイルをインポート
 
-const ModalFrame = ({ title, text, onClose, imageSrc }) => {
+const ModalFrame = ({ title, text, onClose, imageSrc,midashi }) => {
   return (
     <div className="modal-overlay">
       <div className="modal-content">
         <div className="hazinogazou">
-          <img src="/images/komawantyan.png" alt="画像" />
+          <img src={imageSrc} alt="画像" />
         </div>
         <div className="modal-text">
           <button className="close-button" onClick={onClose}>
@@ -14,11 +14,13 @@ const ModalFrame = ({ title, text, onClose, imageSrc }) => {
           </button>
           <div className="modal-header">
             <h2>{title}</h2>
+            <h1>{midashi}</h1>
           </div>
           <div className="modal-body">
             <p>{text}</p>
           </div>
         </div>
+        <button onClick={onClose} className='tukattemiyo'>やってみる</button>
       </div>
     </div>
   );

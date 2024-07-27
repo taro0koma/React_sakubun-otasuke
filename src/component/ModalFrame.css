@@ -1,4 +1,3 @@
-
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -10,14 +9,22 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  opacity: 0; /* フェイドインの初期状態 */
+  animation: fadeIn 0.5s forwards; /* アニメーションの適用 */
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1; /* フェイドイン後の状態 */
+  }
 }
 
 .modal-content {
   background: white;
-  padding: 50px 30px 30px 30px; /* 増加させたパディング */
+  padding: 50px 30px 30px 0; /* 増加させたパディング */
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  position: relative;
+  position: relative; /* 追加 */
   max-width: 100%; /* 増加させた最大幅 */
   width: 95%;
   height: calc(100vh - 230px);
@@ -26,7 +33,7 @@
   justify-content: space-between; /* コンテンツを左右に配置 */
   align-items: flex-start; /* 上部揃え */
   max-width: 800px;
-  border-left:40px solid #f43636;
+  border-left: 40px solid #f43636;
 }
 
 .close-button {
@@ -47,7 +54,6 @@
   cursor: pointer;
   z-index: 1100;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-
 }
 
 .modal-header {
@@ -55,21 +61,30 @@
 }
 
 .modal-header h2 {
-  margin: 0;
+  margin: 0 0 0 10px;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 15px !important;
+}
+
+.modal-body {
+  flex: 1;
+  overflow-y: auto;
 }
 
 .modal-body p {
-  margin: 10px 0 0;
+  margin: 10px 0 30px 10px;
+  font-size: 18px !important;
+  overflow-y: scroll;
+  scrollbar-color: rgb(171, 171, 171) rgb(238, 238, 238);
+  scrollbar-width: thin;
+  height: 14em;
 }
-
-
 
 .hazinogazou img {
   max-width: 100% !important;
-  width: 200px !important; /* 画像をコンテナの幅に合わせる */
+  width: 16em !important; /* 画像をコンテナの幅に合わせる */
   height: auto !important; /* 画像のアスペクト比を維持 */
+  top: 50%;
 }
 
 .modal-text {
@@ -80,4 +95,24 @@
   align-items: flex-end;
   display: block !important;
   text-align: left !important;
+  overflow-y: auto;
+  scrollbar-color: rebeccapurple green;
+  scrollbar-width: thin;
+}
+
+.tukattemiyo {
+  position: absolute; /* 追加 */
+  bottom: 10px; /* 追加: モーダルの底からの距離 */
+  right: 10px; /* 追加: モーダルの右端からの距離 */
+  left: 50%;
+  font-weight: 100;
+  transform: translateX(-50%);
+  font-size: 20px;
+  padding: 0 10px;
+  transition: background-color 0.3 ease;
+}
+
+.modal-header h1 {
+  font-size: 1.5em !important;
+  font-weight: bold;
 }

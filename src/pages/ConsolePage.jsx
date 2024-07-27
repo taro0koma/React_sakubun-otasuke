@@ -2,6 +2,7 @@ import Tabs from "../component/Tabs";
 import React, { useEffect, useState, useRef } from "react";
 import { createClient } from "@supabase/supabase-js";
 import "../assets/css/index.css"; // CSSファイルをインポート
+import ModalFrame from "../component/ModalFrame";
 
 const supabase = createClient(
   process.env.REACT_APP_SUPABASE_URL,
@@ -39,6 +40,7 @@ function getRandomInt(max) {
 const ConsolePage = () => {
   const myImg = useRef();
   const whiteBoxRef = useRef();
+  const [isModalOpen, setIsModalOpen] = useState(true);
   const [kakidashis, setKakidashis] = useState([]);
   const [randomType, setRandomType] = useState(typesnakami[getRandomInt(typesnakami.length)]);
   const [isLoading, setIsLoading] = useState(false);
@@ -72,13 +74,34 @@ const ConsolePage = () => {
 
     setTimeout(() => {
       myImg.current.classList.remove("img-animate"); // アニメーションのクラスを削除
-    }, 5000); // アニメーションの持続時間に合わせる
+    }, 8000); // アニメーションの持続時間に合わせる
 
     setTimeout(() => {
       myImg.current.src = "/images/omikuji.png";
       whiteBoxRef.current.classList.remove("show"); // 白い四角を非表示
-    }, 5000); // 1秒後に再読み込み
+    }, 8000);
   };
+
+  const clickmouikkai = async (e) => {
+    myImg.current.src = "/images/omikujiTobidashi.png";
+    myImg.current.classList.add("img-animate"); // アニメーションのクラスを追加
+    whiteBoxRef.current.classList.add("show"); // 白い四角を表示
+
+    setTimeout(() => {
+      myImg.current.classList.remove("img-animate"); // アニメーションのクラスを削除
+    }, 8000); // アニメーションの持続時間に合わせる
+
+    setTimeout(() => {
+      myImg.current.src = "/images/omikuji.png";
+      whiteBoxRef.current.classList.remove("show"); // 白い四角を非表示
+    }, 8000);
+  };
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+  const handleModuleOpen = () => {
+    setIsModalOpen(true);
+  }
 
   useEffect(() => {
     const imgElm = myImg.current;
@@ -97,6 +120,15 @@ const ConsolePage = () => {
     <div>
       <Tabs />
       <h2>書き出しおみくじ</h2>
+      {isModalOpen && (
+        <ModalFrame
+          title="書き出しおみくじ"
+          text=""
+          onClose={handleModalClose}
+          imageSrc="/images/danrakuwan.png"
+          className="もう文が書けるはずなのにどういう下記初めにすればいいかわからない・・・そんなあなたに書き出しおみくじ！！"
+        ></ModalFrame>
+      )}
       <h6>押してね！</h6>
       <img ref={myImg} src="/images/omikuji.png" alt="おみくじ箱" className="omikujibako"/>
       <div ref={whiteBoxRef} className="white-box">
@@ -110,7 +142,7 @@ const ConsolePage = () => {
         ))
       )}
       </div>
-      <button onClick={clickListener}>もう一回行って</button>
+      <button onClick={clickmouikkai}>もう一回行って</button>
     </div>
   );
 };

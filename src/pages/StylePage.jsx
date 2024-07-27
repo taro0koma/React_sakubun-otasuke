@@ -240,6 +240,9 @@ const StylePage = () => {
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
+  const handleModalOpen = () => {
+    setIsModalOpen(true);
+  }
 
   const scrollChatToBottom = () => {
     const chatContainer = chatContainerRef.current;
@@ -299,13 +302,15 @@ const StylePage = () => {
     <div className="container">
       <Tabs />
       <h3>段落の組み立て</h3>
-
+      <button onClick={handleModalOpen}>押したらもう一回見れるよ</button>
       {isModalOpen && (
         <ModalFrame
           title="段落の組み立て"
-          text="～～～～～～"
+          text="～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～"
           onClose={handleModalClose}
-        />
+          imageSrc="/images/danrakuwan.png"
+          midashi="書きたいことが決まったら自分のぴったりの文の書き方を見つけよう"
+          />
       )}
       <br />
       <form onSubmit={FormSubmit}>
