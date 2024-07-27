@@ -8,7 +8,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 10000;
   opacity: 0; /* フェイドインの初期状態 */
   animation: fadeIn 0.5s forwards; /* アニメーションの適用 */
 }
