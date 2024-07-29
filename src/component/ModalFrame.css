@@ -1,3 +1,5 @@
+/* 現在のスタイルのまま */
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -37,12 +39,12 @@
 }
 
 .close-button {
-  padding: 0;
+  padding: 0 !important;
   position: absolute;
   top: 10px;
   right: 10px;
-  background: #f44336;
-  color: white;
+  background: #000000;
+  color: white !important;
   border: none;
   border-radius: 50%; /* 完全に丸いボタンにする */
   width: 30px; /* ボタンの幅 */
@@ -50,7 +52,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 16px;
+  font-size: 16px !important;
   cursor: pointer;
   z-index: 1100;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
@@ -77,12 +79,13 @@
   overflow-y: scroll;
   scrollbar-color: rgb(171, 171, 171) rgb(238, 238, 238);
   scrollbar-width: thin;
-  height: 14em;
+  height: 11em;
 }
 
 .hazinogazou img {
+  margin: 0 50px 0 0;
   max-width: 100% !important;
-  width: 16em !important; /* 画像をコンテナの幅に合わせる */
+  width: 13em !important; /* 画像をコンテナの幅に合わせる */
   height: auto !important; /* 画像のアスペクト比を維持 */
   top: 50%;
 }
@@ -113,6 +116,38 @@
 }
 
 .modal-header h1 {
-  font-size: 1.5em !important;
+  font-size: 80% !important;
   font-weight: bold;
+}
+
+/* メディアクエリ追加: 画面幅が768px以下の場合 */
+/* メディアクエリ追加: 画面幅が768px以下の場合 */
+@media (max-width: 768px) {
+  .modal-content {
+    flex-direction: column; /* 縦並びに変更 */
+    padding: 20px; /* パディングの調整 */
+    height: auto; /* 高さを自動調整 */
+  }
+
+  .modal-body {
+    overflow-y: auto;
+    margin-bottom: 20px; /* モーダル下部に余白を追加 */
+  }
+
+  .modal-text {
+    align-items: flex-start; /* 左揃えに変更 */
+    padding-left: 0; /* 左側のパディングを削除 */
+  }
+
+  .hazinogazou {
+    display: flex;
+    justify-content: center; /* 横のセンターに配置 */
+    margin-bottom: 20px; /* 下部に余白を追加 */
+    width: 100%; /* コンテナの幅を全体に設定 */
+  }
+
+  .hazinogazou img {
+    max-width: 100%; /* コンテナの幅に合わせて最大幅を設定 */
+    height: auto; /* 高さは自動調整 */
+  }
 }

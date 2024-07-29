@@ -4,12 +4,12 @@
 @tailwind utilities;
 .white-box {
   position: fixed;
-  top: 300px !important;
+  top: 300px;
   left: 50%;
   transform: translateX(-50%);
   width: 80%;
   height: 10em;
-  padding: 30px !important;
+  padding: 30px;
   background-color: #ffffffdd;
   display: none;
   border-radius: 10px;
@@ -28,9 +28,9 @@ body{
   line-height: 2;
 }
 h1 {
-  font-size: 36px;/* IE8以下とAndroid4.3以下用フォールバック */
-  font-size: calc(2.4rem + ((1vw - 0.64rem) * 2.1429));/* 24px~36pxで可変*/
-  line-height: 1.3;
+  font-size: 36px !important;/* IE8以下とAndroid4.3以下用フォールバック */
+  font-size: calc(2.4rem + ((1vw - 0.64rem) * 2.1429)) !important;/* 24px~36pxで可変*/
+  line-height: 1.3 !important;
 }
 h2 {
   font-size: 24px;/* IE8以下とAndroid4.3以下用フォールバック */
@@ -41,25 +41,25 @@ h6{
   font-size: 10px;
 }
 .left-top-logo > .app{
-  color: white !important;
-  background: #6f7074 !important;
-  letter-spacing: 2px !important;
-  border-radius: 100px !important;
-  padding: 3px 10px !important;
-  font-size: 18px !important;
+  color: white;
+  background: #6f7074;
+  letter-spacing: 2px;
+  border-radius: 100px;
+  padding: 3px 7px;
+  font-size: 10px;
 }
 .left-top-logo > .otasuke{
-  letter-spacing: 1px !important;
+  letter-spacing: 1px;
 }
 .left-top-logo {
-  font-family: "M PLUS Rounded 1c", sans-serif !important;
-  font-weight: 800 !important;
-  font-size: 40px !important;
-  font-style: normal !important;
-  letter-spacing: 4px !important;
-  color: #272829 !important;
-  line-height: 1.3 !important;
-  margin: 0px !important;
+  font-family: "M PLUS Rounded 1c", sans-serif;
+  font-weight: 800;
+  font-size: 40px;
+  font-style: normal;
+  letter-spacing: 4px;
+  color: #272829;
+  line-height: 1.3;
+  margin: 0px;
 }
 @media (min-width: 1200px) {/* 1200px以上*/
   .hazinogazou {
@@ -71,30 +71,31 @@ h6{
     align-items: center;
   }
   h1 {
-      font-size: 3.6rem !important;/* 36px*/
+      font-size: 3.6rem;/* 36px*/
   }
   h2 {
-      font-size: 2.4rem !important;/* 24px*/
+      font-size: 2.4rem;/* 24px*/
   }
   .omikujibako{
-    max-width: 100% !important;
-    width: 17% !important;
-    height: 17% !important;
+    max-width: 100%;
+    width: 17%;
+    height: 17%;
+
   }
   
 }
 @media (min-width: 444px) {/* 1200px以上*/
   .omikujibako{
-    max-width: 100% !important;
-    width: 30% !important;
-    height: 30% !important;
+    max-width: 100%;
+    width: 30%;
+    height: 30%;
   }
 }
 @media (max-width:640px){
   .omikujibako{
-    max-width: 100% !important;
-    width: 10% !important;
-    height: 10% !important;
+    max-width: 100%;
+    width: 10%;
+    height: 10%;
   }
 }
 @media (min-width: 768px) {/* 768px以上*/
@@ -102,98 +103,98 @@ h6{
     font-size: 15px;
   }
   h1 {
-      font-size: 3.6rem !important;/* 36px*/
+      font-size: 3.6rem;/* 36px*/
   }
   h2 {
-      font-size: 2.4rem !important;/* 24px*/
+      font-size: 2.4rem;/* 24px*/
   }
   h6{
     font-size: 8px;
   }
   .omikujibako{
-    max-width: 100% !important;
-    width: 25% !important;
-    height: 25% !important;
+    max-width: 100%;
+    width: 25%;
+    height: 25%;
   }
 }
 @media screen and (max-width: 640px) {/* 640px以下*/
   .hazinogazou {
     margin: 0 0 0 0;
-    width: 100px !important; /* 画像の幅 */
-    height: 300px !important; /* 画像の高さ */
+    width: 100px; /* 画像の幅 */
+    height: 300px; /* 画像の高さ */
     display: flex;
     justify-content: flex-start;
     align-items: center;
   }
   .omikujibako{
-    max-width: 200% !important;
-    width: 60% !important;
-    height: 60% !important;
+    max-width: 200%;
+    width: 60%;
+    height: 60%;
   }
   
   h4{
-    font-size: 18px !important;
+    font-size: 18px;
   }
   body{
-  line-height: 2 !important;
+  line-height: 2;
   }
   h3{
-    font-size: 18px !important;
+    font-size: 18px;
   }
   p{
-    font-size: 10px !important;
+    font-size: 10px;
   }
   h1{
-      font-size: 2.4rem !important;/* 24px*/
+      font-size: 2.4rem;/* 24px*/
   }
   h2 {
-      font-size: 2rem !important;/* 20px*/
+      font-size: 2rem;/* 20px*/
   }
   h6{
     font-size: 5rem;
   }
   iframe{
-    width: 100% !important;
-    height: 100% !important;
+    width: 100%;
+    height: 100%;
   }
 
   .left-top-logo > .app{
-    color: white !important;
-    background: #6f7074 !important;
-    letter-spacing: 2px !important;
-    border-radius: 100px !important;
-    padding: 3px 5px !important;
-    font-size: 7px !important;
+    color: white;
+    background: #6f7074;
+    letter-spacing: 2px;
+    border-radius: 100px;
+    padding: 3px 5px;
+    font-size: 7px;
   }
   .left-top-logo > .otasuke{
-    letter-spacing: 1px !important;
+    letter-spacing: 1px;
   }
   .left-top-logo {
-    font-family: "M PLUS Rounded 1c", sans-serif !important;
-    font-weight: 800 !important;
-    font-size: 20px !important;
-    font-style: normal !important;
-    letter-spacing: 4px !important;
-    color: #272829 !important;
-    line-height: 1.3 !important;
-    margin: 0px !important;
+    font-family: "M PLUS Rounded 1c", sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    font-style: normal;
+    letter-spacing: 4px;
+    color: #272829;
+    line-height: 1.3;
+    margin: 0px;
   }
   .white-box {
     position: fixed;
-    bottom: 240px !important;
+    bottom: 240px;
     left: 50%;
     transform: translateX(-50%);
     width: 80%;
-    max-height: 70% !important;
-    height: 70% !important;
-    padding: 20px !important;
+    max-height: 70%;
+    height: 70%;
+    padding: 20px;
     background-color: #ffffffec;
     display: none;
     z-index: 1000; /* 最前面に表示するためのz-index */
     box-shadow: 23px 24px 100px -51px #666666;
   }
   .white-box h4{
-    font-size: 15px !important;
+    font-size: 15px;
   }
   .nakami{
     font-size: 10px;
@@ -213,9 +214,9 @@ h6{
 
 .white-box.show {
   display: block;
-  max-height: 100% !important;
-  /* height: 80% !important; */
-  height: 28em !important;
+  max-height: 100%;
+  /* height: 80%; */
+  height: 28em;
 }
 
 
@@ -228,9 +229,9 @@ h6{
 img{
   margin:auto;
   display:block;
-  max-width: 100% !important;
-  width: 100% !important;
-  height: 100% !important;
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
 }
 
 .contact-button-container {
@@ -255,59 +256,59 @@ img{
 }
 
 .notfoundImage img{
-  width: 50% !important;
-  min-width: 200px !important;
+  width: 50%;
+  min-width: 200px;
   margin-top: 2px;
   padding: 10px 0 0 0;
-  margin: auto !important;
-  display: block !important;
+  margin: auto;
+  display: block;
 }
 .contact-card {
-  max-width: 600px !important;
-  margin: 20px auto !important;
-  border: 1px solid #ddd !important;
-  border-radius: 8px !important;
-  overflow: hidden !important;
-  transition: box-shadow 0.3s ease !important;
-  text-decoration: none !important;
+  max-width: 600px;
+  margin: 20px auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+  text-decoration: none;
 }
 
 .contact-card a {
-  text-decoration: none !important;
-  color: inherit !important;
+  text-decoration: none;
+  color: inherit;
 }
 
 .contact-card-content {
-  display: flex !important;
-  align-items: center !important;
+  display: flex;
+  align-items: center;
 }
 
 .contact-card-image {
-  width: 150px !important;
-  height: auto !important;
-  object-fit: cover !important; /* 画像の切り取り方を指定 */
-  margin-right: 0 !important; /* 画像とテキストの間に余白を追加 */
-  margin-left: 5px !important;
+  width: 150px;
+  height: auto;
+  object-fit: cover; /* 画像の切り取り方を指定 */
+  margin-right: 0; /* 画像とテキストの間に余白を追加 */
+  margin-left: 5px;
 }
 
 .contact-card-text {
-  padding: 20px !important;
+  padding: 20px;
 }
 
 .contact-card h3 {
-  margin: 0 !important;
-  font-size: 22px !important;
-  color: #585858 !important;
+  margin: 0;
+  font-size: 22px;
+  color: #585858;
 }
 
 .contact-card p {
-  margin: 7px 0 0 !important;
-  font-size: 14px !important;
-  color: #666 !important;
+  margin: 7px 0 0;
+  font-size: 14px;
+  color: #666;
 }
 
 .contact-card:hover {
-  background-color: #fcfcfc !important;
+  background-color: #fcfcfc;
 }
 .EmbedBaseLinkCard{
   margin-top: .5em;
@@ -324,9 +325,9 @@ img{
 }
 
 .EmbedBaseLinkCard img{
-  width: 10px !important;
-  height: 10px !important;
-  margin-right: 10px !important;
+  width: 10px;
+  height: 10px;
+  margin-right: 10px;
   margin: 0px;
 }
 /* src/assets/css/index.css に追加 */
@@ -344,7 +345,7 @@ img{
   animation: fadeIn 1s ease-in-out;
 }
 td{
-  border-bottom: 8px solid white !important;
+  border-bottom: 8px solid white;
 }
 
 #danraku-answer > tr:nth-child(1){
@@ -373,7 +374,7 @@ td{
   font-size: 2em;
 }
 .td-item{
-  padding: 40px !important;
+  padding: 40px;
   font-size: 1.4em;
 }
 .td-index span{
@@ -381,8 +382,8 @@ td{
   font-weight: 600;
   transform: translateX(25%);
   display: inline-block;
-  background: white !important;
-  width: 2em !important;
+  background: white;
+  width: 2em;
   height: 2em;
   border-radius: 100%;
 }
@@ -397,4 +398,17 @@ td{
 /* 既存のスタイルに追加 */
 .message {
   white-space: pre-wrap; /* 改行を適用 */
+}
+
+.omikujibako{
+  cursor:  url('/images/finger.svg') 60 60, auto;
+}
+
+.centering {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.left-top-logo{
+  display: inline-block !important;
 }

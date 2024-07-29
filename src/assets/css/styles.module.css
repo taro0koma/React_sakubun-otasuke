@@ -3,14 +3,11 @@
 
 
 body{
-  letter-spacing: 2px !important;
-  color: #000000 !important;
-  font-family: "Zen Kaku Gothic New", sans-serif !important;
+  letter-spacing: 2px;
+  color: #000000;
+  font-family: "Zen Kaku Gothic New", sans-serif;
 }
 
-button{
-  font-family: "Zen Kaku Gothic New", sans-serif !important;
-}
 /* 全体のコンテナを中央寄せ */
 .container {
   display: flex;
@@ -30,26 +27,41 @@ button{
 
 
 select{
-  width: 350px !important;
-  background-color: #f0f0f0 !important;
-  border: white !important;
-  color: #757575 !important;
-  font-family: "Zen Kaku Gothic New", sans-serif !important;
+  width: 350px;
+  background-color: #f0f0f0;
+  border: white;
+  color: #757575;
+  font-family: "Zen Kaku Gothic New", sans-serif;
 }
 input{
-  width: 550px !important;
-  border: 2px solid #b0b1b8 !important;
-  background-color: #f0f0f0 !important;
-  color: #757575 !important;
-  border: white !important;
+  width: 550px;
+  border: 2px solid #b0b1b8;
+  background-color: #f0f0f0;
+  color: #757575;
+  border: white;
   font-size: 20px;
-  font-family: "Zen Kaku Gothic New", sans-serif !important;
+  font-family: "Zen Kaku Gothic New", sans-serif;
 }
 select{
-  font-size: 20px !important;
+  font-size: 20px;
 }
-button{
-  background-color: #000000 !important;
+.button, button, input[type='button'], input[type='reset'], input[type='submit']{
+  background-color: #000000;
+  border-radius: .4rem;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.8rem !important;
+  font-weight: 700 !important;
+  height: auto;
+  letter-spacing: .1rem;
+  line-height: 1.8rem;
+  padding: 1.8rem 3.0rem !important;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+  font-family: "Zen Kaku Gothic New", sans-serif;
 }
 
 /* 画像のスタイル */

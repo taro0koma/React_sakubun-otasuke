@@ -125,11 +125,11 @@ const ConsolePage = () => {
           title="書き出しおみくじ"
           text=""
           onClose={handleModalClose}
-          imageSrc="/images/danrakuwan.png"
-          className="もう文が書けるはずなのにどういう下記初めにすればいいかわからない・・・そんなあなたに書き出しおみくじ！！"
+          imageSrc="/images/kakenaiwan.png"
+          midashi="いい作文は書き出しがかっこいい！"
         ></ModalFrame>
       )}
-      <h6>押してね！</h6>
+      <h6>箱をクリックしてね👇</h6>
       <img ref={myImg} src="/images/omikuji.png" alt="おみくじ箱" className="omikujibako"/>
       <div ref={whiteBoxRef} className="white-box">
       {isLoading ? (
@@ -142,7 +142,7 @@ const ConsolePage = () => {
         ))
       )}
       </div>
-      <button onClick={clickmouikkai}>もう一回行って</button>
+      <button onClick={clickmouikkai}>もういっかい</button>
     </div>
   );
 };
