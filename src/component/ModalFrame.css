@@ -35,7 +35,7 @@
   justify-content: space-between; /* コンテンツを左右に配置 */
   align-items: flex-start; /* 上部揃え */
   max-width: 800px;
-  border-left: 40px solid #f43636;
+  border-left: 30px solid #00920c;
 }
 
 .close-button {
