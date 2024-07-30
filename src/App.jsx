@@ -8,6 +8,7 @@ import ConsolePage from "./pages/ConsolePage";
 import HyougenPage from "./pages/HyougenPage";
 import '../src/assets/css/index.css'
 import React, { useEffect, useState } from "react";
+import AnimationPage from "./pages/AnimationPage";
 
 
 const App = () => {
@@ -46,6 +47,7 @@ const App = () => {
           <Route path="/danraku" element={<StylePage />} />
           <Route path="/omikuji" element={<ConsolePage />} />
           <Route path="/hyougen" element={<HyougenPage />} />
+          <Route path="/anime" element={<AnimationPage />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
