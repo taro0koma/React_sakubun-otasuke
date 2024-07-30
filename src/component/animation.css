@@ -9,7 +9,6 @@ html {
 }
 
 body {
-  font-family: "Michroma", sans-serif;
   height: 100%;
   margin: 0;
 }
@@ -18,9 +17,9 @@ body {
   height: 100%;
 }
 
-.container {
-  background-color: black;
-  color: #fff;
+
+.animation{
+  color: black;
   height: 100%;
   width: 100%;
   display: flex;
@@ -29,8 +28,8 @@ body {
   position: relative;
 }
 
-
 .loading-page {
+  font-family: "Michroma", sans-serif;
   position: absolute;
   top: 50%;
   left: 50%;

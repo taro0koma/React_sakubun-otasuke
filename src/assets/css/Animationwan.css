@@ -1,0 +1,37 @@
+/* SvgAnimation.css */
+.st1, .st2 {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1000; /* パスの長さに合わせて調整 */
+  stroke-dashoffset: 1000; /* 初期状態で隠れるように設定 */
+}
+
+.st1 {
+  stroke: #000000;
+  stroke-width: 9;
+  animation: dash 1s linear forwards; /* スピードを2倍に設定 */
+}
+
+.st2 {
+  stroke: #000000;
+  stroke-width: 13;
+  animation: dash 1s linear forwards; /* スピードを2倍に設定 */
+}
+
+/* 各パスに異なる遅延を設定 */
+.st1:nth-of-type(1) { animation-delay: 0s; }
+.st1:nth-of-type(2) { animation-delay: 0.2s; }
+.st1:nth-of-type(3) { animation-delay: 0.7s; }
+.st1:nth-of-type(4) { animation-delay: 0.9s; }
+.st1:nth-of-type(5) { animation-delay: 1s; }
+.st1:nth-of-type(6) { animation-delay: 1.25s; }
+.st1:nth-of-type(7) { animation-delay: 1.5s; }
+.st2:nth-of-type(1) { animation-delay: 1.7s; }
+
+/* アニメーションの定義 */
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
