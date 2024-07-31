@@ -44,7 +44,6 @@ const ConsolePage = () => {
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [randomType, setRandomType] = useState(typesnakami[getRandomInt(typesnakami.length)]);
   const [kakidashis, setKakidashis] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const [aiResponses, setAiResponses] = useState([]);
   const [isAiLoading, setIsAiLoading] = useState(false);
   const [selectedGrade, setSelectedGrade] = useState("");
@@ -126,7 +125,8 @@ const ConsolePage = () => {
     myImg.current.classList.add("light-animate");
     setTimeout(() => {
       myImg.current.classList.remove("light-animate");
-    }, 8000);
+      setIsBoxClicked(false); // アニメーション後に画像を元に戻す
+    }, 8000); // アニメーションの時間に合わせて調整
   };
 
   const handleModalClose = () => {
@@ -141,9 +141,8 @@ const ConsolePage = () => {
 
   return (
     <div>
-      <Tabs />
-      <h2>書き出しおみくじ</h2>
-      <h3>押してね！</h3>
+      <Tabs pageTitle="書き出しおみくじ"/>
+      <h3 className="setumei">おみくじ箱をクリックして、<br/>かっこいい書き出しを発見！</h3>
       {isModalOpen && (
         <ModalFrame
           title="書き出しおみくじ"
@@ -186,23 +185,17 @@ const ConsolePage = () => {
           <p>読み込み中...</p>
         ) : (
           aiResponses.map((responseObj, index) => (
-            <div>
             <div key={index} className="response-box">
               <p>{responseObj.response}</p>
               <span className="timestamp">{responseObj.timestamp}</span>
             </div>
-            <br />
-            </div>
           ))
         )}
-
-
-
-{kakidashis.map((kakidashi) => (
-  <div key={kakidashi.id}>
-    <h4>{kakidashi.examplesentence}<br/><span className="nakami">-{kakidashi.types}-</span></h4>
-  </div>
-))}
+        {kakidashis.map((kakidashi) => (
+          <div key={kakidashi.id}>
+            <h4>{kakidashi.examplesentence}<br/><span className="nakami">-{kakidashi.types}-</span></h4>
+          </div>
+        ))}
       </div>
     </div>
   );

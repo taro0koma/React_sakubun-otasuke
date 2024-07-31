@@ -119,19 +119,20 @@ const HyougenPage = () => {
 
   return (
     <div id="app">
-      <Tabs/>
-      <h1>表現ぴったり探し</h1>
+      <Tabs pageTitle="表現ぴったり探し"/>
       <div id="inputarea">
         <form ref={formRef}>
           <input
             name="prompt"
             rows="1"
             cols="1"
-            placeholder="探したい言葉を入力してね。(例：楽しい／さみしい)"
+            placeholder="探したい言葉を入力してね。"
+            required
           ></input>
           <br />
+          <p>例：楽しい／さみしい</p>
           <button type="submit">
-            実行する
+            調べる
           </button>
         </form>
         <div id="chat_container" ref={chatContainerRef}>

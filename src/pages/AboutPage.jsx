@@ -3,8 +3,7 @@ import Tabs from '../component/Tabs'
 const AboutPage = () => {
   return (
     <div>
-      <Tabs/>
-      <h1>イメージマップの<br/>作り方の動画</h1>
+      <Tabs pageTitle="イメージマップの作り方の動画"/>
       <p style={{fontSize:20}}>※勝手に使わせていただいています。<br />　いつかは自分で作ろうと思っています。</p>
       {/* <iframe 
         width="560" 

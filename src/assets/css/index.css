@@ -401,6 +401,7 @@ td{
 }
 
 .omikujibako{
+  margin-top: 10px;
   cursor:  url('/images/finger.svg') 60 60, auto;
 }
 
@@ -509,4 +510,21 @@ td{
   right: 5px;
   font-size: 0.8em;
   color: #888;
+}
+.setumei{
+  font-weight: bold;
+  text-align: center;
+  display: block !important;
+  font-size: 5vw;
+}
+.pagetitle{
+  text-align: center;
+  display: block !important;
+  font-weight: 600;
+}
+#inputarea{
+  text-align: center;
+}
+p{
+  font-size: 17px;
 }

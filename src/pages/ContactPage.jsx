@@ -77,8 +77,7 @@ const ContactPage = () => {
 
   return (
     <div>
-      <Tabs />
-      <h1>気持ちや感想</h1>
+      <Tabs pageTitle="気持ちや感想"/>
       {isModalOpen && (
         <ModalFrame title="気持ちや感想の使い方" text="～～～～～～" onClose={handleModalClose} imageSrc="/images/dousiyowan.png"/>
       )}

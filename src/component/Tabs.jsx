@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import '/src/assets/css/index.css';
-import { FaBars, FaTimes } from "react-icons/fa";
 
 const lsStyle = {
   padding: "8px",
   color: "#ffffff",
 };
 
-const Tabs = () => {
+const Tabs = ({ pageTitle }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -100,7 +99,7 @@ const Tabs = () => {
       color: gray;
     }
   `;
-
+  
   return (
     <div>
       <header className="main-menu">
@@ -183,6 +182,7 @@ const Tabs = () => {
         </ul>
       </div>
       </header>
+      <h2 className="pagetitle">{pageTitle}</h2>
     </div>
   );
 };
