@@ -78,8 +78,8 @@ h6{
   }
   .omikujibako{
     max-width: 100%;
-    width: 17%;
-    height: 17%;
+    width: 15%;
+    height: 15%;
 
   }
   
@@ -87,8 +87,8 @@ h6{
 @media (min-width: 444px) {/* 1200px以上*/
   .omikujibako{
     max-width: 100%;
-    width: 30%;
-    height: 30%;
+    width: 40%;
+    height: 40%;
   }
 }
 @media (max-width:640px){
@@ -411,4 +411,102 @@ td{
 }
 .left-top-logo{
   display: inline-block !important;
+}
+.omikujibako {
+  position: relative;
+  cursor: pointer;
+}
+
+.light-animate {
+  animation: lightEffect 8s infinite;
+}
+@keyframes lightEffect {
+  0% {
+    filter: drop-shadow(0 0 20px rgba(255, 255, 0, 0.5));
+  }
+  50% {
+    filter: drop-shadow(0 0 60px rgba(255, 255, 0, 1));
+  }
+  100% {
+    filter: drop-shadow(0 0 20px rgba(255, 255, 0, 0.5));
+  }
+}
+
+
+.white-box {
+  display: none;
+  padding: 20px;
+  margin: 20px auto;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+
+}
+.bokasi.show{
+  display: block;
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 110%;
+  background-color: #00000033;
+  backdrop-filter: blur(10px);
+  z-index: 100 !important;
+}
+
+
+.white-box.show {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.omikujibako {
+  position: relative;
+  cursor:  url('/images/finger.svg') 60 60, auto;
+}
+
+.light-animate {
+  animation: lightEffect 8s infinite;
+}
+
+.grade-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+/* .ai-response {
+  position: absolute;
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  width: 80%;
+  margin: 20px 0 0 0;
+}*/
+
+.ai-response p{
+  font-size: 17px;
+} 
+.response-box {
+  border: 1px solid #ddd;
+  padding: 30px;
+  margin: 10px 0;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  position: relative;
+}
+
+.timestamp {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 0.8em;
+  color: #888;
 }

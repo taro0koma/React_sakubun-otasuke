@@ -1,27 +1,27 @@
-import Tabs from "../component/Tabs";
 import React, { useEffect, useState, useRef } from "react";
 import { createClient } from "@supabase/supabase-js";
-import "../assets/css/index.css"; // CSSファイルをインポート
+import "../assets/css/index.css";
+import Tabs from "../component/Tabs";
 import ModalFrame from "../component/ModalFrame";
 
 const supabase = createClient(
   process.env.REACT_APP_SUPABASE_URL,
-  process.env.REACT_APP_SUPABASE_API_KEY,
+  process.env.REACT_APP_SUPABASE_API_KEY
 );
 
-const gradeJapan = {
-  s1: "小学１年生",
-  s2: "小学２年生",
-  s3: "小学３年生",
-  s4: "小学４年生",
-  s5: "小学５年生",
-  s6: "小学６年生",
-  t1: "中学１年生",
-  t2: "中学２年生",
-  t3: "中学３年生",
-  k1: "高校１年生",
-  k2: "高校２年生",
-  k3: "高校３年生",
+const grades = {
+  s1: "小学1年生",
+  s2: "小学2年生",
+  s3: "小学3年生",
+  s4: "小学4年生",
+  s5: "小学5年生",
+  s6: "小学6年生",
+  t1: "中学1年生",
+  t2: "中学2年生",
+  t3: "中学3年生",
+  k1: "高校1年生",
+  k2: "高校2年生",
+  k3: "高校3年生",
 };
 
 const typesnakami = [
@@ -40,86 +40,110 @@ function getRandomInt(max) {
 const ConsolePage = () => {
   const myImg = useRef();
   const whiteBoxRef = useRef();
+  const adviceRef = useRef();
   const [isModalOpen, setIsModalOpen] = useState(true);
-  const [kakidashis, setKakidashis] = useState([]);
   const [randomType, setRandomType] = useState(typesnakami[getRandomInt(typesnakami.length)]);
+  const [kakidashis, setKakidashis] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [aiResponses, setAiResponses] = useState([]);
+  const [isAiLoading, setIsAiLoading] = useState(false);
+  const [selectedGrade, setSelectedGrade] = useState("");
+  const [formError, setFormError] = useState(false);
+  const [isFormVisible, setIsFormVisible] = useState(false);
+  const [isBoxClicked, setIsBoxClicked] = useState(false);
 
   useEffect(() => {
-    getKakidashis();
-  }, [randomType]);
+    // 初期表示時に必要なデータを取得
+  }, []);
 
-  async function getKakidashis() {
-    setIsLoading(true);
-    const { data, error } = await supabase
-      .from("sakubunKakidashi")
-      .select('*')
-      .eq('types', randomType);
-
-    if (error) {
-      console.error("フェッチでエラーが発生しました：", error);
-    } else {
-      setKakidashis(data);
+  const fetchSupabaseData = async () => {
+    try {
+      const { data, error } = await supabase.from('sakubunKakidashi').select('*').eq('types', randomType);
+      if (error) {
+        console.error('Supabaseデータの取得に失敗しました:', error);
+        return null;
+      }
+      return data;
+    } catch (error) {
+      console.error('Supabaseデータの取得中にエラーが発生しました:', error);
+      return null;
     }
-    setIsLoading(false);
+  };
+
+  async function fetchAIResponse(type) {
+    setIsAiLoading(true);
+    const supabaseData = await fetchSupabaseData();
+    const userMessage = `${grades[selectedGrade]}向けに適切な作文の書き出し例を提供してください。ただし、１つに絞ること。また最初のわかりました的なことは言わないこと。とにかく、必要なことのみ述べてください。参考データ: ${JSON.stringify(supabaseData)}`;
+    try {
+      const response = await fetch(process.env.REACT_APP_API_URL + "/danraku", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt: userMessage }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        const parsedData = data.bot.trim();
+        const timestamp = new Date().toLocaleTimeString();
+        setAiResponses(prevResponses => [{ response: parsedData, timestamp }, ...prevResponses]);
+      } else {
+        console.error("AIのレスポンスの取得に失敗しました。");
+      }
+    } catch (error) {
+      console.error("AIのレスポンス取得中にエラーが発生しました：", error);
+    }
+    setIsAiLoading(false);
   }
 
-  const clickListener = async (e) => {
-    const newRandomType = typesnakami[getRandomInt(typesnakami.length)];
-    setRandomType(newRandomType);
-
-    myImg.current.src = "/images/omikujiTobidashi.png";
-    myImg.current.classList.add("img-animate"); // アニメーションのクラスを追加
-    whiteBoxRef.current.classList.add("show"); // 白い四角を表示
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!selectedGrade) {
+      setFormError(true);
+      return;
+    }
+    setFormError(false);
+    setIsFormVisible(false);
+    await fetchAIResponse(randomType);
+    whiteBoxRef.current.classList.remove("show");
+    setIsBoxClicked(true); // 画像変更のための状態更新
+    triggerLightAnimation(); // 黄色い光のアニメーションをトリガー
 
     setTimeout(() => {
-      myImg.current.classList.remove("img-animate"); // アニメーションのクラスを削除
-    }, 8000); // アニメーションの持続時間に合わせる
+      adviceRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, 1000);
+  };
 
+  const handleClickBox = () => {
+    setIsFormVisible(true);
+    whiteBoxRef.current.classList.add("show");
+    
     setTimeout(() => {
-      myImg.current.src = "/images/omikuji.png";
-      whiteBoxRef.current.classList.remove("show"); // 白い四角を非表示
+      adviceRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, 500);
+  };
+
+  const triggerLightAnimation = () => {
+    myImg.current.classList.add("light-animate");
+    setTimeout(() => {
+      myImg.current.classList.remove("light-animate");
     }, 8000);
   };
 
-  const clickmouikkai = async (e) => {
-    myImg.current.src = "/images/omikujiTobidashi.png";
-    myImg.current.classList.add("img-animate"); // アニメーションのクラスを追加
-    whiteBoxRef.current.classList.add("show"); // 白い四角を表示
-
-    setTimeout(() => {
-      myImg.current.classList.remove("img-animate"); // アニメーションのクラスを削除
-    }, 8000); // アニメーションの持続時間に合わせる
-
-    setTimeout(() => {
-      myImg.current.src = "/images/omikuji.png";
-      whiteBoxRef.current.classList.remove("show"); // 白い四角を非表示
-    }, 8000);
-  };
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
-  const handleModuleOpen = () => {
-    setIsModalOpen(true);
-  }
 
   useEffect(() => {
-    const imgElm = myImg.current;
-    if (imgElm) {
-      imgElm.addEventListener("click", clickListener);
+    if (kakidashis.length > 0) {
+      adviceRef.current?.scrollIntoView({ behavior: "smooth" });
     }
-
-    return () => {
-      if (imgElm) {
-        imgElm.removeEventListener("click", clickListener);
-      }
-    };
   }, [kakidashis]);
 
   return (
     <div>
       <Tabs />
       <h2>書き出しおみくじ</h2>
+      <h3>押してね！</h3>
       {isModalOpen && (
         <ModalFrame
           title="書き出しおみくじ"
@@ -129,20 +153,57 @@ const ConsolePage = () => {
           midashi="いい作文は書き出しがかっこいい！"
         ></ModalFrame>
       )}
-      <h6>箱をクリックしてね👇</h6>
-      <img ref={myImg} src="/images/omikuji.png" alt="おみくじ箱" className="omikujibako"/>
-      <div ref={whiteBoxRef} className="white-box">
-      {isLoading ? (
-        <p>読み込み中...</p>
-      ) : (
-        kakidashis.map((kakidashi) => (
-          <div key={kakidashi.id}>
-            <h4>{kakidashi.examplesentence}<br/><span className="nakami">-{kakidashi.types}-</span></h4>
-          </div>
-        ))
-      )}
+      <img
+        ref={myImg}
+        src={isBoxClicked ? "/images/omikujiTobidashi.png" : "/images/omikuji.png"}
+        alt="おみくじ箱"
+        className="omikujibako"
+        onClick={handleClickBox}
+      />
+      <div className={`bokasi ${isFormVisible ? 'show' : ''}`}></div>
+      <div ref={whiteBoxRef} className={`white-box ${isFormVisible ? 'show' : ''}`}>
+        {isFormVisible && (
+          <form onSubmit={handleSubmit} className="grade-form">
+            <select
+              value={selectedGrade}
+              onChange={(e) => setSelectedGrade(e.target.value)}
+              style={{ border: formError ? "2px solid red" : "1px solid #ccc" }}
+              required
+            >
+              <option value="">学年を選んでね！</option>
+              {Object.keys(grades).map((key) => (
+                <option key={key} value={key}>{grades[key]}</option>
+              ))}
+            </select>
+            <button type="submit">送信</button>
+            {formError && <p style={{ color: "red" }}>学年を選択してください。</p>}
+          </form>
+        )}
+        <button className="close-button" onClick={() => setIsFormVisible(false)}>✖️</button>
       </div>
-      <button onClick={clickmouikkai}>もういっかい</button>
+      <div className="ai-response" ref={adviceRef}>
+        {isAiLoading ? (
+          <p>読み込み中...</p>
+        ) : (
+          aiResponses.map((responseObj, index) => (
+            <div>
+            <div key={index} className="response-box">
+              <p>{responseObj.response}</p>
+              <span className="timestamp">{responseObj.timestamp}</span>
+            </div>
+            <br />
+            </div>
+          ))
+        )}
+
+
+
+{kakidashis.map((kakidashi) => (
+  <div key={kakidashi.id}>
+    <h4>{kakidashi.examplesentence}<br/><span className="nakami">-{kakidashi.types}-</span></h4>
+  </div>
+))}
+      </div>
     </div>
   );
 };
