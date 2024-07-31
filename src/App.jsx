@@ -10,6 +10,7 @@ import '../src/assets/css/index.css'
 import React, { useEffect, useState } from "react";
 import AnimationPage from "./pages/AnimationPage";
 import AnimationKomawanPage from "./pages/AnimationKomawanPage";
+import LoginPage from './pages/LoginPage';
 
 
 const App = () => {
@@ -50,6 +51,7 @@ const App = () => {
           <Route path="/hyougen" element={<HyougenPage />} />
           <Route path="/anime" element={<AnimationPage />} />
           <Route path="/animewan" element={<AnimationKomawanPage />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
