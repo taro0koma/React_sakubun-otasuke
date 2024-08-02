@@ -4,21 +4,17 @@
 @tailwind utilities;
 .white-box {
   position: fixed;
-  top: 300px;
+  top: 80px;
   left: 50%;
   transform: translateX(-50%);
   width: 80%;
-  height: 10em;
   padding: 30px;
   background-color: #ffffffdd;
   display: none;
   border-radius: 10px;
   z-index: 1000; /* 最前面に表示するためのz-index */
   box-shadow: 23px 24px 100px -51px #666666;
-  overflow-y: scroll;
-  scrollbar-color: rgb(171, 171, 171) rgb(238, 238, 238);
   scrollbar-width: thin;
-
 }
 html{
   font-size: 62.5%;
@@ -181,12 +177,9 @@ h6{
   }
   .white-box {
     position: fixed;
-    bottom: 240px;
     left: 50%;
     transform: translateX(-50%);
     width: 80%;
-    max-height: 70%;
-    height: 70%;
     padding: 20px;
     background-color: #ffffffec;
     display: none;
@@ -214,9 +207,7 @@ h6{
 
 .white-box.show {
   display: block;
-  max-height: 100%;
   /* height: 80%; */
-  height: 28em;
 }
 
 
@@ -436,7 +427,7 @@ td{
 
 .white-box {
   display: none;
-  padding: 20px;
+  padding: 3em !important;
   margin: 20px auto;
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -465,6 +456,11 @@ td{
   align-items: center;
 }
 
+.white-box.show p {
+  font-weight: bold;
+  font-size: 2em;
+}
+
 .omikujibako {
   position: relative;
   cursor:  url('/images/finger.svg') 60 60, auto;
@@ -479,6 +475,7 @@ td{
   flex-direction: column;
   gap: 10px;
   width: 100%;
+  margin-bottom: 0 !important;
 }
 
 /* .ai-response {
@@ -527,4 +524,256 @@ td{
 }
 p{
   font-size: 17px;
+}
+
+.grade-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.grade-form select, .grade-form button {
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.white-box {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.white-box.show {
+  display: flex;
+}
+
+.bokasi.show {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+/* 新規追加のスタイル */
+.response-box {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  margin:30px 0;
+  background-color: #f7f7f7;
+  position: relative;
+  padding: 0;
+}
+
+.response-type-tab {
+  background-color: #e0e0e0;
+  border-radius: 5px 5px 0 0;
+  padding: 10px 10px 10px 30px;
+  color: #333;
+  font-size: 20px;
+}
+
+.response-content-tab p{
+  padding: 20px 40px;
+  font-size:18px !important;
+}
+
+.response-content {
+  font-size: 16px;
+  color: #333;
+}
+
+.timestamp {
+  font-size: 12px;
+  color: #666;
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+}
+.balloon1 {
+  position: relative;
+    display: inline-block;
+    /* margin: 1.5em 15px 1.5em 0; */
+    padding: 0 5px;
+    width: 90px;
+    height: 90px;
+    line-height: 90px;
+    text-align: center;
+    color: #FFF;
+    font-size: 20px;
+    font-weight: bold;
+    background: #a58eff;
+    border-radius: 50%;
+    box-sizing: border-box;
+    line-height: 150%;
+    margin: 0 0 0 20px;
+}
+
+.balloon1:before {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  right: -8px;
+  margin-top: -15px;
+  border: 15px solid transparent;
+  border-left: 15px solid #a58eff;
+  z-index: 0;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.balloon1 p {
+  margin: 13px 0 0 0;
+  padding: 0;
+}
+.response-content-tab>.example-sentenceh{
+  font-size: 20px !important;
+  font-weight: bold;
+}
+
+.kajougaki{
+  list-style: disc;
+  padding: 24px;
+  margin: 10px 30px;
+}
+.kajougaki{
+  margin-bottom: 3.2rem;
+}
+/* 作文用紙Style */
+.sakubun {
+  background-color: lightyellow;
+  font-family: "ヒラギノ明朝 ProN W3", "HiraMinProN-W3", "HG明朝E", "ＭＳ Ｐ明朝", "MS PMincho", "MS 明朝", serif;
+  width: 100%;
+  font-size: 28px;
+  color: #333;
+  border: 1px dotted #FFFFFF;
+  position: relative;
+  letter-spacing: .5em;
+  line-height: 1.6em;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 4px 4px 16px #00000014;
+}
+
+.sakubun::before {
+  content: '';
+    position: absolute;
+    width: 91%;
+    height: 91%;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, .2) 1px, transparent 0), linear-gradient(to left, rgba(0, 0, 0, .2) 1px, transparent 0), linear-gradient(to bottom, transparent 11px, rgba(0, 0, 0, .2) 12px, transparent 0);
+    background-size: 1.1em 1.6em;
+    background-position: top left;
+    background-origin: padding-box;
+    margin-left: -5px;
+    z-index: 1;
+}
+
+.sakubun::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.sakubun p {
+  margin: 0;
+  margin-right: 0;
+  margin-top: .3em;
+}
+
+.sakubun ruby {
+  ruby-align: left;
+}
+.sakubun ruby > rt {
+  font-size: 10px;
+  letter-spacing: 0;
+  text-align: justify;
+  line-height: 1em;
+  transform: translateX(.40em) translateY(-1.3em);
+  margin-bottom: .1000em;
+}
+.sakubunyosi{
+  display: flex;
+}
+/* index.css */
+
+/* index.css */
+
+html {
+  scroll-behavior: smooth;
+}
+
+.navigation {
+  background-color: #333;
+  padding: 10px 0;
+}
+
+.navigation-list {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navigation-item {
+  margin: 0 10px;
+}
+
+.navigation-item a {
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.navigation-item a:hover {
+  background-color: #555;
+}
+
+@media (max-width: 768px) {
+  .navigation-list {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navigation-item {
+    margin: 10px 0;
+  }
+
+  .navigation-item a {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.homepng{
+  margin-top: 13px;
+}
+.topbutton{
+  position: fixed;
+  bottom: 10px !important;
+  right: 10px;
+  border-radius: 100px !important;
+  padding: 0;
+  margin: 0;
+}
+.topbutton button{
+  border-radius: 100px;
+  background-color: #ffffffb9;
+  text-align: center;
+  color: rgb(83, 83, 83);
+  border: 0 solid rgba(255, 255, 255, 0);
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.219);
 }

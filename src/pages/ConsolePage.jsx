@@ -3,6 +3,7 @@ import { createClient } from "@supabase/supabase-js";
 import "../assets/css/index.css";
 import Tabs from "../component/Tabs";
 import ModalFrame from "../component/ModalFrame";
+import AnimationKomawanPage from "./AnimationKomawanPage";
 
 const supabase = createClient(
   process.env.REACT_APP_SUPABASE_URL,
@@ -31,6 +32,7 @@ const typesnakami = [
   "疑問から入る",
   "自分の経験から入る",
   "本を取ったきっかけ",
+  "自分の気持ちから入る",
 ];
 
 function getRandomInt(max) {
@@ -42,7 +44,9 @@ const ConsolePage = () => {
   const whiteBoxRef = useRef();
   const adviceRef = useRef();
   const [isModalOpen, setIsModalOpen] = useState(true);
-  const [randomType, setRandomType] = useState(typesnakami[getRandomInt(typesnakami.length)]);
+  const [randomType, setRandomType] = useState(
+    typesnakami[getRandomInt(typesnakami.length)]
+  );
   const [kakidashis, setKakidashis] = useState([]);
   const [aiResponses, setAiResponses] = useState([]);
   const [isAiLoading, setIsAiLoading] = useState(false);
@@ -57,14 +61,17 @@ const ConsolePage = () => {
 
   const fetchSupabaseData = async () => {
     try {
-      const { data, error } = await supabase.from('sakubunKakidashi').select('*').eq('types', randomType);
+      const { data, error } = await supabase
+        .from("sakubunKakidashi")
+        .select("*")
+        .eq("types", randomType);
       if (error) {
-        console.error('Supabaseデータの取得に失敗しました:', error);
+        console.error("Supabaseデータの取得に失敗しました:", error);
         return null;
       }
       return data;
     } catch (error) {
-      console.error('Supabaseデータの取得中にエラーが発生しました:', error);
+      console.error("Supabaseデータの取得中にエラーが発生しました:", error);
       return null;
     }
   };
@@ -72,7 +79,11 @@ const ConsolePage = () => {
   async function fetchAIResponse(type) {
     setIsAiLoading(true);
     const supabaseData = await fetchSupabaseData();
-    const userMessage = `${grades[selectedGrade]}向けに適切な作文の書き出し例を提供してください。ただし、１つに絞ること。また最初のわかりました的なことは言わないこと。とにかく、必要なことのみ述べてください。参考データ: ${JSON.stringify(supabaseData)}`;
+    const userMessage = `${
+      grades[selectedGrade]
+    }向けに適切な作文の書き出し例を提供してください。ただし、1つに絞ること。また最初のわかりました的なことは言わないこと。とにかく、必要なことのみ述べてください。あくまで参考として渡します。同じものを返してはいけません。参考データ: ${JSON.stringify(
+      supabaseData
+    )}`;
     try {
       const response = await fetch(process.env.REACT_APP_API_URL + "/danraku", {
         method: "POST",
@@ -84,7 +95,16 @@ const ConsolePage = () => {
         const data = await response.json();
         const parsedData = data.bot.trim();
         const timestamp = new Date().toLocaleTimeString();
-        setAiResponses(prevResponses => [{ response: parsedData, timestamp }, ...prevResponses]);
+        setAiResponses((prevResponses) => [
+          {
+            response: parsedData,
+            types: type,
+            examplesentence: supabaseData[0]?.examplesentence || "",
+            header: supabaseData[0]?.header || "",
+            timestamp,
+          },
+          ...prevResponses,
+        ]);
       } else {
         console.error("AIのレスポンスの取得に失敗しました。");
       }
@@ -113,9 +133,11 @@ const ConsolePage = () => {
   };
 
   const handleClickBox = () => {
+    const newRandomType = typesnakami[getRandomInt(typesnakami.length)];
+    setRandomType(newRandomType); // 毎回ランダムタイプを設定
     setIsFormVisible(true);
     whiteBoxRef.current.classList.add("show");
-    
+
     setTimeout(() => {
       adviceRef.current?.scrollIntoView({ behavior: "smooth" });
     }, 500);
@@ -141,8 +163,12 @@ const ConsolePage = () => {
 
   return (
     <div>
-      <Tabs pageTitle="書き出しおみくじ"/>
-      <h3 className="setumei">おみくじ箱をクリックして、<br/>かっこいい書き出しを発見！</h3>
+      <Tabs pageTitle="書き出しおみくじ" />
+      <h3 className="setumei">
+        おみくじ箱をクリックして、
+        <br />
+        かっこいい書き出しを発見！
+      </h3>
       {isModalOpen && (
         <ModalFrame
           title="書き出しおみくじ"
@@ -154,13 +180,19 @@ const ConsolePage = () => {
       )}
       <img
         ref={myImg}
-        src={isBoxClicked ? "/images/omikujiTobidashi.png" : "/images/omikuji.png"}
+        src={
+          isBoxClicked ? "/images/omikujiTobidashi.png" : "/images/omikuji.png"
+        }
         alt="おみくじ箱"
         className="omikujibako"
         onClick={handleClickBox}
       />
-      <div className={`bokasi ${isFormVisible ? 'show' : ''}`}></div>
-      <div ref={whiteBoxRef} className={`white-box ${isFormVisible ? 'show' : ''}`}>
+      <div className={`bokasi ${isFormVisible ? "show" : ""}`}></div>
+      <div
+        ref={whiteBoxRef}
+        className={`white-box ${isFormVisible ? "show" : ""}`}
+      >
+        <p>学年を選んでね！</p>
         {isFormVisible && (
           <form onSubmit={handleSubmit} className="grade-form">
             <select
@@ -171,31 +203,65 @@ const ConsolePage = () => {
             >
               <option value="">学年を選んでね！</option>
               {Object.keys(grades).map((key) => (
-                <option key={key} value={key}>{grades[key]}</option>
+                <option key={key} value={key}>
+                  {grades[key]}
+                </option>
               ))}
             </select>
             <button type="submit">送信</button>
-            {formError && <p style={{ color: "red" }}>学年を選択してください。</p>}
+            {formError && (
+              <p style={{ color: "red" }}>学年を選択してください。</p>
+            )}
           </form>
         )}
-        <button className="close-button" onClick={() => setIsFormVisible(false)}>✖️</button>
+        <button
+          className="close-button"
+          onClick={() => setIsFormVisible(false)}
+        >
+          ✖️
+        </button>
       </div>
       <div className="ai-response" ref={adviceRef}>
         {isAiLoading ? (
-          <p>読み込み中...</p>
+          <div>
+            <p>読み込み中...</p>
+            <AnimationKomawanPage />
+          </div>
         ) : (
           aiResponses.map((responseObj, index) => (
-            <div key={index} className="response-box">
-              <p>{responseObj.response}</p>
-              <span className="timestamp">{responseObj.timestamp}</span>
+            <div>
+              <div key={index} className="response-box">
+                
+                <div className="response-type-tab">{responseObj.types}</div>
+                <div className="sakubunyosi">
+                  <div style={{ padding: "10px", marginLeft: "10px" }}>
+                    <div className="sakubun" contenteditable="true">
+                      <p>{"\u3000" + responseObj.header}</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="response-content-tab">
+                  <p className="example-sentenceh">{responseObj.header}</p>
+                  <div className="balloon1">
+                    <p>
+                      たと
+                      <br />
+                      えば
+                    </p>
+                  </div>
+                  <ul className="kajougaki">
+                    <li className="example-sentencee">
+                      {responseObj.examplesentence}
+                    </li>
+                    <li className="response-content">{responseObj.response}</li>
+                  </ul>
+                  <span className="timestamp">{responseObj.timestamp}</span>
+                </div>
+              </div>
             </div>
           ))
         )}
-        {kakidashis.map((kakidashi) => (
-          <div key={kakidashi.id}>
-            <h4>{kakidashi.examplesentence}<br/><span className="nakami">-{kakidashi.types}-</span></h4>
-          </div>
-        ))}
+        {kakidashis.length === 0 && !isAiLoading && <p></p>}
       </div>
     </div>
   );
