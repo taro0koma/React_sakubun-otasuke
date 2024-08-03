@@ -133,13 +133,13 @@ const HomePage = () => {
       <nav className="navigation">
         <ul className="navigation-list">
           <li className="navigation-item">
-            <a href="#komawanpoint1">ポイント１つ目</a>
+            <a href="#komawanpoint1"><span>内容が思いつかないときは</span><br /><span>マップ作り</span></a>
           </li>
           <li className="navigation-item">
-            <a href="#komawanpoint2">ポイント２つ目</a>
+            <a href="#komawanpoint2"><span>書き方がわからないときは</span><br /><span>段落の組み立て</span></a>
           </li>
           <li className="navigation-item">
-            <a href="#komawanpoint3">ポイント３つ目</a>
+            <a href="#komawanpoint4"><span>簡単な言葉をカッコよく</span><br /><span>表現ぴったり探し</span></a>
           </li>
         </ul>
       </nav>

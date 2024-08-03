@@ -712,34 +712,61 @@ html {
   scroll-behavior: smooth;
 }
 
-.navigation {
-  background-color: #333;
-  padding: 10px 0;
-}
+
 
 .navigation-list {
+  height: auto;
   display: flex;
   justify-content: center;
   list-style: none;
   margin: 0;
   padding: 0;
+  border-radius: 10px;
+  line-height: 0;
 }
 
 .navigation-item {
-  margin: 0 10px;
+  width: 25%;
+  background-color: #000000;
+  font-size: 2rem;
+  margin: 0;
+  border-right: 1px solid #ffffff;
+  padding: 10px 20px;
+  border-top: 2px solid #999999;
 }
 
-.navigation-item a {
-  color: white;
-  padding: 10px 20px;
+
+
+.navigation-item:first-child{
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-left: 2px solid #999999;
+}
+.navigation-item:last-child {
+  margin: 0;
+  border-right: 0px solid #00a0b800;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.navigation-item a span{
   text-decoration: none;
   border-radius: 5px;
   transition: background-color 0.3s ease;
+  font-weight: bold;
+}
+.navigation-item a span{
+  font-size: 1.1rem;
+  line-height: 200%;
+}
+.navigation-item a span:last-child{
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  font-weight: bold;
+  font-size: 1.9rem;
 }
 
-.navigation-item a:hover {
-  background-color: #555;
-}
 
 @media (max-width: 768px) {
   .navigation-list {
@@ -748,7 +775,26 @@ html {
   }
 
   .navigation-item {
-    margin: 10px 0;
+    width: 90%;
+    padding: 10px 20px;
+    border-left: 2px solid #999999;
+    border-top:1px solid #4b4b4b;
+    border-right:0;
+  }
+  
+  .navigation-item:first-child{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 0;
+    border-left: 2px solid #999999;
+    border-top: 2px solid #999999;
+  }
+  .navigation-item:last-child {
+    margin: 0;
+    border-right: 0px solid #00a0b800;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 0;
   }
 
   .navigation-item a {
@@ -756,6 +802,27 @@ html {
     width: 100%;
     text-align: center;
   }
+}
+.navigation-item a:hover{
+  color: #07d000;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.navigation-item a{
+  color: white;
+}
+.navigation-item a::after{
+  content: '';
+  display: block;
+  width: 30px;
+  height: 30px;
+  background-image: url(https://www.cybereason.co.jp/assets/img/academy/icon_circle_down_blue.svg);
+  background-position: top left;
+  background-size: 100%;
+  position: absolute;
+  top:50%;
+  right: 20px;
+  margin-top: -15px;
 }
 
 .homepng{
