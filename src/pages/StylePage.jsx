@@ -41,6 +41,7 @@ const StylePage = () => {
     bookReviewFirst: "",
     bookReviewSecond: "",
     bookReviewThird: "",
+    bookReviewArasuji: "",
     sFirst: "",
     sSecond: "",
     sThird: "",
@@ -128,7 +129,9 @@ const StylePage = () => {
         gradeJapan[formObj.grade]
       } 以下の年齢の子供の文化や世界観を表現できる文章にリライトする。 4. ${
         gradeJapan[formObj.grade]
-      } 以下の年齢の子供が読んだり書いたりできるようにリライトする。 5.必ず"一つ一つ"の提案の最後に「～～のようなことを書く段落にするのはどうでしょうか」と書く。）、const answer=[];の形式で日本語の値のみの配列を記載してください。配列のコード以外の文章やアドバイスは完全に省いてください。`;
+      } 以下の年齢の子供が読んだり書いたりできるようにリライトする。 5.あらすじは下記とする。${
+        formObj.bookReviewArasuji
+      }6.必ず"一つ一つ"の提案の最後に「～～のようなことを書く段落にするのはどうでしょうか」と書く。）、const answer=[];の形式で日本語の値のみの配列を記載してください。配列のコード以外の文章やアドバイスは完全に省いてください。`;
       //作文の場合
       return (
         <>
@@ -218,6 +221,12 @@ const StylePage = () => {
           placeholder="本の内容"
         /> */}
           <br />
+          <textarea onChange={(e)=>{
+             InputOnChange("bookReviewArasuji", e.target.value);
+          }}
+          cols="10"//横幅
+          rows="5"//行数
+          placeholder="あらすじ" />
           <input
             onChange={(e) => {
               InputOnChange("bookReviewSecond", e.target.value);
@@ -302,7 +311,6 @@ const StylePage = () => {
     <div className="container">
       <Tabs />
       <h3>段落の組み立て</h3>
-      <button onClick={handleModalOpen}>押したらもう一回見れるよ</button>
       {isModalOpen && (
         <ModalFrame
           title="段落の組み立て"
@@ -320,6 +328,7 @@ const StylePage = () => {
             InputOnChange("grade", e.target.value);
           }}
           value={formObj.grade}
+          required
         >
           <option value="grade">学年</option>
           <option value="s1">小学1年生</option>
@@ -341,6 +350,7 @@ const StylePage = () => {
             InputOnChange("type", e.target.value);
           }}
           value={formObj.type}
+          required
         >
           <option value="">選択</option>
           <option value="bookReview">読書感想文</option>

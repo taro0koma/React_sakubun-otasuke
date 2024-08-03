@@ -1,5 +1,26 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
-<circle cx="15" cy="15" r="15" fill="#00A0B8" style="&#10;    fill: #167651;&#10;"/>
-<path d="M15 10L15 20" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M18 17L15 20L12 17" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 30 30">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #fff;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 2.8px;
+      }
+
+      .cls-2 {
+        fill: #00a379;
+      }
+    </style>
+  </defs>
+  <!-- Generator: Adobe Illustrator 28.6.0, SVG Export Plug-In . SVG Version: 1.2.0 Build 709)  -->
+  <g>
+    <g id="_レイヤー_1" data-name="レイヤー_1">
+      <circle class="cls-2" cx="15" cy="15" r="15"/>
+      <path class="cls-1" d="M15,8.5v13"/>
+      <path class="cls-1" d="M21,16.5l-6,6-6-6"/>
+    </g>
+  </g>
 </svg>

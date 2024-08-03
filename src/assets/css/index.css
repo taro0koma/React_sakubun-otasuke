@@ -733,6 +733,7 @@ html {
   border-right: 1px solid #ffffff;
   padding: 10px 20px;
   border-top: 2px solid #999999;
+  position: relative;
 }
 
 
@@ -768,7 +769,35 @@ html {
 }
 
 
+
+.navigation-item a:hover{
+  color: #07d000;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.navigation-item a{
+  color: white;
+}
+.navigation-item::after{
+  top: 10px !important;
+  right: 8px;
+  content: '';
+  width: 24px;
+  height: 24px;
+  background-image: url(/images/yazirushi.svg);
+  background-position: top left;
+  background-size: 100%;
+  position: absolute;
+}
+
 @media (max-width: 768px) {
+  .navigation-item::after{
+    right: 10%;
+    top: 50% !important;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+  }
   .navigation-list {
     flex-direction: column;
     align-items: center;
@@ -802,28 +831,6 @@ html {
     width: 100%;
     text-align: center;
   }
-}
-.navigation-item a:hover{
-  color: #07d000;
-  background-color: rgba(255, 255, 255, 0);
-}
-
-.navigation-item a{
-  color: white;
-}
-.navigation-item a::after{
-  top: 20pc !important;
-  content: '';
-  display: flex;
-  width: 30px;
-  height: 30px;
-  background-image: url(/images/yazirushi.svg);
-  background-position: top left;
-  background-size: 100%;
-  position: absolute;
-  top:50%;
-  margin-top: -15px;
-  margin-left: 21%;
 }
 
 .homepng{
