@@ -186,6 +186,7 @@ const StylePage = () => {
             <option value="">本の種類</option>
             <option value="愉快な内容の本">愉快な内容の本</option>
             <option value="有名な人物の伝記の本">有名な人物の伝記の本</option>
+            <option value="実際にあった話">実際にあった話</option>
             <option value="冒険をする本">冒険をする本</option>
             <option value="悲しいことが起こる本">悲しいことが起こる本</option>
             <option value="怖い怪談についての本">怖い怪談についての本</option>
