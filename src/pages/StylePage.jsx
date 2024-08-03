@@ -325,11 +325,11 @@ const StylePage = () => {
     <div className="container">
       <Tabs />
       <h3>段落の組み立て</h3>
-      <p>※回答は下に出てきます。ボタンを連打しないでください。</p>
+      <p>※回答には時間がかかります。回答は下に出てきます。</p>
       {isModalOpen && (
         <ModalFrame
           title="段落の組み立て"
-          text="～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～～"
+          text="このサイトは書く順番を内容をもとに作り、形にしていきます。学年と種類、内容を回答して「段落の組み立て教えて」というボタンを押すことでそれぞれの段落を提案します。"
           onClose={handleModalClose}
           imageSrc="/images/danrakuwan.png"
           midashi="書きたいことが決まったら自分のぴったりの文の書き方を見つけよう"
@@ -337,7 +337,7 @@ const StylePage = () => {
       )}
       <br />
       <form onSubmit={FormSubmit}>
-        <h5>学年</h5>
+        <h5>あなたは何年生ですか？</h5>
         <select
           onChange={(e) => {
             InputOnChange("grade", e.target.value);
@@ -380,7 +380,7 @@ const StylePage = () => {
       </form>
 
       {hyou()}
-      <PreviousAndNext Previous="気持ちや感想" urlP="/kimoti" Next="原稿用紙に書いてみよう" urlN="/genkoyoshi"/>
+      <PreviousAndNext midashi="書きたいことが決まっていない？" honbun="何を書くかわかんないときはマップがおすすめ！試しにやってみよう！" buttontext="マップ作り" buttonurl="/mapmake"/>
 
     </div>
   );

@@ -29,7 +29,7 @@ const HomePage = () => {
         "「書きたいことが\nわいてくるぞー！」\nと Kさん。\n\n張り切ってマップをかいています。",
       text: "真ん中に一つテーマを書くと頭で考えているときよりもイメージがわきやすくなり、一つ書き足すごとに関連する言葉がわき出てきます。",
       url: "/mapmake",
-      urlText: "→ マップの作り方へ",
+      urlText: "▶ マップの作り方へ",
       id: "mapfinish",
     },
     {
@@ -46,7 +46,7 @@ const HomePage = () => {
       heading: "「どうやってかけばいいかわかった！」と Kさん。",
       text: "書く内容がわかっていても、どのように書けばいいかわからず手が止まってしまいます。\nなので、教えてくれる物があれば便利です。",
       url: "/danraku",
-      urlText: "→ 段落の組み立てを使ってみる",
+      urlText: "▶ 段落の組み立てを使ってみる",
       id: "uwao",
     },
     {
@@ -64,7 +64,7 @@ const HomePage = () => {
         "「今ままでよりスラスラでいい感じにかけるようになったかも！！」とKさん。手の動きが早いです。",
       text: "作文や読書感想文には枚数や文字数制限があります。そんな時、作文用紙に書くようなサイトがあれば、楽に簡単に調べることができます。",
       url: "/genkoyoshi",
-      urlText: "→ 原稿用紙作成シートについて",
+      urlText: "▶ 原稿用紙作成シートについて",
       id: "surassura",
     },
     {
@@ -88,7 +88,7 @@ const HomePage = () => {
       text: "調べることでいい作文になり、語彙が増えたりします。",
       url: "/hyougen",
       url2: "/kimoti",
-      urlText: "→ 段落の組み立てへ",
+      urlText: "▶ 段落の組み立てへ",
       id: "konoiikaeyoi",
     },
     {
@@ -104,11 +104,10 @@ const HomePage = () => {
     <div id="top">
       <Tabs />
       <div className="setumei">
-        <img src="/images/Applogo.png" alt="ロゴ" />
+        <img src="/images/Applogo.png" alt="ロゴ" style={{maxWidth:"400px"}}/>
         <h2>作文おたすけアプリとは？</h2>
         <p>
-          作文の苦手な人がカッコいい文を書けるように手助けするアプリです。
-          自分の考えや感想を豊かに表現してみましょう。
+          作文の苦手な人がカッコいい文を書けるように手助けするアプリです。<br/>このアプリを使って読書感想文を上達させましょう!
         </p>
       </div>
       <div className="contact-card">

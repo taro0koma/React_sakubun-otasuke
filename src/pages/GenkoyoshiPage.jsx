@@ -13,7 +13,7 @@ const GenkoyoshiPage = () => {
       <br />
       <img src="/images/sakubunyoshi1.png" alt="原稿用紙作成シートのスクショ２" />
       </div> 
-      <PreviousAndNext Previous="段落の組み立て" urlP="/danraku" Next="書き出しおみくじ" urlN="/omikuji"/>
+      <PreviousAndNext midashi="書きたいことが決まっていない？" honbun="何を書くかわかんないときはマップがおすすめ！試しにやってみよう！" buttontext="マップ作り" buttonurl="/mapmake"/>
     </div>
   );
 };

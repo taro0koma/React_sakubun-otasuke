@@ -32,6 +32,8 @@ select{
   border: white;
   color: #757575;
   font-family: "Zen Kaku Gothic New", sans-serif;
+  margin-bottom: 70px;
+  height: 64px;
 }
 input{
   padding: 20px 15px !important;
@@ -45,9 +47,7 @@ input{
   justify-content: center;
   align-items: center;
 }
-select{
-  height: 64px;
-}
+
 .button, button, input[type='button'], input[type='reset'], input[type='submit']{
   background-color: #000000;
   border-radius: .4rem;
@@ -93,4 +93,10 @@ input{
 }
 textarea{
   font-family: "Zen Kaku Gothic New", sans-serif;
+}
+h5{
+  font-weight: bold;
+}
+h4{
+  font-size: 1.6em;
 }

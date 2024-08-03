@@ -1,10 +1,12 @@
 import React from 'react';
 
-const PreviousAndNext = ({ Previous,urlP,Next,urlN }) => {
+const PreviousAndNext = ({ midashi,honbun,buttontext,buttonurl }) => {
   return (
     <div className='down'>
-      <a href={urlP}><button className='previous'>←{Previous}</button></a>
-      <a href={urlN} ><button className='next'>{Next}→</button></a>
+      <h4 style={{fontWeight:"bold"}}>{midashi}</h4>
+      <p>{honbun}</p>
+      <a href={buttonurl}><button>{buttontext}</button></a>
+      <br />
     </div>
   );
 };
