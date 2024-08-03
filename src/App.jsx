@@ -11,7 +11,7 @@ import React, { useEffect, useState } from "react";
 import AnimationPage from "./pages/AnimationPage";
 import AnimationKomawanPage from "./pages/AnimationKomawanPage";
 import LoginPage from './pages/LoginPage';
-import SakubunyoshiPage from "./pages/SakubunyoshiPage";
+import GenkoyoshiPage from "./pages/GenkoyoshiPage";
 
 
 const App = () => {
@@ -53,7 +53,7 @@ const App = () => {
           <Route path="/anime" element={<AnimationPage />} />
           <Route path="/animewan" element={<AnimationKomawanPage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/sakubunyosi" element={<SakubunyoshiPage />} />
+          <Route path="/genkoyoshi" element={<GenkoyoshiPage />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

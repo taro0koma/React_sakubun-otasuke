@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Tabs from "../component/Tabs";
 import ModalFrame from "../component/ModalFrame";
+import PreviousAndNext from "../component/PreviousAndNext";
 
 const StylePage = () => {
   
@@ -379,6 +380,7 @@ const StylePage = () => {
       </form>
 
       {hyou()}
+      <PreviousAndNext Previous="気持ちや感想" urlP="/kimoti" Next="原稿用紙に書いてみよう" urlN="/genkoyoshi"/>
 
     </div>
   );

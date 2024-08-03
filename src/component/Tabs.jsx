@@ -6,7 +6,17 @@ const lsStyle = {
   padding: "8px",
   color: "#ffffff",
 };
-
+const closeWithClickOutSideMethod = (e, setter) => {
+  console.log("e.target", e.target);
+  console.log("e.currentTarget", e.currentTarget);
+  if (e.target === e.currentTarget) {
+    //メニューの外側をクリックしたときだけメニューを閉じる
+    console.log("メニューの外側をクリックした");
+    setter(false);
+  } else {
+    console.log("メニューの内側をクリックした");
+  }
+};
 const Tabs = ({ pageTitle }) => {
   const [isOpen, setIsOpen] = useState(false);
 

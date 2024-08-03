@@ -790,6 +790,62 @@ html {
   position: absolute;
 }
 
+
+
+.homepng{
+  margin-top: 13px;
+}
+.topbutton{
+  position: fixed;
+  bottom: 10px !important;
+  right: 10px;
+  border-radius: 100px !important;
+  padding: 0;
+  margin: 0;
+}
+.topbutton button{
+  border-radius: 100px;
+  background-color: #ffffffb9;
+  text-align: center;
+  color: rgb(83, 83, 83);
+  border: 0 solid rgba(255, 255, 255, 0);
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.219);
+}
+
+.down{
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  top: 30px;
+}
+.next{
+  right: 20px;
+}
+.down a button{
+  background-color: rgb(35, 35, 35);
+  font-size: 13px !important;
+  position: absolute;
+  border-radius: 100px;
+  border: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 18px;
+  border-radius: 30px;
+
+  font-weight: bold;
+  transition: 0.3s;
+  box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.15);
+}
+.down a button:hover{
+  background-color: black;
+  box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.325);
+  filter: brightness(90%);
+}
 @media (max-width: 768px) {
   .navigation-item::after{
     right: 10%;
@@ -831,27 +887,13 @@ html {
     width: 100%;
     text-align: center;
   }
-}
 
-.homepng{
-  margin-top: 13px;
-}
-.topbutton{
-  position: fixed;
-  bottom: 10px !important;
-  right: 10px;
-  border-radius: 100px !important;
-  padding: 0;
-  margin: 0;
-}
-.topbutton button{
-  border-radius: 100px;
-  background-color: #ffffffb9;
-  text-align: center;
-  color: rgb(83, 83, 83);
-  border: 0 solid rgba(255, 255, 255, 0);
-  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.219);
-}
-input{
-  color: black !important;
+  .down a button{
+    position: static;
+  }
+  .next{
+    left: 0;
+    top: 50px;
+    padding: 10px;
+  }
 }
