@@ -60,14 +60,14 @@ const App = () => {
     </div>
   ) : (
     <>
-    <div>
+    <div style={{marginTop: "16px",marginLeft:"24px"}}>
           <h1 className="left-top-logo">
             作文<span className="app">アプリ</span>
             <br />
             <span className="otasuke">おたすけ</span>
           </h1>
         </div>
-    <div className="auth-container" style={{textAlign:"center",width: "400px",margin: "40px auto"}}>
+    <div className="auth-container" style={{textAlign:"center",maxWidth: "400px",margin: "40px auto"}}>
       <div className="auth-box">
         <h2>ログイン</h2>
         <p style={{textAlign:"left"}}><strong>作文お助けアプリ</strong> は、テスト運用中です。<br/>ユーザ名とパスワード名を知っている人のみが使用できます。</p>
