@@ -88,3 +88,9 @@ select{
 .container p{
   text-align: left;
 }
+input{
+  color: black !important;
+}
+textarea{
+  font-family: "Zen Kaku Gothic New", sans-serif;
+}

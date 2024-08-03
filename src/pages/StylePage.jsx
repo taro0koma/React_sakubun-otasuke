@@ -3,6 +3,7 @@ import Tabs from "../component/Tabs";
 import ModalFrame from "../component/ModalFrame";
 
 const StylePage = () => {
+  
   let ok = "no";
   const [isModalOpen, setIsModalOpen] = useState(true);
 
@@ -42,6 +43,7 @@ const StylePage = () => {
     bookReviewSecond: "",
     bookReviewThird: "",
     bookReviewArasuji: "",
+    bookReviewThing:"",
     sFirst: "",
     sSecond: "",
     sThird: "",
@@ -174,7 +176,9 @@ const StylePage = () => {
         gradeJapan[formObj.grade]
       } 以下の年齢の子供の文化や世界観を表現できる文章にリライトする。 4. ${
         gradeJapan[formObj.grade]
-      } 以下の年齢の子供が読んだり書いたりできるようにリライトする。 5.必ず"一つ一つ"の提案の最後に「～～のようなことを書く段落にするのはどうでしょうか」と書く。）、const answer=[];の形式で日本語の値のみの配列を記載してください。配列のコード以外の文章やアドバイスは完全に省いてください。`;
+      }表紙の様子/本の題名から考えたことは下記です。${
+        formObj.bookReviewThing
+      }以下の年齢の子供が読んだり書いたりできるようにリライトする。 5.必ず"一つ一つ"の提案の最後に「～～のようなことを書く段落にするのはどうでしょうか」と書く。）、const answer=[];の形式で日本語の値のみの配列を記載してください。配列のコード以外の文章やアドバイスは完全に省いてください。`;
       return (
         <>
           <select
@@ -193,6 +197,7 @@ const StylePage = () => {
             <option value="困りごとに立ち向かう本">
               困りごとに立ち向かう本
             </option>
+            <option value="食べ物の作り方">食べ物の作り方</option>
             <option value="科学について書かれた本">
               科学について書かれた本
             </option>
@@ -242,6 +247,13 @@ const StylePage = () => {
             }}
             value={formObj.bookReviewThird}
             placeholder="書きたいこと"
+          />
+          <input
+            onChange={(e) => {
+              InputOnChange("bookReviewThing", e.target.value);
+            }}
+            value={formObj.bookReviewThing}
+            placeholder="表紙の様子/本の題名から考えたこと"
           />
         </>
       );
@@ -312,6 +324,7 @@ const StylePage = () => {
     <div className="container">
       <Tabs />
       <h3>段落の組み立て</h3>
+      <p>※回答は下に出てきます。ボタンを連打しないでください。</p>
       {isModalOpen && (
         <ModalFrame
           title="段落の組み立て"
