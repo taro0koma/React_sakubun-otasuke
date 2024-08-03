@@ -905,3 +905,7 @@ html {
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.14);
   max-width: 800px;
 }
+.tobubutton{
+  border-radius: 30px;
+  font-size: 0.8em !important;
+}

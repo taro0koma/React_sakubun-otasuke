@@ -29,7 +29,7 @@ const HomePage = () => {
         "「書きたいことが\nわいてくるぞー！」\nと Kさん。\n\n張り切ってマップをかいています。",
       text: "真ん中に一つテーマを書くと頭で考えているときよりもイメージがわきやすくなり、一つ書き足すごとに関連する言葉がわき出てきます。",
       url: "/mapmake",
-      urlText: "→ マップの作り方",
+      urlText: "→ マップの作り方へ",
       id: "mapfinish",
     },
     {
@@ -62,9 +62,9 @@ const HomePage = () => {
       altText: "今までよりスラスラでいい感じに書けるようになったかも！！",
       heading:
         "「今ままでよりスラスラでいい感じにかけるようになったかも！！」とKさん。手の動きが早いです。",
-      text: "説明文5",
+      text: "作文や読書感想文には枚数や文字数制限があります。そんな時、作文用紙に書くようなサイトがあれば、楽に簡単に調べることができます。",
       url: "/genkoyoshi",
-      urlText: "→ 原稿用紙作成シート",
+      urlText: "→ 原稿用紙作成シートについて",
       id: "surassura",
     },
     {
@@ -72,24 +72,23 @@ const HomePage = () => {
       altText: "コマワンちゃんポイント４",
       heading:
         "コマワンちゃんのポイント４！\n「簡単な言葉を表現ぴったり探しや気持ちや感想から見つけ出そう！」",
-      text: "説明文5",
+      text: "どうしても、簡単な言葉しか出てこず、簡単だとわかっていてもかっこいい言葉がよくわからないことがあります。",
       id: "komawanpoint4",
     },
     {
       imgSrc: "/images/aseru.png",
       altText: "この言葉何回も使っているなぁ",
       heading: "「この言葉何回も使っているなぁ」とKさんは気づきました。",
-      text: "説明文5",
       id: "iikaeniodoroki",
     },
     {
       imgSrc: "/images/iikaeniodoroki.png",
       altText: "この言いかえいい！！こんな書き方があるんだ",
       heading: "「この言い換えがいい！！\nこんなかきかたがあるんだ」",
-      text: "説明文5",
+      text: "調べることでいい作文になり、語彙が増えたりします。",
       url: "/hyougen",
       url2: "/kimoti",
-      urlText: "→ 段落の組み立てを使ってみる",
+      urlText: "→ 段落の組み立てへ",
       id: "konoiikaeyoi",
     },
     {
@@ -97,7 +96,6 @@ const HomePage = () => {
       altText: "作文なら任せなさい…！",
       heading:
         "作文を書きなれたKさんは今では「作文ならまかせなさい！」となるまでに成長しました。",
-      text: "説明文5",
       id: "sakubunmakasete",
     },
   ];
@@ -105,6 +103,14 @@ const HomePage = () => {
   return (
     <div id="top">
       <Tabs />
+      <div className="setumei">
+        <img src="/images/Applogo.png" alt="ロゴ" />
+        <h2>作文おたすけアプリとは？</h2>
+        <p>
+          作文の苦手な人がカッコいい文を書けるように手助けするアプリです。
+          自分の考えや感想を豊かに表現してみましょう。
+        </p>
+      </div>
       <div className="contact-card">
         <a
           href="https://docs.google.com/forms/d/e/1FAIpQLSdJvzw5aympJYQrL58b9DbDy-Jqm8Xr1s43S8gfWTG4y8JY0g/viewform?usp=sf_link"
@@ -157,11 +163,17 @@ const HomePage = () => {
           <div className={styles.set} key={index}>
             <br  id={item.id}/>
             <img src={item.imgSrc} alt={item.altText} className="homepng"/>
-            <h3>{item.heading}</h3>
+            <h3 style={{fontWeight:"bold"}}>{item.heading}</h3>
             <p>
               {item.text}
-              <a href={item.url}>{item.urlText}</a>
-            </p>
+              </p>
+              {/* item.urlの中身があるかどうかを調べる条件分岐を作りその中に表示するHTMLを入れる */}
+              {item.url && (
+                <a href={item.url} target="_blank" rel="noopener noreferrer">
+                  <button className="tobubutton">{item.urlText}</button>
+                </a>
+              )}
+              {/* <a href={item.url}><button>{item.urlText}</button></a> */}
           </div>
         ))}
       </div>

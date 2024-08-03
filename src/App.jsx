@@ -70,7 +70,7 @@ const App = () => {
     <div className="auth-container" style={{textAlign:"center",maxWidth: "400px",margin: "40px auto"}}>
       <div className="auth-box">
         <h2>ログイン</h2>
-        <p style={{textAlign:"left"}}><strong>作文お助けアプリ</strong> は、テスト運用中です。<br/>ユーザ名とパスワード名を知っている人のみが使用できます。</p>
+        <p style={{textAlign:"left",width:"100%",padding:"16px 40px"}}><strong>作文お助けアプリ</strong> は、テスト運用中です。<br/>ユーザ名とパスワード名を知っている人のみが使用できます。</p>
         <input 
           type="text" 
           placeholder="ユーザ名" 
