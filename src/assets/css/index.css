@@ -726,7 +726,7 @@ html {
 }
 
 .navigation-item {
-  width: 25%;
+  width: 30%;
   background-color: #000000;
   font-size: 2rem;
   margin: 0;
@@ -812,17 +812,18 @@ html {
   color: white;
 }
 .navigation-item a::after{
+  top: 20pc !important;
   content: '';
-  display: block;
+  display: flex;
   width: 30px;
   height: 30px;
-  background-image: url(https://www.cybereason.co.jp/assets/img/academy/icon_circle_down_blue.svg);
+  background-image: url(/images/yazirushi.svg);
   background-position: top left;
   background-size: 100%;
   position: absolute;
   top:50%;
-  right: 20px;
   margin-top: -15px;
+  margin-left: 21%;
 }
 
 .homepng{
