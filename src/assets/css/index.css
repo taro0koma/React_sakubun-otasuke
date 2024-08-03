@@ -900,3 +900,8 @@ html {
     padding: 10px;
   }
 }
+.genkouimage img{
+  border-radius: 20px;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.14);
+  max-width: 800px;
+}

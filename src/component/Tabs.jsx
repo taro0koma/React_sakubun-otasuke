@@ -170,6 +170,17 @@ const Tabs = ({ pageTitle }) => {
           </li>
           <li>
             <NavLink
+              to="/genkoyoshi"
+              style={lsStyle}
+              onClick={handleLinkClick}
+              className={({ isActive }) => (isActive ? "active-item" : "panding-item")}
+            >
+              原稿用紙作成シートについて
+            </NavLink>
+          </li>
+
+          <li>
+            <NavLink
               to="/omikuji"
               style={lsStyle}
               onClick={handleLinkClick}
@@ -188,7 +199,6 @@ const Tabs = ({ pageTitle }) => {
               表現ぴったり探し
             </NavLink>
           </li>
-
         </ul>
       </div>
       </header>

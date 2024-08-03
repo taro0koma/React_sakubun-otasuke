@@ -7,7 +7,12 @@ const GenkoyoshiPage = () => {
     <div>
       <Tabs pageTitle="原稿用紙について"/>
       <h5>このサービスではまだ原稿用紙を作るコンテンツができていないため、おすすめのサイトを伝えます。</h5>
-      <p><a href="https://seipsg.main.jp/service/manuscriptpaper_gs" target='_blank'>縦書き原稿用紙</a></p>
+      <p><a href="https://seipsg.main.jp/service/manuscriptpaper_gs" target='_blank'>縦書き原稿用紙<br/>（おすすめ：原稿用紙シート　タイプC-サンプル2　2000字 （20×100））</a></p>
+      <div className='genkouimage'>
+      <img src="/images/sakubunyoshi2.png" alt="原稿用紙作成シートのスクショ" />
+      <br />
+      <img src="/images/sakubunyoshi1.png" alt="原稿用紙作成シートのスクショ２" />
+      </div> 
       <PreviousAndNext Previous="段落の組み立て" urlP="/danraku" Next="書き出しおみくじ" urlN="/omikuji"/>
     </div>
   );
