@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import Tabs from "../component/Tabs";
 import ModalFrame from "../component/ModalFrame";
+import PreviousAndNext from "../component/PreviousAndNext";
 
 const supabase = createClient(
   process.env.REACT_APP_SUPABASE_URL,
@@ -85,7 +86,7 @@ const ContactPage = () => {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label htmlFor="dropdownOption" className="block mb-2">
-              気持ちや感想を入力:
+              知りたい気持ち・感想は何ですか？
             </label>
             <select
               id="dropdownOption"
@@ -103,7 +104,7 @@ const ContactPage = () => {
           </div>
           <div>
             <label htmlFor="dropdownGrade" className="block mb-2">
-              学年を選択してください:
+              あなたは何年生ですか？
             </label>
             <select
               id="dropdownGrade"
@@ -130,24 +131,26 @@ const ContactPage = () => {
             type="submit"
             className="px-4 py-2 bg-blue-500 text-white rounded"
           >
-            Submit
+            送信！
           </button>
         </form>
         {submittedOption && (
           <div>
-            <h2>Supabaseからのデータ:</h2>
+            {/* <h2>Supabaseからのデータ:</h2>
             <ul>
               {kimochis.map((kimochi) => (
                 <li key={kimochi.id}>
                   {kimochi.types} : {kimochi.examples}
                 </li>
               ))}
-            </ul>
+            </ul> */}
             <h2>AIの提案:</h2>
             <p dangerouslySetInnerHTML={{ __html: aiResponse }}></p>
           </div>
         )}
       </div>
+      <PreviousAndNext midashi="知りたい気持ちがなかった！" honbun="そんなときは表現ぴったり探しがおすすめ！試しにやってみよう！" buttontext="▶　使ってみる" buttonurl="/hyogen"/>
+      <div className="spacer" style={{height:400}}></div>
     </div>
   );
 };

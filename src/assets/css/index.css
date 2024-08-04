@@ -822,7 +822,7 @@ html {
   position: fixed;
   width: 100%;
   height: auto;
-  background-color: rgba(223, 223, 223, 0.342);
+  background-color: rgba(223, 223, 223, 0.586);
   padding: 30px 10px 0 10px;
   text-align: center;
   backdrop-filter: blur(8px);
