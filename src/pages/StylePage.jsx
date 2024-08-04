@@ -323,8 +323,7 @@ const StylePage = () => {
 
   return (
     <div className="container">
-      <Tabs />
-      <h3>段落の組み立て</h3>
+      <Tabs pageTitle="段落の組み立て"/>
       <p>※回答には時間がかかります。回答は下に出てきます。</p>
       {isModalOpen && (
         <ModalFrame
@@ -380,8 +379,8 @@ const StylePage = () => {
       </form>
 
       {hyou()}
-      <PreviousAndNext midashi="書きたいことが決まっていない？" honbun="何を書くかわかんないときはマップがおすすめ！試しにやってみよう！" buttontext="マップ作り" buttonurl="/mapmake"/>
-
+      <PreviousAndNext midashi="書きたいことが決まっていない？" honbun="何を書くかわかんないときはマップがおすすめ！試しにやってみよう！" buttontext="▶　マップ作って見る" buttonurl="/mapmake"/>
+      <div className="spacer" style={{height:400}}></div>
     </div>
   );
 };

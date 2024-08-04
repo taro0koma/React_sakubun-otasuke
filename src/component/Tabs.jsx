@@ -111,7 +111,7 @@ const Tabs = ({ pageTitle }) => {
   `;
   
   return (
-    <div>
+    <div className="tabdesu">
       <header className="main-menu">
       <style>{menuStyles}</style>
         <a href="/" className="logo">

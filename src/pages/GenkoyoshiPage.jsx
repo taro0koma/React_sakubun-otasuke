@@ -3,6 +3,12 @@ import Tabs from './../component/Tabs';
 import PreviousAndNext from '../component/PreviousAndNext';
 
 const GenkoyoshiPage = () => {
+  const honbun = (
+    <>
+      何を書くかわかんないときはマップがおすすめ！<br />
+      試しにやってみよう！
+    </>
+  );
   return (
     <div>
       <Tabs pageTitle="原稿用紙について"/>
@@ -12,8 +18,8 @@ const GenkoyoshiPage = () => {
       <img src="/images/sakubunyoshi2.png" alt="原稿用紙作成シートのスクショ" />
       <br />
       <img src="/images/sakubunyoshi1.png" alt="原稿用紙作成シートのスクショ２" />
+      <br />
       </div> 
-      <PreviousAndNext midashi="書きたいことが決まっていない？" honbun="何を書くかわかんないときはマップがおすすめ！試しにやってみよう！" buttontext="マップ作り" buttonurl="/mapmake"/>
     </div>
   );
 };

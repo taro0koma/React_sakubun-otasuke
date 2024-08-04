@@ -818,12 +818,23 @@ html {
 
 .down{
   bottom: 0;
+  left: 0;
   position: fixed;
-  width: 500px;
+  width: 100%;
   height: auto;
-  background-color: rgba(255, 255, 255, 0.904);
-  padding: 10px 30px 0 10px;
+  background-color: rgba(223, 223, 223, 0.342);
+  padding: 30px 10px 0 10px;
   text-align: center;
+  backdrop-filter: blur(8px);
+  border-top-right-radius: 30px;
+  border-top-left-radius: 30px;
+}
+.down::before{
+  content:"";
+  top:0;
+  left:50%;
+  width:50%;
+  border-top:5px solid #000000;
 }
 .next{
   right: 20px;
@@ -835,6 +846,15 @@ html {
   background-color: black;
   box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.325);
   filter: brightness(90%);
+}
+.eyecatch span{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 400px;
+  border-top: 10px solid #000000;
 }
 @media (max-width: 768px) {
   .navigation-item::after{
@@ -890,12 +910,20 @@ html {
     top: 50px;
     padding: 10px;
   }
+  .container h3{
+    margin: 10px 30px 0 0;
+    display: inline;
+    font-size: 1.2em;
+  }
 }
 .genkouimage img{
-  border-radius: 20px;
+  border-radius: 1.3rem;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.14);
   max-width: 800px;
 }
 .tobubutton{
   font-size: 0.8em !important;
 }
+/* :not(.left-top-logo){
+  text-align: center;
+} */
