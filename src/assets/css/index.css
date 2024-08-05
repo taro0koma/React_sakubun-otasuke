@@ -63,7 +63,7 @@ h6{
   line-height: 1.2 !important;
   margin: 0px;
   position: relative;
-  width: 50%;
+  width: 30%;
 }
 @media (min-width: 1200px) {/* 1200px以上*/
   .hazinogazou {
@@ -849,6 +849,21 @@ html {
   left:50%;
   width:50%;
   border-top:5px solid #000000;
+}
+.container form input{
+  width: 100% !important;
+  max-width: 600px;
+}
+.container form textarea{
+  width: 80%;
+  font-size: 1.7rem;
+  min-width: 600px;
+}
+
+.container form select{
+  width: 100%;
+  font-size: 1.7rem;
+  max-width: 500px;
 }
 
 .down.hide {

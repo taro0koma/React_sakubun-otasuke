@@ -359,7 +359,7 @@ const StylePage = () => {
   return (
     <div className="container">
       <Tabs pageTitle="段落の組み立て"/>
-      <p>説明</p>
+      <p>このコンテンツは学年と作文の内容を入力することで組み立てを生成するものです</p>
       {isModalOpen && (
         <ModalFrame
           title="段落の組み立て"
