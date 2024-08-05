@@ -55,6 +55,10 @@ const Tabs = ({ pageTitle }) => {
       cursor: pointer;
       right:20px;
       top:30px;
+      z-index:10;
+      background-color: ${isOpen ? 'white' : 'none'};
+      border-radius: 100%;
+      box-shadow: 0px 0px 9px white;
     }
     .bar {
       width: 100%;
@@ -64,7 +68,7 @@ const Tabs = ({ pageTitle }) => {
     }
     .bar1 {
 
-      transform: ${isOpen ? 'rotate(45deg) translateY(14.5px)' : 'rotate(0)'};
+      transform: ${isOpen ? 'rotate(45deg) translateY(7px) translateX(7px)' : 'rotate(0)'};
     }
     .bar2 {
 
@@ -72,7 +76,7 @@ const Tabs = ({ pageTitle }) => {
     }
     .bar3 {
 
-      transform: ${isOpen ? 'rotate(-45deg) translateY(-14.5px)' : 'rotate(0)'};
+      transform: ${isOpen ? 'rotate(-45deg) translateY(-7px) translateX(8px)' : 'rotate(0)'};
     }
     .menu-items {
       position: fixed !important;
@@ -81,9 +85,8 @@ const Tabs = ({ pageTitle }) => {
       padding: 0 0 0 30px !important;
       margin: 0 !important;
       background-color: #333333bf;
-      position: absolute;
-      top: 7rem;
       right: 0;
+      height:100%;
       width: 100%;
       z-index: 1;
       background-size: cover;
@@ -92,6 +95,8 @@ const Tabs = ({ pageTitle }) => {
       visibility: ${isOpen ? 'visible' : 'hidden'};
       transform: ${isOpen ? 'translateY(0)' : 'translateY(-20px)'};
       transition: opacity 0.5s ease, transform 0.5s ease, visibility 0.5s ease;
+      top:0;
+      overflow:scroll;
     }
     .menu-items li {
       padding: 8px;

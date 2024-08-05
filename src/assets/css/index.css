@@ -265,6 +265,8 @@ img{
   overflow: hidden;
   transition: box-shadow 0.3s ease;
   text-decoration: none;
+  width: 90%;
+  padding: 0 5px 0 0;
 }
 
 .contact-card a {
@@ -278,26 +280,28 @@ img{
 }
 
 .contact-card-image {
-  width: 150px;
+  width: 50%;
   height: auto;
   object-fit: cover; /* 画像の切り取り方を指定 */
   margin-right: 0; /* 画像とテキストの間に余白を追加 */
   margin-left: 5px;
+  max-width: 100px;
 }
 
 .contact-card-text {
-  padding: 20px;
+  padding: 2rem;
 }
 
 .contact-card h3 {
   margin: 0;
-  font-size: 22px;
+  font-size: 2rem;
   color: #585858;
 }
 
 .contact-card p {
+  padding: 0 10px 0 0;
   margin: 7px 0 0;
-  font-size: 14px;
+  font-size: 1rem;
   color: #666;
 }
 
@@ -316,6 +320,7 @@ img{
 .EmbedBaseLinkCard{
   margin-right: 6px;
   flex-shrink: 0;
+  font-size: 1rem;
 }
 
 .EmbedBaseLinkCard img{
@@ -525,6 +530,10 @@ td{
 }
 #inputarea{
   text-align: center;
+}
+#inputarea input{
+  width: 90% !important;
+  max-width: 20em;
 }
 p{
   font-size: 17px;
@@ -928,3 +937,34 @@ html {
 /* :not(.left-top-logo){
   text-align: center;
 } */
+.wrapper{
+  text-align: right;
+  margin: 30px 0px;
+}
+.wrapper span{
+  text-align: right;
+  background-color: #666;
+  padding: 15px;
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
+}
+.wrapperai p{
+  text-align: left;
+  background-color: rgb(255, 255, 255);
+  padding: 30px;
+  border: 2px solid rgb(151, 151, 151);
+  border-radius: 10px;
+}
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1s forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+

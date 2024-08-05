@@ -318,6 +318,12 @@ const StylePage = () => {
       );
     }
   };
+  const honbun = (
+    <>
+      何を書くかわかんないときはマップがおすすめ！<br />
+      試しにやってみよう！
+    </>
+  );
 
 
 
@@ -379,7 +385,7 @@ const StylePage = () => {
       </form>
 
       {hyou()}
-      <PreviousAndNext midashi="書きたいことが決まっていない？" honbun="何を書くかわかんないときはマップがおすすめ！試しにやってみよう！" buttontext="▶　マップ作ってみる" buttonurl="/mapmake"/>
+      <PreviousAndNext midashi="書きたいことが決まっていない？" honbun={honbun} buttontext="▶　マップ作ってみる" buttonurl="/mapmake"/>
       <div className="spacer" style={{height:400}}></div>
     </div>
   );

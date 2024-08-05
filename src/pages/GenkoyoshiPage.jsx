@@ -3,12 +3,6 @@ import Tabs from './../component/Tabs';
 import PreviousAndNext from '../component/PreviousAndNext';
 
 const GenkoyoshiPage = () => {
-  const honbun = (
-    <>
-      何を書くかわかんないときはマップがおすすめ！<br />
-      試しにやってみよう！
-    </>
-  );
   return (
     <div>
       <Tabs pageTitle="原稿用紙について"/>

@@ -75,6 +75,11 @@ const ContactPage = () => {
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
+  const honbun = (
+    <>
+      そんなときは表現ぴったり<br/>どんな言葉でも回答しているよ<br/>試しにやってみよう！
+    </>
+  );
 
   return (
     <div>
@@ -149,7 +154,7 @@ const ContactPage = () => {
           </div>
         )}
       </div>
-      <PreviousAndNext midashi="知りたい気持ちがなかった！" honbun="そんなときは表現ぴったり探しがおすすめ！試しにやってみよう！" buttontext="▶　使ってみる" buttonurl="/hyogen"/>
+      <PreviousAndNext midashi="知りたい気持ちがなかった！" honbun={honbun} buttontext="▶　使ってみる" buttonurl="/hyogen"/>
       <div className="spacer" style={{height:400}}></div>
     </div>
   );
