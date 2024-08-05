@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 
 const PreviousAndNext = ({ midashi, honbun, buttontext, buttonurl }) => {
   const [boxHeight, setBoxHeight] = useState(0);
+  const [hide, setHide] = useState(false);
   const boxRef = useRef(null);
 
   useEffect(() => {
@@ -11,19 +12,29 @@ const PreviousAndNext = ({ midashi, honbun, buttontext, buttonurl }) => {
       }
     };
 
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setHide(true);
+      } else {
+        setHide(false);
+      }
+    };
+
     // 初期ロード時に高さを設定
     updateBoxHeight();
 
     // ウィンドウリサイズ時に高さを更新
     window.addEventListener('resize', updateBoxHeight);
+    window.addEventListener('scroll', handleScroll);
 
     return () => {
       window.removeEventListener('resize', updateBoxHeight);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
   return (
-    <div ref={boxRef} className='down'>
+    <div ref={boxRef} className={`down ${hide ? 'hide' : ''}`}>
       <div className='eyecatch'>
         <span></span>
       </div>

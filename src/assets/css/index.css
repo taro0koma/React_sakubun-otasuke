@@ -49,7 +49,11 @@ h6{
 .left-top-logo > .otasuke{
   letter-spacing: 0.4px;
 }
+.tabdesu{
+  text-align: left;
+}
 .left-top-logo {
+  text-align: left;
   font-family: "M PLUS Rounded 1c", sans-serif;
   font-weight: 800;
   font-size: 40px;
@@ -726,7 +730,6 @@ html {
 }
 
 
-
 .navigation-list {
   height: auto;
   display: flex;
@@ -838,6 +841,7 @@ html {
   backdrop-filter: blur(8px);
   border-top-right-radius: 30px;
   border-top-left-radius: 30px;
+  transition: transform 0.3s ease-in-out;
 }
 .down::before{
   content:"";
@@ -846,6 +850,11 @@ html {
   width:50%;
   border-top:5px solid #000000;
 }
+
+.down.hide {
+  transform: translateY(100%);
+}
+
 .next{
   right: 20px;
 }
@@ -966,5 +975,26 @@ html {
     opacity: 1;
   }
 }
+table{
+  border-collapse: collapse;
+  width: 100%;
+}
+th,
+td{
+  padding: 10px;
+  text-align:center;
+  box-sizing:border-box;
+}
+td:last-child{
+  padding-right: 40px;
+}
 
+@media screen and (max-width: 640px) {
+  th,
+  td {
+    display: block;
+    width: 100%;
+    border-bottom:none;
+  }
+}
 

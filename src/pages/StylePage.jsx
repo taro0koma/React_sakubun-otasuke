@@ -48,6 +48,8 @@ const StylePage = () => {
     sFirst: "",
     sSecond: "",
     sThird: "",
+    sTheme: "",
+    sFo: "",
   });
   const [messages, setMessage] = useState("");
   const [answers, setAnswer] = useState("");
@@ -118,7 +120,8 @@ const StylePage = () => {
 
   const renderAdditionalQuestions = () => {
     if (formObj.type === "composition") {
-      userMessage = `こんにちは、ChatGPT。テーマはわかりませんがある作文の構成を考える手助けをお願いしたいです。${
+      userMessage = `こんにちは、ChatGPT。テーマは「${formObj.sTheme
+      }」です。構成を考える手助けをお願いしたいです。${
         typeJapan[formObj.type]
       }のための${
         gradeJapan[formObj.grade]
@@ -128,7 +131,9 @@ const StylePage = () => {
         formObj.sSecond
       } 」､第3要素は「 ${
         formObj.sThird
-      } 」として、テーマについて自分の考えや経験を描く1600文字程度の作文のための「PREP+」のフレームワークを５～６個の段落の概要提案になるように構成し（次の5点に"必ず"対応してください。 1.項目ごと150文字以上にする。2.最初の段落と最終の段落が自分の言いたいことを伝える重要なまとめの段落とする。 3. ${
+      } 」、第4要素は「${
+        formObj.sFo
+      }」として、テーマについて自分の考えや経験を描く1600文字程度の作文のための「PREP+」のフレームワークを５～６個の段落の概要提案になるように構成し（次の5点に"必ず"対応してください。 1.項目ごと150文字以上にする。2.最初の段落と最終の段落が自分の言いたいことを伝える重要なまとめの段落とする。 3. ${
         gradeJapan[formObj.grade]
       } 以下の年齢の子供の文化や世界観を表現できる文章にリライトする。 4. ${
         gradeJapan[formObj.grade]
@@ -138,6 +143,15 @@ const StylePage = () => {
       //作文の場合
       return (
         <>
+          <h5>テーマを記入してね</h5>
+          <input 
+          onChange={(e) => {
+            InputOnChange("sTheme", e.target.value);
+          }}
+          value={formObj.sTheme}
+          placeholder="テーマ"
+          />
+          <h5>そのテーマに合わせて<br/>どんなことを書きたいか4つ記入してね</h5>
           <input
             onChange={(e) => {
               InputOnChange("sFirst", e.target.value);
@@ -161,6 +175,13 @@ const StylePage = () => {
             value={formObj.sThird}
             placeholder="３番目に書きたいこと"
           />
+          <input
+            onChange={(e) => {
+              InputOnChange("sFo", e.target.value);
+            }}
+            value={formObj.sFo}
+            placeholder="４番目に書きたいこと"
+          />
         </>
       );
     } else if (formObj.type === "bookReview") {
@@ -182,6 +203,7 @@ const StylePage = () => {
       }以下の年齢の子供が読んだり書いたりできるようにリライトする。 5.必ず"一つ一つ"の提案の最後に「～～のようなことを書く段落にするのはどうでしょうか」と書く。）、const answer=[];の形式で日本語の値のみの配列を記載してください。配列のコード以外の文章やアドバイスは完全に省いてください。`;
       return (
         <>
+        <h5>本の種類を選んでね</h5>
           <select
             onChange={(e) => {
               InputOnChange("bookReviewFirst", e.target.value);
@@ -228,12 +250,14 @@ const StylePage = () => {
           placeholder="本の内容"
         /> */}
           <br />
+          <h5>その本にはどんなことが書かれていたかな</h5>
           <textarea onChange={(e)=>{
              InputOnChange("bookReviewArasuji", e.target.value);
           }}
           cols="10"//横幅
           rows="5"//行数
           placeholder="あらすじ" />
+          <h5>心に残った部分は何かな</h5>
           <input
             onChange={(e) => {
               InputOnChange("bookReviewSecond", e.target.value);
@@ -242,19 +266,24 @@ const StylePage = () => {
             placeholder="印象に残ったところ"
           />
           <br />
-          <input
-            onChange={(e) => {
-              InputOnChange("bookReviewThird", e.target.value);
-            }}
-            value={formObj.bookReviewThird}
-            placeholder="書きたいこと"
-          />
+          <br />
+          <h5>本の表紙または<br/>読む前に題名から考えたこと<br/>について書いてね</h5>
           <input
             onChange={(e) => {
               InputOnChange("bookReviewThing", e.target.value);
             }}
             value={formObj.bookReviewThing}
             placeholder="表紙の様子/本の題名から考えたこと"
+          />
+          <br />
+          <br />
+          <h5>上のほかに書きたいことを記入してね</h5>
+          <input
+            onChange={(e) => {
+              InputOnChange("bookReviewThird", e.target.value);
+            }}
+            value={formObj.bookReviewThird}
+            placeholder="書きたいこと"
           />
         </>
       );
@@ -330,7 +359,7 @@ const StylePage = () => {
   return (
     <div className="container">
       <Tabs pageTitle="段落の組み立て"/>
-      <p style={{width:"130%",padding:"0 30px 0 0"}}>※回答には時間がかかります。回答は下に出てきます。</p>
+      <p>説明</p>
       {isModalOpen && (
         <ModalFrame
           title="段落の組み立て"
@@ -379,6 +408,7 @@ const StylePage = () => {
         <br />
         {renderAdditionalQuestions()}
 
+        <br />
         <br />
         <button type="submit">段落の組み立て教えて！</button>
         <p>{messages}</p>

@@ -91,7 +91,7 @@ const ContactPage = () => {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label htmlFor="dropdownOption" className="block mb-2">
-              知りたい気持ち・感想は何ですか？
+              知りたい気持ち・感想はなにか選んでね！
             </label>
             <select
               id="dropdownOption"
@@ -117,7 +117,7 @@ const ContactPage = () => {
               onChange={handleChangeGrade}
               className="p-2 border border-gray-300 rounded"
             >
-              <option value="">学年を選択してください</option>
+              <option value="">学年を選択してね</option>
               <option value="小学1年生">小学1年生</option>
               <option value="小学2年生">小学2年生</option>
               <option value="小学3年生">小学3年生</option>
