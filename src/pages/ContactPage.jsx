@@ -51,7 +51,7 @@ const ContactPage = () => {
   }
 
   async function fetchAIResponse(option, grade, examples) {
-    const userMessage = `下記の言葉を${option}という意味合いで${grade}向けにどんなときにも使える拡張した言葉を10個つくり、それを改行のある1．２．などの表示になるよう箇条書きにしてください。〇〇を埋めずに載せてください！！：\n\n${examples}`;
+    const userMessage = `下記の言葉を${option}という意味合いで${grade}向けにどんなときにも使える拡張した言葉を10個つくり、それを改行のある1．２．などの表示になるよう箇条書きにしてください。：\n\n${examples}`;
     try {
       const response = await fetch(process.env.REACT_APP_API_URL + "/danraku", {
         method: "POST",
@@ -97,7 +97,8 @@ const ContactPage = () => {
               id="dropdownOption"
               value={selectedOption}
               onChange={handleChangeOption}
-              className="p-2 border border-gray-300 rounded"
+              className="p-2 border border-gray-300 rounded !overflow-scroll"
+              required
             >
               <option value="">気持ちや感想を選択してください</option>
               <option value="ほっとした">ほっとした</option>
@@ -116,6 +117,7 @@ const ContactPage = () => {
               value={selectedGrade}
               onChange={handleChangeGrade}
               className="p-2 border border-gray-300 rounded"
+              required
             >
               <option value="">学年を選択してね</option>
               <option value="小学1年生">小学1年生</option>
@@ -130,6 +132,7 @@ const ContactPage = () => {
               <option value="高校1年生">高校1年生</option>
               <option value="高校2年生">高校2年生</option>
               <option value="高校3年生">高校3年生</option>
+              <option value="大人">大人</option>
             </select>
           </div>
           <button
@@ -140,7 +143,7 @@ const ContactPage = () => {
           </button>
         </form>
         {submittedOption && (
-          <div>
+          <div style={{padding:"30px"}}>
             {/* <h2>Supabaseからのデータ:</h2>
             <ul>
               {kimochis.map((kimochi) => (
@@ -149,13 +152,13 @@ const ContactPage = () => {
                 </li>
               ))}
             </ul> */}
-            <h2>AIの提案:</h2>
-            <p dangerouslySetInnerHTML={{ __html: aiResponse }}></p>
+            <h2 style={{padding:10,background:"#4890ff",color:"white",fontWeight:"bold"}}>AIの提案</h2>
+            <p dangerouslySetInnerHTML={{ __html: aiResponse }} style={{textAlign:"left"}}></p>
           </div>
         )}
       </div>
       <PreviousAndNext midashi="知りたい気持ちがなかった！" honbun={honbun} buttontext="▶　使ってみる" buttonurl="/hyougen"/>
-      <div className="spacer" style={{height:400}}></div>
+      <div className="spacer" style={{height:250}}></div>
     </div>
   );
 };

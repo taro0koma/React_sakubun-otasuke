@@ -24,7 +24,6 @@ const AnimationPage = () => {
 
   return (
     <div className='animation'>
-    <div className='animation'>
       <p className='sagattaato' ref={elementRef}>Welcome Viewrs!</p>
 
       <div className="loading-page" ref={anotherElementRef}>
@@ -36,7 +35,6 @@ const AnimationPage = () => {
           <div className="logo-name">nullx</div>
         </div>
       </div>
-    </div>
     </div>
   );
 };
