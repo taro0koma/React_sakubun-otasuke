@@ -34,7 +34,7 @@ const HyougenPage = () => {
         const response = await fetch(process.env.REACT_APP_API_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ prompt: userMessage }),
+          body: JSON.stringify({ prompt: userMessage,sakka: 'あまんきみこ' }),
         });
 
         stopLoader();

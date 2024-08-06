@@ -271,6 +271,7 @@ img{
   text-decoration: none;
   width: 90%;
   padding: 0 5px 0 0;
+  text-align: left;
 }
 
 .contact-card a {
@@ -680,6 +681,7 @@ p{
   padding: 16px;
   border-radius: 12px;
   box-shadow: 4px 4px 16px #00000014;
+  text-align: left;
 }
 
 .sakubun::before {
