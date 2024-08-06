@@ -1,4 +1,4 @@
-# React + Vite　作文お助けアプリ
+# React + Vite　<span style="color:pinc;box-shadow:1px 1px 1px gray">作文お助けアプリ</span>
 
 このサイトは自分でいい作文を書けるようになるよう作成したサイトです。
 
