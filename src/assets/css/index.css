@@ -252,6 +252,23 @@ img{
 .contact-button:hover {
   background-color: #0056b3;
 }
+.LoadingSvg{
+  position:fixed;
+  margin: auto;
+  top:0;
+  width: 100%;
+  text-align: center !important;
+  background-color: rgba(255, 255, 255, 0.493);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  z-index: 99999;
+  height: 100%;
+}
+
+.LoadingSvg .svgtoka{
+  padding: 0 10%;
+  text-align: center;
+}
 
 .notfoundImage img{
   width: 50%;

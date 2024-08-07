@@ -58,7 +58,7 @@ const Tabs = ({ pageTitle }) => {
       z-index:10;
       background-color: ${isOpen ? 'white' : 'none'};
       border-radius: 100%;
-      box-shadow: 0px 0px 9px white;
+      box-shadow: ${isOpen ? '0px 0px 9px white' : "none"};
     }
     .bar {
       width: 100%;

@@ -9,6 +9,7 @@ const supabase = createClient(
   process.env.REACT_APP_SUPABASE_API_KEY
 );
 
+
 const ContactPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(true);
 
@@ -51,12 +52,12 @@ const ContactPage = () => {
   }
 
   async function fetchAIResponse(option, grade, examples) {
-    const userMessage = `下記の言葉を${option}という意味合いで${grade}向けにどんなときにも使える拡張した言葉を10個つくり、それを改行のある1．２．などの表示になるよう箇条書きにしてください。：\n\n${examples}`;
+    const userMessage = `下記の言葉を${option}という意味合いでどんなときにも使える拡張した言葉を10個つくり、それを改行のある1．２．などの表示になるよう箇条書きにしてください。：\n\n${examples}`;
     try {
       const response = await fetch(process.env.REACT_APP_API_URL + "/danraku", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt: userMessage }),
+        body: JSON.stringify({ prompt: userMessage,grades: grade }),
       });
 
       if (response.ok) {
@@ -120,19 +121,19 @@ const ContactPage = () => {
               required
             >
               <option value="">学年を選択してね</option>
-              <option value="小学1年生">小学1年生</option>
-              <option value="小学2年生">小学2年生</option>
-              <option value="小学3年生">小学3年生</option>
-              <option value="小学4年生">小学4年生</option>
-              <option value="小学5年生">小学5年生</option>
-              <option value="小学6年生">小学6年生</option>
-              <option value="中学1年生">中学1年生</option>
-              <option value="中学2年生">中学2年生</option>
-              <option value="中学3年生">中学3年生</option>
-              <option value="高校1年生">高校1年生</option>
-              <option value="高校2年生">高校2年生</option>
-              <option value="高校3年生">高校3年生</option>
-              <option value="大人">大人</option>
+              <option value="s1">小学1年生</option>
+              <option value="s2">小学2年生</option>
+              <option value="s3">小学3年生</option>
+              <option value="s4">小学4年生</option>
+              <option value="s5">小学5年生</option>
+              <option value="s6">小学6年生</option>
+              <option value="t1">中学1年生</option>
+              <option value="t2">中学2年生</option>
+              <option value="t3">中学3年生</option>
+              <option value="k1">高校1年生</option>
+              <option value="k2">高校2年生</option>
+              <option value="k3">高校3年生</option>
+              <option value="oldPeople">大人</option>
             </select>
           </div>
           <button

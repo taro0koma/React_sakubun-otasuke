@@ -25,6 +25,21 @@ const grades = {
   k3: "高校3年生",
 };
 
+// const sakkamei = {
+//   s1: "松谷みよ子",
+//   s2: "あんびるやすこ",
+//   s3: "安西水丸",
+//   s4: "角野栄子",
+//   s5: "ヨシタケシンスケ",
+//   s6: "宮沢賢治",
+//   t1: "重松清",
+//   t2: "森絵都",
+//   t3: "住野よる",
+//   k1: "小川洋子",
+//   k2: "梨木香歩",
+//   k3: "あさのあつこ",
+// };
+//⇑まだ文を比べて並び替えしてないから仮として
 const typesnakami = [
   "この本を選んだ理由を、行動に例える",
   "自分の意見から入る",
@@ -81,17 +96,18 @@ const ConsolePage = () => {
     const supabaseData = await fetchSupabaseData();
     const userMessage = `${
       grades[selectedGrade]
-    }向けに適切な作文の書き出し例を提供してください。ただし、1つに絞ること。また最初のわかりました的なことは言わないこと。とにかく、必要なことのみ述べてください。あくまで参考として渡します。同じものを返してはいけません。参考データ: ${JSON.stringify(
+    }向けに適切な作文の書き出し例を提供してください。ただし、1つに絞ること。また最初のわかりました的なことは言わないこと。とにかく、必要なことのみ述べてください。あくまで参考として渡します。同じものを返えすことは許されません！参考データ（実際にはこの中にある〇〇が書かれている文章の〇〇に文字を入れる形で回答してください）: ${JSON.stringify(
       supabaseData
     )}`;
     try {
       const response = await fetch(process.env.REACT_APP_API_URL + "/danraku", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt: userMessage }),
+        body: JSON.stringify({ prompt: userMessage,grade:selectedGrade }),
       });
 
       if (response.ok) {
+        console.log(userMessage,selectedGrade);
         const data = await response.json();
         const parsedData = data.bot.trim();
         const timestamp = new Date().toLocaleTimeString();
@@ -223,9 +239,11 @@ const ConsolePage = () => {
       </div>
       <div className="ai-response" ref={adviceRef}>
         {isAiLoading ? (
-          <div>
+          <div className="LoadingSvg">
+            <div className="svgtoka"><AnimationKomawanPage/></div>
+            
+            <h2>SAKUBUN OTASUKE</h2>
             <p>読み込み中...</p>
-            <AnimationKomawanPage />
           </div>
         ) : (
           aiResponses.map((responseObj, index) => (
@@ -241,7 +259,6 @@ const ConsolePage = () => {
                   </div>
                 </div>
                 <div className="response-content-tab">
-                  <p className="example-sentenceh">{responseObj.header}</p>
                   <div className="balloon1">
                     <p>
                       たと
@@ -249,7 +266,7 @@ const ConsolePage = () => {
                       えば
                     </p>
                   </div>
-                  <ul className="kajougaki">
+                  <ul className="kajougaki" style={{textAlign:"left"}}>
                     <li className="example-sentencee">
                       {responseObj.examplesentence}
                     </li>
