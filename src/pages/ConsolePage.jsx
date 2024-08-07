@@ -103,7 +103,7 @@ const ConsolePage = () => {
       const response = await fetch(process.env.REACT_APP_API_URL + "/danraku", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt: userMessage,grade:selectedGrade }),
+        body: JSON.stringify({ prompt: userMessage,gakunen:selectedGrade }),
       });
 
       if (response.ok) {
