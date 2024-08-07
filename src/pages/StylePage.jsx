@@ -79,7 +79,7 @@ const StylePage = () => {
       const response = await fetch(process.env.REACT_APP_API_URL + "/danraku", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt: userMessage }),
+        body: JSON.stringify({ prompt: userMessage,gakunen: formObj.grade }),
       });
 
       if (response.ok) {
