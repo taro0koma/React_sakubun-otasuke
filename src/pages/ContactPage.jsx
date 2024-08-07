@@ -57,7 +57,7 @@ const ContactPage = () => {
       const response = await fetch(process.env.REACT_APP_API_URL + "/danraku", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt: userMessage,grades: grade }),
+        body: JSON.stringify({ prompt: userMessage,gakunen: selectedGrade }),
       });
 
       if (response.ok) {
@@ -82,6 +82,7 @@ const ContactPage = () => {
     </>
   );
 
+  //HTML------------------------------------------------------------------
   return (
     <div>
       <Tabs pageTitle="気持ちや感想"/>
