@@ -358,7 +358,7 @@ const StylePage = () => {
 
   return (
     <div className="container">
-      <Tabs pageTitle="段落の組み立て"/>
+      <Tabs pageTitle="段落の組み立て" contents="danraku"/>
       <p>学年と内容を入力してボタンをクリックしよう。<br />下に回答が出てくるよ</p>
       {isModalOpen && (
         <ModalFrame

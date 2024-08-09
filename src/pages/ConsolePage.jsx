@@ -179,7 +179,7 @@ const ConsolePage = () => {
 
   return (
     <div>
-      <Tabs pageTitle="書き出しおみくじ" />
+      <Tabs pageTitle="書き出しおみくじ" contents="kakidashi"/>
       <h3 className="setumei">
         おみくじ箱をクリックして、
         <br />

@@ -139,7 +139,7 @@ const HyougenPage = () => {
 
   return (
     <div id="app">
-      <Tabs pageTitle="表現ぴったり探し"/>
+      <Tabs pageTitle="表現ぴったり探し" contents="hyougen"/>
       <div id="inputarea" style={{marginBottom:"0"}}>
         <p style={{margin:0}}>探したい言葉を入力してね。<br/>10個の例を教えてくれるよ！<br/>文章をすてきにするために参考にしてね！</p>
         <br />

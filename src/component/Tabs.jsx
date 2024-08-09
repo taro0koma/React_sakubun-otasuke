@@ -17,7 +17,7 @@ const closeWithClickOutSideMethod = (e, setter) => {
     console.log("メニューの内側をクリックした");
   }
 };
-const Tabs = ({ pageTitle }) => {
+const Tabs = ({ pageTitle,contents }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -42,6 +42,10 @@ const Tabs = ({ pageTitle }) => {
     }
     .logo {
       margin-right: auto;
+    }
+    .${contents}{
+      background-color:#ffffff70;
+      border-radius: 70px;
     }
     .menu-toggle {
       position: fixed;
@@ -114,7 +118,7 @@ const Tabs = ({ pageTitle }) => {
       color: gray;
     }
     .menu-items li {
-    width:30em;
+    width:17em;
     }
     .menu-items h2{
     padding-top:40px;

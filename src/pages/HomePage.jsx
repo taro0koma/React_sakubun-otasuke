@@ -103,7 +103,7 @@ const HomePage = () => {
   
   return (
     <div id="top">
-      <Tabs />
+      <Tabs contents="home"/>
       <div className="setumei">
         <img src="/images/Applogo.png" alt="ロゴ" style={{maxWidth:"400px"}}/>
         <h2>作文おたすけアプリとは？</h2>

@@ -85,7 +85,7 @@ const ContactPage = () => {
   //HTML------------------------------------------------------------------
   return (
     <div>
-      <Tabs pageTitle="気持ちや感想"/>
+      <Tabs pageTitle="気持ちや感想" contents="kimoti"/>
       {isModalOpen && (
         <ModalFrame title="気持ちや感想の使い方" text="このサイトは簡単な言葉をよりよい回答を出すサイトです。文の中から簡単な言葉見つけ、その言葉を入力して送信しましょう。" onClose={handleModalClose} imageSrc="/images/dousiyowan.png"/>
       )}
