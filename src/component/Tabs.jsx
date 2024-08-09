@@ -45,38 +45,38 @@ const Tabs = ({ pageTitle }) => {
     }
     .menu-toggle {
       position: fixed;
-      justify-content: flex-end
-      font-size: 24px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 25px;
-      height: 25px;
+      width: 48px;
+      height: 48px;
       cursor: pointer;
       right:20px;
       top:30px;
       z-index:10;
       background-color: ${isOpen ? 'white' : 'none'};
       border-radius: 100%;
-      box-shadow: ${isOpen ? '0px 0px 9px white' : "none"};
+      box-shadow: ${isOpen ? '0px 0px 10px #0000007a' : "none"};
     }
     .bar {
-      width: 100%;
+    position: absolute;
+      width: 60%;
       height: 4px;
       background-color: #000;
       transition: transform 0.3s ease, opacity 0.3s ease;
     }
     .bar1 {
-
-      transform: ${isOpen ? 'rotate(45deg) translateY(7px) translateX(7px)' : 'rotate(0)'};
+      transform: ${isOpen ? 'rotate(45deg) translateY(18px) translateX(-1px)' : 'translateX(-50%)'};
+      top:10px;
+      left:50%;
     }
     .bar2 {
-
       opacity: ${isOpen ? 0 : 1};
+      transform:translateX(-50%);
+      top:22px;
+      left:50%;
     }
     .bar3 {
-
-      transform: ${isOpen ? 'rotate(-45deg) translateY(-7px) translateX(8px)' : 'rotate(0)'};
+      transform: ${isOpen ? 'rotate(-45deg) translateY(-18px) translateX(-2px)' : 'translateX(-50%)'};
+      left:50%;
+      top:34px;
     }
     .menu-items {
       position: fixed !important;
@@ -113,6 +113,15 @@ const Tabs = ({ pageTitle }) => {
     .menu-items li a.panding-item {
       color: gray;
     }
+    .menu-items li {
+    width:30em;
+    }
+    .menu-items h2{
+    padding-top:40px;
+    font-weight:bold;
+    font-size:30px;
+    color:white;
+    }
   `;
   
   return (
@@ -128,24 +137,27 @@ const Tabs = ({ pageTitle }) => {
         </a>
         <div className="menu-container">
         <div className="menu-toggle" onClick={toggleMenu}>
-          <div className={`bar bar1`}></div>
-          <div className={`bar bar2`}></div>
-          <div className={`bar bar3`}></div>
+          <div style={{position:"relative",lineHeight:0,height:"100%",width:"100%"}}>
+            <div className={`bar bar1`}></div>
+            <div className={`bar bar2`}></div>
+            <div className={`bar bar3`}></div>
+          </div>
         </div>
         <ul className="menu-items" style={{padding:"5px 30px"}}>
-          <li>
+          <h2>コンテンツ</h2>
+          <li className="home">
             <NavLink
               to="/"
               style={lsStyle}
               onClick={handleLinkClick}
               className={({ isActive }) => (isActive ? "active-item" : "panding-item")}
             >
-              Home
+              トップ画面
             </NavLink>
           </li>
-          <li>
+          <li className="imagemap">
             <NavLink
-              to="/mapmake"
+              to="/map"
               style={lsStyle}
               onClick={handleLinkClick}
               className={({ isActive }) => (isActive ? "active-item" : "panding-item")}
@@ -153,7 +165,7 @@ const Tabs = ({ pageTitle }) => {
               イメージマップの作り方
             </NavLink>
           </li>
-          <li>
+          <li className="kimoti">
             <NavLink
               to="/kimoti"
               style={lsStyle}
@@ -163,7 +175,7 @@ const Tabs = ({ pageTitle }) => {
               気持ちや感想
             </NavLink>
           </li>
-          <li>
+          <li className="danraku">
             <NavLink
               to="/danraku"
               style={lsStyle}
@@ -173,7 +185,7 @@ const Tabs = ({ pageTitle }) => {
               段落の組み立て
             </NavLink>
           </li>
-          <li>
+          <li className="genkouyoshi">
             <NavLink
               to="/genkoyoshi"
               style={lsStyle}
@@ -184,7 +196,7 @@ const Tabs = ({ pageTitle }) => {
             </NavLink>
           </li>
 
-          <li>
+          <li className="kakidashi">
             <NavLink
               to="/omikuji"
               style={lsStyle}
@@ -194,7 +206,7 @@ const Tabs = ({ pageTitle }) => {
               書き出しおみくじ
             </NavLink>
           </li>
-          <li>
+          <li className="hyougen">
             <NavLink
               to="/hyougen"
               style={lsStyle}

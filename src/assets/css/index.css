@@ -874,9 +874,9 @@ html {
   max-width: 600px;
 }
 .container form textarea{
-  width: 80%;
+  width: 100%;
   font-size: 1.7rem;
-  min-width: 600px;
+  max-width: 600px;
 }
 
 .container form select{
@@ -1029,6 +1029,9 @@ td:last-child{
     display: block;
     width: 100%;
     border-bottom:none;
+  }
+  .kakusitai{
+    display: none;
   }
 }
 

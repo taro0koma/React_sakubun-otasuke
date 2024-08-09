@@ -88,7 +88,8 @@ const HomePage = () => {
       text: "調べることでいい作文になり、語彙が増えたりします。",
       url: "/hyougen",
       url2: "/kimoti",
-      urlText: "▶ 段落の組み立てへ",
+      urlText: "▶ 表現ぴったり探し",
+      urlText2: "▶ 気持ちや感想",
       id: "konoiikaeyoi",
     },
     {
@@ -170,6 +171,13 @@ const HomePage = () => {
               {item.url && (
                 <a href={item.url} target="_blank" rel="noopener noreferrer">
                   <button className="tobubutton">{item.urlText}</button>
+                </a>
+              )}
+              {/*item.url2の中身があるかどうかを調べる条件分岐を作りそのなかにボタンを作るHTMLを入れる */}
+              {item.url2 && (
+                <a href={item.url2} target="_blank" rel="noopener noreferrer">
+                  <br />
+                  <button className="tobubutton">{item.urlText2}</button>
                 </a>
               )}
               {/* <a href={item.url}><button>{item.urlText}</button></a> */}

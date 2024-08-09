@@ -45,7 +45,7 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/mapmake" element={<AboutPage />} />
+          <Route path="/map" element={<AboutPage />} />
           <Route path="/kimoti" element={<ContactPage />} />
           <Route path="/danraku" element={<StylePage />} />
           <Route path="/omikuji" element={<ConsolePage />} />
