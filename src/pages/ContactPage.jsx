@@ -89,6 +89,7 @@ const ContactPage = () => {
       {isModalOpen && (
         <ModalFrame title="気持ちや感想の使い方" text="このサイトは簡単な言葉をよりよい回答を出すサイトです。文の中から簡単な言葉見つけ、その言葉を入力して送信しましょう。" onClose={handleModalClose} imageSrc="/images/dousiyowan.png"/>
       )}
+      <p>知りたい気持ちと学年を選択して送信ボタンを押そう<br />そうすると、回答が返ってくるよ！</p>
       <div className="p-4">
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
