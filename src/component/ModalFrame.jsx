@@ -1,7 +1,7 @@
 import React from 'react';
 import './ModalFrame.css'; // CSSファイルをインポート
 
-const ModalFrame = ({ title, text, onClose, imageSrc,midashi }) => {
+const ModalFrame = ({ title, text, onClose, imageSrc,midashi,buttonName }) => {
   return (
     <div className="modal-overlay">
       <div className="modal-content">
@@ -20,7 +20,7 @@ const ModalFrame = ({ title, text, onClose, imageSrc,midashi }) => {
             <p>{text}</p>
           </div>
         </div>
-        <button onClick={onClose} className='tukattemiyo'>やってみる</button>
+        <button onClick={onClose} className='tukattemiyo'>{buttonName || "やってみる"}</button>
       </div>
     </div>
   );
