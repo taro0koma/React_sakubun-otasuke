@@ -1,6 +1,5 @@
 import React,{useState} from 'react';
 import Tabs from './../component/Tabs';
-import PreviousAndNext from '../component/PreviousAndNext';
 import ModalFrame from "../component/ModalFrame";
 
 const GenkoyoshiPage = () => {

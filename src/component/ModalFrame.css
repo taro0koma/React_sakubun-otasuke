@@ -79,7 +79,7 @@
   overflow-y: scroll;
   scrollbar-color: rgb(171, 171, 171) rgb(238, 238, 238);
   scrollbar-width: thin;
-  height: 11em;
+  height: 6em;
 }
 
 .hazinogazou img {
@@ -131,7 +131,7 @@
 
   .modal-body {
     overflow-y: auto;
-    margin-bottom: 20px; /* モーダル下部に余白を追加 */
+    margin-bottom: 40px; /* モーダル下部に余白を追加 */
   }
 
   .modal-text {

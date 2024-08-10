@@ -40,7 +40,7 @@ const PreviousAndNext = ({ midashi, honbun, buttontext, buttonurl }) => {
       </div>
       <h4 style={{ fontWeight: 'bold', fontSize: '2rem' }}>{midashi}</h4>
       <p>{honbun}</p>
-      <a href={buttonurl}><button>{buttontext}</button></a>
+      <button onClick={() => window.location.href = buttonurl}>{buttontext}</button>
       <br />
       <style jsx>{`
         .parent-padding-adjust {
