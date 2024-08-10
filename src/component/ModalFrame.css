@@ -153,10 +153,11 @@
   }
   .modal-body p {
     margin: 10px 0 30px 10px;
-    font-size: 18px !important;
-    overflow-y: scroll;
-    scrollbar-color: rgb(171, 171, 171) rgb(238, 238, 238);
-    scrollbar-width: thin;
-    height: 5em;
+        font-size: 0.7em !important;
+        overflow-y: scroll;
+        scrollbar-color: rgb(171, 171, 171) rgb(238, 238, 238);
+        scrollbar-width: thin;
+        /* height: 8em; */
+        line-height: 1.3em;
   }
 }
