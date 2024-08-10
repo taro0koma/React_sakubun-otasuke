@@ -99,6 +99,12 @@ const HomePage = () => {
         "作文を書きなれたKさんは今では「作文ならまかせなさい！」となるまでに成長しました。",
       id: "sakubunmakasete",
     },
+    {
+      heading:"Kさんのおすすめツールも使ってみてね",
+      url: "/genkoyoshi",
+      urlText: "▶ おすすめツールを確認",
+      id: "osusume",
+    },
   ];
   
   return (
@@ -108,7 +114,7 @@ const HomePage = () => {
         <img src="/images/Applogo.png" alt="ロゴ" style={{maxWidth:"400px"}}/>
         <h2>作文おたすけアプリとは？</h2>
         <p>
-          作文の苦手な人がカッコいい文を書けるように手助けするアプリです。<br/>このアプリを使って読書感想文を上達させましょう!
+          「作文が苦手」をお助けする作文教室のようなアプリです。<br/>このアプリを作って、作文や読書感想文を楽しく作ってみましょう。
         </p>
       </div>
       <div className="contact-card">
@@ -124,8 +130,8 @@ const HomePage = () => {
               className="contact-card-image"
             />
             <div className="contact-card-text">
-              <h3>フィードバックください</h3>
-              <p>作文お助けアプリのご意見をお聞かせください。</p>
+              <h3>フィードバック ぜひ ください</h3>
+              <p>作文お助けアプリを使ってみた感想を教えてくれるとうれしいです。</p>
               <div className="EmbedBaseLinkCard">
                 <img
                   src="https://www.google.com/s2/favicons?sz=14&amp;domain_url=https://docs.google.com"
@@ -139,7 +145,6 @@ const HomePage = () => {
           </div>
         </a>
       </div>
-      <a href="#top" className="topbutton"><button>↑TOP</button></a>
 
       <nav className="navigation">
         <ul className="navigation-list">
@@ -150,12 +155,17 @@ const HomePage = () => {
             <a href="#komawanpoint2"><span>書き方がわからないときは</span><br /><span>段落の組み立て</span></a>
           </li>
           <li className="navigation-item">
+            <a href="#komawanpoint4"><span>言葉をいいかえたいときは</span><br /><span>気持ちや感想のいいかえ</span></a>
+          </li>
+          <li className="navigation-item">
             <a href="#komawanpoint4"><span>簡単な言葉をカッコよく</span><br /><span>表現ぴったり探し</span></a>
+          </li>
+          <li className="navigation-item">
+            <a href="#osusume"><span>もっと効率的に</span><br /><span>おすすめツール</span></a>
           </li>
         </ul>
       </nav>
       <div className={styles.container}>
-        <h2>作文お助けアプリの使い方</h2>
         <br />
         {/* <img src="/images/coma.png" alt="image"/> */}
 
@@ -183,7 +193,36 @@ const HomePage = () => {
               {/* <a href={item.url}><button>{item.urlText}</button></a> */}
           </div>
         ))}
+        
+        {/* <div>
+        <br id="#osusume"/>
+              <h1>おすすめツール</h1>
+              <p>Kさんのおすすめツール使ってみてね</p>
+              <a href="/genkoyoshi">
+                <button>おすすめツール</button>
+              </a>
+              </div> */}
       </div>
+      <nav className="navigation">
+        <ul className="navigation-list">
+          <li className="navigation-item">
+            <a href="#komawanpoint1"><span>内容が思いつかないときは</span><br /><span>マップ作り</span></a>
+          </li>
+          <li className="navigation-item">
+            <a href="#komawanpoint2"><span>書き方がわからないときは</span><br /><span>段落の組み立て</span></a>
+          </li>
+          <li className="navigation-item">
+            <a href="#komawanpoint4"><span>言葉をいいかえたいときは</span><br /><span>気持ちや感想のいいかえ</span></a>
+          </li>
+          <li className="navigation-item">
+            <a href="#komawanpoint4"><span>簡単な言葉をカッコよく</span><br /><span>表現ぴったり探し</span></a>
+          </li>
+          <li className="navigation-item">
+            <a href="#osusume"><span>もっと効率的に</span><br /><span>おすすめツール</span></a>
+          </li>
+        </ul>
+      </nav>
+      <br />
     </div>
   );
 };

@@ -1,8 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Tabs from '../component/Tabs';
 import AnimationKomawanPage from './AnimationKomawanPage'; // インポートするコンポーネント
+import ModalFrame from "../component/ModalFrame";
+
 
 const HyougenPage = () => {
+  const [isModalOpen, setIsModalOpen] = useState(true);
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [loadingComplete, setLoadingComplete] = useState(false);
@@ -136,10 +139,16 @@ const HyougenPage = () => {
     const chatContainer = chatContainerRef.current;
     chatContainer.scrollTop = chatContainer.scrollHeight;
   };
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <div id="app">
       <Tabs pageTitle="表現ぴったり探し" contents="hyougen"/>
+      {isModalOpen && (
+        <ModalFrame title="表現ぴったり探しの使い方" text="このサイトは気持ちや感想というコンテンツにはなかった言葉を10種類回答をだすものです。知りたい言葉を入力して送信しましょう。" onClose={handleModalClose} imageSrc="/images/dousiyowan.png"/>
+      )}
       <div id="inputarea" style={{marginBottom:"0"}}>
         <p style={{margin:0}}>探したい言葉を入力してね。<br/>10個の例を教えてくれるよ！<br/>文章をすてきにするために参考にしてね！</p>
         <br />

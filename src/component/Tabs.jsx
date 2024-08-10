@@ -45,7 +45,9 @@ const Tabs = ({ pageTitle,contents }) => {
     }
     .${contents}{
       background-color:#ffffff70;
-      border-radius: 70px;
+      border-top-right-radius: 70px;
+      border-bottom-right-radius: 70px;
+
     }
     .menu-toggle {
       position: fixed;
@@ -67,7 +69,7 @@ const Tabs = ({ pageTitle,contents }) => {
       transition: transform 0.3s ease, opacity 0.3s ease;
     }
     .bar1 {
-      transform: ${isOpen ? 'rotate(45deg) translateY(18px) translateX(-1px)' : 'translateX(-50%)'};
+      transform: ${isOpen ? 'rotate(45deg) translateY(18.6px) translateX(-1.8px)' : 'translateX(-50%)'};
       top:10px;
       left:50%;
     }
@@ -78,7 +80,7 @@ const Tabs = ({ pageTitle,contents }) => {
       left:50%;
     }
     .bar3 {
-      transform: ${isOpen ? 'rotate(-45deg) translateY(-18px) translateX(-2px)' : 'translateX(-50%)'};
+      transform: ${isOpen ? 'rotate(-45deg) translateY(-18.6px) translateX(-1.8px)' : 'translateX(-50%)'};
       left:50%;
       top:34px;
     }
@@ -110,6 +112,7 @@ const Tabs = ({ pageTitle,contents }) => {
       color: #fff;
       text-decoration: none;
       display: block;
+      text-align: center;
     }
     .menu-items li a.active-item {
       color: blue;
@@ -119,6 +122,7 @@ const Tabs = ({ pageTitle,contents }) => {
     }
     .menu-items li {
     width:17em;
+    margin:auto;
     }
     .menu-items h2{
     padding-top:40px;
@@ -148,7 +152,7 @@ const Tabs = ({ pageTitle,contents }) => {
           </div>
         </div>
         <ul className="menu-items" style={{padding:"5px 30px"}}>
-          <h2>コンテンツ</h2>
+          <h2>いちらん</h2>
           <li className="home">
             <NavLink
               to="/"
@@ -156,7 +160,7 @@ const Tabs = ({ pageTitle,contents }) => {
               onClick={handleLinkClick}
               className={({ isActive }) => (isActive ? "active-item" : "panding-item")}
             >
-              トップ画面
+              ホーム
             </NavLink>
           </li>
           <li className="imagemap">
@@ -169,16 +173,6 @@ const Tabs = ({ pageTitle,contents }) => {
               イメージマップの作り方
             </NavLink>
           </li>
-          <li className="kimoti">
-            <NavLink
-              to="/kimoti"
-              style={lsStyle}
-              onClick={handleLinkClick}
-              className={({ isActive }) => (isActive ? "active-item" : "panding-item")}
-            >
-              気持ちや感想
-            </NavLink>
-          </li>
           <li className="danraku">
             <NavLink
               to="/danraku"
@@ -189,25 +183,14 @@ const Tabs = ({ pageTitle,contents }) => {
               段落の組み立て
             </NavLink>
           </li>
-          <li className="genkouyoshi">
+          <li className="kimoti">
             <NavLink
-              to="/genkoyoshi"
+              to="/kimoti"
               style={lsStyle}
               onClick={handleLinkClick}
               className={({ isActive }) => (isActive ? "active-item" : "panding-item")}
             >
-              原稿用紙作成シートについて
-            </NavLink>
-          </li>
-
-          <li className="kakidashi">
-            <NavLink
-              to="/omikuji"
-              style={lsStyle}
-              onClick={handleLinkClick}
-              className={({ isActive }) => (isActive ? "active-item" : "panding-item")}
-            >
-              書き出しおみくじ
+              気持ちや感想のいいかえ
             </NavLink>
           </li>
           <li className="hyougen">
@@ -218,6 +201,26 @@ const Tabs = ({ pageTitle,contents }) => {
               className={({ isActive }) => (isActive ? "active-item" : "panding-item")}
             >
               表現ぴったり探し
+            </NavLink>
+          </li>
+          <li className="kakidashi">
+            <NavLink
+              to="/omikuji"
+              style={lsStyle}
+              onClick={handleLinkClick}
+              className={({ isActive }) => (isActive ? "active-item" : "panding-item")}
+            >
+              書き出しおみくじ
+            </NavLink>
+          </li>
+          <li className="genkouyoshi">
+            <NavLink
+              to="/genkoyoshi"
+              style={lsStyle}
+              onClick={handleLinkClick}
+              className={({ isActive }) => (isActive ? "active-item" : "panding-item")}
+            >
+              おすすめツール
             </NavLink>
           </li>
         </ul>
