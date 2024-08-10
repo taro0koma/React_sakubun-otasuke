@@ -79,7 +79,6 @@
   overflow-y: scroll;
   scrollbar-color: rgb(171, 171, 171) rgb(238, 238, 238);
   scrollbar-width: thin;
-  height: 6em;
 }
 
 .hazinogazou img {
@@ -126,7 +125,7 @@
   .modal-content {
     flex-direction: column; /* 縦並びに変更 */
     padding: 20px; /* パディングの調整 */
-    height: auto; /* 高さを自動調整 */
+    height: 80%; /* 高さを自動調整 */
   }
 
   .modal-body {
@@ -143,11 +142,21 @@
     display: flex;
     justify-content: center; /* 横のセンターに配置 */
     margin-bottom: 20px; /* 下部に余白を追加 */
-    width: 100%; /* コンテナの幅を全体に設定 */
+    width: 15em; /* コンテナの幅を全体に設定 */
+    margin: auto;
+    margin-top: -2em;
   }
 
   .hazinogazou img {
     max-width: 100%; /* コンテナの幅に合わせて最大幅を設定 */
     height: auto; /* 高さは自動調整 */
+  }
+  .modal-body p {
+    margin: 10px 0 30px 10px;
+    font-size: 18px !important;
+    overflow-y: scroll;
+    scrollbar-color: rgb(171, 171, 171) rgb(238, 238, 238);
+    scrollbar-width: thin;
+    height: 5em;
   }
 }
