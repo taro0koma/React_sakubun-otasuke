@@ -359,11 +359,11 @@ const StylePage = () => {
   return (
     <div className="container">
       <Tabs pageTitle="段落の組み立て" contents="danraku"/>
-      <p>学年と内容を入力してボタンをクリックしよう。<br />下に回答が出てくるよ</p>
+      <p>イメージマップなどで書きたいことが決まったら書きたいことをどんな順番で書けばいいか教えてもらおう</p>
       {isModalOpen && (
         <ModalFrame
           title="段落の組み立て"
-          text="このサイトは書く順番を内容をもとに作り、形にしていきます。学年と種類、内容を回答して「段落の組み立て教えて」というボタンを押すことでそれぞれの段落を提案します。"
+          text="イメージマップなどで書きたいことが決まったら書きたいことをどんな順番で書けばいいか教えてもらおう"
           onClose={handleModalClose}
           imageSrc="/images/danrakuwan.png"
           midashi="書きたいことが決まったら自分のぴったりの文の書き方を見つけよう"
