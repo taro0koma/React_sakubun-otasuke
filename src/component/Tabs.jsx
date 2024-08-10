@@ -152,7 +152,7 @@ const Tabs = ({ pageTitle,contents }) => {
           </div>
         </div>
         <ul className="menu-items" style={{padding:"5px 30px"}}>
-          <h2>いちらん</h2>
+          <h2 style={{textAlign:"center"}}>いちらん</h2>
           <li className="home">
             <NavLink
               to="/"

@@ -96,8 +96,22 @@ textarea{
   font-family: "Zen Kaku Gothic New", sans-serif;
 }
 h5{
+  margin-bottom: 1em;
   font-weight: bold;
 }
 h4{
+  margin-bottom: 1em;
   font-size: 1.6em;
+}
+h1{
+  margin-bottom: 1em;
+}
+h2{
+  margin-bottom: 1em;
+}
+h3{
+  margin-bottom: 2em;
+}
+a{
+  color: blue;
 }

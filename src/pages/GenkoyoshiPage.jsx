@@ -12,10 +12,10 @@ const GenkoyoshiPage = () => {
     <div>
       <Tabs pageTitle="おすすめツール" contents="genkouyoshi"/>
       {isModalOpen && (
-        <ModalFrame title="原稿用紙作成シートについて" text="このサイトは、文字数や枚数、行数などを実際に入力し原稿用紙に移すような形で、調べることのできるサイトの紹介が書かれています" onClose={handleModalClose} imageSrc="/vite.svg"/>
+        <ModalFrame title="原稿用紙作成シートについて" text="「おすすめツール」には便利なサイトをしょうかいしているよ。ぜひ使ってみてね！" onClose={handleModalClose} imageSrc="/vite.svg"/>
       )}
-      <p>文字数や行数が調べられる機能を紹介するよ</p>
-      <p><a href="https://seipsg.main.jp/service/manuscriptpaper_gs" target='_blank'>縦書き原稿用紙<br/>（おすすめ：原稿用紙シート　タイプC-サンプル2　2000字 （20×100））</a></p>
+      <p>「学校教育情報処理研究会」が提供している「縦書き原稿用紙作成シート」は清書する前の下書きにぴったり。作文の文字数や行数を表示してくれるので、文字数が決まっている宿題を調整できるよ</p>
+      <p style={{color:"blue",textDecoration: "underline"}}><a href="https://seipsg.main.jp/service/manuscriptpaper_gs" target='_blank' className='linkosusume'>縦書き原稿用紙作成シート</a></p>
       <div className='genkouimage'>
       <img src="/images/sakubunyoshi2.png" alt="原稿用紙作成シートのスクショ" />
       <br />

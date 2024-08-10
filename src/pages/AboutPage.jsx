@@ -9,12 +9,11 @@ const AboutPage = () => {
   };
   return (
     <div>
-      <Tabs pageTitle="イメージマップの作り方の動画" contents="imagemap"/>
+      <Tabs pageTitle="イメージマップの作り方" contents="imagemap"/>
       {isModalOpen && (
-        <ModalFrame title="イメージマップの作り方について" text="このサイトは、イメージマップについてを動画でまとめており、" onClose={handleModalClose} imageSrc="/vite.svg"/>
+        <ModalFrame title="イメージマップの作り方について" text="頭で考えても思いつかないのに紙に書いてみると、ふしぎなくらいイメージがわいてくる！何を書けばいいか思いつかないときは、紙の真ん中に1つだけ気持ちを書いてスタートしよう（「面白かった」「面白くなかった」からでもだいじょうぶ）" onClose={handleModalClose} imageSrc="/vite.svg"/>
       )}
-      <p>動画を見てイメージマップの作り方を学ぼう！<br/>内容をふくらませるよ</p>
-      <p style={{fontSize:20}}>※勝手に使わせていただいています。<br />　いつかは自分で作ろうと思っています。</p>
+      <p></p>
       {/* <iframe 
         width="560" 
         height="315" 

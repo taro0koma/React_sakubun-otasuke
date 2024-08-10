@@ -1022,7 +1022,9 @@ td{
 td:last-child{
   padding-right: 40px;
 }
-
+.linkosusume{
+  color: blue !important;
+}
 @media screen and (max-width: 640px) {
   th,
   td {

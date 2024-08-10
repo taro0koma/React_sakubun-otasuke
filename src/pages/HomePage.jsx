@@ -85,7 +85,7 @@ const HomePage = () => {
       imgSrc: "/images/iikaeniodoroki.png",
       altText: "この言いかえいい！！こんな書き方があるんだ",
       heading: "「この言い換えがいい！！\nこんなかきかたがあるんだ」",
-      text: "調べることでいい作文になり、語彙が増えたりします。",
+      text: "「表現ぴったり探し」や「気持ちや感想のいいかえ」をつかうことで、気持ちの伝わりやすい作文になりました。\nごいも増えるね！",
       url: "/hyougen",
       url2: "/kimoti",
       urlText: "▶ 表現ぴったり探し",
@@ -161,7 +161,7 @@ const HomePage = () => {
             <a href="#komawanpoint4"><span>簡単な言葉をカッコよく</span><br /><span>表現ぴったり探し</span></a>
           </li>
           <li className="navigation-item">
-            <a href="#osusume"><span>もっと効率的に</span><br /><span>おすすめツール</span></a>
+            <a href="#osusume"><span>もっと便利に</span><br /><span>おすすめツール</span></a>
           </li>
         </ul>
       </nav>
@@ -218,7 +218,7 @@ const HomePage = () => {
             <a href="#komawanpoint4"><span>簡単な言葉をカッコよく</span><br /><span>表現ぴったり探し</span></a>
           </li>
           <li className="navigation-item">
-            <a href="#osusume"><span>もっと効率的に</span><br /><span>おすすめツール</span></a>
+            <a href="#osusume"><span>もっと便利に</span><br /><span>おすすめツール</span></a>
           </li>
         </ul>
       </nav>
