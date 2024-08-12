@@ -1,6 +1,7 @@
 import React,{useState} from 'react';
 import Tabs from '../component/Tabs'
 import ModalFrame from "../component/ModalFrame";
+import PreviousAndNext from '../component/PreviousAndNext';
 
 const AboutPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(true);
@@ -15,6 +16,12 @@ const AboutPage = () => {
       )}
       <p></p>
       <video controls src="/images/figjamvideo.mp4" style={{width:"100%"}}></video>
+      <br />
+      <br />
+      <p>段落の組み立てで作文のそれぞれの段落に何を書くか決めよう。</p>
+      <a href="/danraku"><button>▶ 段落の組み立てを使ってみる</button></a>
+      <PreviousAndNext midashi="思いつかないときは3でも大丈夫！" honbun="「もう思いつかないー！」となったら次へ進もう" buttontext="▶　段落の組み立てを使ってみる" buttonurl="/hyougen"/>
+      <div className="spacer" style={{height:250}}></div>
     </div>
   );
 };

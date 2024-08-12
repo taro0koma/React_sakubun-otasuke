@@ -2,11 +2,11 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import react,{Suspense,lazy} from "react"
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
-import ContactPage from "./pages/ContactPage";
+const ContactPage = lazy(() => import("./pages/ContactPage"));
 import NotFound from "./pages/NotFound";
 import StylePage from "./pages/StylePage";
 const ConsolePage = lazy(() => import("./pages/ConsolePage"));
-import HyougenPage from "./pages/HyougenPage";
+const HyougenPage = lazy(() => import("./pages/HyougenPage"));
 import '../src/assets/css/index.css'
 import React, { useEffect, useState } from "react";
 import AnimationPage from "./pages/AnimationPage";
@@ -46,7 +46,11 @@ const App = () => {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/map" element={<AboutPage />} />
-              <Route path="/kimoti" element={<ContactPage />} />
+              <Route path="/kimoti" element={
+                <Suspense fallback={<div>気持ちや感想　読み込み中・・・</div>}>
+                <ContactPage />
+                </Suspense>
+              } />
               <Route path="/danraku" element={<StylePage />} />
               <Route path="/omikuji" element={
                 <Suspense fallback={<div>Loading ConsolePage...</div>}>
