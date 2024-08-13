@@ -82,10 +82,10 @@
 }
 
 .hazinogazou img {
-  margin: 0 50px 0 0;
+  margin: 0 30px;
   max-width: 100% !important;
-  width: 13em !important; /* 画像をコンテナの幅に合わせる */
-  height: auto !important; /* 画像のアスペクト比を維持 */
+  width: auto !important; /* 画像をコンテナの幅に合わせる */
+  height: 24rem !important; /* 画像のアスペクト比を維持 */
   top: 50%;
 }
 
@@ -97,9 +97,6 @@
   align-items: flex-end;
   display: block !important;
   text-align: left !important;
-  overflow-y: auto;
-  scrollbar-color: rebeccapurple green;
-  scrollbar-width: thin;
 }
 
 .tukattemiyo {
@@ -149,14 +146,17 @@
   .hazinogazou img {
     max-width: 100%; /* コンテナの幅に合わせて最大幅を設定 */
     height: auto; /* 高さは自動調整 */
+    width: 24rem;
+    object-fit: cover;
+    object-position: center;
   }
   .modal-body p {
     margin: 10px 0 30px 10px;
-        font-size: 0.7em !important;
+        font-size: 1.4rem !important;
         overflow-y: scroll;
         scrollbar-color: rgb(171, 171, 171) rgb(238, 238, 238);
-        scrollbar-width: thin;
-        /* height: 8em; */
+        scrollbar-width: initial;
+        height: 5em;
         line-height: 1.3em;
   }
 }

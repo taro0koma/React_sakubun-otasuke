@@ -42,7 +42,7 @@ h6{
   letter-spacing: 2px;
   border-radius: 100px;
   padding: 3px 7px;
-  font-size: 0.4em;
+  font-size: 1.6rem;
   position: absolute;
   top: 15%;
 }
@@ -95,7 +95,7 @@ h6{
     height: 40%;
   }
 }
-@media (max-width:640px){
+@media (max-width:768px){
   .omikujibako{
     max-width: 100%;
     width: 10%;
@@ -121,7 +121,7 @@ h6{
     height: 25%;
   }
 }
-@media screen and (max-width: 640px) {/* 640px以下*/
+@media screen and (max-width: 768px) {/* 768px以下*/
   .hazinogazou {
     margin: 0 0 0 0;
     width: 100px; /* 画像の幅 */
@@ -331,7 +331,7 @@ img{
   background-color: #fcfcfc;
 }
 .EmbedBaseLinkCard{
-  margin-top: .5em;
+  margin-top: .5rem;
   font-size: .78em;
   display: flex;
   align-items: center;
@@ -392,20 +392,20 @@ td{
 }
 .td-index{
   text-align: center;
-  font-size: 2em;
+  font-size: 2.8rem;
 }
 .td-item{
   padding: 40px;
   font-size: 1.4em;
 }
 .td-index span{
-  line-height: 1.9em;
+  line-height: 5rem;
   font-weight: 600;
   transform: translateX(25%);
   display: inline-block;
   background: white;
-  width: 2em;
-  height: 2em;
+  width: 5.5rem;
+  height: 5.5rem;
   border-radius: 100%;
 }
 .aka{
@@ -415,7 +415,7 @@ td{
 .container h3{
   margin: 10px 30px 0 0;
   display: inline;
-  font-size: 2em;
+  font-size: 4rem;
 }
 /* 既存のスタイルに追加 */
 .message {
@@ -458,7 +458,7 @@ td{
 
 .white-box {
   display: none;
-  padding: 3em !important;
+  padding: 5.7rem !important;
   margin: 20px auto;
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -489,7 +489,7 @@ td{
 
 .white-box.show p {
   font-weight: bold;
-  font-size: 2em;
+  font-size: 2.4rem;
 }
 
 .omikujibako {
@@ -536,7 +536,7 @@ td{
   position: absolute;
   top: 5px;
   right: 5px;
-  font-size: 0.8em;
+  font-size: 1rem;
   color: #888;
 }
 .setumei{
@@ -861,6 +861,7 @@ html {
   border-top-right-radius: 30px;
   border-top-left-radius: 30px;
   transition: transform 0.3s ease-in-out;
+  z-index: 1;
 }
 .down::before{
   content:"";
@@ -1025,7 +1026,7 @@ td:last-child{
 .linkosusume{
   color: blue !important;
 }
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 768px) {
   th,
   td {
     display: block;
@@ -1037,3 +1038,28 @@ td:last-child{
   }
 }
 
+.swiper-container {
+  width: 100%;
+  margin: 40px 0;
+  padding: 45px 0;
+}
+
+.swiper-slide {
+  opacity: 0.4;
+  overflow: hidden;
+  transition: .7s;
+}
+
+.swiper-slide img {
+  width: 100%;
+  border: 2px solid #e6e6e6;
+}
+
+.swiper-slide-active {
+  opacity: 1;
+  z-index: 1;
+  transform: scale(1.5);
+}
+.swiper-slide-active img{
+  border: 2px solid #e6e6e6;
+}

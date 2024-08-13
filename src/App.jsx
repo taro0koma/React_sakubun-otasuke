@@ -1,18 +1,19 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import react,{Suspense,lazy} from "react"
+import {Suspense,lazy} from "react"
 import HomePage from "./pages/HomePage";
-import AboutPage from "./pages/AboutPage";
+const AboutPage = lazy(() => import("./pages/AboutPage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
 import NotFound from "./pages/NotFound";
-import StylePage from "./pages/StylePage";
+const StylePage = lazy(() => import("./pages/StylePage"));
 const ConsolePage = lazy(() => import("./pages/ConsolePage"));
 const HyougenPage = lazy(() => import("./pages/HyougenPage"));
-import '../src/assets/css/index.css'
+import '../src/assets/css/index.css';
 import React, { useEffect, useState } from "react";
 import AnimationPage from "./pages/AnimationPage";
 import AnimationKomawanPage from "./pages/AnimationKomawanPage";
 import LoginPage from './pages/LoginPage';
-import GenkoyoshiPage from "./pages/GenkoyoshiPage";
+import SwiperPage from "./pages/swiperPage";
+const GenkoyoshiPage = lazy(() => import("./pages/GenkoyoshiPage"));
 
 
 const App = () => {
@@ -45,7 +46,9 @@ const App = () => {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<HomePage />} />
-              <Route path="/map" element={<AboutPage />} />
+              <Route path="/map" element={
+                <Suspense fallback={<div>イメージマップ読み込み中・・・</div>}><AboutPage /></Suspense>
+                } />
               <Route path="/kimoti" element={
                 <Suspense fallback={<div>気持ちや感想　読み込み中・・・</div>}>
                 <ContactPage />
@@ -65,8 +68,9 @@ const App = () => {
               <Route path="/anime" element={<AnimationPage />} />
               <Route path="/animewan" element={<AnimationKomawanPage />} />
               <Route path="/login" element={<LoginPage />} />
-              <Route path="/genkoyoshi" element={<GenkoyoshiPage />} />
+              <Route path="/osusume" element={<GenkoyoshiPage />} />
               <Route path="/*" element={<NotFound />} />
+              <Route path="/swiper" element={<SwiperPage/>}></Route>
             </Routes>
           </BrowserRouter>
         </div>

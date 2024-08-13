@@ -188,10 +188,10 @@ const ConsolePage = () => {
       {isModalOpen && (
         <ModalFrame
           title="書き出しおみくじ"
-          text="よい作文にするため、でだしをカッコよくしよう。学年を入力して、ランダムに出てくるおみくじを読んで自分の作文に取り入れよう！"
+          text="どうやったらかっこいい書き出しになるのかわからない・・・そんな時はおみくじをつかってお気に入りの書き出しを見つけよう。自分の作文に合わせた言葉が変えられるように例文もついているよ。"
           onClose={handleModalClose}
           imageSrc="/images/kakenaiwan.png"
-          midashi="いい作文は書き出しがかっこいい！"
+          midashi="作文の書き出しがかっこいいとなんかうれしい"
         ></ModalFrame>
       )}
       <img

@@ -101,7 +101,7 @@ const HomePage = () => {
     },
     {
       heading:"Kさんのおすすめツールも使ってみてね",
-      url: "/genkoyoshi",
+      url: "/osusume",
       urlText: "▶ おすすめツールを確認",
       id: "osusume",
     },
@@ -130,7 +130,7 @@ const HomePage = () => {
               className="contact-card-image"
             />
             <div className="contact-card-text">
-              <h3>フィードバック ぜひ ください</h3>
+              <h3>フィードバック ぜひ ください！</h3>
               <p>作文お助けアプリを使ってみた感想を教えてくれるとうれしいです。</p>
               <div className="EmbedBaseLinkCard">
                 <img

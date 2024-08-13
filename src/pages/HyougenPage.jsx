@@ -147,10 +147,10 @@ const HyougenPage = () => {
     <div id="app">
       <Tabs pageTitle="表現ぴったり探し" contents="hyougen"/>
       {isModalOpen && (
-        <ModalFrame title="表現ぴったり探しの使い方" text="このサイトは気持ちや感想というコンテンツにはなかった言葉を10種類回答をだすものです。知りたい言葉を入力して送信しましょう。" onClose={handleModalClose} imageSrc="/images/dousiyowan.png"/>
+        <ModalFrame title="「表現ぴったり探し」の使い方" text="「表現ぴったり探し」で、いろいろな表現が知ることができます。自分の書いてみた文章の中に別の表現にしたい言葉はありませんか？" onClose={handleModalClose} imageSrc="/images/dousiyowan.png"/>
       )}
       <div id="inputarea" style={{marginBottom:"0"}}>
-        <p style={{margin:0}}>探したい言葉を入力してね。<br/>10個の例を教えてくれるよ！<br/>文章をすてきにするために参考にしてね！</p>
+        <p style={{margin:0}}>自分の使っている言葉のほかの表現を知って、気に入るものがあったら、自分の作文に使ってみよう</p>
         <br />
         <form ref={formRef}>
           <input

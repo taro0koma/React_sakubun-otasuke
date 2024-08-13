@@ -87,9 +87,9 @@ const ContactPage = () => {
     <div>
       <Tabs pageTitle="気持ちや感想のいいかえ" contents="kimoti"/>
       {isModalOpen && (
-        <ModalFrame title="気持ちや感想の使い方" text="このサイトは簡単な言葉をよりよい回答を出すものです。文の中から簡単な言葉見つけ、その言葉を入力して送信しましょう。" onClose={handleModalClose} imageSrc="/images/dousiyowan.png"/>
+        <ModalFrame title="気持ちや感想のいいかえの使い方" text="「気持ちや感想のいいかえ」で、 どんないいかえ かをを知ることができます。自分の書いてみた文章の中にいいかえてみたい言葉はありますか？" onClose={handleModalClose} imageSrc="/images/dousiyowan.png"/>
       )}
-      <p>知りたい気持ちと学年を選択して送信ボタンを押そう<br />そうすると、回答が返ってくるよ！</p>
+      <p>自分の使っている言葉のほかにいいかえを知って、気に入るものがあったら、自分の作文に使ってみよう。</p>
       <div className="p-4">
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>

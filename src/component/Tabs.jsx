@@ -215,7 +215,7 @@ const Tabs = ({ pageTitle,contents }) => {
           </li>
           <li className="genkouyoshi">
             <NavLink
-              to="/genkoyoshi"
+              to="/osusume"
               style={lsStyle}
               onClick={handleLinkClick}
               className={({ isActive }) => (isActive ? "active-item" : "panding-item")}
