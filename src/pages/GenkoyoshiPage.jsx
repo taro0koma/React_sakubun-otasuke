@@ -21,7 +21,7 @@ const GenkoyoshiPage = () => {
       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Google_Sheets_2020_Logo.svg/140px-Google_Sheets_2020_Logo.svg.png" alt="logo" style={{width:"2rem",margin:"0 1rem 0 0"}}/>
       <p style={{color:"blue",textDecoration: "underline"}}><a href="https://seipsg.main.jp/service/manuscriptpaper_gs" target='_blank' className='linkosusume'>縦書き原稿用紙作成シート</a></p>
       </div>
-
+      <img src="/images/genkouyousisakuseTukatta.png" alt="" />
       <div className='genkouimage'>
       <br />
       </div> 

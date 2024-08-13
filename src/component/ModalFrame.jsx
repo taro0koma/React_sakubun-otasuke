@@ -13,8 +13,8 @@ const ModalFrame = ({ title, text, onClose, imageSrc,midashi,buttonName }) => {
             ×
           </button>
           <div className="modal-header">
-            <h2>{title}</h2>
-            <h1>{midashi}</h1>
+            <h1>{title}</h1>
+            <h2>{midashi}</h2>
           </div>
           <div className="modal-body">
             <p>{text}</p>

@@ -65,7 +65,7 @@
 .modal-header h2 {
   margin: 0 0 0 10px;
   font-weight: bold;
-  font-size: 15px !important;
+  font-size: 2rem !important;
 }
 
 .modal-body {
@@ -79,6 +79,7 @@
   overflow-y: scroll;
   scrollbar-color: rgb(171, 171, 171) rgb(238, 238, 238);
   scrollbar-width: thin;
+  height: 130px;
 }
 
 .hazinogazou img {
@@ -112,8 +113,9 @@
 }
 
 .modal-header h1 {
-  font-size: 80% !important;
+  font-size: 3rem !important;
   font-weight: bold;
+  padding: 10px 0 0 10px;
 }
 
 /* メディアクエリ追加: 画面幅が768px以下の場合 */
