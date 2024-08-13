@@ -14,10 +14,12 @@ const AboutPage = () => {
       {isModalOpen && (
         <ModalFrame title="イメージマップの作り方について" text="頭で考えても思いつかないのに紙に書いてみると、ふしぎなくらいイメージがわいてくる！何を書けばいいか思いつかないときは、紙の真ん中に1つだけ気持ちを書いてスタートしよう（「面白かった」「面白くなかった」からでもだいじょうぶ）" onClose={handleModalClose} imageSrc="/vite.svg"/>
       )}
-      <p>書く内容がふくらまない・・・<br/>そんな時はイメージマップを使おう！</p>
+      <p style={{textAlign:"center"}}>書くことがぜんぜん思いつかない！<br/>そんな時はイメージマップを書いてみよう。</p>
       <video controls src="/images/figjamvideo.mp4" style={{width:"100%"}} poster='/images/thumbnail.png'></video>
       <br />
-      <br />
+      <div style={{marginBottom:"3rem"}}/>
+      <h4>イメージマップの例</h4>
+        <p>Kさんの作ったイメージマップもあります。<br/>参考にしてくださいね</p>
       <SwiperPage gazou1="/images/sakubunMap1.png" gazou2="/images/sakubunMap2.png" gazou3="/images/sakubunMap3.png" gazou4="/images/dokushokansouMap.png"/>
       <br />
       <br />

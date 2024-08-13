@@ -97,10 +97,13 @@ textarea{
 }
 h5{
   margin-bottom: 1em;
+  padding-top: 4rem;
   font-weight: bold;
 }
 h4{
   margin-bottom: 1em;
+  padding-top: 4rem;
+
   font-size: 1.6em;
 }
 h1{
