@@ -6,7 +6,7 @@ const ModalFrame = ({ title, text, onClose, imageSrc,midashi,buttonName }) => {
     <div className="modal-overlay">
       <div className="modal-content">
         <div className="hazinogazou">
-          <img src={imageSrc} alt="画像" />
+          <img src={imageSrc} alt="画像" style={{height:"auto"}}/>
         </div>
         <div className="modal-text">
           <button className="close-button" onClick={onClose}>
