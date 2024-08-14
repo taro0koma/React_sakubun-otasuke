@@ -415,7 +415,7 @@ const StylePage = () => {
       </form>
 
       {hyou()}
-      <PreviousAndNext midashi="書きたいことが決まっていない？" honbun={honbun} buttontext="▶　マップ作ってみる" buttonurl="/mapmake"/>
+      <PreviousAndNext midashi="書きたいことが決まっていない？" honbun={honbun} buttontext="▶　マップ作ってみる" buttonurl="/map"/>
       <div className="spacer" style={{height:400}}></div>
     </div>
   );
