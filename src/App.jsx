@@ -56,7 +56,7 @@ const App = () => {
               } />
               <Route path="/danraku" element={<StylePage />} />
               <Route path="/omikuji" element={
-                <Suspense fallback={<div>Loading ConsolePage...</div>}>
+                <Suspense fallback={<div>Loading omikuji...</div>}>
                   <ConsolePage />
                 </Suspense>
               } />

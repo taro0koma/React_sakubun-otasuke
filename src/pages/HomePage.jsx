@@ -145,6 +145,34 @@ const HomePage = () => {
           </div>
         </a>
       </div>
+      
+      <div className="contact-card">
+        <a
+          href="https://docs.google.com/forms/d/e/1FAIpQLSdJvzw5aympJYQrL58b9DbDy-Jqm8Xr1s43S8gfWTG4y8JY0g/viewform?usp=sf_link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div className="contact-card-content">
+            <img
+              src="/images/formImage.png"
+              alt="お問い合わせフォームプレビュー"
+              className="contact-card-image"
+            />
+            <div className="contact-card-text">
+              <h3>文が完成したら ぜひ このアンケートに答えてください</h3>
+              <div className="EmbedBaseLinkCard">
+                <img
+                  src="https://docs.google.com/forms/d/e/1FAIpQLSc7OAqyL6l_AXLwumn0ECL2sOzcsxegp44s0PuL4uctH5Rigw/viewform"
+                  alt="docs.google.com favicon image"
+                  width="14"
+                  height="14"
+                />
+                docs.google.com
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
 
       <nav className="navigation">
         <ul className="navigation-list">
