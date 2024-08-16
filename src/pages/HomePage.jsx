@@ -148,7 +148,7 @@ const HomePage = () => {
       
       <div className="contact-card">
         <a
-          href="https://docs.google.com/forms/d/e/1FAIpQLSdJvzw5aympJYQrL58b9DbDy-Jqm8Xr1s43S8gfWTG4y8JY0g/viewform?usp=sf_link"
+          href="https://docs.google.com/forms/d/e/1FAIpQLSc7OAqyL6l_AXLwumn0ECL2sOzcsxegp44s0PuL4uctH5Rigw/viewform"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -159,10 +159,10 @@ const HomePage = () => {
               className="contact-card-image"
             />
             <div className="contact-card-text">
-              <h3>文が完成したら ぜひ このアンケートに答えてください</h3>
+              <h3>作文や感想文が完成したら ぜひ このアンケートに答えてください</h3>
               <div className="EmbedBaseLinkCard">
                 <img
-                  src="https://docs.google.com/forms/d/e/1FAIpQLSc7OAqyL6l_AXLwumn0ECL2sOzcsxegp44s0PuL4uctH5Rigw/viewform"
+                  src="https://www.google.com/s2/favicons?sz=14&amp;domain_url=https://docs.google.com"
                   alt="docs.google.com favicon image"
                   width="14"
                   height="14"
