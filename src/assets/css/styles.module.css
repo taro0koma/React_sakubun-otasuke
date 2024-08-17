@@ -38,7 +38,7 @@ select{
 }
 input{
   padding: 20px 15px !important;
-  width: 50vw !important;
+  width: 50vw;
   border: 2px solid #b0b1b8;
   background-color: #f0f0f0;
   color: #757575;
@@ -120,5 +120,4 @@ a{
 }
 p{
   max-width: 90%;
-  margin-left: 4rem;
 }

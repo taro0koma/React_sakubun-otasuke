@@ -13,6 +13,7 @@ import AnimationPage from "./pages/AnimationPage";
 import AnimationKomawanPage from "./pages/AnimationKomawanPage";
 import LoginPage from './pages/LoginPage';
 import SwiperPage from "./pages/swiperPage";
+import ImagemapPage from "./pages/ImagemapPage";
 const GenkoyoshiPage = lazy(() => import("./pages/GenkoyoshiPage"));
 
 
@@ -66,6 +67,7 @@ const App = () => {
                 </Suspense>
               } />
               <Route path="/anime" element={<AnimationPage />} />
+              <Route path="/imagemapmake" element={<ImagemapPage />} />
               <Route path="/animewan" element={<AnimationKomawanPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/osusume" element={<GenkoyoshiPage />} />
@@ -76,7 +78,7 @@ const App = () => {
         </div>
       ) : (
         <>
-          <div style={{ marginTop: '16px', marginLeft: '24px' }}>
+          <div style={{ marginTop: '16px', marginLeft: '24px',textAlign:"left" }}>
             <h1 className="left-top-logo">
               作文<span className="app">アプリ</span>
               <br />
@@ -95,6 +97,7 @@ const App = () => {
                 placeholder="ユーザ名"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
+                style={{marginLeft:"auto",width:"90%",maxWidth:"500px" }}
               />
               <br />
               <input
@@ -102,6 +105,7 @@ const App = () => {
                 placeholder="パスワード"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                style={{marginRight: 'auto',display:"block",marginLeft:"auto",width:"90%",maxWidth:"500px" }}
               />
               <br />
               <button onClick={handleLogin}>ログインする</button>
