@@ -85,8 +85,8 @@
 .hazinogazou img {
   margin: 0 30px;
   max-width: 100% !important;
-  width: 42rem !important; /* 画像をコンテナの幅に合わせる */
-  height: auto !important; /* 画像のアスペクト比を維持 */
+  width: auto !important; /* 画像をコンテナの幅に合わせる */
+  height: 100% !important; /* 画像のアスペクト比を維持 */
   top: 50%;
 }
 

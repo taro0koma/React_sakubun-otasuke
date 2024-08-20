@@ -14,6 +14,7 @@ import AnimationKomawanPage from "./pages/AnimationKomawanPage";
 import LoginPage from './pages/LoginPage';
 import SwiperPage from "./pages/swiperPage";
 import ImagemapPage from "./pages/ImagemapPage";
+import ZinbutsuPage from "./pages/ZinbutsuPage";
 const GenkoyoshiPage = lazy(() => import("./pages/GenkoyoshiPage"));
 
 
@@ -68,6 +69,7 @@ const App = () => {
               } />
               <Route path="/anime" element={<AnimationPage />} />
               <Route path="/imagemapmake" element={<ImagemapPage />} />
+              <Route path="/zinbutsu" element={<ZinbutsuPage />} />
               <Route path="/animewan" element={<AnimationKomawanPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/osusume" element={<GenkoyoshiPage />} />

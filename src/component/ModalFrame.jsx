@@ -5,7 +5,7 @@ const ModalFrame = ({ title, text, onClose, imageSrc,midashi,buttonName }) => {
   return (
     <div className="modal-overlay">
       <div className="modal-content">
-        <div className="hazinogazou">
+        <div className="hazinogazou" style={{width:"50%",height:"100%"}}>
           <img src={imageSrc} alt="画像" style={{height:"auto"}}/>
         </div>
         <div className="modal-text">

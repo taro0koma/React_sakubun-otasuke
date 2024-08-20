@@ -203,6 +203,16 @@ const Tabs = ({ pageTitle,contents }) => {
               表現ぴったり探し
             </NavLink>
           </li>
+          <li className="zinbutsu">
+            <NavLink
+              to="/zinbutsu"
+              style={lsStyle}
+              onClick={handleLinkClick}
+              className={({ isActive }) => (isActive ? "active-item" : "panding-item")}
+            >
+              登場人物の性格を表す言葉
+            </NavLink>
+          </li>
           <li className="kakidashi">
             <NavLink
               to="/omikuji"
