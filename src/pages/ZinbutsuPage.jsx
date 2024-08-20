@@ -34,10 +34,10 @@ const ZinbutsuPage = () => {
       }
 
       try {
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/danraku`, {
+        const response = await fetch(process.env.REACT_APP_API_URL+"/danraku", {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ prompt: `${userMessage}の別の性格のいいかえにしてください。ただし、コメント（分かりました。もちろんです。了解しました。大丈夫です。など）を入力しない。つまり、聞いていること以外は答えないでください！ちなみに言い換えは箇条書きで１０個出力してください！`,gakunen: gakunen }),
+          body: JSON.stringify({ prompt: `${userMessage}という言葉を作文に使われそうなものとして別の性格のいいかえにしてください。ただし、コメント（分かりました。もちろんです。了解しました。大丈夫です。など）を入力しない。つまり、聞いていること以外は答えないでください！ちなみに言い換えは箇条書きで１０個出力してください！`,gakunen: gakunen }),
         });
 
         stopLoader();
