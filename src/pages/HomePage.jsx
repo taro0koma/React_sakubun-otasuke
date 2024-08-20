@@ -88,8 +88,10 @@ const HomePage = () => {
       text: "「表現ぴったり探し」や「気持ちや感想のいいかえ」をつかうことで、気持ちの伝わりやすい作文になりました。\nごいも増えるね！",
       url: "/hyougen",
       url2: "/kimoti",
+      url3: "/zinbutsu",
       urlText: "▶ 表現ぴったり探し",
       urlText2: "▶ 気持ちや感想",
+      urlText3: "▶ 登場人物の性格を表す言葉",
       id: "konoiikaeyoi",
     },
     {
@@ -216,6 +218,12 @@ const HomePage = () => {
                 <a href={item.url2} target="_blank" rel="noopener noreferrer">
                   <br />
                   <button className="tobubutton">{item.urlText2}</button>
+                </a>
+              )}
+              {item.url3 && (
+                <a href={item.url3} target="_blank" rel="noopener noreferrer">
+                  <br />
+                  <button className="tobubutton">{item.urlText3}</button>
                 </a>
               )}
               {/* <a href={item.url}><button>{item.urlText}</button></a> */}
