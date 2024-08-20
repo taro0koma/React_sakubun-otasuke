@@ -164,9 +164,9 @@ const ZinbutsuPage = () => {
             <option value="t1">中学1年生</option>
             <option value="t2">中学2年生</option>
             <option value="t3">中学3年生</option>
-            <option value="h1">高校1年生</option>
-            <option value="h2">高校2年生</option>
-            <option value="h3">高校3年生</option>
+            <option value="k1">高校1年生</option>
+            <option value="k2">高校2年生</option>
+            <option value="k3">高校3年生</option>
           </select>
           <p>知りたい言葉を入力しよう</p>
         <form ref={formRef}>
