@@ -3,7 +3,6 @@ import Tabs from '../component/Tabs';
 import AnimationKomawanPage from './AnimationKomawanPage'; // インポートするコンポーネント
 import ModalFrame from "../component/ModalFrame";
 
-
 const HyougenPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [messages, setMessages] = useState([]);
@@ -11,66 +10,53 @@ const HyougenPage = () => {
   const [loadingComplete, setLoadingComplete] = useState(false);
   const chatContainerRef = useRef(null);
   const formRef = useRef(null);
+  const inputRef = useRef(null);  // Ref to the input element
 
-  useEffect(() => {
-    const handleSubmit = async (e) => {
-      e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-      const formData = new FormData(formRef.current);
-      const userMessage = formData.get('prompt');
+    const formData = new FormData(formRef.current);
+    const userMessage = formData.get('prompt');
 
-      addMessage(userMessage, false);
+    addMessage(userMessage, false);
 
-      formRef.current.reset();
+    formRef.current.reset();
 
-      const uniqueId = generateUniqueId();
-      addMessage('', true, uniqueId);
+    const uniqueId = generateUniqueId();
+    addMessage('', true, uniqueId);
 
-      scrollChatToBottom();
+    scrollChatToBottom();
 
-      const messageDiv = document.getElementById(uniqueId);
-      if (messageDiv) {
-        startLoader(messageDiv);
-      }
+    const messageDiv = document.getElementById(uniqueId);
+    if (messageDiv) {
+      startLoader(messageDiv);
+    }
 
-      try {
-        const response = await fetch(process.env.REACT_APP_API_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ prompt: userMessage,sakka: 'あまんきみこ' }),
-        });
+    try {
+      const response = await fetch(process.env.REACT_APP_API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt: userMessage, sakka: 'あまんきみこ' }),
+      });
 
-        stopLoader();
+      stopLoader();
 
-        if (response.ok) {
-          const data = await response.json();
-          const parsedData = data.bot.trim();
-          console.log('AIの回答:', parsedData); // AIの回答をコンソールに表示
-          animateMessage(uniqueId, parsedData);
-        } else {
-          const err = await response.text();
-          updateMessage(uniqueId, 'エラーが出たのでもう一度入力してください。');
-          alert(err);
-        }
-      } catch (error) {
-        stopLoader();
+      if (response.ok) {
+        const data = await response.json();
+        const parsedData = data.bot.trim();
+        console.log('AIの回答:', parsedData); // AIの回答をコンソールに表示
+        animateMessage(uniqueId, parsedData);
+      } else {
+        const err = await response.text();
         updateMessage(uniqueId, 'エラーが出たのでもう一度入力してください。');
-        alert(error);
+        alert(err);
       }
-    };
-
-    formRef.current.addEventListener('submit', handleSubmit);
-    formRef.current.addEventListener('keyup', (e) => {
-      if (e.keyCode === 13) {
-        handleSubmit(e);
-      }
-    });
-
-    return () => {
-      formRef.current.removeEventListener('submit', handleSubmit);
-      formRef.current.removeEventListener('keyup', handleSubmit);
-    };
-  }, []);
+    } catch (error) {
+      stopLoader();
+      updateMessage(uniqueId, 'エラーが出たのでもう一度入力してください。');
+      alert(error);
+    }
+  };
 
   const startLoader = (element) => {
     element.textContent = '';
@@ -139,29 +125,33 @@ const HyougenPage = () => {
     const chatContainer = chatContainerRef.current;
     chatContainer.scrollTop = chatContainer.scrollHeight;
   };
+
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
 
+  const handleClick = () => {
+    inputRef.current.focus();  // Focus the input element
+  };
+
   return (
     <div id="app">
-      <Tabs pageTitle="表現ぴったり探し" contents="hyougen"/>
+      <Tabs pageTitle="表現ぴったり探し" contents="hyougen" />
       {isModalOpen && (
-        <ModalFrame title="「表現ぴったり探し」の使い方" text="「表現ぴったり探し」で、いろいろな表現が知ることができます。自分の書いてみた文章の中に別の表現にしたい言葉はありませんか？" onClose={handleModalClose} imageSrc="/images/dousiyowan.png"/>
+        <ModalFrame title="「表現ぴったり探し」の使い方" text="「表現ぴったり探し」で、いろいろな表現が知ることができます。自分の書いてみた文章の中に別の表現にしたい言葉はありませんか？" onClose={handleModalClose} imageSrc="/images/dousiyowan.png" />
       )}
       <div id="inputarea">
-        <p style={{textAlign:"center"}}>自分の使っている言葉のほかの表現を知って、<br/>気に入るものがあったら、自分の作文に使ってみよう！</p>
+        <p style={{ textAlign: "center" }}>自分の使っている言葉のほかの表現を知って、<br />気に入るものがあったら、自分の作文に使ってみよう！</p>
         <br />
-        <form ref={formRef}>
+        <form ref={formRef} onSubmit={handleSubmit}>
           <input
+            ref={inputRef}
             name="prompt"
-            rows="1"
-            cols="1"
             placeholder="例：楽しい／さみしい"
             required
           />
           <br />
-          <button type="submit">
+          <button type="submit" onClick={handleClick}>
             この言葉の表現を探す！
           </button>
         </form>
