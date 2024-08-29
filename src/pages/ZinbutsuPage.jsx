@@ -163,6 +163,7 @@ const HyougenPage = () => {
             <option value="k2">高校2年生</option>
             <option value="k3">高校3年生</option>
           </select>
+          <br />
           <input
             ref={inputRef}
             name="prompt"

@@ -31,7 +31,7 @@
   width: 95%;
   height: calc(100vh - 230px);
   box-sizing: border-box; /* パディングを含めてサイズを設定 */
-  display: flex;
+  display: flex !important;
   justify-content: space-between; /* コンテンツを左右に配置 */
   align-items: flex-start; /* 上部揃え */
   max-width: 800px;
