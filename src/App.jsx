@@ -1,22 +1,24 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import {Suspense,lazy} from "react"
-import HomePage from "./pages/HomePage";
+import { Suspense, lazy, useEffect, useState } from "react";
+import CryptoJS from 'crypto-js';  // トークンの暗号化に使用
+import '../src/assets/css/index.css';
+
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
-import NotFound from "./pages/NotFound";
 const StylePage = lazy(() => import("./pages/StylePage"));
 const ConsolePage = lazy(() => import("./pages/ConsolePage"));
 const HyougenPage = lazy(() => import("./pages/HyougenPage"));
-import '../src/assets/css/index.css';
-import React, { useEffect, useState } from "react";
-import AnimationPage from "./pages/AnimationPage";
-import AnimationKomawanPage from "./pages/AnimationKomawanPage";
-import LoginPage from './pages/LoginPage';
-import SwiperPage from "./pages/swiperPage";
-import ImagemapPage from "./pages/ImagemapPage";
-import ZinbutsuPage from "./pages/ZinbutsuPage";
+const AnimationPage = lazy(() => import("./pages/AnimationPage"));
+const AnimationKomawanPage = lazy(() => import("./pages/AnimationKomawanPage"));
+const LoginPage = lazy(() => import('./pages/LoginPage'));
+const SwiperPage = lazy(() => import("./pages/swiperPage"));
+const ImagemapPage = lazy(() => import("./pages/ImagemapPage"));
+const ZinbutsuPage = lazy(() => import("./pages/ZinbutsuPage"));
 const GenkoyoshiPage = lazy(() => import("./pages/GenkoyoshiPage"));
+import HomePage from "./pages/HomePage";
+import NotFound from "./pages/NotFound";
 
+const SECRET_KEY = process.env.REACT_APP_SECRET_KEY || 'default_secret_key'; // 環境変数からキーを取得、デフォルト値を設定
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -24,16 +26,25 @@ const App = () => {
   const [password, setPassword] = useState('');
 
   useEffect(() => {
-    const savedAuth = localStorage.getItem('isAuthenticated');
-    if (savedAuth) {
-      setIsAuthenticated(JSON.parse(savedAuth));
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      try {
+        const decryptedToken = CryptoJS.AES.decrypt(token, SECRET_KEY).toString(CryptoJS.enc.Utf8);
+        if (decryptedToken === "authenticated") {
+          setIsAuthenticated(true);
+        }
+      } catch (error) {
+        console.error('トークンの復号に失敗しました', error);
+        localStorage.removeItem('authToken');
+      }
     }
   }, []);
 
   const handleLogin = () => {
     if (username === process.env.REACT_APP_USER_NAME && password === process.env.REACT_APP_PASSWORD) {
+      const token = CryptoJS.AES.encrypt("authenticated", SECRET_KEY).toString();
+      localStorage.setItem('authToken', token);
       setIsAuthenticated(true);
-      localStorage.setItem('isAuthenticated', JSON.stringify(true));
     } else if (username === '' || password === '') {
       alert('ユーザ名とパスワードを入力してください');
     } else {
@@ -48,39 +59,25 @@ const App = () => {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<HomePage />} />
-              <Route path="/map" element={
-                <Suspense fallback={<div>イメージマップ読み込み中・・・</div>}><AboutPage /></Suspense>
-                } />
-              <Route path="/kimoti" element={
-                <Suspense fallback={<div>気持ちや感想　読み込み中・・・</div>}>
-                <ContactPage />
-                </Suspense>
-              } />
+              <Route path="/map" element={<AboutPage />} />
+              <Route path="/kimoti" element={<ContactPage />} />
               <Route path="/danraku" element={<StylePage />} />
-              <Route path="/omikuji" element={
-                <Suspense fallback={<div>Loading omikuji...</div>}>
-                  <ConsolePage />
-                </Suspense>
-              } />
-              <Route path="/hyougen" element={
-                <Suspense fallback={<div>Loading HyougenPage...</div>}>
-                  <HyougenPage />
-                </Suspense>
-              } />
+              <Route path="/omikuji" element={<ConsolePage />} />
+              <Route path="/hyougen" element={<HyougenPage />} />
               <Route path="/anime" element={<AnimationPage />} />
               <Route path="/imagemapmake" element={<ImagemapPage />} />
               <Route path="/zinbutsu" element={<ZinbutsuPage />} />
               <Route path="/animewan" element={<AnimationKomawanPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/osusume" element={<GenkoyoshiPage />} />
+              <Route path="/swiper" element={<SwiperPage />} />
               <Route path="/*" element={<NotFound />} />
-              <Route path="/swiper" element={<SwiperPage/>}></Route>
             </Routes>
           </BrowserRouter>
         </div>
       ) : (
         <>
-          <div style={{ marginTop: '16px', marginLeft: '24px',textAlign:"left" }}>
+          <div style={{ marginTop: '16px', marginLeft: '24px', textAlign: "left" }}>
             <h1 className="left-top-logo">
               作文<span className="app">アプリ</span>
               <br />
@@ -99,7 +96,7 @@ const App = () => {
                 placeholder="ユーザ名"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                style={{marginLeft:"auto",width:"90%",maxWidth:"500px" }}
+                style={{ marginLeft: "auto", width: "90%", maxWidth: "500px" }}
               />
               <br />
               <input
@@ -107,7 +104,7 @@ const App = () => {
                 placeholder="パスワード"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                style={{marginRight: 'auto',display:"block",marginLeft:"auto",width:"90%",maxWidth:"500px" }}
+                style={{ marginRight: 'auto', display: "block", marginLeft: "auto", width: "90%", maxWidth: "500px" }}
               />
               <br />
               <button onClick={handleLogin}>ログインする</button>

@@ -144,7 +144,7 @@ const StylePage = () => {
       return (
         <>
           <h5>テーマを記入してね</h5>
-          <input 
+          <textarea 
           onChange={(e) => {
             InputOnChange("sTheme", e.target.value);
           }}
@@ -152,7 +152,7 @@ const StylePage = () => {
           placeholder="テーマ"
           />
           <h5>そのテーマに合わせて<br/>どんなことを書きたいか4つ記入してね</h5>
-          <input
+          <textarea
             onChange={(e) => {
               InputOnChange("sFirst", e.target.value);
             }}
@@ -160,7 +160,7 @@ const StylePage = () => {
             placeholder="１番目に書きたいこと"
           />
           <br />
-          <input
+          <textarea
             onChange={(e) => {
               InputOnChange("sSecond", e.target.value);
             }}
@@ -168,14 +168,14 @@ const StylePage = () => {
             placeholder="２番目にか書きたいこと"
           />
           <br />
-          <input
+          <textarea
             onChange={(e) => {
               InputOnChange("sThird", e.target.value);
             }}
             value={formObj.sThird}
             placeholder="３番目に書きたいこと"
           />
-          <input
+          <textarea
             onChange={(e) => {
               InputOnChange("sFo", e.target.value);
             }}
@@ -242,7 +242,7 @@ const StylePage = () => {
             <option value="不思議な世界に行く話">不思議な世界に行く話</option>
           </select>
 
-          {/* <input
+          {/* <textarea
           onChange={(e) => {
             InputOnChange("bookReviewFirst", e.target.value);
           }}
@@ -258,7 +258,7 @@ const StylePage = () => {
           rows="5"//行数
           placeholder="あらすじ" />
           <h5>心に残った部分は何かな</h5>
-          <input
+          <textarea
             onChange={(e) => {
               InputOnChange("bookReviewSecond", e.target.value);
             }}
@@ -268,7 +268,7 @@ const StylePage = () => {
           <br />
           <br />
           <h5>本の表紙または<br/>読む前に題名から考えたこと<br/>について書いてね</h5>
-          <input
+          <textarea
             onChange={(e) => {
               InputOnChange("bookReviewThing", e.target.value);
             }}
@@ -278,7 +278,7 @@ const StylePage = () => {
           <br />
           <br />
           <h5>上のほかに書きたいことを記入してね</h5>
-          <input
+          <textarea
             onChange={(e) => {
               InputOnChange("bookReviewThird", e.target.value);
             }}
@@ -369,6 +369,7 @@ const StylePage = () => {
           midashi="書きたいことが決まったら自分のぴったりの文の書き方を見つけよう"
           />
       )}
+      <b><p>気に入ったものはどこかにコピーしておこう！</p></b>
       <br />
       <form onSubmit={FormSubmit}>
         <h5>あなたは何年生ですか？</h5>

@@ -1,76 +1,63 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import Tabs from '../component/Tabs';
 import AnimationKomawanPage from './AnimationKomawanPage';
 import ModalFrame from "../component/ModalFrame";
 
-const ZinbutsuPage = () => {
+const HyougenPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [loadingComplete, setLoadingComplete] = useState(false);
-  const [gakunen, setGakunen] = useState('s1'); // デフォルト学年
+  const [grade, setGrade] = useState('s1'); // デフォルトで小学1年生を選択
   const chatContainerRef = useRef(null);
   const formRef = useRef(null);
+  const inputRef = useRef(null);
 
-  useEffect(() => {
-    const handleSubmit = async (e) => {
-      e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-      const formData = new FormData(formRef.current);
-      const userMessage = formData.get('prompt');
+    const formData = new FormData(formRef.current);
+    const userMessage = formData.get('prompt');
 
-      addMessage(userMessage, false);
+    const promptWithGrade = `${userMessage}`;
+    addMessage(promptWithGrade, false);
 
-      formRef.current.reset();
+    formRef.current.reset();
 
-      const uniqueId = generateUniqueId();
-      addMessage('', true, uniqueId);
+    const uniqueId = generateUniqueId();
+    addMessage('', true, uniqueId);
 
-      scrollChatToBottom();
+    scrollChatToBottom();
 
-      const messageDiv = document.getElementById(uniqueId);
-      if (messageDiv) {
-        startLoader(messageDiv);
-      }
+    const messageDiv = document.getElementById(uniqueId);
+    if (messageDiv) {
+      startLoader(messageDiv);
+    }
 
-      try {
-        const response = await fetch(process.env.REACT_APP_API_URL+"/danraku", {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ prompt: `${userMessage}という言葉を作文に使われそうなものとして別の性格のいいかえにしてください。ただし、コメント（分かりました。もちろんです。了解しました。大丈夫です。など）を入力しない。つまり、聞いていること以外は答えないでください！ちなみに言い換えは箇条書きで１０個出力してください！`,gakunen: gakunen }),
-        });
+    try {
+      const response = await fetch(process.env.REACT_APP_API_URL+"/danraku", {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt: `${promptWithGrade}という性格についての別の表現を10個提案してください。決して、下記のような、まあコメントはいらないということなんですが・・・、わかりました、了解しました、これでいいでしょうか、などの言葉を絶対に言わないでください。`, gakunen:grade }),
+      });
 
-        stopLoader();
+      stopLoader();
 
-        if (response.ok) {
-          const data = await response.json();
-          const parsedData = data.bot.trim();
-          console.log('AIの回答:', parsedData);
-          animateMessage(uniqueId, parsedData);
-        } else {
-          const err = await response.text();
-          updateMessage(uniqueId, 'エラーが出たのでもう一度入力してください。');
-          alert(err);
-        }
-      } catch (error) {
-        stopLoader();
+      if (response.ok) {
+        const data = await response.json();
+        const parsedData = data.bot.trim();
+        animateMessage(uniqueId, parsedData);
+      } else {
+        const err = await response.text();
         updateMessage(uniqueId, 'エラーが出たのでもう一度入力してください。');
-        alert(error);
+        alert(err);
       }
-    };
-
-    formRef.current.addEventListener('submit', handleSubmit);
-    formRef.current.addEventListener('keyup', (e) => {
-      if (e.keyCode === 13) {
-        handleSubmit(e);
-      }
-    });
-
-    return () => {
-      formRef.current.removeEventListener('submit', handleSubmit);
-      formRef.current.removeEventListener('keyup', handleSubmit);
-    };
-  }, [gakunen]); // gakunenに依存
+    } catch (error) {
+      stopLoader();
+      updateMessage(uniqueId, 'エラーが出たのでもう一度入力してください。');
+      alert(error);
+    }
+  };
 
   const startLoader = (element) => {
     element.textContent = '';
@@ -144,47 +131,52 @@ const ZinbutsuPage = () => {
     setIsModalOpen(false);
   };
 
+  const handleClick = () => {
+    inputRef.current.focus();
+  };
+
+  const handleGradeChange = (e) => {
+    setGrade(e.target.value);
+  };
+
   return (
     <div id="app">
-      <Tabs pageTitle="登場人物の性格を表す言葉" contents="zinbutsu"/>
+      <Tabs pageTitle="登場人物の性格を表す言葉" contents="zinbutsu" />
       {isModalOpen && (
-        <ModalFrame title="「登場人物の性格を表す言葉」の使い方" text="「登場人物の性格を表す言葉」で、いろいろな人物の表現が知ることができます。自分の書いてみた文章の中に別の表現にしたい性格の言葉はありませんか？" onClose={handleModalClose} imageSrc="/images/dousiyowan.png"/>
+        <ModalFrame title="「登場人物の性格を表す言葉」の使い方" text="「登場人物の性格を表す言葉」で、いろいろな表現が知ることができます。自分の書いてみた文章の中に別の表現にしたい言葉はありませんか？" onClose={handleModalClose} imageSrc="/images/dousiyowan.png" />
       )}
       <div id="inputarea">
-        <p style={{textAlign:"center"}}>自分の使っている性格の表現のほかの表現を知って、<br/>気に入るものがあったら、自分の作文に使ってみよう！</p>
+        <p style={{ textAlign: "center" }}>自分の使っている言葉のほかの表現を知って、<br />気に入るものがあったら、自分の作文に使ってみよう！</p>
         <br />
-        <p>学年を選んでね！</p>
-        <select name="gakunen" onChange={(e) => setGakunen(e.target.value)}>
+        <form ref={formRef} onSubmit={handleSubmit}>
+          <select value={grade} onChange={handleGradeChange}>
             <option value="s1">小学1年生</option>
             <option value="s2">小学2年生</option>
             <option value="s3">小学3年生</option>
             <option value="s4">小学4年生</option>
             <option value="s5">小学5年生</option>
             <option value="s6">小学6年生</option>
-            <option value="t1">中学1年生</option>
-            <option value="t2">中学2年生</option>
-            <option value="t3">中学3年生</option>
+            <option value="c1">中学1年生</option>
+            <option value="c2">中学2年生</option>
+            <option value="c3">中学3年生</option>
             <option value="k1">高校1年生</option>
             <option value="k2">高校2年生</option>
             <option value="k3">高校3年生</option>
           </select>
-          <p>知りたい言葉を入力しよう</p>
-        <form ref={formRef}>
           <input
+            ref={inputRef}
             name="prompt"
-            rows="1"
-            cols="1"
             placeholder="例：やさしい／人見知り"
             required
           />
           <br />
-          <button type="submit">
+          <button type="submit" onClick={handleClick}>
             この言葉の表現を探す！
           </button>
         </form>
         <div id="chat_container" ref={chatContainerRef}>
           {loading && !loadingComplete ? (
-            <AnimationKomawanPage /> // アニメーションを表示
+            <AnimationKomawanPage />
           ) : (
             messages.map((msg) => (
               <div key={msg.id} className={`wrapper${msg.isAi ? 'ai' : ''}`}>
@@ -204,4 +196,4 @@ const ZinbutsuPage = () => {
   );
 };
 
-export default ZinbutsuPage;
+export default HyougenPage;

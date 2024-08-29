@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.44.3",
+    "crypto-js": "^4.2.0",
     "gsap": "^3.12.5",
     "milligram": "^1.4.1",
     "react": "^18.3.1",
