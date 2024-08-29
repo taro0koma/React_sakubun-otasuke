@@ -4,7 +4,22 @@ import ModalFrame from "../component/ModalFrame";
 import PreviousAndNext from "../component/PreviousAndNext";
 
 const StylePage = () => {
-  
+
+  const copyToClipboard = (textToCopy) => {
+    navigator.clipboard.writeText(textToCopy)
+      .then(() => {
+        console.log("Text copied to clipboard:", textToCopy);
+      })
+      .catch(err => {
+        console.error("Failed to copy text: ", err);
+      });
+  };
+
+  const handleCopyClick = (text) => {
+    copyToClipboard(text);
+  };
+
+
   let ok = "no";
   const [isModalOpen, setIsModalOpen] = useState(true);
 
@@ -74,6 +89,7 @@ const StylePage = () => {
       formObj.lName
     } について書くための段落の組み立てアイデアを作ってみます。`;
     // addAnswer(userMemo, false);
+    
 
     try {
       const response = await fetch(process.env.REACT_APP_API_URL + "/danraku", {
@@ -330,7 +346,11 @@ const StylePage = () => {
           {dataArray.slice(0, visibleRows).map((item, index) => (
           <tr key={index} className="animated-row">
             <td className="td-index"><span>{index + 1}</span></td>
-            <td className="td-item">{item}</td>
+                <td className="td-item">
+                  {item}
+                  <br />
+                  <button onClick={() => copyToClipboard(item)} style={{ marginLeft: "10px" }}>この段落をコピーする</button>
+                </td>
           </tr>
         ))}
             {/* {dataArray.map((item, index) => (
