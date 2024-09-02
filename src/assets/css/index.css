@@ -1063,3 +1063,7 @@ td:last-child{
 .swiper-slide-active img{
   border: 2px solid #e6e6e6;
 }
+.react-flow.light{
+  background-color: gainsboro;
+  border-radius: 10px;
+}

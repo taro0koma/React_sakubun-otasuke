@@ -1,234 +1,230 @@
-import React, { useState, useRef } from 'react';
-import Draggable from 'react-draggable';
-import { Line } from 'react-svg-draw';
+import React, { useCallback, useRef, useState, useEffect } from 'react';
+import {
+  ReactFlow,
+  useNodesState,
+  useEdgesState,
+  addEdge,
+  useReactFlow,
+  ReactFlowProvider,
+  Handle,
+  Position,
+} from '@xyflow/react';
+import '@xyflow/react/dist/style.css';
+import './map.css'; // 必要なCSSファイルのパスを指定
+import Tabs from './../component/Tabs';
+const materialColors = [
+  '#F44336', '#E91E63', '#9C27B0', '#673AB7', '#3F51B5', '#2196F3',
+  '#03A9F4', '#00BCD4', '#009688', '#4CAF50', '#8BC34A', '#CDDC39',
+  '#FFEB3B', '#FFC107', '#FF9800', '#FF5722', '#795548', '#9E9E9E',
+  '#607D8B'
+];
 
-function ImagemapPage() {
-  const [boxes, setBoxes] = useState([]);
-  const [lines, setLines] = useState([]);
-  const [isDrawing, setIsDrawing] = useState(false);
-  const [startBox, setStartBox] = useState(null);
-  const [currentLine, setCurrentLine] = useState(null);
-  const [isResizing, setIsResizing] = useState(false); // Resize状態を管理
-  const [selectedBoxId, setSelectedBoxId] = useState(null); // 選択したボックスのID
-  const containerRef = useRef(null);
+const getColorById = (id) => materialColors[Math.abs(parseInt(id, 10)) % materialColors.length];
 
-  const defaultBoxWidth = 100;
-  const defaultBoxHeight = 50;
-  const placeholderText = '入力してね';
+const CustomEdge = ({ id, sourceX, sourceY, targetX, targetY, style }) => {
+  const color = getColorById(id);
+  
+  return (
+    <path
+      id={id}
+      className="react-flow__edge-path"
+      d={`M ${sourceX} ${sourceY} L ${targetX} ${targetY}`}
+      style={{ ...style, stroke: color, strokeWidth: 2 }}
+    />
+  );
+};
 
-  const addBox = () => {
-    const containerRect = containerRef.current.getBoundingClientRect();
-    
-    let x, y;
-    let found = false;
-    while (!found) {
-      x = Math.random() * (containerRect.width - defaultBoxWidth);
-      y = Math.random() * (containerRect.height - defaultBoxHeight);
+const initialNodes = [
+  {
+    id: '0',
+    type: 'input',
+    data: { label: 'Node' },
+    position: { x: 0, y: 50 },
+  },
+];
 
-      found = !boxes.some(box => {
-        const boxRect = {
-          left: box.x,
-          top: box.y,
-          right: box.x + box.width,
-          bottom: box.y + box.height,
+let id = 1;
+const getId = () => `${id++}`;
+
+const AddNodeOnEdgeDrop = () => {
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+  const [selectedNodeId, setSelectedNodeId] = useState(null); // 選択されたノードのID
+  const [nodeLabel, setNodeLabel] = useState(''); // ノードのラベルを管理するステート
+  const { screenToFlowPosition, getEdges, getNodes } = useReactFlow();
+  const reactFlowWrapper = useRef(null);
+  const connectingNodeId = useRef(null);
+  const [nodeEdgeInfo, setNodeEdgeInfo] = useState(''); // ノードとエッジ情報を表示するためのステート
+  const [active, setActive] = useState(false);
+
+  const classToggle = () => {
+    setActive(!active)
+  }
+  const onConnect = useCallback((params) => {
+    connectingNodeId.current = null;
+    setEdges((eds) => addEdge(params, eds));
+  }, []);
+
+  const onConnectStart = useCallback((_, { nodeId }) => {
+    connectingNodeId.current = nodeId;
+  }, []);
+
+  const onConnectEnd = useCallback(
+    (event) => {
+      if (!connectingNodeId.current) return;
+
+      const targetIsPane = event.target.classList.contains('react-flow__pane');
+
+      if (targetIsPane) {
+        const id = getId();
+        const newNode = {
+          id,
+          position: screenToFlowPosition({
+            x: event.clientX,
+            y: event.clientY,
+          }),
+          data: { label: `Node ${id}` },
         };
-        const newBoxRect = {
-          left: x,
-          top: y,
-          right: x + defaultBoxWidth,
-          bottom: y + defaultBoxHeight,
-        };
-        return !(newBoxRect.right < boxRect.left || 
-                 newBoxRect.left > boxRect.right || 
-                 newBoxRect.bottom < boxRect.top || 
-                 newBoxRect.top > boxRect.bottom);
-      });
+
+        setNodes((nds) => nds.concat(newNode));
+        setEdges((eds) =>
+          eds.concat({ id: `e${connectingNodeId.current}-${id}`, source: connectingNodeId.current, target: id }),
+        );
+      }
+    },
+    [screenToFlowPosition],
+  );
+
+  const onNodeClick = useCallback((event, node) => {
+    setSelectedNodeId(node.id);
+    setNodeLabel(node.data.label); // 選択されたノードのラベルを設定
+  }, []);
+
+  const onLabelChange = useCallback((event) => {
+    setNodeLabel(event.target.value);
+    setNodes((nds) =>
+      nds.map((node) =>
+        node.id === selectedNodeId ? { ...node, data: { label: event.target.value } } : node
+      )
+    );
+  }, [selectedNodeId, setNodes]);
+
+  const onPaneClick = useCallback((event) => {
+    const targetIsPane = event.target.classList.contains('react-flow__pane');
+    if (targetIsPane) {
+      const { clientX, clientY } = event;
+      const newNode = {
+        id: getId(),
+        position: screenToFlowPosition({ x: clientX, y: clientY }),
+        data: { label: `Node ${id}` },
+      };
+      setNodes((nds) => nds.concat(newNode));
     }
+  }, [screenToFlowPosition]);
 
-    setBoxes([...boxes, { id: boxes.length, x, y, width: defaultBoxWidth, height: defaultBoxHeight, text: '' }]);
-  };
-
-  const startLine = (box, e) => {
-    setIsDrawing(true);
-    setStartBox(box);
-    const containerRect = containerRef.current.getBoundingClientRect();
-    setCurrentLine({
-      x1: e.clientX - containerRect.left,
-      y1: e.clientY - containerRect.top,
-      x2: e.clientX - containerRect.left,
-      y2: e.clientY - containerRect.top,
-    });
-  };
-
-  const updateLine = (e) => {
-    if (isDrawing) {
-      const containerRect = containerRef.current.getBoundingClientRect();
-      setCurrentLine({
-        ...currentLine,
-        x2: e.clientX - containerRect.left,
-        y2: e.clientY - containerRect.top,
-      });
+  const onKeyDown = useCallback((event) => {
+    if (event.key === 'Backspace') {
+      const selectedEdges = getEdges().filter(edge => edge.selected);
+      if (selectedEdges.length) {
+        setEdges((eds) => eds.filter(edge => !selectedEdges.includes(edge)));
+      }
     }
-  };
+  }, [getEdges]);
 
-  const finishLine = (box) => {
-    if (isDrawing && box && box !== startBox) {
-      setLines([...lines, {
-        x1: startBox.x + startBox.width / 2,
-        y1: startBox.y + startBox.height / 2,
-        x2: box.x + box.width / 2,
-        y2: box.y + box.height / 2,
-      }]);
-    }
-    setIsDrawing(false);
-    setCurrentLine(null);
-  };
+  // 定期的にノードとエッジの情報を更新
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      const nodesInfo = getNodes()
+        .map(node => `Node ID: ${node.id}, Label: ${node.data.label}, Position: (${node.position.x}, ${node.position.y})`)
+        .join('\n');
+      const edgesInfo = getEdges()
+        .map(edge => `Edge ID: ${edge.id}, Source: ${edge.source}, Target: ${edge.target}`)
+        .join('\n');
+      setNodeEdgeInfo(`${nodesInfo}\n\n${edgesInfo}`);
+    }, 1000);
 
-  const handleResizeStart = () => {
-    setIsResizing(true); // Resize開始時に設定
-  };
+    return () => clearInterval(intervalId);
+  }, [getNodes, getEdges]);
 
-  const handleResizeStop = (id, e) => {
-    setIsResizing(false); // Resize終了時に設定
-    setBoxes(boxes.map(box =>
-      box.id === id ? { ...box, width: e.target.style.width.replace('px', ''), height: e.target.style.height.replace('px', '') } : box
-    ));
-  };
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      const nodesInfo = getNodes()
+        .map(node => `Node ID: ${node.id}, Label: ${node.data.label}, Position: (${node.position.x}, ${node.position.y})`)
+        .join('\n');
+      const edgesInfo = getEdges()
+        .map(edge => `Edge ID: ${edge.id}, Source: ${edge.source}, Target: ${edge.target}`)
+        .join('\n');
+      setNodeEdgeInfo(`${nodesInfo}\n\n${edgesInfo}`);
+    }, 1000);
 
-  const handleBoxChange = (id, newText) => {
-    setBoxes(boxes.map(box =>
-      box.id === id ? { ...box, text: newText } : box
-    ));
-  };
+    return () => clearInterval(intervalId);
+  }, [getNodes,getEdges]);
 
-  const handleInput = (id, e) => {
-    const text = e.target.innerText.trim();
-    setBoxes(boxes.map(box =>
-      box.id === id ? { ...box, text: text } : box
-    ));
-  };
 
-  const handleFocus = (id) => {
-    setSelectedBoxId(id);
-    const box = boxes.find(box => box.id === id);
-    if (box && box.text === placeholderText) {
-      // テキストがプレースホルダーの場合はクリア
-      setBoxes(boxes.map(box =>
-        box.id === id ? { ...box, text: '' } : box
-      ));
-    }
-  };
+  useEffect(() => {
+    window.addEventListener('keydown', onKeyDown);
+    return () => {
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, [onKeyDown]);
 
-  const handleBlur = (id) => {
-    const box = boxes.find(box => box.id === id);
-    if (box && box.text === '') {
-      setBoxes(boxes.map(box =>
-        box.id === id ? { ...box, text: placeholderText } : box
-      ));
-    }
-  };
+  useEffect(() => {
+    const handleBeforeUnload = (event) => {
+      event.preventDefault();
+      event.returnValue = ''; // Chromeでの警告表示に必要
+    };
 
-  const increaseBoxSize = () => {
-    if (selectedBoxId !== null) {
-      setBoxes(boxes.map(box =>
-        box.id === selectedBoxId ? { ...box, width: box.width + 10, height: box.height + 10 } : box
-      ));
-    }
-  };
+    window.addEventListener('beforeunload', handleBeforeUnload);
 
-  const decreaseBoxSize = () => {
-    if (selectedBoxId !== null) {
-      setBoxes(boxes.map(box =>
-        box.id === selectedBoxId ? { ...box, width: Math.max(box.width - 10, 10), height: Math.max(box.height - 10, 10) } : box
-      ));
-    }
-  };
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
 
   return (
-    <div
-      ref={containerRef}
-      onMouseMove={updateLine}
-      style={{ position: 'relative', height: '100vh', width: '100vw', border: '1px solid black', overflow: 'hidden' }}
-    >
-      <button onClick={addBox} style={{ marginBottom: '10px' }}>Add Box</button>
-      <button onClick={increaseBoxSize} style={{ marginBottom: '10px' }}>Increase Size</button>
-      <button onClick={decreaseBoxSize} style={{ marginBottom: '10px' }}>Decrease Size</button>
-      <svg style={{ position: 'absolute', top: 0, left: 0, zIndex: 1, pointerEvents: 'none' }}>
-        {lines.map((line, index) => (
-          <Line key={index} x1={line.x1} y1={line.y1} x2={line.x2} y2={line.y2} stroke="black" />
-        ))}
-        {currentLine && (
-          <Line x1={currentLine.x1} y1={currentLine.y1} x2={currentLine.x2} y2={currentLine.y2} stroke="black" />
-        )}
-      </svg>
-      {boxes.map(box => (
-        <Draggable
-          key={box.id}
-          defaultPosition={{ x: box.x, y: box.y }}
-          bounds="parent"
-          disabled={isResizing} // リサイズ中はドラッグを無効にする
-          onStop={(e, data) => {
-            setBoxes(boxes.map(b =>
-              b.id === box.id ? { ...b, x: data.x, y: data.y } : b
-            ));
-          }}
-        >
-          <div
-            contentEditable
-            suppressContentEditableWarning
-            style={{
-              width: `${box.width}px`,
-              height: `${box.height}px`,
-              backgroundColor: 'lightgray',
-              textAlign: 'center',
-              lineHeight: '1.2em',
-              border: '1px solid black',
-              position: 'absolute',
-              zIndex: 2,
-              cursor: 'pointer',
-              userSelect: 'text',
-              overflow: 'hidden',
-              padding: '4px',
-              boxSizing: 'border-box',
-              resize: 'both', // 縦横比を自由に変更できるようにする
-            }}
-            data-id={box.id} // ID属性を追加
-            onMouseDown={(e) => startLine(box, e)}
-            onMouseUp={() => finishLine(box)}
-            onResizeStart={handleResizeStart} // リサイズ開始時に呼び出す
-            onResizeStop={(e) => handleResizeStop(box.id, e)} // リサイズ終了時に呼び出す
-            onInput={(e) => handleInput(box.id, e)}
-            onFocus={() => handleFocus(box.id)}
-            onBlur={() => handleBlur(box.id)}
-          >
-            {box.text === placeholderText ? (
-              <div
-                style={{
-                  position: 'absolute',
-                  top: '50%',
-                  left: '50%',
-                  transform: 'translate(-50%, -50%)',
-                  color: 'gray',
-                  pointerEvents: 'none',
-                }}
-              >
-                {placeholderText}
-              </div>
-            ) : (
-              <div
-                style={{
-                  overflowWrap: 'break-word', // 文字を折り返す
-                  whiteSpace: 'normal', // 折り返しを有効にする
-                }}
-              >
-                {box.text}
-              </div>
-            )}
-          </div>
-        </Draggable>
-      ))}
+    <div>
+      <Tabs pageTitle="イメージマップ作成ツール" contents="genkouyoshi"/>
+    <div className="wrapper" ref={reactFlowWrapper} style={{ width: '100%', height: '500px', position: 'relative' }} >
+      <button style={{marginRight:"100%"}} onClick>使い方</button>
+      <div className="node-input">
+        <label htmlFor="node-label" style={{ textAlign: 'center' }}>思いついたことを入力</label>
+        <textarea
+          id="node-label"
+          type="text"
+          value={nodeLabel}
+          onChange={onLabelChange}
+          placeholder="ノードのラベルを入力"
+          disabled={selectedNodeId === null} // ノードが選択されていないときは入力を無効にする
+        />
+      </div>
+      <ReactFlow
+        nodes={nodes}
+        edges={edges}
+        onNodesChange={onNodesChange}
+        onEdgesChange={onEdgesChange}
+        onConnect={onConnect}
+        onConnectStart={onConnectStart}
+        onConnectEnd={onConnectEnd}
+        onPaneClick={onPaneClick}
+        onNodeClick={onNodeClick}
+        fitView
+        fitViewOptions={{ padding: 2 }}
+        nodeOrigin={[0.5, 0]}
+        edgeTypes={{ custom: CustomEdge }}
+      />
+      <div className={active ? "node-edge-info sideOutLeft" : "node-edge-info"}>
+        {nodeEdgeInfo}
+        <button onClick={classToggle} className='akesimebutton'>{active ? "◀" : "▶"}</button>
+      </div>
+    </div>
     </div>
   );
-}
+};
+
+const ImagemapPage = () => (
+  <ReactFlowProvider>
+    <AddNodeOnEdgeDrop />
+  </ReactFlowProvider>
+);
 
 export default ImagemapPage;

@@ -1,0 +1,147 @@
+@keyframes slideOutLeft{
+  0% {
+      transform: translateX(0);
+  }
+  100% {
+      transform: translateX(90%);
+  }
+}
+@keyframes slide{
+  0% {
+      transform: translateX(90%);
+  }
+  100% {
+      transform: translateX(0);
+  }
+}
+
+.react-flow .react-flow__handle {
+  width: 30px;
+  height: 14px;
+  border-radius: 3px;
+  background-color: #784be8;
+}
+
+.react-flow .react-flow__handle-top {
+  top: -10px;
+}
+
+.react-flow .react-flow__handle-bottom {
+  bottom: -10px;
+}
+
+.react-flow .react-flow__node {
+  height: 40px;
+  width: 150px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  border-width: 2px;
+  font-weight: 700;
+}
+
+.react-flow .react-flow__edge path,
+.react-flow__connectionline path {
+  stroke-width: 2;
+}
+
+.wrapper {
+  flex-grow: 1;
+  height: 100%;
+}
+/* src/pages/ImagemapPage.css または適切なCSSファイルに追加 */
+.node-input {
+  margin: 10px;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+}
+
+.node-input label {
+  margin-right: 10px;
+}
+
+.node-input input {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.node {
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 14px;
+  color: white; /* ノードのテキスト色 */
+}
+
+/* ポートのスタイルをカスタマイズする */
+.react-flow__node-input .react-flow__port {
+  background-color: var(--port-bg-color, #ddd); /* デフォルトの背景色 */
+}
+
+/* ノードのポートに色を適用するためにカスタムプロパティを使う */
+.node.port-top-left, .node.port-bottom-right {
+  --port-bg-color: #FF5722; /* 例: ポートの背景色を指定 */
+}
+/* 色をランダムに設定する場合の CSS 例 */
+
+
+/* 例: すべてのハンドルの背景色を変更する */
+.react-flow__handle.react-flow__handle-bottom,
+.react-flow__handle.react-flow__handle-top {
+  background-color: #82b1ff; /* デフォルトの色 */
+}
+
+.react-flow__nodes .react-flow__node:nth-child(5n+1) .react-flow__handle{
+  background-color:#a7ffeb
+  ;
+}
+
+.react-flow__nodes .react-flow__node:nth-child(5n+2) .react-flow__handle{
+  background-color: #8c9eff;
+}
+.react-flow__nodes .react-flow__node:nth-child(5n+3) .react-flow__handle{
+  background-color: #ea80fc;
+}
+
+.react-flow__nodes .react-flow__node:nth-child(5n+4) .react-flow__handle{
+  background-color: #b388ff;
+}
+
+
+.node-edge-info {
+  animation-name: slidet;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+  width: 500px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid #ccc;
+  padding: 10px;
+  font-family: monospace;
+  overflow-y: auto;
+  height: 600px;
+  margin: auto 0;
+  text-align: left;
+}
+.react-flow__panel.react-flow__attribution.bottom.right{
+  display: none;
+}
+
+
+.node-edge-info.sideOutLeft {
+  animation-name: slideOutLeft;
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+  color: #784be8;
+}
+.akesimebutton {
+  height: 70%;
+  margin: auto 0;
+  display: block;
+  width: 10px;
+  font-size: 10px !important;
+}

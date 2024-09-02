@@ -200,9 +200,9 @@ const HomePage = () => {
         {/* <img src="/images/coma.png" alt="image"/> */}
 
         {items.map((item, index) => (
-          <div className={styles.set} key={index}>
+          <div className={styles.set} key={index} style={{maxWidth:600}}>
             <br  id={item.id}/>
-            <img src={item.imgSrc} alt={item.altText} className="homepng"/>
+            <img src={item.imgSrc} alt={item.altText} className="homepng" style={{width:"90%"}}/>
             <h3 style={{fontWeight:"bold"}}>{item.heading}</h3>
             <p>
               {item.text}
