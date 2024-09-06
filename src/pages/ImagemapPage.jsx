@@ -56,6 +56,184 @@ const AddNodeOnEdgeDrop = () => {
   const connectingNodeId = useRef(null);
   const [nodeEdgeInfo, setNodeEdgeInfo] = useState(''); // ノードとエッジ情報を表示するためのステート
   const [active, setActive] = useState(false);
+  const inputRef = useRef(null);
+  const formRef = useRef(null);
+  const [messages, setMessages] = useState([]);
+  const [loading,setLoading] = useState(false);
+  const [loadingComplete,setLoadingComplete] = useState(false);
+  const chatContainerRef = useRef(null);
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(formRef.current);
+    const userMessage = formData.get('prompt');
+
+    addMessage(userMessage, false);
+
+    formRef.current.reset();
+
+    const uniqueId = generateUniqueId();
+    addMessage('', true, uniqueId);
+
+    scrollChatToBottom();
+
+    const messageDiv = document.getElementById(uniqueId);
+    if (messageDiv) {
+      startLoader(messageDiv);
+    }
+
+    try {
+      const input = nodeEdgeInfo;
+      console.log(input);
+
+// ノード情報を抽出
+const nodeLines = input.match(/Node ID: \d+, Label: .+/g);
+console.log(nodeLines);
+const nodes = {};
+console.log(nodes);
+nodeLines.forEach(line => {
+  const nodeMatch = line.match(/Node ID: (\d+), Label: (.+?), Position/);
+  console.log(nodeMatch);
+  const id = nodeMatch[1];
+  const label = nodeMatch[2];
+  console.log(id, label)
+  nodes[id] = label;
+  console.log(nodes[id]);
+});
+console.log(input)
+
+// エッジ情報を抽出
+const edgeLines = input.match(/Edge ID: .+/g) || []; // エッジ情報がない場合は空配列
+const edges = {};
+edgeLines.forEach(line => {
+    const match = line.match(/Source: (\d+), Target: (\d+)/);
+    if (match) {
+        const source = match[1];
+        const target = match[2];
+        if (!edges[source]) {
+            edges[source] = [];
+        }
+        edges[source].push(target);
+    }
+});
+
+// データ構造の構築
+function buildTree(nodes, edges, rootId) {
+    const root = {};
+    if (edges[rootId]) {
+        edges[rootId].forEach(childId => {
+            const childLabel = nodes[childId];
+            root[nodes[rootId]] = root[nodes[rootId]] || {};
+            root[nodes[rootId]][childLabel] = buildTree(nodes, edges, childId);
+        });
+    }
+    return root[nodes[rootId]] || nodes[rootId];
+}
+
+const rootId = "0";  // 最初のノードのID
+const result = buildTree(nodes, edges, rootId);
+console.log(JSON.stringify(result, null, 2));
+
+
+
+      const response = await fetch(process.env.REACT_APP_API_URL+"/danraku", {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt: `質問：${userMessage}　参考：${JSON.stringify(result,null,2)}　ちなみに、聞いていること以外話さないでください。もし、どうすればいいですか？などの質問であれば、参考に書かれていることにあるJson形式のものをイメージマップ・マインドマップと認識し、作文に対してのほかに必要なものを提案してください。例えば、そのイメージマップが読書感想文だと認識したら、かつあらすじをかいていなかったらあらすじを書いてという提案などをするとか・・・。Nodeという言葉は初期値なので、Nodeというテーマだと勘違いしないでください。もし、Nodeという言葉しか存在しない場合は　「頑張ってるね！！もし使い方がわからなかったら左上にある作り方を参考に書いてみましょう。もし、何を書いていいかわからない場合、読書感想文だとあらすじや感想をかくといいよ」のようなことを教えてください、そして、「Node」という言葉しかない場合という言葉を絶対に入れないでください！必要ありません。もし、できましたと答えられた場合、見たところ不足しているなと思うところをいくつか挙げてください、たとえば感想がうれしかったなどという簡単か言葉から何かが続いていなかったらなにがうれしかったのですかとかあらすじが短かったら詳しくどんなお話なのか書いてみてください、ここの部分を詳しく書こうなど、そのほかにも必要と思うことは書いてください。そこそこできていれば1行目などに褒めを入れてユーザが喜んでもらえるようにしてください。で、例えば質問とかではなくありがとうなど感謝を伝えられた時はどういたしまして！のような返事を返してください。褒め方はすごい！やいいね！などいわれてうれしいことを言ってください。決して良くできましたという言葉を使わないこと。この言葉は日本人にとって上から目線でむかつく言葉に当たります。`, gakunen: "s6" }),
+      });
+
+      stopLoader();
+
+      if (response.ok) {
+        const data = await response.json();
+        const parsedData = data.bot.trim();
+        console.log('AIの回答:', parsedData); // AIの回答をコンソールに表示
+        animateMessage(uniqueId, parsedData);
+      } else {
+        const err = await response.text();
+        updateMessage(uniqueId, 'エラーが出たのでもう一度入力してください。');
+        alert(err);
+      }
+    } catch (error) {
+      stopLoader();
+      updateMessage(uniqueId, 'エラーが出たのでもう一度入力してください。');
+      alert(error);
+    }
+  };
+  const startLoader = (element) => {
+    element.textContent = '';
+    setLoading(true);
+    const interval = setInterval(() => {
+      element.textContent += '.';
+      if (element.textContent.length > 3) {
+        element.textContent = '';
+      }
+    }, 300);
+    return interval;
+  };
+
+  const stopLoader = () => {
+    setLoading(false);
+  };
+
+  const animateMessage = (id, text) => {
+    const lines = text.split('\n').map(line => line.trim()).filter(line => line !== '');
+    const messageDiv = document.getElementById(id);
+
+    if (messageDiv) {
+      messageDiv.innerHTML = ''; // Clear the existing content
+      let lineIndex = 0;
+
+      const addLine = () => {
+        if (lineIndex < lines.length) {
+          const lineElement = document.createElement('p');
+          lineElement.className = 'fade-in'; // Apply fade-in effect
+          lineElement.textContent = lines[lineIndex];
+          messageDiv.appendChild(lineElement);
+          lineIndex++;
+          setTimeout(addLine, 500); // Adjust delay between lines
+        } else {
+          setLoadingComplete(true); // 完了時にフラグを設定
+        }
+      };
+
+      addLine();
+    }
+  };
+
+  const generateUniqueId = () => {
+    const timestamp = Date.now();
+    const randomNumber = Math.random();
+    const hexadecimalString = randomNumber.toString(16);
+    return `id-${timestamp}-${hexadecimalString}`;
+  };
+
+  const addMessage = (value, isAi, uniqueId) => {
+    setMessages(prevMessages => [
+      ...prevMessages,
+      { id: uniqueId || generateUniqueId(), value: isAi ? [] : [value], isAi }
+    ]);
+  };
+
+  const updateMessage = (id, value) => {
+    setMessages(prevMessages =>
+      prevMessages.map(msg =>
+        msg.id === id ? { ...msg, value: [value] } : msg
+      )
+    );
+  };
+
+  const scrollChatToBottom = () => {
+    const chatContainer = chatContainerRef.current;
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+  };
+
+
+  const handleClick = () => {
+    inputRef.current.focus();  // Focus the input element
+  };
 
   const classToggle = () => {
     setActive(!active)
@@ -181,6 +359,7 @@ const AddNodeOnEdgeDrop = () => {
     };
   }, []);
 
+
   return (
     <div>
       <Tabs pageTitle="イメージマップ作成ツール" contents="genkouyoshi"/>
@@ -213,8 +392,28 @@ const AddNodeOnEdgeDrop = () => {
         edgeTypes={{ custom: CustomEdge }}
       />
       <div className={active ? "node-edge-info sideOutLeft" : "node-edge-info"}>
-        {nodeEdgeInfo}
+        {/* {nodeEdgeInfo} */}
         <button onClick={classToggle} className='akesimebutton'>{active ? "◀" : "▶"}</button>
+        <div className='chatsousin'>
+          <form ref={formRef} onSubmit={handleSubmit}>
+        <input type="text" ref={inputRef} name='prompt' placeholder='例：分かりました／どうすればいいですか' required/><button onClick={handleClick}>送信</button></form></div>
+        <div id="chat_container" ref={chatContainerRef}>
+        {loading && !loadingComplete ? (
+            <AnimationKomawanPage /> // アニメーションを表示
+          ) : (
+            messages.map((msg) => (
+              <div key={msg.id} className={`wrapper${msg.isAi ? 'ai' : ''}`}>
+                <div className="chat">
+                  <div className="message" id={msg.id}>
+                    {msg.value.map((line, index) => (
+                      <p key={index} className={msg.isAi ? 'fade-in' : ''}><span>{line}</span></p>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
       </div>
     </div>
     </div>

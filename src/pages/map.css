@@ -126,11 +126,16 @@
   height: 600px;
   margin: auto 0;
   text-align: left;
+  display: flex;
 }
 .react-flow__panel.react-flow__attribution.bottom.right{
   display: none;
 }
-
+.chatsousin{
+  height: fit-content;
+  margin: auto 0 30px auto;
+  display: flex;
+}
 
 .node-edge-info.sideOutLeft {
   animation-name: slideOutLeft;
