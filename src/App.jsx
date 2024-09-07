@@ -18,6 +18,7 @@ const GenkoyoshiPage = lazy(() => import("./pages/GenkoyoshiPage"));
 import HomePage from "./pages/HomePage";
 import NotFound from "./pages/NotFound";
 import MyComponent from "./pages/ScreenshotPage";
+import ChatBot from "./pages/ChatBot";
 
 const SECRET_KEY = process.env.REACT_APP_SECRET_KEY || 'default_secret_key'; // 環境変数からキーを取得、デフォルト値を設定
 
@@ -73,6 +74,7 @@ const App = () => {
               <Route path="/osusume" element={<GenkoyoshiPage />} />
               <Route path="/swiper" element={<SwiperPage />} />
               <Route path="/sksyo" element={<MyComponent />} />
+              <Route path="/chatBot" element={<ChatBot />} />
               <Route path="/*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

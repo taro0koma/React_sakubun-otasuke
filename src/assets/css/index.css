@@ -1067,3 +1067,6 @@ td:last-child{
   background-color: gainsboro;
   border-radius: 10px;
 }
+.react-flow__controls-button svg{
+  position: absolute;
+}
