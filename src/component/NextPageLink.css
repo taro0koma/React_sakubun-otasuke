@@ -1,0 +1,61 @@
+/* 横並びとレスポンシブ対応 */
+section.container {
+  padding: 2rem 0;
+  float: left;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.column {
+  flex: 0 1 calc(33.333% - 1rem);
+  margin-bottom: 1rem;
+}
+
+.box {
+  text-align: center;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  transition: transform 0.3s;
+}
+
+.box-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.box:hover {
+  transform: translateY(-5px);
+}
+
+.box-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  margin-bottom: 0.5rem;
+}
+
+/* レスポンシブ対応: 画面幅が768px以下の場合、ボックスを2つ横並びに */
+@media (max-width: 768px) {
+  .column {
+    flex: 0 1 calc(50% - 1rem);
+  }
+  .column-25 {
+    width:50%;
+  }
+}
+
+/* レスポンシブ対応: 画面幅が480px以下の場合、ボックスを1つずつ表示 */
+@media (max-width: 480px) {
+  .column {
+    flex: 0 1 100%;
+  }
+}
+@media (max-width: 1024px) {
+  .column-25 {
+    width:33.3% !important;
+  }
+}

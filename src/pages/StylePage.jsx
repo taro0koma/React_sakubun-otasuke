@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import Tabs from "../component/Tabs";
 import ModalFrame from "../component/ModalFrame";
 import PreviousAndNext from "../component/PreviousAndNext";
+import NextPageLink from './../component/NextPageLink';
 
 const StylePage = () => {
 
@@ -206,11 +207,11 @@ const StylePage = () => {
         typeJapan[formObj.type]
       }のための${
         gradeJapan[formObj.grade]
-      } が作成する作文をつくります。本の内容は ${
+      } が作成する作文をつくります。最初に題名のヒントとなるその作文のテーマを出力してください。もちろん次の行は改行を入れてください。本の内容は ${
         formObj.bookReviewFirst
       } に設定し、第2要素は「 ${formObj.bookReviewSecond} 」､第3要素は「 ${
         formObj.bookReviewThird
-      } 」として、テーマについて自分の考えや経験を描く1600文字程度の作文のための「PREP+」のフレームワークを５～６個の段落の概要提案になるように構成し（次の5点に"必ず"対応してください。 1.項目ごと150文字以上にする。2.最初の段落と最終の段落が自分の言いたいことを伝える重要なまとめの段落とする。 3. ${
+      } 」として、テーマについて自分の考えや経験を描く1600文字程度の作文のための「PREP+」のフレームワークを５個の段落の概要提案になるように構成し（次の5点に"必ず"対応してください。 1.項目ごと150文字以上にする。2.最初の段落と最終の段落が自分の言いたいことを伝える重要なまとめの段落とする。 3. ${
         gradeJapan[formObj.grade]
       } 以下の年齢の子供の文化や世界観を表現できる文章にリライトする。 4. ${
         gradeJapan[formObj.grade]
@@ -414,6 +415,19 @@ const StylePage = () => {
           <option value="k2">高校2年生</option>
           <option value="k3">高校3年生</option>
         </select>
+        <h5>アドバイスもらう先生</h5>
+        {/* <select
+          onChange={(e) => {
+            InputOnChange("type", e.target.value);
+          }}
+          value={formObj.type}
+          required
+        >
+          <option value="">選択</option>
+          <option value="sai">サイ先生</option> {/**DESC法とか・・？ */}
+          {/*<option value="risu">リス先生</option> {/**PREP法？ */}
+          {/*<option value="kirin">キリン先生</option> {/**未定 */}
+        {/*</select>*/}
         <h5>作文のタイプ</h5>
         <select
           onChange={(e) => {
@@ -436,6 +450,7 @@ const StylePage = () => {
       </form>
 
       {hyou()}
+      {/* <NextPageLink image1="/images/dousiyowan.png" text1="[気持ちや感想のいいかえ]"/> */}
       <PreviousAndNext midashi="書きたいことが決まっていない？" honbun={honbun} buttontext="▶　マップ作ってみる" buttonurl="/map"/>
       <div className="spacer" style={{height:400}}></div>
     </div>
