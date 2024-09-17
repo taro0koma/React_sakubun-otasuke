@@ -72,7 +72,7 @@ const App = () => {
       {isAuthenticated ? (
         <div className="container">
           <BrowserRouter>
-          <Routes onChange={logPageView}>
+            <Routes onChange={logPageView}>
               <Route path="/" element={<HomePage />} />
               <Route path="/map" element={<AboutPage />} />
               <Route path="/kimoti" element={<ContactPage />} />
