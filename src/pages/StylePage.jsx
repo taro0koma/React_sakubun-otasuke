@@ -380,7 +380,7 @@ const StylePage = () => {
   return (
     <div className="container">
       <Tabs pageTitle="段落の組み立て" contents="danraku"/>
-      <p>イメージマップなどで書きたいことが決まったら<br/>書きたいことをどんな順番で書けばいいか教えてもらおう</p>
+      <p>などで書きたいことが決まったら<br/>書きたいことをどんな順番で書けばいいか教えてもらおう</p>
       {isModalOpen && (
         <ModalFrame
           title="段落の組み立て"
@@ -450,7 +450,7 @@ const StylePage = () => {
       </form>
 
       {hyou()}
-      {/* <NextPageLink image1="/images/dousiyowan.png" text1="[気持ちや感想のいいかえ]"/> */}
+      <NextPageLink imairu="danraku1"/>
       <PreviousAndNext midashi="書きたいことが決まっていない？" honbun={honbun} buttontext="▶　マップ作ってみる" buttonurl="/map"/>
       <div className="spacer" style={{height:400}}></div>
     </div>

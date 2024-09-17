@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Suspense, lazy, useEffect, useState } from "react";
 import CryptoJS from 'crypto-js';  // トークンの暗号化に使用
 import '../src/assets/css/index.css';
+import ReactGA from "react-ga4";
 
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
@@ -22,12 +23,22 @@ import ChatBot from "./pages/ChatBot";
 
 const SECRET_KEY = process.env.REACT_APP_SECRET_KEY || 'default_secret_key'; // 環境変数からキーを取得、デフォルト値を設定
 
+
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  const logPageView = () => {
+    ReactGA.send({ hitType: "pageview", page: window.location.pathname });
+  };
+
   useEffect(() => {
+    ReactGA.initialize(process.env.REACT_APP_GA_TRACKING_ID);
+
+    
+    logPageView();
+    
     const token = localStorage.getItem('authToken');
     if (token) {
       try {
@@ -54,12 +65,14 @@ const App = () => {
     }
   };
 
+
+
   return (
     <Suspense fallback={<div>Loading...</div>}>
       {isAuthenticated ? (
         <div className="container">
           <BrowserRouter>
-            <Routes>
+          <Routes onChange={logPageView}>
               <Route path="/" element={<HomePage />} />
               <Route path="/map" element={<AboutPage />} />
               <Route path="/kimoti" element={<ContactPage />} />

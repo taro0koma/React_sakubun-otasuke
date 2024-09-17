@@ -2,6 +2,7 @@ import React,{useState} from 'react';
 import Tabs from './../component/Tabs';
 import ModalFrame from "../component/ModalFrame";
 import SwiperPage from './swiperPage';
+import NextPageLink from '../component/NextPageLink';
 
 const GenkoyoshiPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(true);
@@ -35,9 +36,9 @@ const GenkoyoshiPage = () => {
       </div>
       <div className='genkouimage'>
       <SwiperPage gazou1="/images/sakubunMap1.png" gazou2="/images/sakubunMap2.png" gazou3="/images/sakubunMap3.png" gazou4="/images/dokushokansouMap.png"/>
-
+      <NextPageLink imairu="benri1"/>
       <br />
-      </div> 
+      </div>
     </div>
   );
 };

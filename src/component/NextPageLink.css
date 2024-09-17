@@ -3,11 +3,35 @@ section.container {
   padding: 2rem 0;
   float: left;
 }
-
+.contentsmei{
+  font-size:0.7em;
+  margin: 0;
+  text-align: left;
+}
+.contentssetumei{
+  font-size: 0.6em;
+  text-align: left;
+}
+.sitazentai{
+  background-color: rgb(150, 150, 150);
+  width: 100%;
+}
+.sitazentai ::before{
+  background: url(/images/zarazara.png) 50% repeat;
+  background-size: auto 240px;
+  content: "";
+  height: 100%;
+  left: 0;
+  mix-blend-mode: color-burn;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 5;
+}
 .row {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: normal;
 }
 
 .column {
@@ -18,7 +42,7 @@ section.container {
 .box {
   text-align: center;
   padding: 1rem;
-  border: 1px solid #ddd;
+  background-color: white;
   transition: transform 0.3s;
 }
 
@@ -36,6 +60,11 @@ section.container {
   height: auto;
   object-fit: cover;
   margin-bottom: 0.5rem;
+
+}
+
+.box .box-image{
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.16);
 }
 
 /* レスポンシブ対応: 画面幅が768px以下の場合、ボックスを2つ横並びに */

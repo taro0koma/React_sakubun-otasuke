@@ -5,6 +5,7 @@ import './swiperPage.css';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation'; // ナビゲーションボタン用のスタイル
+import NextPageLink from "../component/NextPageLink";
 
 const SwiperPage = ({ gazou1, gazou2, gazou3, gazou4 }) => {
   const modalRef = useRef(null);

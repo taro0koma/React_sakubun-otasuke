@@ -2,6 +2,7 @@ import React,{useState} from 'react';
 import Tabs from '../component/Tabs'
 import ModalFrame from "../component/ModalFrame";
 import SwiperPage from './swiperPage';
+import NextPageLink from './../component/NextPageLink';
 
 const AboutPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(true);
@@ -27,6 +28,7 @@ const AboutPage = () => {
       <p>段落の組み立てで作文のそれぞれの段落に何を書くか決めよう。</p>
       <a href="/danraku"><button>▶ 段落の組み立てを使ってみる</button></a>
       <div className="spacer" style={{height:100}}></div>
+      <NextPageLink imairu="imagemap1"/>
     </div>
   );
 };
