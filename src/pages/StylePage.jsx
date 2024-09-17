@@ -380,7 +380,7 @@ const StylePage = () => {
   return (
     <div className="container">
       <Tabs pageTitle="段落の組み立て" contents="danraku"/>
-      <p>などで書きたいことが決まったら<br/>書きたいことをどんな順番で書けばいいか教えてもらおう</p>
+      <p>イメージマップなどで書きたいことが決まったら<br/>書きたいことをどんな順番で書けばいいか教えてもらおう</p>
       {isModalOpen && (
         <ModalFrame
           title="段落の組み立て"
