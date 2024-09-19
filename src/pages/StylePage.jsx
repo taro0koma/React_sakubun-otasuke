@@ -66,6 +66,7 @@ const StylePage = () => {
     sThird: "",
     sTheme: "",
     sFo: "",
+    sensei: " ",
   });
   const [messages, setMessage] = useState("");
   const [answers, setAnswer] = useState("");
@@ -135,6 +136,24 @@ const StylePage = () => {
     scrollChatToBottom();
   };
 
+  const senseierabi = () => {
+    if (formObj.sensei === "DESC法") {
+      return (
+        <img src="/images/saisensei.png" alt="担当してくれるAI先生(サイ)" />
+      )
+    }
+    if (formObj.sensei === "PREP法") {
+      return (
+        <img src="/images/risusensei.png" alt="担当してくれるAI先生(リス)" />
+      )
+    }
+    if (formObj.sensei === "一段落目が個性的なPREP法") {
+      return (
+        <img src="/images/raionsensei.png" alt="担当してくれるAI先生(ライオン)" />
+      )
+    }
+  }
+
   const renderAdditionalQuestions = () => {
     if (formObj.type === "composition") {
       userMessage = `こんにちは、ChatGPT。テーマは「${formObj.sTheme
@@ -150,7 +169,7 @@ const StylePage = () => {
         formObj.sThird
       } 」、第4要素は「${
         formObj.sFo
-      }」として、テーマについて自分の考えや経験を描く1600文字程度の作文のための「PREP+」のフレームワークを５～６個の段落の概要提案になるように構成し（次の5点に"必ず"対応してください。 1.項目ごと150文字以上にする。2.最初の段落と最終の段落が自分の言いたいことを伝える重要なまとめの段落とする。 3. ${
+      }」として、テーマについて自分の考えや経験を描く1600文字程度の作文のための「${formObj.sensei}」のフレームワークを５～６個の段落の概要提案になるように構成し（次の5点に"必ず"対応してください。 1.項目ごと150文字以上にする。2.最初の段落と最終の段落が自分の言いたいことを伝える重要なまとめの段落とする。 3. ${
         gradeJapan[formObj.grade]
       } 以下の年齢の子供の文化や世界観を表現できる文章にリライトする。 4. ${
         gradeJapan[formObj.grade]
@@ -211,7 +230,7 @@ const StylePage = () => {
         formObj.bookReviewFirst
       } に設定し、第2要素は「 ${formObj.bookReviewSecond} 」､第3要素は「 ${
         formObj.bookReviewThird
-      } 」として、テーマについて自分の考えや経験を描く1600文字程度の作文のための「PREP+」のフレームワークを５個の段落の概要提案になるように構成し（次の5点に"必ず"対応してください。 1.項目ごと150文字以上にする。2.最初の段落と最終の段落が自分の言いたいことを伝える重要なまとめの段落とする。 3. ${
+      } 」として、テーマについて自分の考えや経験を描く1600文字程度の作文のための「${formObj.sensei}」のフレームワークを５個の段落の概要提案になるように構成し（次の5点に"必ず"対応してください。 1.項目ごと150文字以上にする。2.最初の段落と最終の段落が自分の言いたいことを伝える重要なまとめの段落とする。 3. ${
         gradeJapan[formObj.grade]
       } 以下の年齢の子供の文化や世界観を表現できる文章にリライトする。 4. ${
         gradeJapan[formObj.grade]
@@ -416,18 +435,23 @@ const StylePage = () => {
           <option value="k3">高校3年生</option>
         </select>
         <h5>アドバイスもらう先生</h5>
-        {/* <select
+        <select
           onChange={(e) => {
-            InputOnChange("type", e.target.value);
+            InputOnChange("sensei", e.target.value);
           }}
-          value={formObj.type}
+          value={formObj.sensei}
           required
         >
-          <option value="">選択</option>
-          <option value="sai">サイ先生</option> {/**DESC法とか・・？ */}
-          {/*<option value="risu">リス先生</option> {/**PREP法？ */}
-          {/*<option value="kirin">キリン先生</option> {/**未定 */}
-        {/*</select>*/}
+          <option value="未入力状態">選択</option>
+          <option value="DESC法">🦏サイ先生</option>
+          <option value="PREP法">🐿️リス先生</option> {/**PREP法？ */}
+          <option value="一段落目が個性的なPREP法">🦁ライオン先生</option> {/**個性的が好きなライオン先生 */}
+        </select>
+        <br />
+          <div className="sensei">
+            {senseierabi()}
+          </div>
+        <br />
         <h5>作文のタイプ</h5>
         <select
           onChange={(e) => {

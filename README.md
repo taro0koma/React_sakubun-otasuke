@@ -1,8 +1,5 @@
-# React + Vite　<span style="color:blue">作文お助けアプリ</span>
+作文お助けアプリ
 
-このサイトは自分でいい作文を書けるようになるよう作成したサイトです。
+作文が苦手・・・きらい・・・を手伝うアプリです。
 
-現在、２つの公式プラグインが利用可能です：
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+現在、仮運用中なので、パスワードを知っている人しか使うことができません
