@@ -84,121 +84,6 @@ const AddNodeOnEdgeDrop = () => {
   const [loadingComplete, setLoadingComplete] = useState(false);
   const chatContainerRef = useRef(null);
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   const formData = new FormData(formRef.current);
-  //   const userMessage = formData.get("prompt");
-
-  //   addMessage(userMessage, false);
-
-  //   formRef.current.reset();
-
-  //   const uniqueId = generateUniqueId();
-  //   addMessage("", true, uniqueId);
-
-  //   scrollChatToBottom();
-
-  //   const messageDiv = document.getElementById(uniqueId);
-  //   if (messageDiv) {
-  //     startLoader(messageDiv);
-  //   }
-
-  //   try {
-  //     // const input = nodeEdgeInfo;
-  //     // console.log(input);
-
-  //     // // ノード情報を抽出
-  //     // const nodeLines = input.match(/Node ID: \d+, Label: .+/g);
-  //     // const nodes = {};
-
-  //     // if (nodeLines && nodeLines.length > 0) {
-  //     //   nodeLines.forEach((line) => {
-  //     //     const match = line.match(/Node ID: (\d+), Label: (.+?), Position/);
-  //     //     if (match) {
-  //     //       const id = match[1];
-  //     //       const label = match[2];
-  //     //       nodes[id] = label;
-  //     //     }
-  //     //   });
-  //     // }
-
-  //     // // エッジ情報を取得
-  //     // const edgeLines = input.match(/Edge ID: .+/g) || [];
-  //     // const edges = {};
-
-  //     // if (edgeLines && edgeLines.length > 0) {
-  //     //   edgeLines.forEach((line) => {
-  //     //     const match = line.match(/Source: (\d+), Target: (\d+)/);
-  //     //     if (match) {
-  //     //       const source = match[1];
-  //     //       const target = match[2];
-  //     //       if (!edges[source]) {
-  //     //         edges[source] = [];
-  //     //       }
-  //     //       edges[source].push(target);
-  //     //     }
-  //     //   });
-  //     // }
-
-  //     // // データ構造の構築
-  //     // function buildTree(nodes, edges, rootId) {
-  //     //   const root = {};
-  //     //   if (edges[rootId]) {
-  //     //     edges[rootId].forEach((childId) => {
-  //     //       const childLabel = nodes[childId];
-  //     //       root[nodes[rootId]] = root[nodes[rootId]] || {};
-  //     //       root[nodes[rootId]][childLabel] = buildTree(nodes, edges, childId);
-  //     //     });
-  //     //   }
-  //     //   return root[nodes[rootId]] || nodes[rootId];
-  //     // }
-
-  //     // // エッジもノードも存在しない場合に対応
-  //     // let result = {};
-  //     // if (Object.keys(nodes).length > 0 && Object.keys(edges).length > 0) {
-  //     //   const rootId = "0"; // 最初のノードのID
-  //     //   result = buildTree(nodes, edges, rootId);
-  //     // } else if (Object.keys(nodes).length > 0) {
-  //     //   result = nodes; // ノードのみが存在する場合
-  //     // } else {
-  //     //   result = "No data available"; // ノードもエッジも存在しない場合
-  //     // }
-  //     // console.log(JSON.stringify(result, null, 2));
-
-  //     //AIを呼び出す必要はない
-  //     // const response = await fetch(process.env.REACT_APP_API_URL + "/danraku", {
-  //     //   method: "POST",
-  //     //   headers: { "Content-Type": "application/json" },
-  //     //   body: JSON.stringify({
-  //     //     prompt: `質問：${userMessage}　参考：${JSON.stringify(
-  //     //       result,
-  //     //       null,
-  //     //       2
-  //     //     )}　ちなみに、聞いていること以外話さないでください。もし、どうすればいいですか？などの質問であれば、参考に書かれていることにあるJson形式のものをイメージマップ・マインドマップと認識し、作文に対してのほかに必要なものを提案してください。例えば、そのイメージマップが読書感想文だと認識したら、かつあらすじをかいていなかったらあらすじを書いてという提案などをするとか・・・。Nodeという言葉は初期値なので、Nodeというテーマだと勘違いしないでください。もし、Nodeという言葉しか存在しない場合は　「頑張ってるね！！もし使い方がわからなかったら左上にある作り方を参考に書いてみましょう。もし、何を書いていいかわからない場合、読書感想文だとあらすじや感想をかくといいよ」のようなことを教えてください、そして、「Node」という言葉しかない場合という言葉を絶対に入れないでください！必要ありません。もし、できましたと答えられた場合、見たところ不足しているなと思うところをいくつか挙げてください、たとえば感想がうれしかったなどという簡単か言葉から何かが続いていなかったらなにがうれしかったのですかとかあらすじが短かったら詳しくどんなお話なのか書いてみてください、ここの部分を詳しく書こうなど、そのほかにも必要と思うことは書いてください。そこそこできていれば1行目などに褒めを入れてユーザが喜んでもらえるようにしてください。で、例えば質問とかではなくありがとうなど感謝を伝えられた時はどういたしまして！のような返事を返してください。褒め方はすごい！やいいね！などいわれてうれしいことを言ってください。決して良くできましたという言葉を使わないこと。この言葉は日本人にとって上から目線でむかつく言葉に当たります。`,
-  //     //     gakunen: "s6",
-  //     //   }),
-  //     // });
-    
-
-  //     // stopLoader();
-
-  //     // if (response.ok) {
-  //     //   const data = await response.json();
-  //     //   const parsedData = data.bot.trim();
-  //     //   console.log("AIの回答:", parsedData); // AIの回答をコンソールに表示
-  //     //   animateMessage(uniqueId, parsedData);
-  //     // } else {
-  //     //   const err = await response.text();
-  //     //   updateMessage(uniqueId, "エラーが出たのでもう一度入力してください。");
-  //     //   alert(err);
-  //     // }
-  //   } catch (error) {
-  //     // stopLoader();
-  //     updateMessage(uniqueId, "エラーが出たのでもう一度入力してください。");
-  //     alert(error);
-  //   }
-  // };
   const startLoader = (element) => {
     element.textContent = "";
     setLoading(true);
@@ -278,7 +163,7 @@ const AddNodeOnEdgeDrop = () => {
     setActive(!active);
   };
   const zenGamen = () => {
-    setZenactive(!active);
+    setZenactive(!zenactive);
   };
   const onConnect = useCallback((params) => {
     connectingNodeId.current = null;
@@ -428,18 +313,32 @@ const AddNodeOnEdgeDrop = () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
   }, []);
+  const style = `
+   .notimagemap{
+    display: ${zenactive ? "none" : ""};
+  }
+  .react-flow{
+    width:${zenactive ? "100%" :"100%"} !important;
+    height:${zenactive ? "110%" :"100%"} !important;
+    max-width:300%;
+  }
+  `
 
   return (
-    <div>
+    <div style={{position:"absolute",width:"90vw"}} className={`imagemapimagemap ${zenactive ? "zengamen" : ""}`}>
+      <style>{style}</style>
+      <div className="notimagemap">
       <Tabs pageTitle="イメージマップ作成ツール" contents="genkouyoshi" />
+      </div>
       <div
         className="wrapper"
         ref={reactFlowWrapper}
         style={{ width: "100%", height: "500px", position: "relative" }}
-      >
+      > <div className="notimagemap">
         <button style={{ marginRight: "100%" }}>
-          使い方
+          つかい方
         </button>
+        </div>
         <div className="node-input">
           <label htmlFor="node-label" style={{ textAlign: "center" }}>
             思いついたことを入力
@@ -470,8 +369,9 @@ const AddNodeOnEdgeDrop = () => {
         >
           <Controls />
           <MiniMap />
-          <button onClick={zenGamen}>{zenactive ? "全画面" : "小画面"}</button>
+          <button onClick={zenGamen} style={{left:0,zIndex:"2147483647",position:"absolute"}}>{zenactive ? "がめんをもどす" : "がめんを大きく"}</button>
         </ReactFlow>
+        <div className="notimagemap">
         <div
           className={active ? "node-edge-info sideOutLeft" : "node-edge-info"}
         >
@@ -479,39 +379,9 @@ const AddNodeOnEdgeDrop = () => {
            <button onClick={classToggle} className="akesimebutton">
             {active ? "◀" : "▶"}
           </button>
-          {/*<div className="chatsousin">
-            <form ref={formRef} onSubmit={handleSubmit}>
-              <textarea
-                type="text"
-                ref={inputRef}
-                name="prompt"
-                placeholder="例：分かりました／どうすればいいですか"
-                required
-              />
-              <button onClick={handleClick}>送信</button>
-            </form>
-          </div>
-          <div id="chat_container" ref={chatContainerRef}>
-            {loading && !loadingComplete ? (
-              <AnimationKomawanPage /> // アニメーションを表示
-            ) : (
-              messages.map((msg) => (
-                <div key={msg.id} className={`wrapper${msg.isAi ? "ai" : ""}`}>
-                  <div className="chat">
-                    <div className="message" id={msg.id}>
-                      {msg.value.map((line, index) => (
-                        <p key={index} className={msg.isAi ? "fade-in" : ""}>
-                          <span>{line}</span>
-                        </p>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              ))
-            )}
-          </div> */}
+          
           <ChatBot imagemap1={nodeEdgeInfo}/>
-        </div>
+        </div></div>
       </div>
     </div>
   );

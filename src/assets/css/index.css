@@ -417,6 +417,9 @@ td{
   display: inline;
   font-size: 4rem;
 }
+.container:has(.zengamen) {
+  margin:0 !important;
+}
 /* 既存のスタイルに追加 */
 .message {
   white-space: pre-wrap; /* 改行を適用 */
