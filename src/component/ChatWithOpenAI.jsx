@@ -5,6 +5,7 @@ const ChatWithOpenAI = ({ age, theme, goal,imagemap1 }) => {
   const [message, setMessage] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
   const [inputValue, setInputValue] = useState('');
+  let imagemapMae = ""
 
   // ボタンが押されたときに、クリックされたボタンの文字列をセット
   const handleButtonClick = (fruit) => {
@@ -76,13 +77,15 @@ const ChatWithOpenAI = ({ age, theme, goal,imagemap1 }) => {
     const feedbackPrompt = `
       作文の種類は: ${theme}
       どのようにするか: ${goal}
-      前回のイメージマップ構成: 
+      ${imagemapMae ? `前回のイメージマップ構成: ${imagemapMae}` : ""}
       いまのイメージマップ構成: ${JSON.stringify(result, null, 2)}
       ユーザからのメッセージ（上に書いたものを参考に答えてください）: ${message}
-      
-      最初に、イメージマップに対してほめてください。
-      もし、使い方がよくわかりませんと聞かれた場合、左上の使い方とかいてあるボタンをクリックしてみようなどと答えてください。
+      ${imagemapMae ? `最初に、前回のマップと今回のマップを比べた褒めをもらいたいです。たとえば、「〇〇についてが詳しくなりましたね！その調子です！」のような感じです。` : "最初の1行目に何もない状態から発生した設定として、頑張ったことについてほめてください。"}
+      もし、ユーザからのメッセージが使い方がよくわかりませんと聞かれた場合、「左上の使い方とかいてあるボタンをクリックしてみよう」などと答えてください。
       次に、フィードバックを3つくらい書いてください。ほぼ完ぺきであれば、少なくてもかまいません。
+      Nodeについてしゃべらないでください。Nodeはイメージマップを書くにあたっての初期値なので、その部分は何も変更を加えていない状況という設定として考えてください。
+      また、ほめ方を、「作文に挑戦することはとても素晴らしいね」などの褒め方はよくないです。作文を書いていることについてやイメージマップを書いていることについてをほめるのではなく、イメージマップの内容についてほめてください。
+      また、アドバイスは「〇〇を詳しく書くといいです。」などではなく、「〇〇について、△△や◆◆などのことを書いてみるといいかもしれないです。」など、加えるべきことについてほどほどに詳しくしてもらえたらと思います。
       `;
     
     try {
@@ -96,6 +99,8 @@ const ChatWithOpenAI = ({ age, theme, goal,imagemap1 }) => {
       console.log(aiResponse);
       setChatHistory([...chatHistory, { role: 'user', content: message }, { role: 'ai', content: aiResponse.bot }]);
       setMessage('');
+      console.log(feedbackPrompt);
+      imagemapMae = JSON.stringify(result, null, 2);
     } catch (error) {
       console.error('API request failed', error);
     }
@@ -105,6 +110,12 @@ const ChatWithOpenAI = ({ age, theme, goal,imagemap1 }) => {
   return (
     <div className="chat-container">
       <div className="chat-history">
+      <div className={`chat-bubble ai`}>
+            <p>イメージマップで考えをふくらませよう！</p>
+            <br />
+            <p>つかい方がわからないときは下をクリックしてね！</p>
+            <button>つかい方</button>
+        </div>
         {chatHistory.map((chat, index) => (
           <div key={index} className={`chat-bubble ${chat.role === 'user' ? 'user' : 'ai'}`}>
             <p>{chat.content}</p>
