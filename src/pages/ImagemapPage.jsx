@@ -16,6 +16,7 @@ import "@xyflow/react/dist/style.css";
 import "./map.css"; // 必要なCSSファイルのパスを指定
 import Tabs from "./../component/Tabs";
 import ChatBot from "./ChatBot";
+import DownloadButton from "../component/DownloadButton";
 const materialColors = [
   "#F44336",
   "#E91E63",
@@ -357,6 +358,7 @@ const AddNodeOnEdgeDrop = () => {
           edgeTypes={{ custom: CustomEdge }}
         >
           <Controls />
+          <DownloadButton/>
           <MiniMap />
           <button onClick={zenGamen} style={{left:0,zIndex:"2147483647",position:"absolute"}}>{zenactive ? "がめんをもどす" : "がめんを大きく"}</button>
         </ReactFlow>

@@ -1079,4 +1079,8 @@ td:last-child{
   text-align: center;
   margin: auto;
 }
-
+.imagemapimagemap button{
+  border: white solid;
+  margin: 5px;
+  border-radius: 5px;
+}
