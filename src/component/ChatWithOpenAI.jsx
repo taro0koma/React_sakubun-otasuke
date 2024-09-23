@@ -1,16 +1,22 @@
 import { useState } from 'react';
 import './ChatWithOpenAI.css';  // LINE風のUIスタイルを追加
+import RadioButtonForMap from './RadioButtonForMap';
 
 const ChatWithOpenAI = ({ age, theme, goal,imagemap1 }) => {
   const [message, setMessage] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
   const [inputValue, setInputValue] = useState('');
+  const [selectedRadio, setSelectedRadio] = useState('');
   let imagemapMae = ""
 
   // ボタンが押されたときに、クリックされたボタンの文字列をセット
   const handleButtonClick = (fruit) => {
     setInputValue(fruit);
     setMessage(fruit);
+  };
+
+  const handleRadioChange = (event) => {  // ✨ 新しい関数を追加
+    setSelectedRadio(event.target.value);  // ✨ ラジオボタンの値をセット
   };
 
   const sendMessage = async () => {
@@ -110,10 +116,13 @@ const ChatWithOpenAI = ({ age, theme, goal,imagemap1 }) => {
   return (
     <div className="chat-container">
       <div className="chat-history">
+      <div className={`chat-bubble user`}>
+            <p>学年：{age}<br/>{theme}についてのイメージマップを書いている。<br/>主に{goal}についてのテーマで書く。</p>
+        </div>
       <div className={`chat-bubble ai`}>
-            <p>イメージマップで考えをふくらませよう！</p>
+            <p>では、ひだりのイメージマップツールを使ってあなたの{theme}の{goal}について思いつくことをまずひとつかいてみよう！</p>
             <br />
-            <p>つかい方がわからないときは下をクリックしてね！</p>
+            <p>つかい方がわからないときは下のつかい方ボタンをクリックしてね！</p>
             <button>つかい方</button>
         </div>
         {chatHistory.map((chat, index) => (
@@ -122,20 +131,10 @@ const ChatWithOpenAI = ({ age, theme, goal,imagemap1 }) => {
           </div>
         ))}
       </div>
-        <button onClick={() => handleButtonClick('イメージマップを見てください')}>イメージマップを見てください</button>
-        <button onClick={() => handleButtonClick('使い方がよくわかりません')}>使い方がよくわかりません</button>
-        <button onClick={() => handleButtonClick('思い浮かびません')}>思い浮かびません</button>
+        <RadioButtonForMap selectedValue={selectedRadio} onChange={handleRadioChange}/>
       <div className="chat-input-container">
-        {/* <input
-          type="text"
-          className="chat-input"
-          value={inputValue}
-          onChange={(e) => setMessage(e.target.value)}
-          placeholder="メッセージを入力..."
-        /> */}
-        <p className='chat-input'>{inputValue}</p>
-
-        <button onClick={sendMessage} className="send-button">お願い</button>
+        <button onClick={sendMessage} className="send-button">
+        <p className='chat-input'>{selectedRadio}　</p>をお願いする</button>
       </div>
     </div>
   );

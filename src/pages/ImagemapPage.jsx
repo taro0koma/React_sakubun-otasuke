@@ -83,6 +83,7 @@ const AddNodeOnEdgeDrop = () => {
   const [loading, setLoading] = useState(false);
   const [loadingComplete, setLoadingComplete] = useState(false);
   const chatContainerRef = useRef(null);
+  const [nodeAdded, setNodeAdded] = useState(false);
 
   const startLoader = (element) => {
     element.textContent = "";
@@ -168,6 +169,7 @@ const AddNodeOnEdgeDrop = () => {
   const onConnect = useCallback((params) => {
     connectingNodeId.current = null;
     setEdges((eds) => addEdge(params, eds));
+    setNodeAdded(false);
   }, []);
 
   const onConnectStart = useCallback((_, { nodeId }) => {
@@ -176,6 +178,7 @@ const AddNodeOnEdgeDrop = () => {
 
   const onConnectEnd = useCallback(
     (event) => {
+      if (!connectingNodeId.current || nodeAdded) return;
       if (!connectingNodeId.current) return;
 
       const targetIsPane = event.target.classList.contains("react-flow__pane");
@@ -199,9 +202,10 @@ const AddNodeOnEdgeDrop = () => {
             target: id,
           })
         );
+        setNodeAdded(true);
       }
     },
-    [screenToFlowPosition]
+    [screenToFlowPosition,nodeAdded]
   );
 
   const onNodeClick = useCallback((event, node) => {
@@ -225,6 +229,7 @@ const AddNodeOnEdgeDrop = () => {
 
   const onPaneClick = useCallback(
     (event) => {
+      if (nodeAdded) return;
       const targetIsPane = event.target.classList.contains("react-flow__pane");
       if (targetIsPane) {
         const { clientX, clientY } = event;
@@ -234,9 +239,10 @@ const AddNodeOnEdgeDrop = () => {
           data: { label: `Node ${id}` },
         };
         setNodes((nds) => nds.concat(newNode));
+        setNodeAdded(true);
       }
     },
-    [screenToFlowPosition]
+    [screenToFlowPosition,nodeAdded]
   );
 
   const onKeyDown = useCallback(
@@ -252,6 +258,9 @@ const AddNodeOnEdgeDrop = () => {
     },
     [getEdges]
   );
+  useEffect(() => {
+    setNodeAdded(false);
+  },[nodes,edges]);
 
   // 定期的にノードとエッジの情報を更新
   useEffect(() => {
@@ -272,27 +281,7 @@ const AddNodeOnEdgeDrop = () => {
     }, 1000);
 
     return () => clearInterval(intervalId);
-  }, [getNodes, getEdges]);
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      const nodesInfo = getNodes()
-        .map(
-          (node) =>
-            `Node ID: ${node.id}, Label: ${node.data.label}, Position: (${node.position.x}, ${node.position.y})`
-        )
-        .join("\n");
-      const edgesInfo = getEdges()
-        .map(
-          (edge) =>
-            `Edge ID: ${edge.id}, Source: ${edge.source}, Target: ${edge.target}`
-        )
-        .join("\n");
-      setNodeEdgeInfo(`${nodesInfo}\n\n${edgesInfo}`);
-    }, 1000);
-
-    return () => clearInterval(intervalId);
-  }, [getNodes, getEdges]);
+  }, [getNodes, getEdges]);  
 
   useEffect(() => {
     window.addEventListener("keydown", onKeyDown);
