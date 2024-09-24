@@ -367,7 +367,7 @@ const AddNodeOnEdgeDrop = () => {
           className={active ? "node-edge-info sideOutLeft" : "node-edge-info"}
         >
           {/* {nodeEdgeInfo} */}
-           <button onClick={classToggle} className="akesimebutton">
+           <button onClick={classToggle} className="akesimebutton" style={{fontSize:20}}>
             {active ? "◀" : "▶"}
           </button>
           
