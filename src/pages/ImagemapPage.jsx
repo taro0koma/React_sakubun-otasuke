@@ -66,7 +66,7 @@ const initialNodes = [
   {
     id: "0",
     type: "input",
-    data: { label: "Node" },
+    data: { label: "アイデア" },
     position: { x: 0, y: 50 },
   },
 ];
@@ -204,7 +204,7 @@ const AddNodeOnEdgeDrop = () => {
             x: event.clientX,
             y: event.clientY,
           }),
-          data: { label: `Node ${id}` },
+          data: { label: `アイデア ${id}` },
         };
 
         setNodes((nds) => nds.concat(newNode));
@@ -249,7 +249,7 @@ const AddNodeOnEdgeDrop = () => {
         const newNode = {
           id: getId(),
           position: screenToFlowPosition({ x: clientX, y: clientY }),
-          data: { label: `Node ${id}` },
+          data: { label: `アイデア ${id}` },
         };
         setNodes((nds) => nds.concat(newNode));
         setNodeAdded(true);
@@ -342,17 +342,18 @@ const AddNodeOnEdgeDrop = () => {
         </button>
         </div>
         {showFrame && <FloatingFrame steps={steps}/>}
-        <div className="node-input">
+        <div className="node-input" style={{textAlign:"center"}}>
           <label htmlFor="node-label" style={{ textAlign: "center" }}>
-            思いついたことを入力
+            ▼　ここに入力するとマップにかきこめるよ！　▼
           </label>
-          <textarea
+          <input
             id="node-label"
             type="text"
             value={nodeLabel}
             onChange={onLabelChange}
-            placeholder="ノードのラベルを入力"
+            placeholder="マップのアイデア・・｜"
             disabled={selectedNodeId === null} // ノードが選択されていないときは入力を無効にする
+            className="nodebox"
           />
         </div>
         <ReactFlow
