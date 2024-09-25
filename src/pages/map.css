@@ -106,6 +106,9 @@
 .react-flow__nodes .react-flow__node:nth-child(5n+4) .react-flow__handle{
   background-color: #b388ff;
 }
+.react-flow__nodes .react-flow__node .react-flow__handle{
+  cursor: url('/images/pick_sign.svg'), auto;
+}
 
 
 .node-edge-info {
