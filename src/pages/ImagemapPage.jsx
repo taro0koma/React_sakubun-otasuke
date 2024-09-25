@@ -17,6 +17,13 @@ import "./map.css"; // 必要なCSSファイルのパスを指定
 import Tabs from "./../component/Tabs";
 import ChatBot from "./ChatBot";
 import DownloadButton from "../component/DownloadButton";
+import FloatingFrame from "../component/FloatingFrame";
+const steps = [
+  { theme: "テーマ1", gif: "/path/to/gif1.gif", text: "最初の説明" },
+  { theme: "テーマ2", gif: "/path/to/gif2.gif", text: "次の説明" },
+  { theme: "テーマ3", gif: "/path/to/gif3.gif", text: "最後の説明" },
+  // 追加のステップも自由にここに入れられます
+];
 const materialColors = [
   "#F44336",
   "#E91E63",
@@ -85,6 +92,11 @@ const AddNodeOnEdgeDrop = () => {
   const [loadingComplete, setLoadingComplete] = useState(false);
   const chatContainerRef = useRef(null);
   const [nodeAdded, setNodeAdded] = useState(false);
+  const [showFrame, setShowFrame] = useState(false); // フレームの表示状態を管理
+
+  const handleShowFrame = () => {
+    setShowFrame(true); // ボタンを押したらフレームを表示
+  };
 
   const startLoader = (element) => {
     element.textContent = "";
@@ -325,10 +337,11 @@ const AddNodeOnEdgeDrop = () => {
         ref={reactFlowWrapper}
         style={{ width: "100%", height: "500px", position: "relative" }}
       > <div className="notimagemap">
-        <button style={{ marginRight: "100%" }}>
+        <button style={{ marginRight: "100%" }} onClick={handleShowFrame}>
           つかい方
         </button>
         </div>
+        {showFrame && <FloatingFrame steps={steps}/>}
         <div className="node-input">
           <label htmlFor="node-label" style={{ textAlign: "center" }}>
             思いついたことを入力

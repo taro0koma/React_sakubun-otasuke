@@ -88,26 +88,35 @@
 /* 例: すべてのハンドルの背景色を変更する */
 .react-flow__handle.react-flow__handle-bottom,
 .react-flow__handle.react-flow__handle-top {
-  background-color: #82b1ff; /* デフォルトの色 */
+  background: url(/images/pick_sign.svg)#82b1ff; /* デフォルトの色 */
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 .react-flow__nodes .react-flow__node:nth-child(5n+1) .react-flow__handle{
-  background-color:#a7ffeb
-  ;
+  background:url(/images/pick_sign.svg)#a7ffeb;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 .react-flow__nodes .react-flow__node:nth-child(5n+2) .react-flow__handle{
-  background-color: #8c9eff;
+  background: url(/images/pick_sign.svg)#8c9eff;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 .react-flow__nodes .react-flow__node:nth-child(5n+3) .react-flow__handle{
-  background-color: #ea80fc;
+  background: url(/images/pick_sign.svg)#ea80fc;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 
 .react-flow__nodes .react-flow__node:nth-child(5n+4) .react-flow__handle{
-  background-color: #b388ff;
+  background: url(/images/pick_sign.svg)#b388ff;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 .react-flow__nodes .react-flow__node .react-flow__handle{
-  cursor: url('/images/pick_sign.svg'), auto;
+  cursor: url('/images/hipparu.svg')40 40,auto;
 }
 
 
