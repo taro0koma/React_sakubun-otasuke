@@ -46,10 +46,11 @@ function DownloadButton() {
   };
 
   return (
-    <Panel position="top-right">
+    <Panel position="top">
       <button className="download-btn" onClick={onClick}>
         イメージマップを保存する！
       </button>
+      {onClick ? "" : <img src="/images/hozon.gif"/>}
     </Panel>
   );
 }

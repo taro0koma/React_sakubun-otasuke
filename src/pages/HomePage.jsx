@@ -116,10 +116,10 @@ const HomePage = () => {
         <img src="/images/Applogo.png" alt="ロゴ" style={{maxWidth:"400px"}}/>
         <h2>作文おたすけアプリとは？</h2>
         <p>
-          「作文が苦手」をお助けする作文教室のようなアプリです。<br/>このアプリを作って、作文や読書感想文を楽しく作ってみましょう。
+          「作文が苦手」をお助けする作文教室のようなアプリです。<br/>苦手だった作文や読書感想文が楽しくなるかも！
         </p>
       </div>
-      <div className="contact-card">
+      {/* <div className="contact-card">
         <a
           href="https://docs.google.com/forms/d/e/1FAIpQLSdJvzw5aympJYQrL58b9DbDy-Jqm8Xr1s43S8gfWTG4y8JY0g/viewform?usp=sf_link"
           target="_blank"
@@ -146,9 +146,9 @@ const HomePage = () => {
             </div>
           </div>
         </a>
-      </div>
+      </div> */}
       
-      <div className="contact-card">
+      {/* <div className="contact-card">
         <a
           href="https://docs.google.com/forms/d/e/1FAIpQLSc7OAqyL6l_AXLwumn0ECL2sOzcsxegp44s0PuL4uctH5Rigw/viewform"
           target="_blank"
@@ -174,7 +174,7 @@ const HomePage = () => {
             </div>
           </div>
         </a>
-      </div>
+      </div> */}
 
       <nav className="navigation">
         <ul className="navigation-list">

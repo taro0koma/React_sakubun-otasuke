@@ -12,6 +12,7 @@ import {
   MiniMap,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
+import { FaRegFaceSmile } from "react-icons/fa6";
 
 import "./map.css"; // 必要なCSSファイルのパスを指定
 import Tabs from "./../component/Tabs";
@@ -336,9 +337,9 @@ const AddNodeOnEdgeDrop = () => {
         className="wrapper"
         ref={reactFlowWrapper}
         style={{ width: "100%", height: "500px", position: "relative" }}
-      > <div className="notimagemap">
-        <button style={{ marginRight: "100%" }} onClick={handleShowFrame}>
-          つかい方
+      > <div className="notimagemap" style={{textAlign:"center"}}>
+        <button onClick={handleShowFrame} className="howa">
+          イメージマップ作成ツールのつかい方 <FaRegFaceSmile style={{top:20}}/>
         </button>
         </div>
         {showFrame && <FloatingFrame steps={steps}/>}
@@ -372,17 +373,17 @@ const AddNodeOnEdgeDrop = () => {
           edgeTypes={{ custom: CustomEdge }}
         >
           <Controls />
-          <DownloadButton/>
           <MiniMap />
+          <DownloadButton/>
           <button onClick={zenGamen} style={{left:0,zIndex:"2147483647",position:"absolute"}}>{zenactive ? "がめんをもどす" : "がめんを大きく"}</button>
         </ReactFlow>
         <div className="notimagemap">
         <div
-          className={active ? "node-edge-info sideOutLeft" : "node-edge-info"}
+          className={active ? "node-edge-info sideOutLeft" : "node-edge-info sideOutRight"} style={{borderRadius:"1em",boxShadow:"0 0 8px #00000033",border:"1px solid #ffffff"}}
         >
           {/* {nodeEdgeInfo} */}
-           <button onClick={classToggle} className="akesimebutton" style={{fontSize:20}}>
-            {active ? "◀" : "▶"}
+           <button onClick={classToggle} className="akesimebutton" style={{margin:"auto",height:"100%",textAlign:"center",position:"relative"}}>
+            <div style={{display:"inline-block",writingMode:"vertical-rl",position:"absolute",left:"50%",transform:"translateX(-50%)"}}>{active ? <>◀ ひらく ◀</> : <>▶ とじる ▶</>}</div>
           </button>
           
           <ChatBot imagemap1={nodeEdgeInfo}/>

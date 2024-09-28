@@ -76,6 +76,15 @@ const NextPageLink = ({imairu}) => {
             </div>
           </a>
         </div>
+        <div className="column column-25 benri1">
+          <a href="/" className="box-link">
+            <div className="box">
+              <img src="/images/osusumesenden.png" alt="Page 3" className="box-image" />
+              <p className="contentsmei">{"[作文づくりのコツ]"}</p>
+            <p className="contentssetumei">文字数・枚数確認できたり、イメージマップを作るのに便利なツールを紹介するよ！</p>
+            </div>
+          </a>
+        </div>
       </div>
     </section>
     </div>

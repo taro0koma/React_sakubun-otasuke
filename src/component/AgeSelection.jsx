@@ -25,8 +25,10 @@ const GradeSelection = ({ onSubmit }) => {
   };
 
   return (
+    <div style={{paddingTop:"24px",textAlign:"center"}}>
+    <div style={{fontSize:"0.9em",lineHeight:"1.5",fontWeight:"bold",marginBottom:"0.5rem",backgroundColor:"#ffffff"}}>イメージマップの<br/>アドバイスをもらおう！</div>
     <div>
-      <h2>あなたの学年は？</h2>
+      <h2 style={{backgroundColor:"white",fontWeight:"bold"}}>あなたの学年は？</h2>
       <div className="grade-buttons">
         {grades.map(grade => (
           <button
@@ -38,6 +40,7 @@ const GradeSelection = ({ onSubmit }) => {
           </button>
         ))}
       </div>
+    </div>
     </div>
   );
 };

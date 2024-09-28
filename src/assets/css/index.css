@@ -1080,7 +1080,45 @@ td:last-child{
   margin: auto;
 }
 .imagemapimagemap button{
-  border: white solid;
-  margin: 5px;
-  border-radius: 5px;
+  background-color: #000000;
+    color: white;
+    border: 1px solid #ffffff99;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
+    
+}
+.imagemapimagemap .howa{
+  animation: pulse 2s infinite;
+  transition: transform 0.2s ease-in-out;
+  position: relative;
+  padding-right: 5rem !important;
+}
+
+@keyframes pulse {
+  0% {
+      box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+      transform: scale(1);
+  }
+  50% {
+      box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+      transform: scale(1.02);
+  }
+  100% {
+      box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+      transform: scale(1);
+  }
+}
+
+.imagemapimagemap .howa:hover {
+  transform: scale(1.15);
+}
+.imagemapimagemap .howa:before{
+  content: "💡";
+    position: absolute;
+    top: 50%;
+    right: 2rem;
+    transform: translateY(-50%);
+    font-size: 2rem;
 }
