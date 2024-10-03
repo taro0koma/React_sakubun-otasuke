@@ -98,6 +98,9 @@ const AddNodeOnEdgeDrop = () => {
   const handleShowFrame = () => {
     setShowFrame(true); // ボタンを押したらフレームを表示
   };
+  const handleCloseFrame = () => {
+    setShowFrame(false);
+  }
 
   const startLoader = (element) => {
     element.textContent = "";
@@ -330,6 +333,8 @@ const AddNodeOnEdgeDrop = () => {
   return (
     <div style={{position:"absolute",width:"90vw"}} className={`imagemapimagemap ${zenactive ? "zengamen" : ""}`}>
       <style>{style}</style>
+      <div className={showFrame ? "background" : ""}>
+      {showFrame && <FloatingFrame steps={steps} onClose={handleCloseFrame}/>}</div>
       <div className="notimagemap">
       <Tabs pageTitle="イメージマップ作成ツール" contents="genkouyoshi" />
       </div>
@@ -337,12 +342,11 @@ const AddNodeOnEdgeDrop = () => {
         className="wrapper"
         ref={reactFlowWrapper}
         style={{ width: "100%", height: "500px", position: "relative" }}
-      > <div className="notimagemap" style={{textAlign:"center"}}>
+      > <div className={`notimagemap app-container ${showFrame ? 'blur-background' : ''}`} style={{textAlign:"center"}}>
         <button onClick={handleShowFrame} className="howa">
-          イメージマップ作成ツールのつかい方 <FaRegFaceSmile style={{top:20}}/>
+          イメージマップ作成ツールのつかい方
         </button>
         </div>
-        {showFrame && <FloatingFrame steps={steps}/>}
         <div className="node-input" style={{textAlign:"center"}}>
           <label htmlFor="node-label" style={{ textAlign: "center" }}>
             ▼　ここに入力するとマップにかきこめるよ！　▼

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './FloatingFrame.css'; // CSSを別ファイルに分離
 
 
-const FloatingFrame = ({ steps }) => {
+const FloatingFrame = ({ steps,onClose }) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [isFrameVisible, setIsFrameVisible] = useState(true);
 
@@ -20,6 +20,8 @@ const FloatingFrame = ({ steps }) => {
 
   const closeFrame = () => {
     setIsFrameVisible(false); // 「使ってみる」を押すとフレームを閉じる
+    setCurrentStep(0);
+    onClose();
   };
 
   const currentData = steps[currentStep];

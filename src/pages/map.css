@@ -206,3 +206,12 @@
   position: absolute;
   top: 5rem;
 }
+.react-flow .react-flow__node{
+  height: auto !important;
+  line-height: 100%;
+}
+.react-flow__node.react-flow__node-input.nopan.selected.selectable.draggable{
+  word-break: break-word;
+  hyphens: auto;
+  line-break: strict;
+}
