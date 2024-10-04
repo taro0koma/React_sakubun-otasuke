@@ -42,6 +42,8 @@ const Tabs = ({ pageTitle,contents }) => {
     }
     .logo {
       margin-right: auto;
+      width:30%;
+      display:block;
     }
     .${contents}{
       background-color:#ffffff70;
@@ -138,9 +140,10 @@ const Tabs = ({ pageTitle,contents }) => {
       <style>{menuStyles}</style>
         <a href="/" className="logo">
           <h1 className="left-top-logo">
-            作文<span className="app">アプリ</span>
+            作文
             <br />
             <span className="otasuke">おたすけ</span>
+            <span className="app" style={{right:"0"}}>アプリ</span>
           </h1>
         </a>
         <div className="menu-container">

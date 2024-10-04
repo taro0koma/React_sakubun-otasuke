@@ -63,7 +63,6 @@ h6{
   line-height: 1.2 !important;
   margin: 0px;
   position: relative;
-  width: 30%;
 }
 @media (min-width: 1200px) {/* 1200px以上*/
   .hazinogazou {
@@ -121,7 +120,17 @@ h6{
     height: 25%;
   }
 }
-@media screen and (max-width: 768px) {/* 768px以下*/
+@media screen and (max-width: 1144px){
+  .left-top-logo > .app{
+    color: white;
+    background: #6f7074;
+    letter-spacing: 2px;
+    border-radius: 100px;
+    padding: 3px 5px;
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 850px) {/* 768px以下*/
   .hazinogazou {
     margin: 0 0 0 0;
     width: 100px; /* 画像の幅 */
@@ -168,7 +177,7 @@ h6{
     letter-spacing: 2px;
     border-radius: 100px;
     padding: 3px 5px;
-    font-size: 7px;
+    font-size: 10px;
   }
   .left-top-logo > .otasuke{
     letter-spacing: 1px;
@@ -200,6 +209,7 @@ h6{
     font-size: 10px;
   }
 }
+
 .img-animate {
   animation: imgAnimation 8s;
 }
@@ -210,7 +220,16 @@ h6{
   100% { transform: scale(1); }
 }
 
-
+@media screen and (max-width: 563px){
+  .left-top-logo > .app{
+    color: white;
+    background: #6f7074;
+    letter-spacing: 2px;
+    border-radius: 100px;
+    padding: 3px 5px;
+    font-size: 8px;
+  }
+}
 
 .white-box.show {
   display: block;
