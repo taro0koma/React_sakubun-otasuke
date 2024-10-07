@@ -83,7 +83,7 @@ button:disabled {
 }
 
 .content img.gif {
-  max-width: 100%;
+  width: auto;
   max-height: 200px;
 }
 

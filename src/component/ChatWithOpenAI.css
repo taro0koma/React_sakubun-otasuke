@@ -3,6 +3,7 @@
   flex-direction: column;
   height: 100vh;
   background-color: #f1f1f1;
+  width: 100%;
 }
 
 .chat-history {
@@ -10,26 +11,33 @@
   padding: 10px;
   overflow-y: auto;
   background-color: white;
+  width: 100%;
 }
 
 .chat-bubble {
-  max-width: 70%;
-  padding: 10px;
+  max-width: 90%;
+  padding: 40px 20px;
   margin: 5px;
   border-radius: 10px;
   font-size: 14px;
 }
+.chat-bubble p{
+  max-width: 100%;
+  width: 100%;
+  line-height: 1.8;
+  font-weight: bold;
+}
 
 .chat-bubble.user {
-  background-color: #dcf8c6;
+  background-color: #c6f8f3;
   align-self: flex-end;
-  margin-right: 10px;
+  margin-left: 10%;
 }
 
 .chat-bubble.ai {
-  background-color: #ececec;
+  background-color: #fceeff;
   align-self: flex-start;
-  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .chat-input-container {

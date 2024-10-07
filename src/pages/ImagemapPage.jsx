@@ -20,9 +20,9 @@ import ChatBot from "./ChatBot";
 import DownloadButton from "../component/DownloadButton";
 import FloatingFrame from "../component/FloatingFrame";
 const steps = [
-  { theme: "テーマ1", gif: "/path/to/gif1.gif", text: "最初の説明" },
-  { theme: "テーマ2", gif: "/path/to/gif2.gif", text: "次の説明" },
-  { theme: "テーマ3", gif: "/path/to/gif3.gif", text: "最後の説明" },
+  { theme: "テーマ1", gif: "/images/anm_image1.gif", text: "最初の説明" },
+  { theme: "テーマ2", gif: "/images/anm_image2.gif", text: "次の説明" },
+  { theme: "テーマ3", gif: "/images/anm_image3.gif", text: "最後の説明" },
   // 追加のステップも自由にここに入れられます
 ];
 const materialColors = [

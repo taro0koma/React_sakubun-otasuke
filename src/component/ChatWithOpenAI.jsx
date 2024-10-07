@@ -85,14 +85,15 @@ const ChatWithOpenAI = ({ age, theme, goal,imagemap1 }) => {
       どのようにするか: ${goal}
       ${imagemapMae ? `前回のイメージマップ構成: ${imagemapMae}` : ""}
       いまのイメージマップ構成: ${JSON.stringify(result, null, 2)}
-      ユーザからのメッセージ（上に書いたものを参考に答えてください）: ${message}
+      ユーザからのメッセージ（上に書いたものを参考に答えてください）: ${selectedRadio}
       ${imagemapMae ? `最初に、前回のマップと今回のマップを比べた褒めをもらいたいです。たとえば、「〇〇についてが詳しくなりましたね！その調子です！」のような感じです。` : "最初の1行目に何もない状態から発生した設定として、頑張ったことについてほめてください。"}
       もし、ユーザからのメッセージが使い方がよくわかりませんと聞かれた場合、「左上の使い方とかいてあるボタンをクリックしてみよう」などと答えてください。
-      次に、フィードバックを3つくらい書いてください。ほぼ完ぺきであれば、少なくてもかまいません。
+      次に、アドバイスを3つくらい提案してください。ほぼ完ぺきであれば、少なくてもかまいません。
       Nodeについてしゃべらないでください。Nodeはイメージマップを書くにあたっての初期値なので、その部分は何も変更を加えていない状況という設定として考えてください。
       また、ほめ方を、「作文に挑戦することはとても素晴らしいね」などの褒め方はよくないです。作文を書いていることについてやイメージマップを書いていることについてをほめるのではなく、イメージマップの内容についてほめてください。
       また、アドバイスは「〇〇を詳しく書くといいです。」などではなく、「〇〇について、△△や◆◆などのことを書いてみるといいかもしれないです。」など、加えるべきことについてほどほどに詳しくしてもらえたらと思います。
       `;
+      setChatHistory([...chatHistory, { role: 'user', content: selectedRadio }, { role: 'ai', content: "入力中・・・" }]);
     
     try {
       const response = await fetch(process.env.REACT_APP_API_URL+"/danraku", {
@@ -103,7 +104,7 @@ const ChatWithOpenAI = ({ age, theme, goal,imagemap1 }) => {
       
       const aiResponse = await response.json();
       console.log(aiResponse);
-      setChatHistory([...chatHistory, { role: 'user', content: message }, { role: 'ai', content: aiResponse.bot }]);
+      setChatHistory([...chatHistory, { role: 'user', content: selectedRadio },{ role: 'ai', content: aiResponse.bot }]);
       setMessage('');
       console.log(feedbackPrompt);
       imagemapMae = JSON.stringify(result, null, 2);
