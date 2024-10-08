@@ -12,7 +12,6 @@ import {
   MiniMap,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
-import { FaRegFaceSmile } from "react-icons/fa6";
 
 import "./map.css"; // 必要なCSSファイルのパスを指定
 import Tabs from "./../component/Tabs";
@@ -20,10 +19,10 @@ import ChatBot from "./ChatBot";
 import DownloadButton from "../component/DownloadButton";
 import FloatingFrame from "../component/FloatingFrame";
 const steps = [
-  { theme: "テーマ1", gif: "/images/anm_image1.gif", text: "最初の説明" },
-  { theme: "テーマ2", gif: "/images/anm_image2.gif", text: "次の説明" },
-  { theme: "テーマ3", gif: "/images/anm_image3.gif", text: "最後の説明" },
-  // 追加のステップも自由にここに入れられます
+  { theme: "開いたら出てくる画面", gif: "/images/anm_image1.gif", text: "開いたらまず真ん中くらいに「アイデア」と書いてある四角があるよ！" },
+  { theme: "入力する用意をしよう", gif: "/images/anm_image2.gif", text: "真ん中にある四角をクリックすると上の入力らんに四角（アイデア）の文字が表示されるよ" },
+  { theme: "入力してみよう", gif: "/images/anm_image3.gif", text: "入力らんに書きたいこと（まずはテーマ）を入力しよう" },
+  // 追加のステップも自由にここに入れられる
 ];
 const materialColors = [
   "#F44336",
