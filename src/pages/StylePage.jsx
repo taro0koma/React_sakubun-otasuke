@@ -71,6 +71,7 @@ const StylePage = () => {
   const [messages, setMessage] = useState("");
   const [answers, setAnswer] = useState("");
   const [visibleRows, setVisibleRows] = useState(0);
+  const [loading,setLoading] = useState([]);
 
   const chatContainerRef = useRef(null);
 
@@ -91,6 +92,7 @@ const StylePage = () => {
       formObj.lName
     } について書くための段落の組み立てアイデアを作ってみます。`;
     // addAnswer(userMemo, false);
+    setLoading([...loading, { role: 'ai', content: <div style={{position:"absolute",width:"100vw"}}><img src="/images/loadingAnimation.svg" alt="" style={{width:30,height:"auto",margin:"0 5px 0 0",padding:0}}/></div> }])
     
 
     try {
@@ -106,7 +108,9 @@ const StylePage = () => {
         const data = await response.json();
         const parsedData = data.bot.trim();
         addAnswer(parsedData, true);
+        setLoading([...loading, { role: 'ai', content:""}])
       } else {
+        setLoading([...loading, { role: 'ai', content:""}])
         const err = await response.text();
         setMessage(
           "段落の組み立て作成がうまくいきませんでした。もう一度入力してください。"
@@ -161,21 +165,21 @@ const StylePage = () => {
         typeJapan[formObj.type]
       }のための${
         gradeJapan[formObj.grade]
-      } が作成する作文をつくります。第1要素は${
+      } が作成する作文をつくります。必ず、最初に題名のヒントとなるその作文のおすすめのテーマを出力してください。もちろん次の行は改行を入れてください。第２要素は${
         formObj.sFirst
-      } に設定し、第2要素は「 ${
+      } に設定し、第３要素は「 ${
         formObj.sSecond
-      } 」､第3要素は「 ${
+      } 」､第４要素は「 ${
         formObj.sThird
-      } 」、第4要素は「${
+      } 」、第５要素は「${
         formObj.sFo
-      }」として、テーマについて自分の考えや経験を描く1600文字程度の作文のための「${formObj.sensei}」のフレームワークを５～６個の段落の概要提案になるように構成し（次の5点に"必ず"対応してください。 1.項目ごと150文字以上にする。2.最初の段落と最終の段落が自分の言いたいことを伝える重要なまとめの段落とする。 3. ${
+      }」として、テーマについて自分の考えや経験を描く1600文字程度の作文のための「${formObj.sensei}」のフレームワークを５個の段落の概要提案になるように構成し（次の5点に"必ず"対応してください。 1.項目ごと150文字以上にする。2.最初の段落と最終の段落が自分の言いたいことを伝える重要なまとめの段落とする。 3. ${
         gradeJapan[formObj.grade]
       } 以下の年齢の子供の文化や世界観を表現できる文章にリライトする。 4. ${
         gradeJapan[formObj.grade]
       } 以下の年齢の子供が読んだり書いたりできるようにリライトする。 5.あらすじは下記とする。${
         formObj.bookReviewArasuji
-      }6.必ず"一つ一つ"の提案の最後に「～～のようなことを書く段落にするのはどうでしょうか」と書く。）、const answer=[];の形式で日本語の値のみの配列を記載してください。配列のコード以外の文章やアドバイスは”完全に省いて”ください。あまり情報がなかった場合、勝手にお話を作らないでください。大胆でいいんです！`;
+      }6.必ず、一文くらいの例文と最後に簡単に"一つ一つ"の提案に「～～のようなことを書く段落にするのはどうでしょうか」と書く。）、const answer=[];の形式で日本語の値のみの配列を記載してください。配列のコード以外の文章やアドバイスは”完全に省いて”ください。あまり情報がなかった場合、勝手にお話を作らないでください。大胆でいいんです！`;
       //作文の場合
       return (
         <>
@@ -226,7 +230,7 @@ const StylePage = () => {
         typeJapan[formObj.type]
       }のための${
         gradeJapan[formObj.grade]
-      } が作成する作文をつくります。最初に題名のヒントとなるその作文のテーマを出力してください。もちろん次の行は改行を入れてください。本の内容は ${
+      } が作成する作文をつくります。最初に題名のヒントとなるその作文のおすすめのテーマを出力してください。もちろん次の行は改行を入れてください。本の内容は ${
         formObj.bookReviewFirst
       } に設定し、第2要素は「 ${formObj.bookReviewSecond} 」､第3要素は「 ${
         formObj.bookReviewThird
@@ -236,7 +240,7 @@ const StylePage = () => {
         gradeJapan[formObj.grade]
       }表紙の様子/本の題名から考えたことは下記です。${
         formObj.bookReviewThing
-      }以下の年齢の子供が読んだり書いたりできるようにリライトする。 5.必ず"一つ一つ"の提案の最後に「～～のようなことを書く段落にするのはどうでしょうか」と書く。）、const answer=[];の形式で日本語の値のみの配列を記載してください。配列のコード以外の文章やアドバイスは完全に省いてください。`;
+      }以下の年齢の子供が読んだり書いたりできるようにリライトする。 5.必ず"一つ一つ"の提案を「～～のようなことを書く段落にするのはどうでしょうか」と書く。）、const answer=[];の形式で日本語の値のみの配列を記載してください(これ一番大事！)。配列のコード以外の文章やアドバイスは完全に省いてください。`;
       return (
         <>
         <h5>本の種類を選んでね</h5>
@@ -365,11 +369,15 @@ const StylePage = () => {
           <tbody id="danraku-answer">
           {dataArray.slice(0, visibleRows).map((item, index) => (
           <tr key={index} className="animated-row">
-            <td className="td-index"><span>{index + 1}</span></td>
+            <td className="td-index"><span>{index}</span></td>
                 <td className="td-item">
                   {item}
                   <br />
-                  <button onClick={() => copyToClipboard(item)} style={{ marginLeft: "10px" }}>この段落をコピーする</button>
+                  {/**indexが0ではないときだけボタンを表示させる */}
+                  {index > 0 && (
+                    <button onClick={() => copyToClipboard(item)} style={{ marginLeft: "10px" }}>この段落をコピーする</button>
+                  )}
+                  
                 </td>
           </tr>
         ))}
@@ -398,6 +406,11 @@ const StylePage = () => {
 
   return (
     <div className="container">
+      {loading.map((chat, index) => (
+          <div key={index} className="loadingDanraku">
+            <p>{chat.content}</p>
+          </div>
+        ))}
       <Tabs pageTitle="段落の組み立て" contents="danraku"/>
       <p>イメージマップなどで書きたいことが決まったら<br/>書きたいことをどんな順番で書けばいいか教えてもらおう</p>
       {isModalOpen && (

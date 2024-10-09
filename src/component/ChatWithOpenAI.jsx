@@ -93,7 +93,7 @@ const ChatWithOpenAI = ({ age, theme, goal,imagemap1 }) => {
       また、ほめ方を、「作文に挑戦することはとても素晴らしいね」などの褒め方はよくないです。作文を書いていることについてやイメージマップを書いていることについてをほめるのではなく、イメージマップの内容についてほめてください。
       また、アドバイスは「〇〇を詳しく書くといいです。」などではなく、「〇〇について、△△や◆◆などのことを書いてみるといいかもしれないです。」など、加えるべきことについてほどほどに詳しくしてもらえたらと思います。
       `;
-      setChatHistory([...chatHistory, { role: 'user', content: selectedRadio }, { role: 'ai', content: "入力中・・・" }]);
+      setChatHistory([...chatHistory, { role: 'user', content: selectedRadio }, { role: 'ai', content: <div style={{display:"flex"}}><img src="/images/spinnerAnimation.svg" alt="" style={{width:17,height:"auto",margin:"0 5px 0 0",padding:0}}/>入力中・・・</div> }]);
     
     try {
       const response = await fetch(process.env.REACT_APP_API_URL+"/danraku", {
