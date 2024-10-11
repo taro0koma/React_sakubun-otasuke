@@ -92,7 +92,7 @@ const StylePage = () => {
       formObj.lName
     } について書くための段落の組み立てアイデアを作ってみます。`;
     // addAnswer(userMemo, false);
-    setLoading([...loading, { role: 'ai', content: <div style={{position:"absolute",width:"100vw"}}><img src="/images/loadingAnimation.svg" alt="" style={{width:30,height:"auto",margin:"0 5px 0 0",padding:0}}/></div> }])
+    setLoading([...loading, { role: 'ai', content: <div className="loading"><img src="/images/loadingAnimation.svg" alt="loading..." className="kaiten"/><p>loading...</p></div> }])
     
 
     try {
@@ -230,7 +230,7 @@ const StylePage = () => {
         typeJapan[formObj.type]
       }のための${
         gradeJapan[formObj.grade]
-      } が作成する作文をつくります。最初に題名のヒントとなるその作文のおすすめのテーマを出力してください。もちろん次の行は改行を入れてください。本の内容は ${
+      } が作成する作文をつくります。第１要素目に必ず最初に題名のヒントとなるその作文のおすすめのテーマを出力してください。もちろん次の行は改行を入れてください。本の内容は ${
         formObj.bookReviewFirst
       } に設定し、第2要素は「 ${formObj.bookReviewSecond} 」､第3要素は「 ${
         formObj.bookReviewThird

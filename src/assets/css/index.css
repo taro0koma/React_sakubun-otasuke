@@ -1158,3 +1158,25 @@ td:last-child{
   padding: 0 !important;
 }
 
+.loading{
+  width: 100vw;
+  height: 100vw;
+  text-align: center;
+  background: #00000024;
+  z-index: 10000000000;
+  position: fixed;
+  top: 0px;
+  margin: 0;
+  padding: 0;
+  left: 0;
+}
+.loading img{
+  position: fixed;
+  top: 30%;
+  width: 100px;
+  text-align: center;
+}
+.loading p{
+  width: 100%;
+  margin: auto 0;
+}
