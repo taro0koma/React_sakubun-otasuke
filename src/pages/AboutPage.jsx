@@ -18,6 +18,7 @@ const AboutPage = () => {
       <p style={{textAlign:"center"}}>書くことがぜんぜん思いつかない！<br/>そんな時はイメージマップを書いてみよう。</p>
       <video controls src="/images/figjamvideo.mp4" style={{width:"80%"}} poster='/images/thumbnail.png'></video>
       <p>上のようなものを紙などに書いてみよう</p>
+      <a href="/imagemapmake"><button>イメージマップ作成ツールで作ってみる▶</button></a>
       <br />
       <div style={{marginBottom:"3rem"}}/>
       <h4>イメージマップの例</h4>
