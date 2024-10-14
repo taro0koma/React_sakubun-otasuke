@@ -176,6 +176,16 @@ const Tabs = ({ pageTitle,contents }) => {
               イメージマップの作り方
             </NavLink>
           </li>
+          <li className="imagemapmake">
+            <NavLink
+              to="/imagemapmake"
+              style={lsStyle}
+              onClick={handleLinkClick}
+              className={({ isActive }) => (isActive ? "active-item" : "panding-item")}
+            >
+              イメージマップ作成ツール
+            </NavLink>
+          </li>
           <li className="danraku">
             <NavLink
               to="/danraku"

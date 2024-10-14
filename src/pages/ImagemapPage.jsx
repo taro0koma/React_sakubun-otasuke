@@ -265,7 +265,7 @@ const AddNodeOnEdgeDrop = () => {
       <div className={showFrame ? "background" : ""}>
       {showFrame && <FloatingFrame steps={steps} onClose={handleCloseFrame}/>}</div>
       <div className="notimagemap">
-      <Tabs pageTitle="イメージマップ作成ツール" contents="genkouyoshi" />
+      <Tabs pageTitle="イメージマップ作成ツール" contents="imagemapmake" />
       </div>
       <div
         className="wrapper"
