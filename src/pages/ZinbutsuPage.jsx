@@ -157,9 +157,9 @@ const HyougenPage = () => {
             <option value="s4">小学4年生</option>
             <option value="s5">小学5年生</option>
             <option value="s6">小学6年生</option>
-            <option value="c1">中学1年生</option>
-            <option value="c2">中学2年生</option>
-            <option value="c3">中学3年生</option>
+            <option value="t1">中学1年生</option>
+            <option value="t2">中学2年生</option>
+            <option value="t3">中学3年生</option>
             <option value="k1">高校1年生</option>
             <option value="k2">高校2年生</option>
             <option value="k3">高校3年生</option>
