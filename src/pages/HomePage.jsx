@@ -29,7 +29,9 @@ const HomePage = () => {
         "「書きたいことが\nわいてくるぞー！」\nと Kさん。\n\n張り切ってマップをかいています。",
       text: "真ん中に一つテーマを書くと頭で考えているときよりもイメージがわきやすくなり、一つ書き足すごとに関連する言葉がわき出てきます。",
       url: "/map",
+      url2: "/imagemapmake",
       urlText: "▶ マップの作り方へ",
+      urlText2: "▶ イメージマップを作ってみよう",
       id: "mapfinish",
     },
     {
@@ -119,63 +121,6 @@ const HomePage = () => {
           「作文が苦手」をお助けする作文教室のようなアプリです。<br/>苦手だった作文や読書感想文が楽しくなるかも！
         </p>
       </div>
-      {/* <div className="contact-card">
-        <a
-          href="https://docs.google.com/forms/d/e/1FAIpQLSdJvzw5aympJYQrL58b9DbDy-Jqm8Xr1s43S8gfWTG4y8JY0g/viewform?usp=sf_link"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <div className="contact-card-content">
-            <img
-              src="/images/formImage.png"
-              alt="お問い合わせフォームプレビュー"
-              className="contact-card-image"
-            />
-            <div className="contact-card-text">
-              <h3>フィードバック ぜひ ください！</h3>
-              <p>作文お助けアプリを使ってみた感想を教えてくれるとうれしいです。</p>
-              <div className="EmbedBaseLinkCard">
-                <img
-                  src="https://www.google.com/s2/favicons?sz=14&amp;domain_url=https://docs.google.com"
-                  alt="docs.google.com favicon image"
-                  width="14"
-                  height="14"
-                />
-                docs.google.com
-              </div>
-            </div>
-          </div>
-        </a>
-      </div> */}
-      
-      {/* <div className="contact-card">
-        <a
-          href="https://docs.google.com/forms/d/e/1FAIpQLSc7OAqyL6l_AXLwumn0ECL2sOzcsxegp44s0PuL4uctH5Rigw/viewform"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <div className="contact-card-content">
-            <img
-              src="/images/formImage.png"
-              alt="お問い合わせフォームプレビュー"
-              className="contact-card-image"
-            />
-            <div className="contact-card-text">
-              <h3>作文や感想文が完成したら ぜひ このアンケートに答えてください</h3>
-              <div className="EmbedBaseLinkCard">
-                <img
-                  src="https://www.google.com/s2/favicons?sz=14&amp;domain_url=https://docs.google.com"
-                  alt="docs.google.com favicon image"
-                  width="14"
-                  height="14"
-                />
-                docs.google.com
-              </div>
-            </div>
-          </div>
-        </a>
-      </div> */}
-
       <nav className="navigation">
         <ul className="navigation-list">
           <li className="navigation-item">
