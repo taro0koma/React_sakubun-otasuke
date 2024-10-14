@@ -80,8 +80,8 @@ const NextPageLink = ({imairu}) => {
           <a href="/" className="box-link">
             <div className="box">
               <img src="/images/osusumesenden.png" alt="Page 3" className="box-image" />
-              <p className="contentsmei">{"[作文づくりのコツ]"}</p>
-            <p className="contentssetumei">文字数・枚数確認できたり、イメージマップを作るのに便利なツールを紹介するよ！</p>
+              <p className="contentsmei">{"[作文作りのコツ]"}</p>
+            <p className="contentssetumei">手順やコツを紹介するよ！</p>
             </div>
           </a>
         </div>
