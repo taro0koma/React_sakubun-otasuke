@@ -31,15 +31,21 @@ const HyougenPage = () => {
     if (messageDiv) {
       startLoader(messageDiv);
     }
+    setLoading(true); // ローディングを開始
 
+    // 2秒間のディレイを追加
+    await new Promise(resolve => setTimeout(resolve, 2000));
+  
     try {
       const response = await fetch(process.env.REACT_APP_API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: userMessage, sakka: 'あまんきみこ' }),
       });
-
+  
       stopLoader();
+      setLoading(false); // ローディングを終了
+      setLoadingComplete(false); // ローディング完了フラグをリセット
 
       if (response.ok) {
         const data = await response.json();

@@ -103,80 +103,7 @@ const AddNodeOnEdgeDrop = () => {
     setShowFrame(false);
   }
 
-  const startLoader = (element) => {
-    element.textContent = "";
-    setLoading(true);
-    const interval = setInterval(() => {
-      element.textContent += ".";
-      if (element.textContent.length > 3) {
-        element.textContent = "";
-      }
-    }, 300);
-    return interval;
-  };
 
-  const stopLoader = () => {
-    setLoading(false);
-  };
-
-  const animateMessage = (id, text) => {
-    const lines = text
-      .split("\n")
-      .map((line) => line.trim())
-      .filter((line) => line !== "");
-    const messageDiv = document.getElementById(id);
-
-    if (messageDiv) {
-      messageDiv.innerHTML = ""; // Clear the existing content
-      let lineIndex = 0;
-
-      const addLine = () => {
-        if (lineIndex < lines.length) {
-          const lineElement = document.createElement("p");
-          lineElement.className = "fade-in"; // Apply fade-in effect
-          lineElement.textContent = lines[lineIndex];
-          messageDiv.appendChild(lineElement);
-          lineIndex++;
-          setTimeout(addLine, 500); // Adjust delay between lines
-        } else {
-          setLoadingComplete(true); // 完了時にフラグを設定
-        }
-      };
-
-      addLine();
-    }
-  };
-
-  const generateUniqueId = () => {
-    const timestamp = Date.now();
-    const randomNumber = Math.random();
-    const hexadecimalString = randomNumber.toString(16);
-    return `id-${timestamp}-${hexadecimalString}`;
-  };
-
-  const addMessage = (value, isAi, uniqueId) => {
-    setMessages((prevMessages) => [
-      ...prevMessages,
-      { id: uniqueId || generateUniqueId(), value: isAi ? [] : [value], isAi },
-    ]);
-  };
-
-  const updateMessage = (id, value) => {
-    setMessages((prevMessages) =>
-      prevMessages.map((msg) =>
-        msg.id === id ? { ...msg, value: [value] } : msg
-      )
-    );
-  };
-
-  const scrollChatToBottom = () => {
-    const chatContainer = chatContainerRef.current;
-    chatContainer.scrollTop = chatContainer.scrollHeight;
-  };
-
-  const handleClick = () => {
-    inputRef.current.focus(); // Focus the input element
-  };
 
   const classToggle = () => {
     setActive(!active);
@@ -387,7 +314,7 @@ const AddNodeOnEdgeDrop = () => {
           className={active ? "node-edge-info sideOutLeft" : "node-edge-info sideOutRight"} style={{borderRadius:"1em",boxShadow:"0 0 8px #00000033",border:"1px solid #ffffff"}}
         >
           {/* {nodeEdgeInfo} */}
-           <button onClick={classToggle} className="akesimebutton" style={{margin:"auto",height:"100%",textAlign:"center",position:"relative"}}>
+           <button onClick={classToggle} className="akesimebutton" style={{height:"100%",textAlign:"center",position:"relative"}}>
             <div style={{display:"inline-block",writingMode:"vertical-rl",position:"absolute",left:"50%",transform:"translateX(-50%)"}}>{active ? <>◀ ひらく ◀</> : <>▶ とじる ▶</>}</div>
           </button>
           

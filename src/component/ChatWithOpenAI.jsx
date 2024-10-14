@@ -1,18 +1,48 @@
 import { useState } from 'react';
 import './ChatWithOpenAI.css';  // LINE風のUIスタイルを追加
 import RadioButtonForMap from './RadioButtonForMap';
+import FloatingFrame from './FloatingFrame';
 
+const steps = [
+  { theme: "開いたら出てくる画面", gif: "/images/anm_image1.gif", text: "開いたらまず真ん中くらいに「アイデア」と書いてある四角があるよ！" },
+  { theme: "入力する用意をしよう", gif: "/images/anm_image2.gif", text: "真ん中にある四角をクリックすると上の入力らんに四角（アイデア）の文字が表示されるよ" },
+  { theme: "入力してみよう", gif: "/images/anm_image3.gif", text: "入力らんに書きたいこと（まずはテーマ）を入力しよう" },
+  { theme: "イメージマップでいらないところを削除しよう", gif: "/images/anm_image4.gif", text: "いらない四角の部分をクリックしよう。そのあと「Back Space（Windows）」ボタンをクリックしよう\n※Macの場合は「DELETE」をクリックしてください。" },
+  { theme: "チャット機能を使おう！", gif: "/images/anm_image5.gif", text: "このチャット機能は、思いつかないときに質問してマップをどんどんふくらませるためにあるよ！まず、学年を選択して、作文か読書感想文どちらを書きたいか選ぼう！次に、それぞれそのあとに出てきた質問に対して答えよう。これで質問は終わりだよ！次にチャット機能を実際に使おう。３つの中から自分に合ったものを選んで送ろう！" },
+  // 追加のステップも自由にここに入れられる
+];
 const ChatWithOpenAI = ({ age, theme, goal,imagemap1 }) => {
   const [message, setMessage] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [selectedRadio, setSelectedRadio] = useState('');
-  let imagemapMae = ""
+  const [showFrame, setShowFrame] = useState(false);
+  let imagemapMae = "";
+  const handleShowFrame = () => {
+    setShowFrame(true); // ボタンを押したらフレームを表示
+  };
 
-  // ボタンが押されたときに、クリックされたボタンの文字列をセット
-  const handleButtonClick = (fruit) => {
-    setInputValue(fruit);
-    setMessage(fruit);
+  const handleCloseFrame = () => {
+    setShowFrame(false);
+  }
+
+  const gradeJapan = {
+    grade: "とくに制限なし",
+    s1: "小学１年生",
+    s2: "小学２年生",
+    s3: "小学３年生",
+    s4: "小学４年生",
+    s5: "小学５年生",
+    s6: "小学６年生",
+    t1: "中学１年生",
+    t2: "中学２年生",
+    t3: "中学３年生",
+    k1: "高校１年生",
+    k2: "高校２年生",
+    k3: "高校３年生",
+    d1: "大学１年生",
+    d2: "大学２年生",
+    d3: "大学３年生",
   };
 
   const handleRadioChange = (event) => {  // ✨ 新しい関数を追加
@@ -116,15 +146,19 @@ const ChatWithOpenAI = ({ age, theme, goal,imagemap1 }) => {
 
   return (
     <div className="chat-container">
+      <div className={showFrame ? "background" : ""}>
+      {showFrame && <FloatingFrame steps={steps} onClose={handleCloseFrame}/>}</div>
       <div className="chat-history">
       <div className={`chat-bubble user`}>
-            <p>学年：{age}<br/>{theme}についてのイメージマップを書いている。<br/>主に{goal}についてのテーマで書く。</p>
+            <p>学年：{gradeJapan[age]}<br/>{theme}についてのイメージマップを書いている。<br/>主に{goal}についてのテーマで書く。</p>
         </div>
       <div className={`chat-bubble ai`}>
             <p>では、ひだりのイメージマップツールを使ってあなたの{theme}の{goal}について思いつくことをまずひとつかいてみよう！</p>
             <br />
             <p>つかい方がわからないときは下のつかい方ボタンをクリックしてね！</p>
-            <button>つかい方</button>
+            <div className={`notimagemap app-container ${showFrame ? 'blur-background' : ''}`} style={{textAlign:"center"}}>
+            <button onClick={handleShowFrame}>つかい方</button>
+            </div>
         </div>
         {chatHistory.map((chat, index) => (
           <div key={index} className={`chat-bubble ${chat.role === 'user' ? 'user' : 'ai'}`}>
