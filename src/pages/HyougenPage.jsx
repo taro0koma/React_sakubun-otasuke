@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import Tabs from '../component/Tabs';
 import AnimationKomawanPage from './AnimationKomawanPage'; // インポートするコンポーネント
 import ModalFrame from "../component/ModalFrame";
+import NextPageLink from '../component/NextPageLink';
 
 const HyougenPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(true);
@@ -179,6 +180,7 @@ const HyougenPage = () => {
           )}
         </div>
       </div>
+      <NextPageLink imairu="hyougen1"/>
     </div>
   );
 };
