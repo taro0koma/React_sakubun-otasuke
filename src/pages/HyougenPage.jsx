@@ -162,9 +162,12 @@ const HyougenPage = () => {
             この言葉の表現を探す！
           </button>
         </form>
-        <div id="chat_container" ref={chatContainerRef}>
+        <div id="chat_container" ref={chatContainerRef} className={loading && !loadingComplete ? "yomikomihyougen" : ""}>
           {loading && !loadingComplete ? (
-            <AnimationKomawanPage /> // アニメーションを表示
+            <>
+            <AnimationKomawanPage />
+            <p style={{fontSize:20,fontWeight:900}}>読み込み中・・・</p>
+            </>
           ) : (
             messages.map((msg) => (
               <div key={msg.id} className={`wrapper${msg.isAi ? 'ai' : ''}`}>
