@@ -369,16 +369,35 @@ const StylePage = () => {
           <tbody id="danraku-answer">
           {dataArray.slice(0, visibleRows).map((item, index) => (
           <tr key={index} className="animated-row">
-            <td className="td-index"><span>{index}</span></td>
-                <td className="td-item">
-                  {item}
-                  <br />
-                  {/**indexが0ではないときだけボタンを表示させる */}
-                  {index > 0 && (
-                    <button onClick={() => copyToClipboard(item)} style={{ marginLeft: "10px" }}>この段落をコピーする</button>
-                  )}
-                  
-                </td>
+            {index === 0 && (
+              <>
+              <td className="td-index"><span className="danraku-theme">テーマの<br/><div style={{fontSize:15}}>おすすめ</div></span></td>
+              <td className="td-item">
+                {item}
+                <br />
+                {/**indexが0ではないときだけボタンを表示させる */}
+                {index > 0 && (
+                  <button onClick={() => copyToClipboard(item)} style={{ marginLeft: "10px" }}>この段落をコピーする</button>
+                )}
+                
+              </td>
+              </>
+            )}
+            {/**indexが0じゃないときの条件分岐 */}
+            {index > 0 && (
+              <>
+              <td className="td-index"><span>{index}</span></td>
+              <td className="td-item">
+                {item}
+                <br />
+                {/**indexが0ではないときだけボタンを表示させる */}
+                {index > 0 && (
+                  <button onClick={() => copyToClipboard(item)} style={{ marginLeft: "10px" }}>この段落をコピーする</button>
+                )}
+                
+              </td>
+              </>
+            )}
           </tr>
         ))}
             {/* {dataArray.map((item, index) => (

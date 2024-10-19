@@ -64,6 +64,16 @@ h6{
   margin: 0px;
   position: relative;
 }
+.td-index .danraku-theme{
+  font-size: 17px;
+  writing-mode: vertical-rl;
+  height: auto;
+  border-radius: 100px;
+  padding: 10px !important;
+  line-height: 1.1 !important;
+  /* padding-right: 4px !important; */
+  margin: auto;
+}
 @media (min-width: 1200px) {/* 1200px以上*/
   .hazinogazou {
     margin: 0 0 0 30px;
@@ -99,6 +109,10 @@ h6{
     max-width: 100%;
     width: 10%;
     height: 10%;
+  }
+  .td-index .danraku-theme{
+    writing-mode: horizontal-tb;
+    width: auto;
   }
 }
 @media (min-width: 768px) {/* 768px以上*/
