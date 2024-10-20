@@ -1208,3 +1208,10 @@ td:last-child{
   padding: 392px;
   backdrop-filter: blur(4px);
 }
+
+.react-flow__edge-path{
+  stroke: #393939 !important;
+}
+.react-flow__edge.selected .react-flow__edge-path{
+  stroke: #000000 !important;
+}

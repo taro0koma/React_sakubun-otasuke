@@ -43,7 +43,7 @@ const NextPageLink = ({imairu}) => {
         <div className="column column-25 hyougen1">
           <a href="/hyougen" className="box-link">
             <div className="box">
-              <img src="/images/hyougensenden.png" alt="Page 3" className="box-image" />
+              <img src="/images/iikaesenden.png" alt="Page 3" className="box-image" />
               <p className="contentsmei">{"[表現ぴったり探し]"}</p>
             <p className="contentssetumei">カッコよい表現にしたいときは表現ぴったり探しを使ってみよう!</p>
             </div>
