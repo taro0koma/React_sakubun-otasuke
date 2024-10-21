@@ -11,7 +11,7 @@ const NextPageLink = ({imairu}) => {
     <div>
       <style>{style}</style>
       <section className="container" style={{marginTop:40}}>
-        <h4>つぎはなにをつかってみる？</h4>
+        <h4><b>つぎはなにをつかってみる？</b></h4>
       <div className="row">
         <div className="column column-25 imagemap1">
           <a href="/map" className="box-link">
@@ -52,7 +52,7 @@ const NextPageLink = ({imairu}) => {
         <div className="column column-25 zinbutu1">
           <a href="/zinbutsu" className="box-link">
             <div className="box">
-              <img src="/images/zinbutusenden.png" alt="Page 3" className="box-image" />
+              <img src="/images/iikaeniodoroki2.png" alt="Page 3" className="box-image" />
               <p className="contentsmei">{"[登場人物の性格を表す言葉]"}</p>
             <p className="contentssetumei">人物をいいかえたいときは登場人物の性格を表す言葉!</p>
             </div>
@@ -61,7 +61,7 @@ const NextPageLink = ({imairu}) => {
         <div className="column column-25 kakidashi1">
           <a href="/omikuji" className="box-link">
             <div className="box">
-              <img src="/images/kakidasisenden.png" alt="Page 3" className="box-image" />
+              <img src="/images/link_omikuji.png" alt="Page 3" className="box-image" />
               <p className="contentsmei">{"[書き出しおみくじ]"}</p>
             <p className="contentssetumei">書き出しをカッコよくしたいときは書き出しおみくじを使おう!</p>
             </div>
