@@ -5,9 +5,8 @@ import './swiperPage.css';
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/navigation'; // ナビゲーションボタン用のスタイル
-import NextPageLink from "../component/NextPageLink";
 
-const SwiperPage = ({ gazou1, gazou2, gazou3, gazou4 }) => {
+const SwiperPage = ({ gazou1, gazou2, gazou3, gazou4,gazou5, gazou6, gazou7, gazou8 }) => {
   const modalRef = useRef(null);
   const modalImgRef = useRef(null);
   const closeSpanRef = useRef(null);
@@ -74,10 +73,22 @@ const SwiperPage = ({ gazou1, gazou2, gazou3, gazou4 }) => {
           <p className="img"><img src={gazou2} alt="スライド2" className="popup" /></p>
         </SwiperSlide>
         <SwiperSlide>
-          <p className="img"><img src={gazou3 || gazou1} alt="スライド3" className="popup" /></p>
+          <p className="img"><img src={gazou3} alt="スライド3" className="popup" /></p>
         </SwiperSlide>
         <SwiperSlide>
-          <p className="img"><img src={gazou4 || gazou2} alt="スライド4" className="popup" /></p>
+          <p className="img"><img src={gazou4} alt="スライド4" className="popup" /></p>
+        </SwiperSlide>
+        <SwiperSlide>
+          <p className="img"><img src={gazou5 || gazou1} alt="スライド1" className="popup" /></p>
+        </SwiperSlide>
+        <SwiperSlide>
+          <p className="img"><img src={gazou6 || gazou2} alt="スライド2" className="popup" /></p>
+        </SwiperSlide>
+        <SwiperSlide>
+          <p className="img"><img src={gazou7 || gazou3} alt="スライド3" className="popup" /></p>
+        </SwiperSlide>
+        <SwiperSlide>
+          <p className="img"><img src={gazou8 || gazou4} alt="スライド4" className="popup" /></p>
         </SwiperSlide>
       </Swiper>
       <div id="modal" ref={modalRef} className="modal">

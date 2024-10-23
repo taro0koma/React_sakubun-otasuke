@@ -1,6 +1,8 @@
 import React from "react";
 import Tabs from "../component/Tabs";
 import styles from "../assets/css/styles.module.css";
+import SwiperPage from "./swiperPage";
+import SwiperHome from "./SwiperHome";
 // import '/css/style.css'
 
 // width: 100% !important;
@@ -121,6 +123,7 @@ const HomePage = () => {
           「作文が苦手」をお助けする作文教室のようなアプリです。<br/>苦手だった作文や読書感想文が楽しくなるかも！
         </p>
       </div>
+      <SwiperHome gazou1="/images/danrakusenden.png" gazou2="/images/iikaesenden.png" gazou3="images/iikaesenden.png" gazou4="/images/iikaeniodoroki2.png"/>
       <nav className="navigation">
         <ul className="navigation-list">
           <li className="navigation-item">
