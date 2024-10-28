@@ -34,7 +34,7 @@ const NextPageLink = ({imairu}) => {
         <div className="column column-25 kimochi1">
           <a href="/kimoti" className="box-link">
             <div className="box">
-              <img src="/images/iikaesenden.png" alt="Page 3" className="box-image" />
+              <img src="/images/iikaesenden2.png" alt="Page 3" className="box-image" />
               <p className="contentsmei">{"気持ちや感想のいいかえ"}</p>
             <p className="contentssetumei">言葉をいいかえたいときは気持ちや感想のいいかえを使おう!</p>
             </div>

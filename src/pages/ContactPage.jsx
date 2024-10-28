@@ -3,6 +3,7 @@ import { createClient } from "@supabase/supabase-js";
 import Tabs from "../component/Tabs";
 import ModalFrame from "../component/ModalFrame";
 import PreviousAndNext from "../component/PreviousAndNext";
+import ChatWithOpenAI from './../component/ChatWithOpenAI';
 
 const supabase = createClient(
   process.env.REACT_APP_SUPABASE_URL,
@@ -155,7 +156,8 @@ const ContactPage = () => {
                 </li>
               ))}
             </ul> */}
-            <h2 style={{padding:10,background:"#4890ff",color:"white",fontWeight:"bold"}}>AIの提案</h2>
+            {/**入力した気持ちを出力する */}
+            <h2 style={{padding:10,background:"#4890ff",color:"white",fontWeight:"bold"}}>「<b>{submittedOption}</b>」をいいかえてみる！</h2>
             <p dangerouslySetInnerHTML={{ __html: aiResponse }} style={{textAlign:"left"}}></p>
           </div>
         )}
