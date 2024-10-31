@@ -4,6 +4,7 @@ import "../assets/css/index.css";
 import Tabs from "../component/Tabs";
 import ModalFrame from "../component/ModalFrame";
 import AnimationKomawanPage from "./AnimationKomawanPage";
+import { Helmet } from "react-helmet-async";
 
 const supabase = createClient(
   process.env.REACT_APP_SUPABASE_URL,
@@ -179,7 +180,8 @@ const ConsolePage = () => {
 
   return (
     <div>
-      <Tabs pageTitle="書き出しおみくじ" contents="kakidashi"/>
+      <Helmet><title>かっこいい書き出しおみくじ | 作文おたすけアプリ</title></Helmet>
+      <Tabs pageTitle="かっこいい書き出しおみくじ" contents="kakidashi"/>
       <h3 className="setumei">
         おみくじ箱をクリックして、
         <br />
@@ -187,7 +189,7 @@ const ConsolePage = () => {
       </h3>
       {isModalOpen && (
         <ModalFrame
-          title="書き出しおみくじ"
+          title="かっこいい書き出しおみくじ"
           text="どうやったらかっこいい書き出しになるのかわからない・・・そんな時はおみくじをつかってお気に入りの書き出しを見つけよう。自分の作文に合わせた言葉が変えられるように例文もついているよ。"
           onClose={handleModalClose}
           imageSrc="/images/kakenaiwan.png"

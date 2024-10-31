@@ -3,6 +3,7 @@ import Tabs from '../component/Tabs';
 import AnimationKomawanPage from './AnimationKomawanPage'; // インポートするコンポーネント
 import ModalFrame from "../component/ModalFrame";
 import NextPageLink from '../component/NextPageLink';
+import { Helmet } from 'react-helmet-async';
 
 const HyougenPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(true);
@@ -143,6 +144,7 @@ const HyougenPage = () => {
 
   return (
     <div id="app">
+      <Helmet><title>表現ぴったり探し | 作文おたすけアプリ</title></Helmet>
       <Tabs pageTitle="表現ぴったり探し" contents="hyougen" />
       {isModalOpen && (
         <ModalFrame title="「表現ぴったり探し」の使い方" text="「表現ぴったり探し」で、いろいろな表現が知ることができます。自分の書いてみた文章の中に別の表現にしたい言葉はありませんか？" onClose={handleModalClose} imageSrc="/images/dousiyowan.png" />

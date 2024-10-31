@@ -233,7 +233,7 @@ const Tabs = ({ pageTitle,contents }) => {
               onClick={handleLinkClick}
               className={({ isActive }) => (isActive ? "active-item" : "panding-item")}
             >
-              書き出しおみくじ
+              かっこいい書き出しおみくじ
             </NavLink>
           </li>
           <li className="genkouyoshi">

@@ -3,6 +3,7 @@ import Tabs from '../component/Tabs'
 import ModalFrame from "../component/ModalFrame";
 import SwiperPage from './swiperPage';
 import NextPageLink from './../component/NextPageLink';
+import { Helmet } from 'react-helmet-async';
 
 const AboutPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(true);
@@ -11,6 +12,7 @@ const AboutPage = () => {
   };
   return (
     <div>
+      <Helmet><title>イメージマップの作り方 | 作文おたすけアプリ</title></Helmet>
       <Tabs pageTitle="「イメージマップ」の作り方" contents="imagemap"/>
       {isModalOpen && (
         <ModalFrame title="イメージマップの作り方について" text="頭で考えても思いつかないのに紙に書いてみると、ふしぎなくらいイメージがわいてくる！何を書けばいいか思いつかないときは、紙の真ん中に1つだけ気持ちを書いてスタートしよう（「面白かった」「面白くなかった」からでもだいじょうぶ）" onClose={handleModalClose} imageSrc="/vite.svg"/>

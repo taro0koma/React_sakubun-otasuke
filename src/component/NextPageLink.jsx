@@ -62,7 +62,7 @@ const NextPageLink = ({imairu}) => {
           <a href="/omikuji" className="box-link">
             <div className="box">
               <img src="/images/link_omikuji.png" alt="Page 3" className="box-image" />
-              <p className="contentsmei">{"書き出しおみくじ"}</p>
+              <p className="contentsmei">{"かっこいい書き出しおみくじ"}</p>
             <p className="contentssetumei">書き出しをカッコよくしたいときは書き出しおみくじを使おう!</p>
             </div>
           </a>

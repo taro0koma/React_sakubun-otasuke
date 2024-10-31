@@ -19,6 +19,7 @@ import HomePage from "./pages/HomePage";
 import NotFound from "./pages/NotFound";
 import MyComponent from "./pages/ScreenshotPage";
 import ChatBot from "./pages/ChatBot";
+import { HelmetProvider } from "react-helmet-async";
 
 
 //今度Basic認証を付けるときは下のURLにアクセスし、コードを変更しよう！
@@ -26,6 +27,7 @@ import ChatBot from "./pages/ChatBot";
 const App = () => {
 
   return (
+    <HelmetProvider>
     <Suspense fallback={<div>Loading...</div>}>
         <div className="container">
           <BrowserRouter>
@@ -50,6 +52,7 @@ const App = () => {
           </BrowserRouter>
         </div>
     </Suspense>
+    </HelmetProvider>
   );
 };
 

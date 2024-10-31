@@ -3,6 +3,7 @@ import Tabs from '../component/Tabs';
 import AnimationKomawanPage from './AnimationKomawanPage';
 import ModalFrame from "../component/ModalFrame";
 import NextPageLink from '../component/NextPageLink';
+import { Helmet } from 'react-helmet-async';
 
 const HyougenPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(true);
@@ -44,7 +45,7 @@ const HyougenPage = () => {
       const response = await fetch(process.env.REACT_APP_API_URL+"/danraku", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt: `${promptWithGrade}という性格についての別の表現を10個提案してください。決して、下記のような、まあコメントはいらないということなんですが・・・、わかりました、了解しました、これでいいでしょうか、などの言葉を絶対に言わないでください。`, gakunen:grade }),
+        body: JSON.stringify({ prompt: `${promptWithGrade}という性格についての別の表現を10個提案してください。決して、下記のような、コメント(コメント全般)はいらないです「わかりました、了解しました、これでいいでしょうか」などの言葉を絶対に言わないでください。`, gakunen:grade }),
       });
 
       stopLoader();
@@ -149,6 +150,7 @@ const HyougenPage = () => {
 
   return (
     <div id="app">
+      <Helmet><title>登場人物の性格を表す言葉 | 作文おたすけアプリ</title></Helmet>
       <Tabs pageTitle="登場人物の性格を表す言葉" contents="zinbutsu" />
       {isModalOpen && (
         <ModalFrame title="「登場人物の性格を表す言葉」の使い方" text="「登場人物の性格を表す言葉」で、いろいろな表現が知ることができます。自分の書いてみた文章の中に別の表現にしたい言葉はありませんか？" onClose={handleModalClose} imageSrc="/images/dousiyowan.png" />

@@ -1,8 +1,8 @@
 import React from "react";
 import Tabs from "../component/Tabs";
 import styles from "../assets/css/styles.module.css";
-import SwiperPage from "./swiperPage";
 import SwiperHome from "./SwiperHome";
+import { Helmet } from "react-helmet-async";
 // import '/css/style.css'
 
 // width: 100% !important;
@@ -115,6 +115,7 @@ const HomePage = () => {
   
   return (
     <div id="top">
+      <Helmet><title> 作文おたすけアプリ</title></Helmet>
       <Tabs contents="home"/>
       <div className="setumei">
         <img src="/images/Applogo.png" alt="ロゴ" style={{maxWidth:"400px"}}/>
