@@ -4,6 +4,7 @@ import Tabs from "../component/Tabs";
 import ModalFrame from "../component/ModalFrame";
 import PreviousAndNext from "../component/PreviousAndNext";
 import ChatWithOpenAI from './../component/ChatWithOpenAI';
+import NextPageLink from "../component/NextPageLink";
 
 const supabase = createClient(
   process.env.REACT_APP_SUPABASE_URL,
@@ -164,6 +165,7 @@ const ContactPage = () => {
       </div>
       <PreviousAndNext midashi="知りたい気持ちがなかった！" honbun={honbun} buttontext="▶　使ってみる" buttonurl="/hyougen"/>
       <div className="spacer" style={{height:250}}></div>
+      <NextPageLink imairu="kimochi1"/>
     </div>
   );
 };
