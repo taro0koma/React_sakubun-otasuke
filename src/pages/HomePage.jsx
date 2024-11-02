@@ -15,6 +15,7 @@ const HomePage = () => {
       altText: "作文苦手なのよー！",
       heading: "あるところに\n作文が苦手なKさんがいました。",
       text: "本をたくさん読めば語彙が増えるとか、作文や国語が得意になると言われているが、思い通りにいかない困っている人に「作文おたすけアプリ」の使い方とおすすめポイントを案内します。",
+      id:"contents-top"
     },
     {
       imgSrc: `/images/wantyan1.png`,
@@ -124,7 +125,7 @@ const HomePage = () => {
           「作文が苦手」をお助けする作文教室のようなアプリです。<br/>苦手だった作文や読書感想文が楽しくなるかも！
         </p>
       </div>
-      <SwiperHome gazou1="/images/danrakusenden.png" gazou2="/images/iikaesenden.png" gazou3="images/iikaesenden.png" gazou4="/images/iikaeniodoroki2.png"/>
+      <SwiperHome/>
       <nav className="navigation">
         <ul className="navigation-list">
           <li className="navigation-item">

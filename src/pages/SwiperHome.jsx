@@ -6,21 +6,20 @@ import './SwiperHome.css';
 import 'swiper/css';
 import 'swiper/css/navigation'; // ナビゲーションボタン用のスタイル
 
-const SwiperHome = ({ gazou1, gazou2, gazou3, gazou4,gazou5, gazou6, gazou7, gazou8 }) => {
+const SwiperHome = ({  }) => {
   const modalRef = useRef(null);
   const modalImgRef = useRef(null);
   const closeSpanRef = useRef(null);
   const text = {
-    "imagemap":["イメージマップ","内容が思いつかないときはイメージマップを作ってみよう！",],
-    "danraku":["段落の組み立て","書き方がわからないときは段落の組み立てを使おう！"],
-    "kimochi":["気持ちや感想のいいかえ","言葉をいいかえたいときは気持ちや感想のいいかえを使おう！"],
-    "hyougen":["表現ぴったり探し","カッコよい表現にしたいときは表現ぴったり探しを使ってみよう！"],
-    "zinbutsu":["登場人物の性格を表す言葉","人物をいいかえたいときは登場人物の性格を表す言葉！"],
-    "kakidashi":["かっこいい書き出しおみくじ","内容が思いつかないときはイメージマップを作ってみよう"],
-    "osusume":["おすすめツール","書き出しをカッコよくしたいときは書き出しおみくじを使おう"],
-    "home":["イメージマップ","手順やコツを紹介するよ！"],
+    "imagemap":["イメージマップ","内容が思いつかないときはイメージマップを作ってみよう！","/images/imagemapsenden2.png"],
+    "danraku":["段落の組み立て","書き方がわからないときは段落の組み立てを使おう！","/images/danrakusenden.png"],
+    "kimochi":["気持ちや感想のいいかえ","言葉をいいかえたいときは気持ちや感想のいいかえを使おう！","/images/iikaesenden2.png"],
+    "hyougen":["表現ぴったり探し","カッコよい表現にしたいときは表現ぴったり探しを使ってみよう！","/images/iikaesenden.png"],
+    "zinbutsu":["登場人物の性格を表す言葉","人物をいいかえたいときは登場人物の性格を表す言葉！","/images/iikaeniodoroki2.png"],
+    "kakidashi":["かっこいい書き出しおみくじ","書き出しをカッコよくしたいときは書き出しおみくじを使おう!","/images/link_omikuji.png"],
+    "osusume":["おすすめツール","文字数・枚数確認できたり、イメージマップを作るのに便利なツールを紹介するよ！","/images/benrituru.png"],
+    "home":["もくじ","手順やコツを紹介するよ！","/images/sakubunkotsu.png"],
   }
-
   useEffect(() => {
     const modal = modalRef.current;
     const modalImg = modalImgRef.current;
@@ -77,41 +76,55 @@ const SwiperHome = ({ gazou1, gazou2, gazou3, gazou4,gazou5, gazou6, gazou7, gaz
         navigation
       >
         <SwiperSlide>
-          <p className="img"><img src={gazou1} alt="スライド1" className="popup" /><p className="contentsmei">{text["imagemap"][0]}</p>
+        <a href="#komawanpoint1">
+          <p className="img"><img src={text["imagemap"][2]} alt="スライド1" className="popup" /><p className="contentsmei">{text["imagemap"][0]}</p>
           <p className="contentssetumei">{text["imagemap"][1]}</p></p>
+          </a>
         </SwiperSlide>
         <SwiperSlide>
-          <p className="img"><img src={gazou2} alt="スライド2" className="popup" /><p className="contentsmei">{text["danraku"][0]}</p>
-          <p className="contentssetumei">{text["danraku"][1]}</p></p>
+        <a href="#komawanpoint2">
+          <p className="img"><img src={text["danraku"][2]} alt="スライド2" className="popup" /><p className="contentsmei">{text["danraku"][0]}</p>
+          <p className="contentssetumei">{text["danraku"][1]}</p></p></a>
         </SwiperSlide>
         <SwiperSlide>
-          <p className="img"><img src={gazou3} alt="スライド3" className="popup" /><p className="contentsmei">{text["kimochi"][0]}</p>
+        <a href="#komawanpoint4">
+          <p className="img"><img src={text["kimochi"][2]} alt="スライド3" className="popup" /><p className="contentsmei">{text["kimochi"][0]}</p>
           <p className="contentssetumei">{text["kimochi"][1]}!</p></p>
+          </a>
         </SwiperSlide>
         <SwiperSlide>
-          <p className="img"><img src={gazou4} alt="スライド4" className="popup" /><p className="contentsmei">{text["hyougen"][0]}</p>
+        <a href="#komawanpoint4">
+          <p className="img"><img src={text["hyougen"][2]} alt="スライド4" className="popup" /><p className="contentsmei">{text["hyougen"][0]}</p>
           <p className="contentssetumei">{text["hyougen"][1]}!</p></p>
+          </a>
         </SwiperSlide>
         <SwiperSlide>
-          <p className="img"><img src={gazou5 || gazou1} alt="スライド1" className="popup" /><p className="contentsmei">{text["zinbutsu"][0]}</p>
+        <a href="#komawanpoint4">
+          <p className="img"><img src={text["zinbutsu"][2]} alt="スライド1" className="popup" /><p className="contentsmei">{text["zinbutsu"][0]}</p>
           <p className="contentssetumei">{text["zinbutsu"][1]}!</p></p>
+          </a>
         </SwiperSlide>
         <SwiperSlide>
-          <p className="img"><img src={gazou6 || gazou2} alt="スライド2" className="popup" /><p className="contentsmei">{text["kakidashi"][0]}</p>
+        <a href="#komawanpoint1">
+          <p className="img"><img src={text["kakidashi"][2]} alt="スライド2" className="popup" /><p className="contentsmei">{text["kakidashi"][0]}</p>
           <p className="contentssetumei">{text["kakidashi"][1]}!</p></p>
+          </a>
         </SwiperSlide>
         <SwiperSlide>
-          <p className="img"><img src={gazou7 || gazou3} alt="スライド3" className="popup" /><p className="contentsmei">{text["osusume"][0]}</p>
+          <a href="#osusume">
+          <p className="img"><img src={text["osusume"][2]} alt="スライド3" className="popup" /><p className="contentsmei">{text["osusume"][0]}</p>
           <p className="contentssetumei">{text["osusume"][1]}</p></p>
+          </a>
         </SwiperSlide>
         <SwiperSlide>
-          <p className="img"><img src={gazou8 || gazou4} alt="スライド4" className="popup" /><p className="contentsmei">{text["home"][0]}</p>
+        <a href="#contents-top">
+          <p className="img"><img src={text["home"][2]} alt="スライド4" className="popup" /><p className="contentsmei">{text["home"][0]}</p>
           <p className="contentssetumei">{text["home"][1]}</p></p>
+          </a>
         </SwiperSlide>
       </Swiper>
-      <div id="modal" ref={modalRef} className="modal">
-        <span id="close" ref={closeSpanRef}>×</span>
-        <img className="modal-content" ref={modalImgRef} id="modalImage" alt="拡大表示" />
+      <div id="" ref={modalRef} className="">
+        <span id="" ref={closeSpanRef}></span>
       </div>
       <br />
     </>
