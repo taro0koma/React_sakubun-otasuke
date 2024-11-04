@@ -31,7 +31,7 @@
 
 .navigation {
   display: flex;
-  justify-content: space-between;
+  justify-content:center;
 }
 
 .try-btn {
@@ -95,7 +95,7 @@ button:disabled {
 
 .navigation {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   padding: 10px;
   bottom: 30px;
   position: relative;
