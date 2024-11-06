@@ -14,6 +14,9 @@ const GenkoyoshiPage = () => {
     <div>
       <Helmet>
         <title>おすすめツール | 作文おたすけアプリ</title>
+        <meta property="og:title" content="おすすめツール | 作文おたすけアプリ" />
+        <meta property="og:description" content="作文を書くのに便利なツールを紹介します。" />
+        <meta property="og:url" content="https://sakubun-otasuke.com/images/benrituru.png" />
       </Helmet>
       <Tabs pageTitle="おすすめツール" contents="genkouyoshi"/>
       {isModalOpen && (
