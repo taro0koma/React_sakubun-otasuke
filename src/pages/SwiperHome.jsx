@@ -13,7 +13,7 @@ const SwiperHome = ({  }) => {
   const text = {
     "imagemap":["イメージマップ","内容が思いつかないときはイメージマップを作ってみよう！","/images/imagemapsenden2.png"],
     "danraku":["段落の組み立て","書き方がわからないときは段落の組み立てを使おう！","/images/danrakusenden.png"],
-    "kimochi":["気持ちや感想のいいかえ","言葉をいいかえたいときは気持ちや感想のいいかえを使おう！","/images/iikaesenden2.png"],
+    "kimochi":["","言葉をいいかえたいときは気持ちや感想のいいかえを使おう！","/images/iikaesenden2.png"],
     "hyougen":["表現ぴったり探し","カッコよい表現にしたいときは表現ぴったり探しを使ってみよう！","/images/iikaesenden.png"],
     "zinbutsu":["登場人物の性格を表す言葉","人物をいいかえたいときは登場人物の性格を表す言葉！","/images/iikaeniodoroki2.png"],
     "kakidashi":["かっこいい書き出しおみくじ","書き出しをカッコよくしたいときは書き出しおみくじを使おう!","/images/link_omikuji.png"],

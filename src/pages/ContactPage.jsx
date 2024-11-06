@@ -5,6 +5,7 @@ import ModalFrame from "../component/ModalFrame";
 import PreviousAndNext from "../component/PreviousAndNext";
 import ChatWithOpenAI from './../component/ChatWithOpenAI';
 import NextPageLink from "../component/NextPageLink";
+import { Helmet } from "react-helmet-async";
 
 const supabase = createClient(
   process.env.REACT_APP_SUPABASE_URL,
@@ -87,6 +88,9 @@ const ContactPage = () => {
   //HTML------------------------------------------------------------------
   return (
     <div>
+      <Helmet>
+        <title>気持ちや感想のいいかえ | 作文おたすけアプリ</title>
+      </Helmet>
       <Tabs pageTitle="気持ちや感想のいいかえ" contents="kimoti"/>
       {isModalOpen && (
         <ModalFrame title="気持ちや感想のいいかえの使い方" text="「気持ちや感想のいいかえ」で、 どんないいかえ かをを知ることができます。自分の書いてみた文章の中にいいかえてみたい言葉はありますか？" onClose={handleModalClose} imageSrc="/images/dousiyowan.png"/>

@@ -3,6 +3,7 @@ import Tabs from "../component/Tabs";
 import ModalFrame from "../component/ModalFrame";
 import PreviousAndNext from "../component/PreviousAndNext";
 import NextPageLink from './../component/NextPageLink';
+import { Helmet } from "react-helmet-async";
 
 const StylePage = () => {
 
@@ -205,7 +206,7 @@ const StylePage = () => {
               InputOnChange("sSecond", e.target.value);
             }}
             value={formObj.sSecond}
-            placeholder="２番目にか書きたいこと"
+            placeholder="２番目に書きたいこと"
           />
           <br />
           <textarea
@@ -371,7 +372,7 @@ const StylePage = () => {
           <tr key={index} className="animated-row">
             {index === 0 && (
               <>
-              <td className="td-index"><span className="danraku-theme">テーマの<br/><div style={{fontSize:15}}>おすすめ</div></span></td>
+              <td className="td-index"><span className="danraku-theme">テーマ<br/><div style={{fontSize:15}}>おすすめ</div></span></td>
               <td className="td-item">
                 {item}
                 <br />
@@ -425,6 +426,9 @@ const StylePage = () => {
 
   return (
     <div className="container">
+      <Helmet>
+        <title>段落の組み立て | 作文おたすけアプリ</title>
+      </Helmet>
       {loading.map((chat, index) => (
           <div key={index} className="loadingDanraku">
             <p>{chat.content}</p>

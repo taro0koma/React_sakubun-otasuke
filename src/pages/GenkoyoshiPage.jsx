@@ -3,6 +3,7 @@ import Tabs from './../component/Tabs';
 import ModalFrame from "../component/ModalFrame";
 import SwiperPage from './swiperPage';
 import NextPageLink from '../component/NextPageLink';
+import { Helmet } from 'react-helmet-async';
 
 const GenkoyoshiPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(true);
@@ -11,6 +12,9 @@ const GenkoyoshiPage = () => {
   };
   return (
     <div>
+      <Helmet>
+        <title>おすすめツール | 作文おたすけアプリ</title>
+      </Helmet>
       <Tabs pageTitle="おすすめツール" contents="genkouyoshi"/>
       {isModalOpen && (
         <ModalFrame title="デジタルでも書け、文字数や枚数が確認できるツールをがほしい！" text="作文には枚数や文字数制限などがあるので、自分が書いている文章が何文字多いかOR少ないか知ることができるサイトを紹介しています" onClose={handleModalClose} imageSrc="/vite.svg" buttonName="見てみる"/>
