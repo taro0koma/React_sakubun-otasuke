@@ -167,7 +167,7 @@ const ContactPage = () => {
           </div>
         )}
       </div>
-      <PreviousAndNext midashi="知りたい気持ちがなかった！" honbun={honbun} buttontext="▶　使ってみる" buttonurl="/hyougen"/>
+      {/* <PreviousAndNext midashi="知りたい気持ちがなかった！" honbun={honbun} buttontext="▶　使ってみる" buttonurl="/hyougen"/> */}
       <div className="spacer" style={{height:250}}></div>
       <NextPageLink imairu="kimochi1"/>
     </div>

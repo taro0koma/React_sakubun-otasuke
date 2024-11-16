@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap');
 /* フェードアウトとフェードイン、スライドインアニメーション */
 
 
@@ -119,5 +119,8 @@ a{
   color: blue;
 }
 p{
-  max-width: 90%;
+  max-width: 100%;
+}
+label{
+  font-size: 1.8rem;
 }

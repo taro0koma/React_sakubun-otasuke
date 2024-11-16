@@ -79,6 +79,12 @@ section.container {
   .column-25 {
     width:50%;
   }
+  .row .column.column-25 {
+    flex: 0 0 25%;
+    max-width: 100%;
+    width: 55% !important;
+    margin: 0 auto;
+}
 }
 
 /* レスポンシブ対応: 画面幅が480px以下の場合、ボックスを1つずつ表示 */

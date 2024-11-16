@@ -45,6 +45,11 @@ const Tabs = ({ pageTitle,contents }) => {
       width:30%;
       display:block;
     }
+    @media (max-width: 768px) {
+      .logo {
+        width: 100%;
+      }
+    }
     .${contents}{
       background-color:#ffffff70;
       border-top-right-radius: 70px;

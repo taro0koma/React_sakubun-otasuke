@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700;800&family=Zen+Maru+Gothic:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -22,6 +22,7 @@ html{
 body{
   font-size:1.6rem;/* 16px*/
   line-height: 2;
+  font-weight: 500;
 }
 h1 {
   font-size: 36px !important;/* IE8以下とAndroid4.3以下用フォールバック */
@@ -242,6 +243,16 @@ h6{
     border-radius: 100px;
     padding: 3px 5px;
     font-size: 8px;
+  }
+}
+@media screen and (max-width: 462px){
+  .left-top-logo > .app{
+    color: white;
+    background: #6f7074;
+    letter-spacing: 2px;
+    border-radius: 100px;
+    padding: 2.5px 4px;
+    font-size: 7px;
   }
 }
 
@@ -585,7 +596,7 @@ td{
   text-align: center;
   display: block !important;
   font-weight: 600;
-  font-size: 20px;
+  font-size: 3.5rem;
 }
 #inputarea{
   text-align: center;
