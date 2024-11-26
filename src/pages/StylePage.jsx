@@ -4,6 +4,7 @@ import ModalFrame from "../component/ModalFrame";
 import PreviousAndNext from "../component/PreviousAndNext";
 import NextPageLink from './../component/NextPageLink';
 import { Helmet } from "react-helmet-async";
+import AnimationKomawanPage from "./AnimationKomawanPage";
 
 const StylePage = () => {
 
@@ -93,7 +94,8 @@ const StylePage = () => {
       formObj.lName
     } について書くための段落の組み立てアイデアを作ってみます。`;
     // addAnswer(userMemo, false);
-    setLoading([...loading, { role: 'ai', content: <div className="loading"><img src="/images/loadingAnimation.svg" alt="loading..." className="kaiten"/><p>loading...</p></div> }])
+    setLoading([...loading, { role: 'ai', content: <div className="loading yomikomihyougen"> <div style={{height:"80%",maxWidth:"100vw"}}><AnimationKomawanPage /></div>
+            <p style={{fontSize:20,fontWeight:900}}><h2><b>SAKUBUN OTASUKE</b></h2>読み込み中・・・</p></div> }])
     
 
     try {

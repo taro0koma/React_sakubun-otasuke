@@ -242,7 +242,7 @@ const ConsolePage = () => {
       </div>
       <div className="ai-response" ref={adviceRef}>
         {isAiLoading ? (
-          <div className="LoadingSvg">
+          <div className="LoadingSvg yomikomihyougen">
             <div className="svgtoka"><AnimationKomawanPage/></div>
             
             <h2>SAKUBUN OTASUKE</h2>

@@ -168,7 +168,7 @@ const HyougenPage = () => {
           {loading && !loadingComplete ? (
             <>
             <AnimationKomawanPage />
-            <p style={{fontSize:20,fontWeight:900}}>読み込み中・・・</p>
+            <h1><b>SAKUBUN OTASUKE</b></h1>
             </>
           ) : (
             messages.map((msg) => (

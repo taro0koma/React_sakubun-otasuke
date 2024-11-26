@@ -187,7 +187,10 @@ const HyougenPage = () => {
         </form>
         <div id="chat_container" ref={chatContainerRef}>
           {loading && !loadingComplete ? (
+            <div className='yomikomihyougen svgtoka LoadingSvg'>
             <AnimationKomawanPage />
+            <h1><b>SAKUBUN OTASUKE</b></h1>
+            </div>
           ) : (
             messages.map((msg) => (
               <div key={msg.id} className={`wrapper${msg.isAi ? 'ai' : ''}`}>
