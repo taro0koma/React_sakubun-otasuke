@@ -102,7 +102,7 @@ const ConsolePage = () => {
       supabaseData
     )}`;
     try {
-      const response = await fetch(process.env.REACT_APP_API_URL + "/danraku", {
+      const response = await fetch(process.env.REACT_APP_API_URL + "/api/azure", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt: userMessage,gakunen:selectedGrade }),

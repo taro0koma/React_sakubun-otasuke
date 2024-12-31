@@ -126,7 +126,7 @@ const ChatWithOpenAI = ({ age, theme, goal,imagemap1 }) => {
       setChatHistory([...chatHistory, { role: 'user', content: selectedRadio }, { role: 'ai', content: <div style={{display:"flex"}}><img src="/images/spinnerAnimation.svg" alt="" style={{width:17,height:"auto",margin:"0 5px 0 0",padding:0}}/>入力中・・・</div> }]);
     
     try {
-      const response = await fetch(process.env.REACT_APP_API_URL+"/danraku", {
+      const response = await fetch(process.env.REACT_APP_API_URL+"/api/azure", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: feedbackPrompt, gakunen:age }),

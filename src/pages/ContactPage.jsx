@@ -57,7 +57,7 @@ const ContactPage = () => {
   async function fetchAIResponse(option, grade, examples) {
     const userMessage = `下記の言葉を${option}という意味合いでどんなときにも使える拡張した言葉を10個つくり、それを改行のある1．２．などの表示になるよう箇条書きにしてください。：\n\n${examples}`;
     try {
-      const response = await fetch(process.env.REACT_APP_API_URL + "/danraku", {
+      const response = await fetch(process.env.REACT_APP_API_URL + "/api/azure", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt: userMessage,gakunen: selectedGrade }),

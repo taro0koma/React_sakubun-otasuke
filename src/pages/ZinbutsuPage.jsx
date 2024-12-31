@@ -42,7 +42,7 @@ const HyougenPage = () => {
     await new Promise(resolve => setTimeout(resolve, 2000));
 
     try {
-      const response = await fetch(process.env.REACT_APP_API_URL+"/danraku", {
+      const response = await fetch(process.env.REACT_APP_API_URL+"/api/azure", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: `${promptWithGrade}という性格についての別の表現を10個提案してください。決して、下記のような、コメント(コメント全般)はいらないです「わかりました、了解しました、これでいいでしょうか」などの言葉を絶対に言わないでください。`, gakunen:grade }),

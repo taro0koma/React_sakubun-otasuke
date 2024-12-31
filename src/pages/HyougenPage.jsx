@@ -39,7 +39,7 @@ const HyougenPage = () => {
     await new Promise(resolve => setTimeout(resolve, 2000));
   
     try {
-      const response = await fetch(process.env.REACT_APP_API_URL, {
+      const response = await fetch(process.env.REACT_APP_API_URL+"/api/azurehyougen", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: userMessage, sakka: 'あまんきみこ' }),
