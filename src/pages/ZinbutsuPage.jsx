@@ -153,7 +153,7 @@ const HyougenPage = () => {
       <Helmet><title>登場人物の性格を表す言葉 | 作文おたすけアプリ</title></Helmet>
       <Tabs pageTitle="登場人物の性格を表す言葉" contents="zinbutsu" />
       {isModalOpen && (
-        <ModalFrame title="「登場人物の性格を表す言葉」の使い方" text="「登場人物の性格を表す言葉」で、いろいろな表現が知ることができます。自分の書いてみた文章の中に別の表現にしたい言葉はありませんか？" onClose={handleModalClose} imageSrc="/images/dousiyowan.png" />
+        <div className='saisyonihyouzisuruhurothinghuremu'><ModalFrame title="「登場人物の性格を表す言葉」の使い方" text="「登場人物の性格を表す言葉」で、いろいろな表現が知ることができます。自分の書いてみた文章の中に別の表現にしたい言葉はありませんか？" onClose={handleModalClose} imageSrc="/images/dousiyowan.png" /></div>
       )}
       <div id="inputarea">
         <p style={{ textAlign: "center" }}>自分の使っている言葉のほかの表現を知って、<br />気に入るものがあったら、自分の作文に使ってみよう！</p>

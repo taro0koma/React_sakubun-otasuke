@@ -15,7 +15,7 @@ const AboutPage = () => {
       <Helmet><title>イメージマップの作り方 | 作文おたすけアプリ</title></Helmet>
       <Tabs pageTitle="「イメージマップ」の作り方" contents="imagemap"/>
       {isModalOpen && (
-        <ModalFrame title="イメージマップの作り方について" text="頭で考えても思いつかないのに紙に書いてみると、ふしぎなくらいイメージがわいてくる！何を書けばいいか思いつかないときは、紙の真ん中に1つだけ気持ちを書いてスタートしよう（「面白かった」「面白くなかった」からでもだいじょうぶ）" onClose={handleModalClose} imageSrc="/vite.svg"/>
+        <div className='saisyonihyouzisuruhurothinghuremu'><ModalFrame title="イメージマップの作り方について" text="頭で考えても思いつかないのに紙に書いてみると、ふしぎなくらいイメージがわいてくる！何を書けばいいか思いつかないときは、紙の真ん中に1つだけ気持ちを書いてスタートしよう（「面白かった」「面白くなかった」からでもだいじょうぶ）" onClose={handleModalClose} imageSrc="/vite.svg"/></div>
       )}
       <p style={{textAlign:"center"}}>書くことがぜんぜん思いつかない！<br/>そんな時はイメージマップを書いてみよう。</p>
       <video controls src="/images/figjamvideo.mp4" style={{width:"80%"}} poster='/images/thumbnail.png'></video>

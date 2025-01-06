@@ -188,14 +188,16 @@ const ConsolePage = () => {
         <br />
         かっこいい書き出しを発見！
       </h3>
+      
       {isModalOpen && (
+        <div className="saisyonihyouzisuruhurothinghuremu">
         <ModalFrame
           title="かっこいい書き出しおみくじ"
           text="どうやったらかっこいい書き出しになるのかわからない・・・そんな時はおみくじをつかってお気に入りの書き出しを見つけよう。自分の作文に合わせた言葉が変えられるように例文もついているよ。"
           onClose={handleModalClose}
           imageSrc="/images/kakenaiwan.png"
           midashi="作文の書き出しがかっこいいとなんかうれしい"
-        ></ModalFrame>
+        ></ModalFrame></div>
       )}
       <img
         ref={myImg}

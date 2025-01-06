@@ -143,21 +143,48 @@ const StylePage = () => {
     scrollChatToBottom();
   };
 
+  useEffect(() => {
+    if (formObj.sensei === "DESC法") {
+      setIsModalOpen(true);
+    }
+  }, [formObj.sensei]);
+
   const senseierabi = () => {
     if (formObj.sensei === "DESC法") {
       return (
-        <img src="/images/saisensei.png" alt="担当してくれるAI先生(サイ)" />
+        <div className="sensei">
+        {isModalOpen && (
+        <ModalFrame
+          title="サイ先生！"
+          text="イメージマップなどで書きたいことが決まったら書きたいことをどんな順番で書けばいいか教えてもらおう"
+          onClose={handleModalClose}
+          imageSrc="/images/saisensei.png"
+          midashi="書きたいことが決まったら自分のぴったりの文の書き方を見つけよう"
+          />
+      )}
+        </div>
       )
-    }
-    if (formObj.sensei === "PREP法") {
+    } else if (formObj.sensei === "PREP法") {
       return (
         <img src="/images/risusensei.png" alt="担当してくれるAI先生(リス)" />
       )
-    }
-    if (formObj.sensei === "一段落目が個性的なPREP法") {
+    } else if (formObj.sensei === "一段落目が個性的なPREP法") {
       return (
         <img src="/images/raionsensei.png" alt="担当してくれるAI先生(ライオン)" />
       )
+    }else{
+      return(
+      <div className="saisyonihyouzisuruhurothinghuremu">
+      {isModalOpen && (
+        <ModalFrame
+          title="段落の組み立て"
+          text="イメージマップなどで書きたいことが決まったら書きたいことをどんな順番で書けばいいか教えてもらおう"
+          onClose={handleModalClose}
+          imageSrc="/images/danrakuwan.png"
+          midashi="書きたいことが決まったら自分のぴったりの文の書き方を見つけよう"
+          />
+      )}</div>
+    )
     }
   }
 
@@ -438,7 +465,7 @@ const StylePage = () => {
         ))}
       <Tabs pageTitle="段落の組み立て" contents="danraku"/>
       <p>イメージマップなどで書きたいことが決まったら<br/>書きたいことをどんな順番で書けばいいか教えてもらおう</p>
-      {isModalOpen && (
+      {/* {isModalOpen && (
         <ModalFrame
           title="段落の組み立て"
           text="イメージマップなどで書きたいことが決まったら書きたいことをどんな順番で書けばいいか教えてもらおう"
@@ -446,7 +473,8 @@ const StylePage = () => {
           imageSrc="/images/danrakuwan.png"
           midashi="書きたいことが決まったら自分のぴったりの文の書き方を見つけよう"
           />
-      )}
+      )} */}
+      {senseierabi()}
       <b><p>気に入ったものはどこかにコピーしておこう！</p></b>
       <br />
       <form onSubmit={FormSubmit}>
@@ -486,9 +514,6 @@ const StylePage = () => {
           <option value="一段落目が個性的なPREP法">🦁ライオン先生</option> {/**個性的が好きなライオン先生 */}
         </select>
         <br />
-          <div className="sensei">
-            {senseierabi()}
-          </div>
         <br />
         <h5>作文のタイプ</h5>
         <select

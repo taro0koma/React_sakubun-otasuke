@@ -75,6 +75,55 @@ h6{
   /* padding-right: 4px !important; */
   margin: auto;
 }
+
+.sensei .modal-overlay {
+  background: rgb(0 0 0 / 11%);
+}
+.sensei .modal-content {
+  background:#ffffffd5;
+  border-left:0px;
+  width: 400px;
+  display: block !important;
+}
+.saisyonihyouzisuruhurothinghuremu .hazinogazou{
+  width: 50%;
+  height: 100%;
+}
+
+.sensei .tukattemiyo {
+  display: none;
+}
+.sensei .modal-body {
+  display: none;
+}
+.sensei .modal-header h2 {
+  margin: 0;
+  width: auto;
+}
+
+.sensei .hazinogazou img {
+    max-width: 100%;
+    height: auto;
+    width: 24rem;
+    object-fit: cover;
+    object-position: center;
+}
+.sensei .modal-header,.sensei .modal-text{
+  width: 320px;
+  margin: auto;
+  text-align: center;
+}
+.sensei .modal-header{
+  margin: 8px auto 24px;
+}
+.sensei .hazinogazou {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  width: 15em;
+  margin: auto;
+}
+
 @media (min-width: 1200px) {/* 1200px以上*/
   .hazinogazou {
     margin: 0 0 0 30px;
@@ -1118,8 +1167,8 @@ td:last-child{
 .react-flow__controls-button svg{
   position: absolute;
 }
-.sensei{
-  width: 100%;
+.sensei img{
+  width: 20vw;
   max-width:400px;
   text-align: center;
   margin: auto;

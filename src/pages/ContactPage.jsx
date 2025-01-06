@@ -93,7 +93,7 @@ const ContactPage = () => {
       </Helmet>
       <Tabs pageTitle="気持ちや感想のいいかえ" contents="kimoti"/>
       {isModalOpen && (
-        <ModalFrame title="気持ちや感想のいいかえの使い方" text="「気持ちや感想のいいかえ」で、 どんないいかえ かをを知ることができます。自分の書いてみた文章の中にいいかえてみたい言葉はありますか？" onClose={handleModalClose} imageSrc="/images/dousiyowan.png"/>
+        <div className="saisyonihyouzisuruhurothinghuremu"><ModalFrame title="気持ちや感想のいいかえの使い方" text="「気持ちや感想のいいかえ」で、 どんないいかえ かをを知ることができます。自分の書いてみた文章の中にいいかえてみたい言葉はありますか？" onClose={handleModalClose} imageSrc="/images/dousiyowan.png"/></div>
       )}
       <p>自分の使っている言葉のほかにいいかえを知って、<br/>気に入るものがあったら、自分の作文に使ってみよう。</p>
       <div className="p-4">

@@ -147,7 +147,7 @@ const HyougenPage = () => {
       <Helmet><title>表現ぴったり探し | 作文おたすけアプリ</title></Helmet>
       <Tabs pageTitle="表現ぴったり探し" contents="hyougen" />
       {isModalOpen && (
-        <ModalFrame title="「表現ぴったり探し」の使い方" text="「表現ぴったり探し」で、いろいろな表現が知ることができます。自分の書いてみた文章の中に別の表現にしたい言葉はありませんか？" onClose={handleModalClose} imageSrc="/images/dousiyowan.png" />
+        <div className='saisyonihyouzisuruhurothinghuremu'><ModalFrame title="「表現ぴったり探し」の使い方" text="「表現ぴったり探し」で、いろいろな表現が知ることができます。自分の書いてみた文章の中に別の表現にしたい言葉はありませんか？" onClose={handleModalClose} imageSrc="/images/dousiyowan.png" /></div>
       )}
       <div id="inputarea">
         <p style={{ textAlign: "center" }}>自分の使っている言葉のほかの表現を知って、<br />気に入るものがあったら、自分の作文に使ってみよう！</p>
