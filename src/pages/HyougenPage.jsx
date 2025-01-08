@@ -43,6 +43,7 @@ const HyougenPage = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: userMessage, sakka: 'あまんきみこ' }),
+        mode:"cors"
       });
   
       stopLoader();

@@ -106,6 +106,7 @@ const ConsolePage = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt: userMessage,gakunen:selectedGrade }),
+        mode:"cors"
       });
 
       if (response.ok) {

@@ -46,6 +46,7 @@ const HyougenPage = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: `${promptWithGrade}という性格についての別の表現を10個提案してください。決して、下記のような、コメント(コメント全般)はいらないです「わかりました、了解しました、これでいいでしょうか」などの言葉を絶対に言わないでください。`, gakunen:grade }),
+        mode:"cors"
       });
 
       stopLoader();
