@@ -5,6 +5,7 @@ import PreviousAndNext from "../component/PreviousAndNext";
 import NextPageLink from './../component/NextPageLink';
 import { Helmet } from "react-helmet-async";
 import AnimationKomawanPage from "./AnimationKomawanPage";
+import Footer from "./Footer";
 
 const StylePage = () => {
 
@@ -103,7 +104,7 @@ const StylePage = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt: userMessage,gakunen: formObj.grade }),
-        mode:"cors"
+        mode:'cors'
       });
 
       if (response.ok) {
@@ -144,48 +145,21 @@ const StylePage = () => {
     scrollChatToBottom();
   };
 
-  useEffect(() => {
-    if (formObj.sensei === "DESC法") {
-      setIsModalOpen(true);
-    }
-  }, [formObj.sensei]);
-
   const senseierabi = () => {
     if (formObj.sensei === "DESC法") {
       return (
-        <div className="sensei">
-        {isModalOpen && (
-        <ModalFrame
-          title="サイ先生！"
-          text="イメージマップなどで書きたいことが決まったら書きたいことをどんな順番で書けばいいか教えてもらおう"
-          onClose={handleModalClose}
-          imageSrc="/images/saisensei.png"
-          midashi="書きたいことが決まったら自分のぴったりの文の書き方を見つけよう"
-          />
-      )}
-        </div>
+        <img src="/images/saisensei.png" alt="担当してくれるAI先生(サイ)" />
       )
-    } else if (formObj.sensei === "PREP法") {
+    }
+    if (formObj.sensei === "PREP法") {
       return (
         <img src="/images/risusensei.png" alt="担当してくれるAI先生(リス)" />
       )
-    } else if (formObj.sensei === "一段落目が個性的なPREP法") {
+    }
+    if (formObj.sensei === "一段落目が個性的なPREP法") {
       return (
         <img src="/images/raionsensei.png" alt="担当してくれるAI先生(ライオン)" />
       )
-    }else{
-      return(
-      <div className="saisyonihyouzisuruhurothinghuremu">
-      {isModalOpen && (
-        <ModalFrame
-          title="段落の組み立て"
-          text="イメージマップなどで書きたいことが決まったら書きたいことをどんな順番で書けばいいか教えてもらおう"
-          onClose={handleModalClose}
-          imageSrc="/images/danrakuwan.png"
-          midashi="書きたいことが決まったら自分のぴったりの文の書き方を見つけよう"
-          />
-      )}</div>
-    )
     }
   }
 
@@ -466,7 +440,7 @@ const StylePage = () => {
         ))}
       <Tabs pageTitle="段落の組み立て" contents="danraku"/>
       <p>イメージマップなどで書きたいことが決まったら<br/>書きたいことをどんな順番で書けばいいか教えてもらおう</p>
-      {/* {isModalOpen && (
+      {isModalOpen && (
         <ModalFrame
           title="段落の組み立て"
           text="イメージマップなどで書きたいことが決まったら書きたいことをどんな順番で書けばいいか教えてもらおう"
@@ -474,8 +448,7 @@ const StylePage = () => {
           imageSrc="/images/danrakuwan.png"
           midashi="書きたいことが決まったら自分のぴったりの文の書き方を見つけよう"
           />
-      )} */}
-      {senseierabi()}
+      )}
       <b><p>気に入ったものはどこかにコピーしておこう！</p></b>
       <br />
       <form onSubmit={FormSubmit}>
@@ -515,6 +488,9 @@ const StylePage = () => {
           <option value="一段落目が個性的なPREP法">🦁ライオン先生</option> {/**個性的が好きなライオン先生 */}
         </select>
         <br />
+          <div className="sensei">
+            {senseierabi()}
+          </div>
         <br />
         <h5>作文のタイプ</h5>
         <select
@@ -541,6 +517,7 @@ const StylePage = () => {
       <NextPageLink imairu="danraku1"/>
       <PreviousAndNext midashi="書きたいことが決まっていない？" honbun={honbun} buttontext="▶　マップ作ってみる" buttonurl="/map"/>
       <div className="spacer" style={{height:400}}></div>
+      <Footer/>
     </div>
   );
 };

@@ -4,6 +4,7 @@ import AnimationKomawanPage from './AnimationKomawanPage'; // インポートす
 import ModalFrame from "../component/ModalFrame";
 import NextPageLink from '../component/NextPageLink';
 import { Helmet } from 'react-helmet-async';
+import Footer from './Footer';
 
 const HyougenPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(true);
@@ -43,7 +44,7 @@ const HyougenPage = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: userMessage, sakka: 'あまんきみこ' }),
-        mode:"cors"
+        mode:'cors'
       });
   
       stopLoader();
@@ -148,7 +149,7 @@ const HyougenPage = () => {
       <Helmet><title>表現ぴったり探し | 作文おたすけアプリ</title></Helmet>
       <Tabs pageTitle="表現ぴったり探し" contents="hyougen" />
       {isModalOpen && (
-        <div className='saisyonihyouzisuruhurothinghuremu'><ModalFrame title="「表現ぴったり探し」の使い方" text="「表現ぴったり探し」で、いろいろな表現が知ることができます。自分の書いてみた文章の中に別の表現にしたい言葉はありませんか？" onClose={handleModalClose} imageSrc="/images/dousiyowan.png" /></div>
+        <ModalFrame title="「表現ぴったり探し」の使い方" text="「表現ぴったり探し」で、いろいろな表現が知ることができます。自分の書いてみた文章の中に別の表現にしたい言葉はありませんか？" onClose={handleModalClose} imageSrc="/images/dousiyowan.png" />
       )}
       <div id="inputarea">
         <p style={{ textAlign: "center" }}>自分の使っている言葉のほかの表現を知って、<br />気に入るものがあったら、自分の作文に使ってみよう！</p>
@@ -187,6 +188,7 @@ const HyougenPage = () => {
         </div>
       </div>
       <NextPageLink imairu="hyougen1"/>
+      <Footer/>
     </div>
   );
 };

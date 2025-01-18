@@ -6,6 +6,7 @@ import ModalFrame from "../component/ModalFrame";
 import AnimationKomawanPage from "./AnimationKomawanPage";
 import { Helmet } from "react-helmet-async";
 import NextPageLink from "../component/NextPageLink";
+import Footer from "./Footer";
 
 const supabase = createClient(
   process.env.REACT_APP_SUPABASE_URL,
@@ -287,6 +288,7 @@ const ConsolePage = () => {
         {kakidashis.length === 0 && !isAiLoading && <p></p>}
       </div>
       <NextPageLink imairu="kakidashi1"/>
+      <Footer/>
     </div>
   );
 };

@@ -2,6 +2,115 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.chat-container {
+  width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.container {
+  max-width: 100%;
+}
+
+.footer {
+  display: grid;
+  width: 100%;
+  grid-auto-flow: row;
+  place-items: start;
+  column-gap: 1rem;
+  row-gap: 2.5rem;
+  font-size: .875rem;
+  line-height: 1.25rem;
+}
+
+.bg-neutral {
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-n, oklch(var(--n) / var(--tw-bg-opacity)));
+}
+
+.rounded {
+  border-radius: .25rem;
+}
+
+.p-10 {
+  padding: 2.5rem;
+}
+
+@media (min-width: 48rem) {
+  .footer {
+      grid-auto-flow: column;
+  }
+}
+
+.text-neutral-content {
+  --tw-text-opacity: 1;
+  color: #d0cad3;
+}
+
+.bg-neutral {
+  --tw-bg-opacity: 1;
+  background-color: #291334;
+}
+
+.footer-title {
+  margin-bottom: .5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  opacity: .6;
+}
+
+.link-hover {
+  text-decoration-line: none;
+}
+
+.link {
+  cursor: pointer;
+}
+
+.chat-history {
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+.user-message {
+  text-align: right;
+  color: blue;
+}
+
+.ai-message {
+  text-align: left;
+  color: green;
+}
+
+.input-container {
+  display: flex;
+  gap: 10px;
+}
+
+input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
 .white-box {
   position: fixed;
   top: 80px;
@@ -18,11 +127,13 @@
 }
 html{
   font-size: 62.5%;
+  margin: 0 auto;
 }
 body{
   font-size:1.6rem;/* 16px*/
   line-height: 2;
   font-weight: 500;
+  margin: 0 auto;
 }
 h1 {
   font-size: 36px !important;/* IE8以下とAndroid4.3以下用フォールバック */
@@ -75,55 +186,6 @@ h6{
   /* padding-right: 4px !important; */
   margin: auto;
 }
-
-.sensei .modal-overlay {
-  background: rgb(0 0 0 / 11%);
-}
-.sensei .modal-content {
-  background:#ffffffd5;
-  border-left:0px;
-  width: 400px;
-  display: block !important;
-}
-.saisyonihyouzisuruhurothinghuremu .hazinogazou{
-  width: 50%;
-  height: 100%;
-}
-
-.sensei .tukattemiyo {
-  display: none;
-}
-.sensei .modal-body {
-  display: none;
-}
-.sensei .modal-header h2 {
-  margin: 0;
-  width: auto;
-}
-
-.sensei .hazinogazou img {
-    max-width: 100%;
-    height: auto;
-    width: 24rem;
-    object-fit: cover;
-    object-position: center;
-}
-.sensei .modal-header,.sensei .modal-text{
-  width: 320px;
-  margin: auto;
-  text-align: center;
-}
-.sensei .modal-header{
-  margin: 8px auto 24px;
-}
-.sensei .hazinogazou {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-  width: 15em;
-  margin: auto;
-}
-
 @media (min-width: 1200px) {/* 1200px以上*/
   .hazinogazou {
     margin: 0 0 0 30px;
@@ -1167,8 +1229,8 @@ td:last-child{
 .react-flow__controls-button svg{
   position: absolute;
 }
-.sensei img{
-  width: 20vw;
+.sensei{
+  width: 100%;
   max-width:400px;
   text-align: center;
   margin: auto;

@@ -20,6 +20,7 @@ import DownloadButton from "../component/DownloadButton";
 import FloatingFrame from "../component/FloatingFrame";
 import NextPageLink from "../component/NextPageLink";
 import { Helmet } from "react-helmet-async";
+import Footer from "./Footer";
 const steps = [
   { theme: "開いたら出てくる画面", gif: "/images/anm_image1.gif", text: "開いたらまず真ん中くらいに「アイデア」と書いてある四角があるよ！" },
   { theme: "入力する用意をしよう", gif: "/images/anm_image2.gif", text: "真ん中にある四角をクリックすると上の入力らんに四角（アイデア）の文字が表示されるよ" },
@@ -261,7 +262,7 @@ const AddNodeOnEdgeDrop = () => {
   `
 
   return (
-    <div style={{position:"absolute",width:"90vw"}} className={`imagemapimagemap ${zenactive ? "zengamen" : ""}`}>
+    <div style={{position:"absolute"}} className={`imagemapimagemap ${zenactive ? "zengamen" : ""}`}>
       <Helmet><title>イメージマップ作成ツール | 作文おたすけアプリ</title></Helmet>
       <style>{style}</style>
       <div className={showFrame ? "background" : ""}>
@@ -328,6 +329,7 @@ const AddNodeOnEdgeDrop = () => {
       <div style={{marginTop:300}}>
       <NextPageLink imairu="hyougen1"/>
       </div>
+      <Footer/>
     </div>
   );
 };

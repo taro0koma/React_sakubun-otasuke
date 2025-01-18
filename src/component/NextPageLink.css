@@ -1,7 +1,6 @@
 /* 横並びとレスポンシブ対応 */
 section.container {
   padding: 2rem 0;
-  float: left;
 }
 .contentsmei{
   font-size:1em;

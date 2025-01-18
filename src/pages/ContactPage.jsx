@@ -6,6 +6,7 @@ import PreviousAndNext from "../component/PreviousAndNext";
 import ChatWithOpenAI from './../component/ChatWithOpenAI';
 import NextPageLink from "../component/NextPageLink";
 import { Helmet } from "react-helmet-async";
+import Footer from "./Footer";
 
 const supabase = createClient(
   process.env.REACT_APP_SUPABASE_URL,
@@ -61,7 +62,7 @@ const ContactPage = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt: userMessage,gakunen: selectedGrade }),
-        mode:"cors"
+        mode:'cors'
       });
 
       if (response.ok) {
@@ -94,7 +95,7 @@ const ContactPage = () => {
       </Helmet>
       <Tabs pageTitle="気持ちや感想のいいかえ" contents="kimoti"/>
       {isModalOpen && (
-        <div className="saisyonihyouzisuruhurothinghuremu"><ModalFrame title="気持ちや感想のいいかえの使い方" text="「気持ちや感想のいいかえ」で、 どんないいかえ かをを知ることができます。自分の書いてみた文章の中にいいかえてみたい言葉はありますか？" onClose={handleModalClose} imageSrc="/images/dousiyowan.png"/></div>
+        <ModalFrame title="気持ちや感想のいいかえの使い方" text="「気持ちや感想のいいかえ」で、 どんないいかえ かをを知ることができます。自分の書いてみた文章の中にいいかえてみたい言葉はありますか？" onClose={handleModalClose} imageSrc="/images/dousiyowan.png"/>
       )}
       <p>自分の使っている言葉のほかにいいかえを知って、<br/>気に入るものがあったら、自分の作文に使ってみよう。</p>
       <div className="p-4">
@@ -171,6 +172,8 @@ const ContactPage = () => {
       {/* <PreviousAndNext midashi="知りたい気持ちがなかった！" honbun={honbun} buttontext="▶　使ってみる" buttonurl="/hyougen"/> */}
       <div className="spacer" style={{height:250}}></div>
       <NextPageLink imairu="kimochi1"/>
+      <br />
+      <Footer/>
     </div>
   );
 };

@@ -3,6 +3,7 @@ import Tabs from "../component/Tabs";
 import styles from "../assets/css/styles.module.css";
 import SwiperHome from "./SwiperHome";
 import { Helmet } from "react-helmet-async";
+import Footer from "./Footer";
 // import '/css/style.css'
 
 // width: 100% !important;
@@ -209,6 +210,7 @@ const HomePage = () => {
         </ul>
       </nav>
       <br />
+      <Footer/>
     </div>
   );
 };
