@@ -1235,6 +1235,48 @@ td:last-child{
   text-align: center;
   margin: auto;
 }
+
+
+.sensei {
+  .hazinogazou {
+    display: flex;
+    justify-content: center; /* 横のセンターに配置 */
+    margin-bottom: 20px; /* 下部に余白を追加 */
+    width: 15em; /* コンテナの幅を全体に設定 */
+    margin: auto;
+  }
+  .modal-content {
+    flex-direction: column; /* 縦並びに変更 */
+      padding: 80px; /* パディングの調整 */
+      height: 80%; /* 高さを自動調整 */
+      border-left: none;
+  }
+  .modal-header{
+    text-align: center;
+  }
+  .modal-text {
+    width: 100%;
+  }
+
+  .modal-overlay {
+    padding: 40px;
+  }
+  .modal-body p {
+    display: none;
+  }
+
+  .modal-body {
+    margin-bottom: 60px;
+  }
+
+  .hazinogazou img {
+    max-width: 100%; /* コンテナの幅に合わせて最大幅を設定 */
+    height: auto; /* 高さは自動調整 */
+    width: 24rem;
+    object-fit: cover;
+    object-position: center;
+  }
+}
 .imagemapimagemap button{
   background-color: #000000;
     color: white;
@@ -1336,4 +1378,8 @@ td:last-child{
 }
 .react-flow__edge.selected .react-flow__edge-path{
   stroke: #000000 !important;
+}
+
+.img {
+  height: auto !important;
 }

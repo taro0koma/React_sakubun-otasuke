@@ -145,20 +145,68 @@ const StylePage = () => {
     scrollChatToBottom();
   };
 
+  useEffect(() => {
+    if (formObj.sensei === "DESC法") {
+      setIsModalOpen(true);
+    }
+    else if (formObj.sensei === "PREP法") {
+      setIsModalOpen(true);
+    }
+    else if (formObj.sensei === "一段落目が個性的なPREP法") {
+      setIsModalOpen(true);
+    }
+  }, [formObj.sensei]);
+
   const senseierabi = () => {
     if (formObj.sensei === "DESC法") {
       return (
-        <img src="/images/saisensei.png" alt="担当してくれるAI先生(サイ)" />
+        // <img src="/images/saisensei.png" alt="担当してくれるAI先生(サイ)" />
+        <div className="sensei">
+        {isModalOpen && (
+        <ModalFrame
+          title="サイ先生"
+          buttonName="閉じる"
+          text=""
+          onClose={handleModalClose}
+          imageSrc="/images/saisensei.png"
+          midashi="ものごとをじゅんじょよくつたえる作文をかんがえるよ"
+          />
+      )}
+        </div>
       )
     }
-    if (formObj.sensei === "PREP法") {
+    else if (formObj.sensei === "PREP法") {
       return (
-        <img src="/images/risusensei.png" alt="担当してくれるAI先生(リス)" />
+        // <img src="/images/risusensei.png" alt="担当してくれるAI先生(リス)" />
+        <div className="sensei">
+        {isModalOpen && (
+        <ModalFrame
+          title="リス先生"
+          buttonName="閉じる"
+          text=""
+          onClose={handleModalClose}
+          imageSrc="/images/risusensei.png"
+          midashi="いいたいことのまとめをだいじにして作文をかんがえるよ"
+          />
+      )}
+        </div>
       )
     }
     if (formObj.sensei === "一段落目が個性的なPREP法") {
       return (
-        <img src="/images/raionsensei.png" alt="担当してくれるAI先生(ライオン)" />
+        // <img src="/images/raionsensei.png" alt="担当してくれるAI先生(ライオン)" />
+        <div className="sensei">
+        {isModalOpen && (
+        <ModalFrame
+          title="ライオン先生"
+          buttonName="閉じる"
+          text=""
+          onClose={handleModalClose}
+          imageSrc="/images/raionsensei.png"
+          midashi="じぶんらしさを出す作文をかんがえるよ"
+          />
+      )}
+        </div>
       )
     }
   }
@@ -440,7 +488,7 @@ const StylePage = () => {
         ))}
       <Tabs pageTitle="段落の組み立て" contents="danraku"/>
       <p>イメージマップなどで書きたいことが決まったら<br/>書きたいことをどんな順番で書けばいいか教えてもらおう</p>
-      {isModalOpen && (
+      {isModalOpen&&formObj.sensei===" " && (
         <ModalFrame
           title="段落の組み立て"
           text="イメージマップなどで書きたいことが決まったら書きたいことをどんな順番で書けばいいか教えてもらおう"
