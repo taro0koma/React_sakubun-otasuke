@@ -1,7 +1,10 @@
-import { useState } from 'react';
+import { useState,useRef } from 'react';
 import './ChatWithOpenAI.css';  // LINE風のUIスタイルを追加
 import RadioButtonForMap from './RadioButtonForMap';
 import FloatingFrame from './FloatingFrame';
+import { Canvas, useFrame } from '@react-three/fiber'
+import { FaDownLong } from 'react-icons/fa6';
+import {useGLTF,OrbitControls,Stats} from '@react-three/drei';
 
 const steps = [
   { theme: "開いたら出てくる画面", gif: "/images/anm_image1.gif", text: "開いたらまず真ん中くらいに「アイデア」と書いてある四角があるよ！" },
@@ -11,6 +14,76 @@ const steps = [
   { theme: "チャット機能を使おう！", gif: "/images/anm_image5.gif", text: "このチャット機能は、思いつかないときに質問してマップをどんどんふくらませるためにあるよ！まず、学年を選択して、作文か読書感想文どちらを書きたいか選ぼう！次に、それぞれそのあとに出てきた質問に対して答えよう。これで質問は終わりだよ！次にチャット機能を実際に使おう。３つの中から自分に合ったものを選んで送ろう！" },
   // 追加のステップも自由にここに入れられる
 ];
+
+
+function Box(props){
+  const ref = useRef();
+  const [cliked, setCliked] = useState(false)
+  const [hoverd,setHoverd] = useState(false);
+
+  useFrame(() => (ref.current.rotation.x += 0.01))
+  return(
+    <mesh {...props} ref={ref} castShadow onClick={() => setCliked(!cliked)} scale={cliked ? 2:1} onPointerOver={() => setHoverd(true)} onPointerOut={() => setHoverd(false)}>
+      <boxGeometry args={[1,1,1]} />
+      <meshStandardMaterial color={hoverd ? "hotpink" : "orange"} />
+    </mesh>
+  )
+}
+
+function Komawan(props){
+  // const ref = useRef();
+  const { scene, nodes } = useGLTF("models/komawan.glb")
+  console.log('nodes:', nodes)
+  console.log('scene:', scene)
+  const mesh_kao = nodes["コマワンちゃんの顔test"] || scene.children.find(child => child.isMesh)
+  const mesh_mabuta = nodes["コマワンちゃんの瞼とかまつ毛001"] || scene.children.find(child => child.isMesh)
+
+  // 瞬き処理がすでにスケジュールされているかを管理する
+  const blinkTriggered = useRef(false)
+
+  useFrame((state) => {
+    // 顔のシェイプキーはサイン波で常にアニメーション
+    if (mesh_kao && mesh_kao.morphTargetInfluences) {
+      mesh_kao.morphTargetInfluences[0] = 0.5 + 0.5 * Math.sin(state.clock.elapsedTime * 0)
+    }
+    // 瞼（mesh_mabuta）の処理
+    if (mesh_mabuta && mesh_mabuta.morphTargetInfluences) {
+      // すでに瞬き処理がスケジュールされていなければ
+      if (!blinkTriggered.current) {
+        blinkTriggered.current = true;
+        // 3000ms 後に瞬きを開始
+        setTimeout(() => {
+          let step = 0;
+          const totalSteps = 5;       // 瞬きを5段階で実施
+          const stepDelay = 50;       // 各ステップの間隔（ミリ秒）
+          // 再帰的に各ステップの値を更新する関数
+          function animateBlink() {
+            if (step < totalSteps) {
+              // state.clock.elapsedTime は setTimeout 内では固定値となりがちなので、
+              // 各ステップでオフセットを加えて変化を付けています
+              mesh_mabuta.morphTargetInfluences[0] = 0.5 + 0.5 * Math.sin((state.clock.elapsedTime + step * 0.05) * 1);
+              step++;
+              setTimeout(animateBlink, stepDelay);
+            } else {
+              // 瞬き終了後は 0 にリセット
+              mesh_mabuta.morphTargetInfluences[0] = 0;
+              blinkTriggered.current = false;
+            }
+          }
+          animateBlink();
+        }, 3000);
+      }
+    }
+  })
+  // useFrame(() => (ref.current.rotation.x += 0.01))
+  // console.log(ref.current.rotation.x);
+  return(
+    <mesh>
+    <primitive object={scene} />
+    </mesh>
+  )
+}
+
 const ChatWithOpenAI = ({ age, theme, goal,imagemap1 }) => {
   const [message, setMessage] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
@@ -151,7 +224,7 @@ const ChatWithOpenAI = ({ age, theme, goal,imagemap1 }) => {
       {showFrame && <FloatingFrame steps={steps} onClose={handleCloseFrame}/>}</div>
       <div className="chat-history">
       <div className={`chat-bubble user`}>
-            <p>学年：{gradeJapan[age]}<br/>{theme}についてのイメージマップを書いている。<br/>主に{goal}についてのテーマで書く。</p>
+            <p>学年：{gradeJapan[age]}<br/>{theme}についてのイメージマップを書いている。<br/>主に{goal}についてのテーマで書く。</p><div className='blinking'><FaDownLong/><p> 下へ</p></div>
         </div>
       <div className={`chat-bubble ai`}>
             <p>では、ひだりのイメージマップツールを使ってあなたの{theme}の{goal}について思いつくことをまずひとつかいてみよう！</p>
@@ -163,15 +236,33 @@ const ChatWithOpenAI = ({ age, theme, goal,imagemap1 }) => {
         </div>
         {chatHistory.map((chat, index) => (
           <div key={index} className={`chat-bubble ${chat.role === 'user' ? 'user' : 'ai'}`}>
-            <p>{chat.content}</p>
+            <div>{chat.content}</div>
           </div>
         ))}
       </div>
         <RadioButtonForMap selectedValue={selectedRadio} onChange={handleRadioChange}/>
       <div className="chat-input-container">
+      {selectedRadio ? (
         <button onClick={sendMessage} className="send-button">
-        <p className='chat-input'>{selectedRadio}　</p>をお願いする</button>
+        <p className='chat-input' >{selectedRadio}　</p>をお願いする</button>
+      ) : (
+        <button onClick={sendMessage} className="send-button" disabled>
+        上から１つえらんでください</button>
+      )}
+        
       </div>
+      <div className='komawan'>
+        <Canvas>
+          {/* <mesh position={[-10, -2, 1]}> */}
+          {/* <boxGeometry args={[2, 2, 2]} /> */}
+          <Komawan/>
+          <directionalLight position={[0, 3, 5]} castShadow intensity={2.5} />
+          <directionalLight position={[0, -10, 11]} castShadow intensity={2.5} />
+          <ambientLight intensity={0.5} />
+          {/* <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1}/> */}
+          {/* </mesh> */}
+        </Canvas>
+        </div>
     </div>
   );
 };

@@ -3,7 +3,7 @@
   flex-direction: column;
   height: 100vh;
   background-color: #f1f1f1;
-  width: 100%;
+  width: 410px;
 }
 
 .chat-history {
@@ -11,7 +11,7 @@
   padding: 10px;
   overflow-y: auto;
   background-color: white;
-  width: 100%;
+  width: 394px;
 }
 
 .chat-bubble {
@@ -25,19 +25,26 @@
   max-width: 100%;
   width: 100%;
   line-height: 1.8;
-  font-weight: bold;
+  font-weight:500;
 }
 
 .chat-bubble.user {
   background-color: #c6f8f3;
   align-self: flex-end;
   margin-left: 10%;
+  background-color: hsla(358.0000000000001, 0%, 100%, 1);
+  background-image: radial-gradient(circle at 85% 80%, hsla(150.8823529411765, 52%, 83%, 0.62) 9%, transparent 55%), radial-gradient(circle at 60% 24%, hsla(220.00000000000014, 100%, 90%, 0.65) 5%, transparent 72%), radial-gradient(circle at 13% 82%, hsla(297.7941176470588, 100%, 65%, 0.11) 5%, transparent 52%), radial-gradient(circle at 24% 7%, hsla(182.00000000000003, 71%, 68%, 0) 13%, transparent 68%);
+  background-blend-mode: normal, normal, normal, normal;
 }
 
 .chat-bubble.ai {
   background-color: #fceeff;
   align-self: flex-start;
   margin-right: 10px;
+  width: 350px;
+  background-color: hsla(358.0000000000001, 0%, 100%, 1);
+  background-image: radial-gradient(circle at 67% 65%, hsla(181.32352941176478, 61%, 87%, 1) 9%, transparent 55%), radial-gradient(circle at 55% 46%, hsla(219.99999999999997, 100%, 82%, 1) 5%, transparent 72%), radial-gradient(circle at 23% 74%, hsla(297.7941176470588, 0%, 100%, 1) 5%, transparent 52%), radial-gradient(circle at 24% 7%, hsla(219.7058823529412, 68%, 56%, 0.29) 13%, transparent 68%);
+  background-blend-mode: normal, normal, normal, normal;
 }
 
 .chat-input-container {
@@ -95,4 +102,63 @@
   border-radius: 0 0 5px 0;
   bottom: 0;
   right: 0;
+}
+
+.chat-bubble.ai:before {
+  display: inline-block;
+  margin-top: -36px;
+  vertical-align: middle;
+  font-size: 18px;
+  content: "🤖";
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 6px 12px;
+  box-shadow: 0px 2px 4px rgb(0 0 0 / 7%);
+}
+
+.chat-bubble.user:before {
+  display: inline-block;
+  margin-top: -36px;
+  vertical-align: middle;
+  font-size: 18px;
+  content: "😀　あなた";
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 6px 12px;
+  box-shadow: 0px 2px 4px rgb(0 0 0 / 7%);
+}
+
+.chat-bubble.ai:after{
+  display: inline-block;
+  padding-right: 6p;
+}
+
+.blinking{
+	-webkit-animation:blink 1.5s ease-in-out infinite alternate;
+    -moz-animation:blink 1.5s ease-in-out infinite alternate;
+    animation:blink 1.5s ease-in-out infinite alternate;
+  font-weight: 900;
+}
+@-webkit-keyframes blink{
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+@-moz-keyframes blink{
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+@keyframes blink{
+    0% {opacity:0;}
+    100% {opacity:1;}
+}
+
+.komawan{
+  position: absolute;
+  right: 0px;
+  bottom: -80px;
+  display: none;
+}
+div div canvas{
+  width: 142px !important;
+  height: 240px !important;
 }

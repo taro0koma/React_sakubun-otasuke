@@ -13,7 +13,7 @@ const RadioButtonForMap = ({ selectedValue, onChange }) => {
             checked={selectedValue === "イメージマップを見てください"} 
             onChange={onChange} 
           />
-          イメージマップを見てください
+          イメージマップを見てほしい
         </label>
         <label>
           <input 
@@ -23,7 +23,7 @@ const RadioButtonForMap = ({ selectedValue, onChange }) => {
             checked={selectedValue === "使い方がよくわかりません"} 
             onChange={onChange} 
           />
-          使い方がよくわかりません
+          つかい方がよくわかりません
         </label>
         <label>
           <input 
@@ -33,7 +33,7 @@ const RadioButtonForMap = ({ selectedValue, onChange }) => {
             checked={selectedValue === "思い浮かびません"} 
             onChange={onChange} 
           />
-          思い浮かびません
+          思いうかびません
         </label>
       </fieldset>
     </div>
