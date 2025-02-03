@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background-color: #f1f1f1;
+  background-color: #ffffff;
   width: 410px;
 }
 
@@ -16,7 +16,7 @@
 
 .chat-bubble {
   max-width: 90%;
-  padding: 40px 20px;
+  padding: 40px 40px;
   margin: 5px;
   border-radius: 10px;
   font-size: 14px;
@@ -31,7 +31,6 @@
 .chat-bubble.user {
   background-color: #c6f8f3;
   align-self: flex-end;
-  margin-left: 10%;
   background-color: hsla(358.0000000000001, 0%, 100%, 1);
   background-image: radial-gradient(circle at 85% 80%, hsla(150.8823529411765, 52%, 83%, 0.62) 9%, transparent 55%), radial-gradient(circle at 60% 24%, hsla(220.00000000000014, 100%, 90%, 0.65) 5%, transparent 72%), radial-gradient(circle at 13% 82%, hsla(297.7941176470588, 100%, 65%, 0.11) 5%, transparent 52%), radial-gradient(circle at 24% 7%, hsla(182.00000000000003, 71%, 68%, 0) 13%, transparent 68%);
   background-blend-mode: normal, normal, normal, normal;
@@ -107,6 +106,7 @@
 .chat-bubble.ai:before {
   display: inline-block;
   margin-top: -36px;
+  margin-left: -23px;
   vertical-align: middle;
   font-size: 18px;
   content: "🤖";
@@ -119,6 +119,7 @@
 .chat-bubble.user:before {
   display: inline-block;
   margin-top: -36px;
+  margin-left: -23px;
   vertical-align: middle;
   font-size: 18px;
   content: "😀　あなた";

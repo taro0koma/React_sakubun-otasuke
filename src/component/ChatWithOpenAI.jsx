@@ -119,10 +119,13 @@ const ChatWithOpenAI = ({ age, theme, goal,imagemap1 }) => {
   };
 
   const handleRadioChange = (event) => {  // ✨ 新しい関数を追加
-    setSelectedRadio(event.target.value);  // ✨ ラジオボタンの値をセット
+    const value = event.target.value;
+    setSelectedRadio(value);  // ✨ ラジオボタンの値をセット
+    sendMessage(value);
   };
 
-  const sendMessage = async () => {
+  const sendMessage = async (selectedValue) => {
+    console.log(selectedValue);
     const input = imagemap1;
       console.log(input);
 
@@ -188,7 +191,7 @@ const ChatWithOpenAI = ({ age, theme, goal,imagemap1 }) => {
       どのようにするか: ${goal}
       ${imagemapMae ? `前回のイメージマップ構成: ${imagemapMae}` : ""}
       いまのイメージマップ構成: ${JSON.stringify(result, null, 2)}
-      ユーザからのメッセージ（上に書いたものを参考に答えてください）: ${selectedRadio}
+      ユーザからのメッセージ（上に書いたものを参考に答えてください）: ${selectedValue}
       ${imagemapMae ? `最初に、前回のマップと今回のマップを比べた褒めをもらいたいです。たとえば、「〇〇についてが詳しくなりましたね！その調子です！」のような感じです。` : "最初の1行目に何もない状態から発生した設定として、頑張ったことについてほめてください。"}
       もし、ユーザからのメッセージが使い方がよくわかりませんと聞かれた場合、「左上の使い方とかいてあるボタンをクリックしてみよう」などと答えてください。
       次に、アドバイスを3つくらい提案してください。ほぼ完ぺきであれば、少なくてもかまいません。
@@ -196,7 +199,8 @@ const ChatWithOpenAI = ({ age, theme, goal,imagemap1 }) => {
       また、ほめ方を、「作文に挑戦することはとても素晴らしいね」などの褒め方はよくないです。作文を書いていることについてやイメージマップを書いていることについてをほめるのではなく、イメージマップの内容についてほめてください。
       また、アドバイスは「〇〇を詳しく書くといいです。」などではなく、「〇〇について、△△や◆◆などのことを書いてみるといいかもしれないです。」など、加えるべきことについてほどほどに詳しくしてもらえたらと思います。
       `;
-      setChatHistory([...chatHistory, { role: 'user', content: selectedRadio }, { role: 'ai', content: <div style={{display:"flex"}}><img src="/images/spinnerAnimation.svg" alt="" style={{width:17,height:"auto",margin:"0 5px 0 0",padding:0}}/>入力中・・・</div> }]);
+      console.log(selectedValue);
+      setChatHistory([...chatHistory, { role: 'user', content: selectedValue }, { role: 'ai', content: <div style={{display:"flex"}}><img src="/images/spinnerAnimation.svg" alt="" style={{width:17,height:"auto",margin:"0 5px 0 0",padding:0}}/>入力中・・・</div> }]);
     
     try {
       const response = await fetch(process.env.REACT_APP_API_URL+"/api/azure", {
@@ -208,7 +212,7 @@ const ChatWithOpenAI = ({ age, theme, goal,imagemap1 }) => {
       
       const aiResponse = await response.json();
       console.log(aiResponse);
-      setChatHistory([...chatHistory, { role: 'user', content: selectedRadio },{ role: 'ai', content: aiResponse.bot }]);
+      setChatHistory([...chatHistory, { role: 'user', content: selectedValue },{ role: 'ai', content: aiResponse.bot }]);
       setMessage('');
       console.log(feedbackPrompt);
       imagemapMae = JSON.stringify(result, null, 2);
@@ -224,7 +228,7 @@ const ChatWithOpenAI = ({ age, theme, goal,imagemap1 }) => {
       {showFrame && <FloatingFrame steps={steps} onClose={handleCloseFrame}/>}</div>
       <div className="chat-history">
       <div className={`chat-bubble user`}>
-            <p>学年：{gradeJapan[age]}<br/>{theme}についてのイメージマップを書いている。<br/>主に{goal}についてのテーマで書く。</p><div className='blinking'><FaDownLong/><p> 下へ</p></div>
+            <p>私は {gradeJapan[age]} だよ。<br/>{theme}についてのイメージマップを書いてるよ。<br/>テーマは {goal} についてだよ。</p><div className='blinking'><p><FaDownLong/> 下へ</p></div>
         </div>
       <div className={`chat-bubble ai`}>
             <p>では、ひだりのイメージマップツールを使ってあなたの{theme}の{goal}について思いつくことをまずひとつかいてみよう！</p>
@@ -242,13 +246,13 @@ const ChatWithOpenAI = ({ age, theme, goal,imagemap1 }) => {
       </div>
         <RadioButtonForMap selectedValue={selectedRadio} onChange={handleRadioChange}/>
       <div className="chat-input-container">
-      {selectedRadio ? (
+      {/* {selectedRadio ? (
         <button onClick={sendMessage} className="send-button">
         <p className='chat-input' >{selectedRadio}　</p>をお願いする</button>
       ) : (
-        <button onClick={sendMessage} className="send-button" disabled>
+        <button className="send-button" disabled>
         上から１つえらんでください</button>
-      )}
+      )} */}
         
       </div>
       <div className='komawan'>

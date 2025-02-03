@@ -47,3 +47,57 @@
 .radio-3 input {
   display: none;
 }
+.squishy-neon {
+  background-color: rgb(124 58 237) !important;
+  color: white !important;
+  border-radius: 0.5rem !important;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255,255,255,0.3),
+    0 2px 0 0 rgb(109 40 217),
+    0 4px 0 0 rgb(91 33 182),
+    0 6px 0 0 rgb(76 29 149),
+    0 8px 0 0 rgb(67 26 131),
+    0 8px 16px 0 rgba(147,51,234,0.5) !important;
+  overflow: hidden;
+  border: 0px !important;
+}
+
+.squishy-neon::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.2), transparent) !important;
+}
+
+.squishy-neon:hover {
+  transform: translateY(4px) !important;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255,255,255,0.3),
+    0 1px 0 0 rgb(109 40 217),
+    0 2px 0 0 rgb(91 33 182),
+    0 3px 0 0 rgb(76 29 149),
+    0 4px 0 0 rgb(67 26 131),
+    0 4px 8px 0 rgba(147,51,234,0.5) !important;
+}
+
+.squishy-neon:hover i {
+  animation: bounce 1s infinite;
+}
+
+.squishy {
+  position: relative;
+  font-size: 1.875rem;
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 250ms;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.squishy i {
+  width: 1.75rem;
+  height: 1.75rem;
+}
