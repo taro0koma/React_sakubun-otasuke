@@ -200,7 +200,7 @@ const ChatWithOpenAI = ({ age, theme, goal,imagemap1 }) => {
       また、アドバイスは「〇〇を詳しく書くといいです。」などではなく、「〇〇について、△△や◆◆などのことを書いてみるといいかもしれないです。」など、加えるべきことについてほどほどに詳しくしてもらえたらと思います。
       `;
       console.log(selectedValue);
-      setChatHistory([...chatHistory, { role: 'user', content: selectedValue }, { role: 'ai', content: <div style={{display:"flex"}}><img src="/images/spinnerAnimation.svg" alt="" style={{width:17,height:"auto",margin:"0 5px 0 0",padding:0}}/>入力中・・・</div> }]);
+      setChatHistory([...chatHistory, { role: 'user', content: selectedValue }, { role: 'ai', content: <div style={{display:"flex"}}><img src="/images/spinnerAnimation.svg" alt="" style={{width:17,height:"auto",margin:"0 5px 0 0",padding:0}}/>まってね～</div> }]);
     
     try {
       const response = await fetch(process.env.REACT_APP_API_URL+"/api/azure", {
