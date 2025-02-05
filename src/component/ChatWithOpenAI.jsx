@@ -61,7 +61,7 @@ function Komawan(props){
             if (step < totalSteps) {
               // state.clock.elapsedTime は setTimeout 内では固定値となりがちなので、
               // 各ステップでオフセットを加えて変化を付けています
-              mesh_mabuta.morphTargetInfluences[0] = 0.5 + 0.5 * Math.sin((state.clock.elapsedTime + step * 0.05) * 1);
+              mesh_mabuta.morphTargetInfluences[0] = 0.5 + 0.5 * Math.sin((state.clock.elapsedTime + step * 0.05) * 20);
               step++;
               setTimeout(animateBlink, stepDelay);
             } else {

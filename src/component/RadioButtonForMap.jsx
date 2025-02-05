@@ -7,6 +7,15 @@ const RadioButtonForMap = ({ selectedValue, onChange }) => {
   <div className="button-group">
     <button
       type="button"
+      className={selectedValue === "思い浮かびません squishy squishy-neon" ? "active squishy squishy-neon" : "squishy squishy-neon"}
+      onClick={() =>
+        onChange({ target: { value: "思い浮かびません" } })
+      }
+    >
+      思いつかないよ
+    </button>
+    <button
+      type="button"
       className={selectedValue === "イメージマップを見てください squishy squishy-neon" ? "active squishy squishy-neon" : "squishy squishy-neon"}
       onClick={() =>
         onChange({ target: { value: "イメージマップを見てください" } })
@@ -23,15 +32,7 @@ const RadioButtonForMap = ({ selectedValue, onChange }) => {
     >
       つかい方がよくわかりません
     </button>
-    <button
-      type="button"
-      className={selectedValue === "思い浮かびません squishy squishy-neon" ? "active squishy squishy-neon" : "squishy squishy-neon"}
-      onClick={() =>
-        onChange({ target: { value: "思い浮かびません" } })
-      }
-    >
-      思いうかびません
-    </button>
+    
   </div>
 </div>
 

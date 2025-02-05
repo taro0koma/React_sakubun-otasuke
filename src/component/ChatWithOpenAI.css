@@ -156,10 +156,9 @@
 .komawan{
   position: absolute;
   right: 0px;
-  bottom: -80px;
-  display: none;
+  bottom: -20px;
 }
 div div canvas{
-  width: 142px !important;
-  height: 240px !important;
+  width: 186px !important;
+  height: 539px !important;
 }
