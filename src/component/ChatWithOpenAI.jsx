@@ -33,18 +33,20 @@ function Box(props){
 function Komawan(props){
   // const ref = useRef();
   const { scene, nodes } = useGLTF("models/komawan.glb")
-  console.log('nodes:', nodes)
-  console.log('scene:', scene)
-  const mesh_kao = nodes["コマワンちゃんの顔test"] || scene.children.find(child => child.isMesh)
-  const mesh_mabuta = nodes["コマワンちゃんの瞼とかまつ毛001"] || scene.children.find(child => child.isMesh)
+  // console.log('nodes:', nodes)
+  // console.log('scene:', scene)
+
+  const mesh_kao = nodes["kuchi"] || scene.children.find(child => child.isMesh)
+  const mesh_mabuta = nodes["コマワンちゃんの瞼"] || scene.children.find(child => child.isMesh)
 
   // 瞬き処理がすでにスケジュールされているかを管理する
   const blinkTriggered = useRef(false)
+  console.log(mesh_kao.morphTargetInfluences);
 
   useFrame((state) => {
     // 顔のシェイプキーはサイン波で常にアニメーション
     if (mesh_kao && mesh_kao.morphTargetInfluences) {
-      mesh_kao.morphTargetInfluences[0] = 0.5 + 0.5 * Math.sin(state.clock.elapsedTime * 0)
+      mesh_kao.morphTargetInfluences[0] = 0.5 + 0.5 * Math.sin(state.clock.elapsedTime * 3)
     }
     // 瞼（mesh_mabuta）の処理
     if (mesh_mabuta && mesh_mabuta.morphTargetInfluences) {
@@ -61,7 +63,7 @@ function Komawan(props){
             if (step < totalSteps) {
               // state.clock.elapsedTime は setTimeout 内では固定値となりがちなので、
               // 各ステップでオフセットを加えて変化を付けています
-              mesh_mabuta.morphTargetInfluences[0] = 0.5 + 0.5 * Math.sin((state.clock.elapsedTime + step * 0.05) * 20);
+              mesh_mabuta.morphTargetInfluences[0] = 0.5 + 0.5 * Math.sin((state.clock.elapsedTime + step * 0.05) * 30);
               step++;
               setTimeout(animateBlink, stepDelay);
             } else {
@@ -261,7 +263,8 @@ const ChatWithOpenAI = ({ age, theme, goal,imagemap1 }) => {
           {/* <boxGeometry args={[2, 2, 2]} /> */}
           <Komawan/>
           <directionalLight position={[0, 3, 5]} castShadow intensity={2.5} />
-          <directionalLight position={[0, -10, 11]} castShadow intensity={2.5} />
+          <directionalLight position={[0, -90, 20]} castShadow intensity={2.5} />
+          <directionalLight position={[-10, -10, -1]} castShadow intensity={2.5} />
           <ambientLight intensity={0.5} />
           {/* <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1}/> */}
           {/* </mesh> */}

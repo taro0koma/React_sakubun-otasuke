@@ -1135,7 +1135,8 @@ html {
   max-width: 800px;
 }
 .tobubutton{
-  font-size: 0.8em !important;
+  font-size: 1.4em !important;
+  padding: 25px !important;
 }
 /* :not(.left-top-logo){
   text-align: center;
