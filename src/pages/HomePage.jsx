@@ -1,5 +1,6 @@
 import React from "react";
 import Tabs from "../component/Tabs";
+//⇓おかしくなったらimport style from "../assets/css/styles.module.css"にする
 import "../assets/css/styles.module.css";
 import SwiperHome from "./SwiperHome";
 import { Helmet } from "react-helmet-async";
