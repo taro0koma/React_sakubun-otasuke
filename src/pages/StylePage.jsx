@@ -6,6 +6,7 @@ import NextPageLink from './../component/NextPageLink';
 import { Helmet } from "react-helmet-async";
 import AnimationKomawanPage from "./AnimationKomawanPage";
 import Footer from "./Footer";
+import { GiRhinocerosHorn } from "react-icons/gi";
 
 const StylePage = () => {
 
@@ -268,6 +269,7 @@ const StylePage = () => {
             value={formObj.sThird}
             placeholder="３番目に書きたいこと"
           />
+          <br/>
           <textarea
             onChange={(e) => {
               InputOnChange("sFo", e.target.value);
@@ -531,7 +533,10 @@ const StylePage = () => {
           required
         >
           <option value="未入力状態">選択</option>
-          <option value="DESC法">🦏サイ先生</option>
+          <option value="DESC法">
+            <img src="../assets/images/rhino_simple.svg" width="24" height="24" alt="" />
+            サイ先生
+            </option>
           <option value="PREP法">🐿️リス先生</option> {/**PREP法？ */}
           <option value="一段落目が個性的なPREP法">🦁ライオン先生</option> {/**個性的が好きなライオン先生 */}
         </select>

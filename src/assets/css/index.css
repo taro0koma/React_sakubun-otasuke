@@ -1,7 +1,9 @@
+
 @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@100;300;400;500;700;800;900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 .chat-container {
   width: 400px;
   margin: 0 auto;
@@ -568,9 +570,9 @@ td{
   font-weight: 900;
 }
 .container h3{
-  margin: 10px 30px 0 0;
+  margin: 10px 0 0 0;
   display: inline;
-  font-size: 4rem;
+  font-size: 3rem;
 }
 .container:has(.zengamen) {
   margin:0 !important;
@@ -917,6 +919,7 @@ html {
   padding: 0;
   border-radius: 10px;
   line-height: 0;
+  width: 340px;
 }
 
 .navigation-item {
@@ -972,17 +975,56 @@ html {
 .navigation-item a{
   color: white;
 }
+
 .navigation-item::after{
-  top: 10px !important;
-  right: 8px;
-  content: '';
-  width: 24px;
-  height: 24px;
-  background-image: url(/images/yazirushi.svg);
   background-position: top left;
   background-size: 100%;
   position: absolute;
+  background-image: url(/images/yazirushi.svg);
+  content: '';
+  right: -19px;
+  top: 50% !important;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
 }
+.navigation-list {
+  max-width: 500px;
+  width: 80%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.navigation-item {
+  width: 90%;
+  padding: 10px 20px;
+  border-left: 2px solid #999999;
+  border-top:1px solid #4b4b4b;
+  border-right:0;
+}
+
+.navigation-item:first-child{
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 0;
+  border-left: 2px solid #999999;
+  border-top: 2px solid #999999;
+}
+.navigation-item:last-child {
+  margin: 0;
+  border-right: 0px solid #00a0b800;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 0;
+}
+
+.navigation-item a {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+
 
 
 
@@ -1037,6 +1079,9 @@ html {
   width: 100%;
   font-size: 1.7rem;
   max-width: 600px;
+  border:3px solid rgb(149, 149, 149);
+  border-radius: 10px;
+  resize: vertical;
 }
 
 .container form select{
@@ -1071,15 +1116,22 @@ html {
 }
 @media (max-width: 768px) {
   .navigation-item::after{
-    right: 10%;
+    background-position: top left;
+    background-size: 100%;
+    position: absolute;
+    background-image: url(/images/yazirushi.svg);
+    content: '';
+    right: -6%;
     top: 50% !important;
     transform: translateY(-50%);
     width: 40px;
     height: 40px;
   }
   .navigation-list {
+    width: 80%;
     flex-direction: column;
     align-items: center;
+    width: 340px;
   }
 
   .navigation-item {
@@ -1089,7 +1141,7 @@ html {
     border-top:1px solid #4b4b4b;
     border-right:0;
   }
-  
+
   .navigation-item:first-child{
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
@@ -1110,7 +1162,7 @@ html {
     width: 100%;
     text-align: center;
   }
-  
+
   .down{
     width: 100%;
   }
@@ -1124,7 +1176,7 @@ html {
     padding: 10px;
   }
   .container h3{
-    margin: 10px 30px 0 0;
+    margin: 10px 0 0 0;
     display: inline;
     font-size: 1.2em;
   }
@@ -1135,7 +1187,7 @@ html {
   max-width: 800px;
 }
 .tobubutton{
-  font-size: 1.4em !important;
+  /* font-size: 1.4em !important; */
   padding: 25px !important;
 }
 /* :not(.left-top-logo){

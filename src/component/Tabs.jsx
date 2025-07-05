@@ -153,7 +153,7 @@ const Tabs = ({ pageTitle,contents }) => {
         </a>
         <div className="menu-container">
         <div className="menu-toggle" onClick={toggleMenu}>
-          <div style={{position:"relative",lineHeight:0,height:"100%",width:"100%"}}>
+          <div style={{position:"relative",lineHeight:0,height:"100%",width:"100%",backgroundColor:"#ffffffd4",borderRadius:"100%"}}>
             <div className={`bar bar1`}></div>
             <div className={`bar bar2`}></div>
             <div className={`bar bar3`}></div>

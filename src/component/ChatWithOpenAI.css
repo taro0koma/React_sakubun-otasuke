@@ -1,7 +1,6 @@
 .chat-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;
   background-color: #ffffff;
   width: 410px;
 }
@@ -155,10 +154,13 @@
 
 .komawan{
   position: absolute;
-  right: 0px;
-  bottom: -20px;
+  left: 300px;
+  bottom: 180px;
+  z-index: 1000000;
+  width: 180px;
+  height: 180px;
 }
-div div canvas{
-  width: 186px !important;
-  height: 539px !important;
-}
+/* div div canvas{
+  width: 150px !important;
+  height: 150px !important;
+} */

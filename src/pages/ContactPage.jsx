@@ -111,7 +111,7 @@ const ContactPage = () => {
               className="p-2 border border-gray-300 rounded !overflow-scroll"
               required
             >
-              <option value="">気持ちや感想を選択してください</option>
+              <option value="">気持ちや感想を選択してね</option>
               <option value="ほっとした">ほっとした</option>
               <option value="おどろいた">おどろいた</option>
               <option value="うれしい">うれしい</option>

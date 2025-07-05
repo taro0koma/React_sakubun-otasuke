@@ -3,7 +3,18 @@
       transform: translateX(0px);
   }
   100% {
-      transform: translateX(420px);
+    transform: translateX(420px);
+      /* スマホの場合は376pxにする */
+  }
+}
+@media (max-width: 768px) {
+  @keyframes slideOutLeft {
+    0% {
+      transform: translateX(0px);
+    }
+    100% {
+      transform: translateX(376px);
+    }
   }
 }
 @keyframes slideOutRight{
@@ -14,6 +25,17 @@
     transform: translateX(0px);
   }
 }
+@media (max-width: 768px) {
+  @keyframes slideOutRight{
+    0% {
+        transform: translateX(376px);
+    }
+    100% {
+      transform: translateX(0px);
+    }
+  }
+}
+
 @keyframes slide{
   0% {
       transform: translateX(90%);
@@ -146,7 +168,14 @@
   margin: auto 0;
   text-align: left;
   display: flex;
+  top: -100px;
+  z-index: 100;
 }
+
+.node-edge-info::-webkit-scrollbar{
+  display: none;
+}
+
 .react-flow__panel.react-flow__attribution.bottom.right{
   display: none;
 }
@@ -214,4 +243,11 @@
   word-break: break-word;
   hyphens: auto;
   line-break: strict;
+}
+
+@media (max-width: 768px) {
+  .node-edge-info {
+    right: 0px;
+    width: 460px;
+  }
 }

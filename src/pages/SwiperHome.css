@@ -57,13 +57,9 @@
   height: 80%;
   object-fit: cover;
 }
-@media (max-width: 768px) {
-  .modal-content {
-      height: auto !important;
-  }
-}
+
 .swiper.swiper-initialized.swiper-horizontal.swiper-backface-hidden{
-  width: 80%;
+  width: 56%;
 }
 .contentsmei{
   font-weight: bold;
@@ -82,4 +78,13 @@ p.img{
 
 a{
   color: black;
+}
+
+@media (max-width: 768px) {
+  .modal-content {
+      height: auto !important;
+  }
+  .swiper.swiper-initialized.swiper-horizontal.swiper-backface-hidden{
+  width: 80%;
+}
 }

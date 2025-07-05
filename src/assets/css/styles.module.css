@@ -5,7 +5,7 @@
 body{
   letter-spacing: 2px;
   color: #000000;
-  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-family: "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック体", YuGothic, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
   text-align: center;
 }
 
@@ -32,21 +32,26 @@ select{
   background-color: #f0f0f0;
   border: white;
   color: #757575;
-  font-family: "Zen Kaku Gothic New", sans-serif;
-  margin-bottom: 70px;
+  font-family: "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック体", YuGothic, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+  margin-bottom: 20px;
   height: 64px;
+  border: 3px solid rgb(149, 149, 149);
+  border-radius: 30px !important;
+  margin-top: 10px;
+  padding-left: 20px;
 }
 input{
-  padding: 20px 15px !important;
+  padding: 25px 15px !important;
   width: 50vw;
   border: 2px solid #b0b1b8;
   background-color: #f0f0f0;
   color: #757575;
-  border: white;
+  border: 3px solid rgb(149, 149, 149) !important;
   font-size: 20px;
-  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-family: "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック体", YuGothic, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
   justify-content: center;
   align-items: center;
+  border-radius: 10px !important;
 }
 
 .button, button, input[type='button'], input[type='reset'], input[type='submit']{
@@ -65,7 +70,7 @@ input{
   text-decoration: none;
   text-transform: uppercase;
   white-space: nowrap;
-  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-family: "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック体", YuGothic, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
 }
 
 /* 画像のスタイル */
@@ -93,7 +98,7 @@ input{
   color: black !important;
 }
 textarea{
-  font-family: "Zen Kaku Gothic New", sans-serif;
+  font-family: "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック体", YuGothic, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
 }
 h5{
   margin-bottom: 1em;
