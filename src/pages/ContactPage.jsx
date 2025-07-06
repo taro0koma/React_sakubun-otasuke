@@ -302,7 +302,7 @@ const ContactPage = () => {
             </h2>
             {isLoading ? (
               <div className="loading-message">
-                回答を生成中です...少々お待ちください。
+                かんがえ中だよ💭<br/>ちょっと待ってね。
               </div>
             ) : (
               <div 
