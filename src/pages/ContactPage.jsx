@@ -161,7 +161,7 @@ const ContactPage = () => {
   }
 
   async function fetchAIResponse(option, grade, examples) {
-    const userMessage = `下記の言葉を${option}という意味合いでどんなときにも使える拡張した言葉を10個つくり、それを改行のある・などの表示になるよう箇条書きにしてください。3.〇〇や-〇〇な〇〇-のような当てはめるべきところは当てはめて出力してください。：\n\n${examples}`;
+    const userMessage = `下記の言葉を${option}という意味合いでどんなときにも使える拡張した言葉を10個つくり、それを改行のある・(中点。絶対にこの中点にしてください「·」にしないでください。)の表示になるよう箇条書きにしてください。3.〇〇や-〇〇な〇〇-のような当てはめるべきところは当てはめて出力してください。：\n\n${examples}`;
     
     try {
       const response = await fetch(process.env.REACT_APP_API_URL + "/api/azure", {
