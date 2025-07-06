@@ -1567,6 +1567,8 @@ td:last-child{
 
 /* AIレスポンス部分のスタイリング */
 .ai-response-container {
+  max-width: 640px;
+  margin: auto;
   position: relative;
   padding: 40px;
   margin-top: 30px;
@@ -1611,19 +1613,12 @@ td:last-child{
   position: relative;
   z-index: 2;
   padding: 20px 30px;
-  background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
-  color: white;
+  color: #495057;
   font-weight: 600;
   border-radius: 12px;
   margin-bottom: 30px;
   text-align: center;
-  box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
   transition: all 0.3s ease;
-}
-
-.ai-response-header:hover {
-  transform: scale(1.02);
-  box-shadow: 0 6px 20px rgba(108, 117, 125, 0.4);
 }
 
 .ai-response-content {
@@ -1843,4 +1838,7 @@ td:last-child{
 .ai-response-item:focus-within {
   outline: 2px solid rgba(108, 117, 125, 0.3);
   outline-offset: 2px;
+}
+.submit-button {
+  margin: 40px 0 !important;
 }
