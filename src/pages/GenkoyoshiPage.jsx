@@ -26,7 +26,7 @@ const GenkoyoshiPage = () => {
       <p>作文を書くのに便利なツールを紹介します。</p>
       <br />
       <h4 style={{padding:"0 10px"}}>１. 縦書き原稿用紙作成シート</h4>
-      <p style={{textAlign:"left"}}>「学校教育情報処理研究会」が提供している「縦書き原稿用紙作成シート」は清書する前の下書きにぴったり。作文の文字数や行数を表示してくれるので、文字数が決まっている宿題を調整できるよ</p>
+      <p style={{textAlign:"left",maxWidth:"650px",margin:"auto"}}>「学校教育情報処理研究会」が提供している「縦書き原稿用紙作成シート」は清書する前の下書きにぴったり。作文の文字数や行数を表示してくれるので、文字数が決まっている宿題を調整できるよ</p>
       
       <div style={{display:"flex",textAlign:"center",justifyContent:"center"}}>
       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Google_Sheets_2020_Logo.svg/140px-Google_Sheets_2020_Logo.svg.png" alt="logo" style={{width:"2rem",margin:"0 1rem 0 0"}}/>
@@ -37,7 +37,7 @@ const GenkoyoshiPage = () => {
       <br />
       </div> 
       <h4 style={{padding:"0 10px"}}>２. Figjam</h4>
-      <p style={{textAlign:"left"}}>「Figma, Inc.（本社：米国サンフランシスコ）」が提供している「Figjam」はイメージマップを書くのにぴったり。<br/>見やすくて、便利！</p>
+      <p style={{textAlign:"left",maxWidth:"650px",margin:"auto"}}>「Figma, Inc.（本社：米国サンフランシスコ）」が提供している「Figjam」はイメージマップを書くのにぴったり。<br/>見やすくて、便利！</p>
       <div style={{display:"flex",textAlign:"center",justifyContent:"center"}}>
       <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Figma-logo.svg/300px-Figma-logo.svg.png" alt="logo" style={{width:"2rem",margin:"0 1rem 0 0"}}/>
       <p style={{color:"blue",textDecoration: "underline"}}><a href="https://www.figma.com/" target='_blank' className='linkosusume'>Figjam</a></p>

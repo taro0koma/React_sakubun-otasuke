@@ -1564,3 +1564,260 @@ td:last-child{
   white-space: nowrap;
   font-family: "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック体", YuGothic, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
 }
+
+/* AIレスポンス部分のスタイリング */
+.ai-response-container {
+  position: relative;
+  padding: 40px;
+  margin-top: 30px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 16px;
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.08),
+    0 4px 20px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.ai-response-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(0, 0, 0, 0.02) 0%, transparent 50%);
+  pointer-events: none;
+  animation: noiseAnimation 8s ease-in-out infinite;
+}
+
+@keyframes noiseAnimation {
+  0%, 100% { opacity: 0.3; }
+  25% { opacity: 0.1; }
+  50% { opacity: 0.4; }
+  75% { opacity: 0.2; }
+}
+
+.ai-response-container:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 15px 40px rgba(0, 0, 0, 0.12),
+    0 8px 25px rgba(0, 0, 0, 0.06);
+}
+
+.ai-response-header {
+  position: relative;
+  z-index: 2;
+  padding: 20px 30px;
+  background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+  color: white;
+  font-weight: 600;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
+  transition: all 0.3s ease;
+}
+
+.ai-response-header:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 20px rgba(108, 117, 125, 0.4);
+}
+
+.ai-response-content {
+  position: relative;
+  z-index: 2;
+  text-align: left;
+  line-height: 1.8;
+  font-size: 16px;
+  color: #495057;
+}
+
+/* 追加の楽しいアニメーション効果 */
+.ai-response-item:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(15px);
+}
+
+/* ホバー時のキラキラ効果 */
+.ai-response-item:hover::after {
+  content: '✨';
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  opacity: 0;
+  animation: twinkle 0.8s ease-in-out;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0; transform: translateY(-50%) scale(0.5); }
+  50% { opacity: 1; transform: translateY(-50%) scale(1.2); }
+  100% { opacity: 0; transform: translateY(-50%) scale(0.8); }
+}
+
+/* コンテナの子供向けスタイリング */
+.ai-response-container {
+  position: relative;
+  padding: 40px;
+  margin-top: 30px;
+  background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+  border-radius: 20px;
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.08),
+    0 4px 20px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+/* 子供向けのカラフルなパステルカラー */
+.ai-response-item:nth-child(1) { 
+  background: linear-gradient(135deg, #fef7f7 0%, #fce4ec 100%);
+  border-left: 4px solid #f8bbd9;
+  animation-delay: 0.2s; 
+}
+.ai-response-item:nth-child(3) { 
+  background: linear-gradient(135deg, #f3e5f5 0%, #e8eaf6 100%);
+  border-left: 4px solid #ce93d8;
+  animation-delay: 0.4s; 
+}
+.ai-response-item:nth-child(5) { 
+  background: linear-gradient(135deg, #e8f5e8 0%, #f1f8e9 100%);
+  border-left: 4px solid #a5d6a7;
+  animation-delay: 0.6s; 
+}
+.ai-response-item:nth-child(7) { 
+  background: linear-gradient(135deg, #fff3e0 0%, #fce4ec 100%);
+  border-left: 4px solid #ffcc80;
+  animation-delay: 0.8s; 
+}
+.ai-response-item:nth-child(9) { 
+  background: linear-gradient(135deg, #e0f2f1 0%, #e8f5e8 100%);
+  border-left: 4px solid #80cbc4;
+  animation-delay: 1.0s; 
+}
+.ai-response-item:nth-child(11) { 
+  background: linear-gradient(135deg, #e1f5fe 0%, #f0f4ff 100%);
+  border-left: 4px solid #81d4fa;
+  animation-delay: 1.2s; 
+}
+.ai-response-item:nth-child(13) { 
+  background: linear-gradient(135deg, #f9fbe7 0%, #f0f4c3 100%);
+  border-left: 4px solid #c5e1a5;
+  animation-delay: 1.4s; 
+}
+.ai-response-item:nth-child(15) { 
+  background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+  border-left: 4px solid #ffe082;
+  animation-delay: 1.6s; 
+}
+.ai-response-item:nth-child(17) { 
+  background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);
+  border-left: 4px solid #f48fb1;
+  animation-delay: 1.8s; 
+}
+.ai-response-item:nth-child(19) { 
+  background: linear-gradient(135deg, #e8eaf6 0%, #d1c4e9 100%);
+  border-left: 4px solid #b39ddb;
+  animation-delay: 2.0s; 
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* アイテム内のテキストスタイリング */
+
+.ai-response-item:hover::before {
+  opacity: 1;
+  transform: translateY(-50%) scale(1.2);
+  animation: sparkle 0.6s ease-in-out;
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; transform: translateY(-50%) scale(1.4) rotate(10deg); }
+}
+
+/* リストアイテムのスタイリング */
+.ai-response-item {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s ease forwards;
+  padding: 15px 20px;
+  padding-left: 40px;
+  margin: 12px 0;
+  border-radius: 12px;
+  position: relative;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  font-weight: 500;
+}
+
+.ai-response-item strong {
+  color: #343a40;
+  font-weight: 600;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+  .ai-response-container {
+    padding: 25px 20px;
+    margin-top: 20px;
+  }
+  
+  .ai-response-header {
+    padding: 15px 20px;
+    font-size: 16px;
+  }
+  
+  .ai-response-item {
+    padding: 12px 16px;
+    margin: 8px 0;
+    font-size: 14px;
+  }
+}
+
+/* 追加のアニメーション効果 */
+.ai-response-container::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  border-radius: 18px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.ai-response-container:hover::after {
+  opacity: 1;
+}
+
+/* テキストの読みやすさ向上 */
+.ai-response-item:hover {
+  color: #212529;
+  font-weight: 500;
+}
+
+/* 美しいフォーカス効果 */
+.ai-response-item:focus-within {
+  outline: 2px solid rgba(108, 117, 125, 0.3);
+  outline-offset: 2px;
+}
