@@ -1681,47 +1681,47 @@ td:last-child{
   border-left: 4px solid #f8bbd9;
   animation-delay: 0.2s; 
 }
-.ai-response-item:nth-child(3) { 
+.ai-response-item:nth-child(2) { 
   background: linear-gradient(135deg, #f3e5f5 0%, #e8eaf6 100%);
   border-left: 4px solid #ce93d8;
   animation-delay: 0.4s; 
 }
-.ai-response-item:nth-child(5) { 
+.ai-response-item:nth-child(3) { 
   background: linear-gradient(135deg, #e8f5e8 0%, #f1f8e9 100%);
   border-left: 4px solid #a5d6a7;
   animation-delay: 0.6s; 
 }
-.ai-response-item:nth-child(7) { 
+.ai-response-item:nth-child(4) { 
   background: linear-gradient(135deg, #fff3e0 0%, #fce4ec 100%);
   border-left: 4px solid #ffcc80;
   animation-delay: 0.8s; 
 }
-.ai-response-item:nth-child(9) { 
+.ai-response-item:nth-child(5) { 
   background: linear-gradient(135deg, #e0f2f1 0%, #e8f5e8 100%);
   border-left: 4px solid #80cbc4;
   animation-delay: 1.0s; 
 }
-.ai-response-item:nth-child(11) { 
+.ai-response-item:nth-child(6) { 
   background: linear-gradient(135deg, #e1f5fe 0%, #f0f4ff 100%);
   border-left: 4px solid #81d4fa;
   animation-delay: 1.2s; 
 }
-.ai-response-item:nth-child(13) { 
+.ai-response-item:nth-child(7) { 
   background: linear-gradient(135deg, #f9fbe7 0%, #f0f4c3 100%);
   border-left: 4px solid #c5e1a5;
   animation-delay: 1.4s; 
 }
-.ai-response-item:nth-child(15) { 
+.ai-response-item:nth-child(8) { 
   background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
   border-left: 4px solid #ffe082;
   animation-delay: 1.6s; 
 }
-.ai-response-item:nth-child(17) { 
+.ai-response-item:nth-child(9) { 
   background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);
   border-left: 4px solid #f48fb1;
   animation-delay: 1.8s; 
 }
-.ai-response-item:nth-child(19) { 
+.ai-response-item:nth-child(10) { 
   background: linear-gradient(135deg, #e8eaf6 0%, #d1c4e9 100%);
   border-left: 4px solid #b39ddb;
   animation-delay: 2.0s; 
@@ -1737,8 +1737,6 @@ td:last-child{
     transform: translateY(0);
   }
 }
-
-/* アイテム内のテキストスタイリング */
 
 .ai-response-item:hover::before {
   opacity: 1;
