@@ -307,7 +307,7 @@ const ContactPage = () => {
             ) : (
               <div 
                 className="ai-response-content"
-                dangerouslySetInnerHTML={{ __html: aiResponse.replace(/(\d+\.\s*[^<・]*)(?=・|$)/g, '<div class="ai-response-item">$1</div>') }}
+                dangerouslySetInnerHTML={{ __html: aiResponse.replace(/(\d+\.\s*[^<・\-]*)(?=[・\-]|$)/g, '<div class="ai-response-item">$1</div>') }}
               />
             )}
           </div>
