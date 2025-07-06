@@ -1726,6 +1726,31 @@ td:last-child{
   border-left: 4px solid #b39ddb;
   animation-delay: 2.0s; 
 }
+.ai-response-item:nth-child(11) { 
+  background: linear-gradient(135deg, #f3e5f5 0%, #e8eaf6 100%);
+  border-left: 4px solid #ce93d8;
+  animation-delay: 0.4s; 
+}
+.ai-response-item:nth-child(13) { 
+  background: linear-gradient(135deg, #fff3e0 0%, #fce4ec 100%);
+  border-left: 4px solid #ffcc80;
+  animation-delay: 0.8s; 
+}
+.ai-response-item:nth-child(15) { 
+  background: linear-gradient(135deg, #e1f5fe 0%, #f0f4ff 100%);
+  border-left: 4px solid #81d4fa;
+  animation-delay: 1.2s; 
+}
+.ai-response-item:nth-child(17) { 
+  background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+  border-left: 4px solid #ffe082;
+  animation-delay: 1.6s; 
+}
+.ai-response-item:nth-child(19) { 
+  background: linear-gradient(135deg, #e8eaf6 0%, #d1c4e9 100%);
+  border-left: 4px solid #b39ddb;
+  animation-delay: 2.0s; 
+}
 
 @keyframes fadeInUp {
   from {
