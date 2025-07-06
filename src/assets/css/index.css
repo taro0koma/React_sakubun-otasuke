@@ -1782,12 +1782,8 @@ td:last-child{
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.3);
-  font-weight: 500;
-}
-
-.ai-response-item strong {
-  color: #343a40;
-  font-weight: 600;
+  font-weight: bold;
+  font-size: 18px;
 }
 
 /* レスポンシブデザイン */
@@ -1828,17 +1824,6 @@ td:last-child{
   opacity: 1;
 }
 
-/* テキストの読みやすさ向上 */
-.ai-response-item:hover {
-  color: #212529;
-  font-weight: 500;
-}
-
-/* 美しいフォーカス効果 */
-.ai-response-item:focus-within {
-  outline: 2px solid rgba(108, 117, 125, 0.3);
-  outline-offset: 2px;
-}
 .submit-button {
   margin: 40px 0 !important;
 }
