@@ -359,7 +359,7 @@ const ContactPage = () => {
                       transition: `opacity 0.3s ease ${index * 0.1}s, transform 0.3s ease ${index * 0.1}s`
                     }}
                   >
-                    {index + 1}. {item}
+                    {item}
                   </div>
                 ))}
               </div>
