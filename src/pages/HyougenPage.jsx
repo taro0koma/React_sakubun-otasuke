@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import Tabs from '../component/Tabs';
 import AnimationKomawanPage from './AnimationKomawanPage'; // インポートするコンポーネント
 import ModalFrame from "../component/ModalFrame";
@@ -7,6 +8,7 @@ import { Helmet } from 'react-helmet-async';
 import Footer from './Footer';
 
 const HyougenPage = () => {
+  const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -58,12 +60,12 @@ const HyougenPage = () => {
         animateMessage(uniqueId, parsedData);
       } else {
         const err = await response.text();
-        updateMessage(uniqueId, 'エラーが出たのでもう一度入力してください。');
+        updateMessage(uniqueId, t('hyougen.error'));
         alert(err);
       }
     } catch (error) {
       stopLoader();
-      updateMessage(uniqueId, 'エラーが出たのでもう一度入力してください。');
+      updateMessage(uniqueId, t('hyougen.error'));
       alert(error);
     }
   };
@@ -146,31 +148,31 @@ const HyougenPage = () => {
 
   return (
     <div id="app">
-      <Helmet><title>表現ぴったり探し | 作文おたすけアプリ</title></Helmet>
-      <Tabs pageTitle="表現ぴったり探し" contents="hyougen" />
+      <Helmet><title>{t('hyougen.helmet')}</title></Helmet>
+      <Tabs pageTitle={t('hyougen.title')} contents="hyougen" />
       {isModalOpen && (
-        <ModalFrame title="「表現ぴったり探し」の使い方" text="「表現ぴったり探し」で、いろいろな表現が知ることができます。自分の書いてみた文章の中に別の表現にしたい言葉はありませんか？" onClose={handleModalClose} imageSrc="/images/dousiyowan.png" />
+        <ModalFrame title={t('hyougen.modalTitle')} text={t('hyougen.modalText')} onClose={handleModalClose} imageSrc="/images/dousiyowan.png" />
       )}
       <div id="inputarea">
-        <p style={{ textAlign: "center" }}>自分の使っている言葉のほかの表現を知って、<br />気に入るものがあったら、自分の作文に使ってみよう！</p>
+        <p style={{ textAlign: "center" }}>{t('hyougen.introText1')}<br />{t('hyougen.introText2')}</p>
         <br />
         <form ref={formRef} onSubmit={handleSubmit}>
           <input
             ref={inputRef}
             name="prompt"
-            placeholder="例：楽しい／さみしい"
+            placeholder={t('hyougen.placeholder')}
             required
           />
           <br />
           <button type="submit" onClick={handleClick}>
-            この言葉の表現を探す！
+            {t('hyougen.button')}
           </button>
         </form>
         <div id="chat_container" ref={chatContainerRef} className={loading && !loadingComplete ? "yomikomihyougen" : ""}>
           {loading && !loadingComplete ? (
             <>
             <AnimationKomawanPage />
-            <h1><b>SAKUBUN OTASUKE</b></h1>
+            <h1><b>{t('hyougen.loadingText')}</b></h1>
             </>
           ) : (
             messages.map((msg) => (

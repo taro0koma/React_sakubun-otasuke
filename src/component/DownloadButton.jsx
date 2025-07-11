@@ -6,6 +6,7 @@ import {
   getViewportForBounds,
 } from '@xyflow/react';
 import { toPng } from 'html-to-image';
+import { t } from 'i18next';
 
 function downloadImage(dataUrl) {
   const a = document.createElement('a');
@@ -73,7 +74,7 @@ function DownloadButton() {
   return (
     <Panel position="top">
       <button className="download-btn" onClick={onClick}>
-        イメージマップを保存する！
+        {t('imagemapPage.imagemapKeep')}
       </button>
     </Panel>
   );

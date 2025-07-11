@@ -155,6 +155,16 @@ h1, h2, h3 {
   justify-content: center;
 }
 
+.content-blocktwo {
+  padding: 30px;
+  margin-bottom: 70px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .content-block:nth-child(even) { /* 偶数番目のブロックに背景色 */
   background-color: #fcfcfc;
 }

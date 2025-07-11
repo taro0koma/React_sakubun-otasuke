@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import Tabs from '../component/Tabs';
 import AnimationKomawanPage from './AnimationKomawanPage';
 import ModalFrame from "../component/ModalFrame";
@@ -6,7 +7,8 @@ import NextPageLink from '../component/NextPageLink';
 import { Helmet } from 'react-helmet-async';
 import Footer from './Footer';
 
-const HyougenPage = () => {
+const ZinbutsuPage = () => {
+  const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -60,12 +62,12 @@ const HyougenPage = () => {
         animateMessage(uniqueId, parsedData);
       } else {
         const err = await response.text();
-        updateMessage(uniqueId, 'エラーが出たのでもう一度入力してください。');
+        updateMessage(uniqueId, t('zinbutsu.error'));
         alert(err);
       }
     } catch (error) {
       stopLoader();
-      updateMessage(uniqueId, 'エラーが出たのでもう一度入力してください。');
+      updateMessage(uniqueId, t('zinbutsu.error'));
       alert(error);
     }
   };
@@ -152,39 +154,39 @@ const HyougenPage = () => {
 
   return (
     <div id="app">
-      <Helmet><title>登場人物の性格を表す言葉 | 作文おたすけアプリ</title></Helmet>
-      <Tabs pageTitle="登場人物の性格を表す言葉" contents="zinbutsu" />
+      <Helmet><title>{t('zinbutsu.helmet')}</title></Helmet>
+      <Tabs pageTitle={t('zinbutsu.title')} contents="zinbutsu" />
       {isModalOpen && (
-        <ModalFrame title="「登場人物の性格を表す言葉」の使い方" text="「登場人物の性格を表す言葉」で、いろいろな表現が知ることができます。自分の書いてみた文章の中に別の表現にしたい言葉はありませんか？" onClose={handleModalClose} imageSrc="/images/dousiyowan.png" />
+        <ModalFrame title={t('zinbutsu.modalTitle')} text={t('zinbutsu.modalText')} onClose={handleModalClose} imageSrc="/images/dousiyowan.png" />
       )}
       <div id="inputarea">
-        <p style={{ textAlign: "center" }}>自分の使っている言葉のほかの表現を知って、<br />気に入るものがあったら、自分の作文に使ってみよう！</p>
+        <p style={{ textAlign: "center" }}>{t('zinbutsu.introText1')}<br />{t('zinbutsu.introText2')}</p>
         <br />
         <form ref={formRef} onSubmit={handleSubmit}>
           <select value={grade} onChange={handleGradeChange}>
-            <option value="s1">小学1年生</option>
-            <option value="s2">小学2年生</option>
-            <option value="s3">小学3年生</option>
-            <option value="s4">小学4年生</option>
-            <option value="s5">小学5年生</option>
-            <option value="s6">小学6年生</option>
-            <option value="t1">中学1年生</option>
-            <option value="t2">中学2年生</option>
-            <option value="t3">中学3年生</option>
-            <option value="k1">高校1年生</option>
-            <option value="k2">高校2年生</option>
-            <option value="k3">高校3年生</option>
+            <option value="s1">{t('zinbutsu.s1')}</option>
+            <option value="s2">{t('zinbutsu.s2')}</option>
+            <option value="s3">{t('zinbutsu.s3')}</option>
+            <option value="s4">{t('zinbutsu.s4')}</option>
+            <option value="s5">{t('zinbutsu.s5')}</option>
+            <option value="s6">{t('zinbutsu.s6')}</option>
+            <option value="t1">{t('zinbutsu.t1')}</option>
+            <option value="t2">{t('zinbutsu.t2')}</option>
+            <option value="t3">{t('zinbutsu.t3')}</option>
+            <option value="k1">{t('zinbutsu.k1')}</option>
+            <option value="k2">{t('zinbutsu.k2')}</option>
+            <option value="k3">{t('zinbutsu.k3')}</option>
           </select>
           <br />
           <input
             ref={inputRef}
             name="prompt"
-            placeholder="例：やさしい／人見知り"
+            placeholder={t('zinbutsu.placeholder')}
             required
           />
           <br />
           <button type="submit" onClick={handleClick}>
-            この言葉の表現を探す！
+            {t('zinbutsu.button')}
           </button>
         </form>
         <div id="chat_container" ref={chatContainerRef}>
@@ -214,4 +216,4 @@ const HyougenPage = () => {
   );
 };
 
-export default HyougenPage;
+export default ZinbutsuPage;

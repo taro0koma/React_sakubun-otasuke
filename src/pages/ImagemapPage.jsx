@@ -1,4 +1,5 @@
 import React, { useCallback, useRef, useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import {
   ReactFlow,
   useNodesState,
@@ -6,8 +7,6 @@ import {
   addEdge,
   useReactFlow,
   ReactFlowProvider,
-  Handle,
-  Position,
   Controls,
   MiniMap,
 } from "@xyflow/react";
@@ -21,14 +20,7 @@ import FloatingFrame from "../component/FloatingFrame";
 import NextPageLink from "../component/NextPageLink";
 import { Helmet } from "react-helmet-async";
 import Footer from "./Footer";
-const steps = [
-  { theme: "開いたら出てくる画面", gif: "/images/anm_image1.gif", text: "開いたらまず真ん中くらいに「アイデア」と書いてある四角があるよ！" },
-  { theme: "入力する用意をしよう", gif: "/images/anm_image2.gif", text: "真ん中にある四角をクリックすると上の入力らんに四角（アイデア）の文字が表示されるよ" },
-  { theme: "入力してみよう", gif: "/images/anm_image3.gif", text: "入力らんに書きたいこと（まずはテーマ）を入力しよう" },
-  { theme: "イメージマップでいらないところを削除しよう", gif: "/images/anm_image4.gif", text: "いらない四角の部分をクリックしよう。そのあと「Back Space（Windows）」ボタンをクリックしよう\n※Macの場合は「DELETE」をクリックしてください。" },
-  { theme: "チャット機能を使おう！", gif: "/images/anm_image5.gif", text: "このチャット機能は、思いつかないときに質問してマップをどんどんふくらませるためにあるよ！まず、学年を選択して、作文か読書感想文どちらを書きたいか選ぼう！次に、それぞれそのあとに出てきた質問に対して答えよう。これで質問は終わりだよ！次にチャット機能を実際に使おう。３つの中から自分に合ったものを選んで送ろう！" },
-  // 追加のステップも自由にここに入れられる
-];
+
 const materialColors = [
   "#F44336",
   "#E91E63",
@@ -80,6 +72,11 @@ let id = 1;
 const getId = () => `${id++}`;
 
 const AddNodeOnEdgeDrop = () => {
+  const { t } = useTranslation();
+  const steps = t('imagemapPage.steps', { returnObjects: true }).map((step, index) => ({
+    ...step,
+    gif: `/images/anm_image${index + 1}.gif`
+  }));
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const [selectedNodeId, setSelectedNodeId] = useState(null); // 選択されたノードのID
@@ -90,12 +87,6 @@ const AddNodeOnEdgeDrop = () => {
   const [nodeEdgeInfo, setNodeEdgeInfo] = useState(""); // ノードとエッジ情報を表示するためのステート
   const [active, setActive] = useState(false);
   const [zenactive, setZenactive] = useState(false);
-  const inputRef = useRef(null);
-  const formRef = useRef(null);
-  const [messages, setMessages] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [loadingComplete, setLoadingComplete] = useState(false);
-  const chatContainerRef = useRef(null);
   const [nodeAdded, setNodeAdded] = useState(false);
   const [showFrame, setShowFrame] = useState(false); // フレームの表示状態を管理
 
@@ -105,8 +96,6 @@ const AddNodeOnEdgeDrop = () => {
   const handleCloseFrame = () => {
     setShowFrame(false);
   }
-
-
 
   const classToggle = () => {
     setActive(!active);
@@ -263,12 +252,12 @@ const AddNodeOnEdgeDrop = () => {
 
   return (
     <div style={{position:"absolute"}} className={`imagemapimagemap ${zenactive ? "zengamen" : ""}`}>
-      <Helmet><title>イメージマップ作成ツール | 作文おたすけアプリ</title></Helmet>
+      <Helmet><title>{t('imagemapPage.helmet')}</title></Helmet>
       <style>{style}</style>
       <div className={showFrame ? "background" : ""}>
       {showFrame && <FloatingFrame steps={steps} onClose={handleCloseFrame}/>}</div>
       <div className="notimagemap">
-      <Tabs pageTitle="イメージマップ作成ツール" contents="imagemapmake" />
+      <Tabs pageTitle={t('imagemapPage.title')} contents="imagemapmake" />
       </div>
       <div
         className="wrapper"
@@ -276,19 +265,19 @@ const AddNodeOnEdgeDrop = () => {
         style={{ width: "100%", height: "500px", position: "relative" }}
       > <div className={`notimagemap app-container ${showFrame ? 'blur-background' : ''}`} style={{textAlign:"center"}}>
         <button onClick={handleShowFrame} className="howa">
-          イメージマップ作成ツールのつかい方
+          {t('imagemapPage.howToButton')}
         </button>
         </div>
         <div className="node-input" style={{textAlign:"center"}}>
           <label htmlFor="node-label" style={{ textAlign: "center" }}>
-            ▼　ここに入力するとマップにかきこめるよ！　▼
+            {t('imagemapPage.inputLabel')}
           </label>
           <input
             id="node-label"
             type="text"
             value={nodeLabel}
             onChange={onLabelChange}
-            placeholder="マップのアイデア・・｜"
+            placeholder={t('imagemapPage.inputPlaceholder')}
             disabled={selectedNodeId === null} // ノードが選択されていないときは入力を無効にする
             className="nodebox"
           />
@@ -311,7 +300,7 @@ const AddNodeOnEdgeDrop = () => {
           <Controls />
           <MiniMap />
           <DownloadButton/>
-          <button onClick={zenGamen} style={{left:0,zIndex:"2147483647",position:"absolute"}}>{zenactive ? "がめんをもどす" : "がめんを大きく"}</button>
+          <button onClick={zenGamen} style={{left:0,zIndex:"2147483647",position:"absolute"}}>{zenactive ? t('imagemapPage.exitFullscreenButton') : t('imagemapPage.fullscreenButton')}</button>
         </ReactFlow>
         <div className="notimagemap">
         <div
@@ -319,7 +308,7 @@ const AddNodeOnEdgeDrop = () => {
         >
           {/* {nodeEdgeInfo} */}
            <button onClick={classToggle} className="akesimebutton" style={{height:"100%",textAlign:"center",position:"relative"}}>
-            <div style={{display:"inline-block",writingMode:"vertical-rl",position:"absolute",left:"50%",transform:"translateX(-50%)"}}>{active ? <>◀ ひらく ◀</> : <>▶ とじる ▶</>}</div>
+            <div style={{display:"inline-block",writingMode:"vertical-rl",position:"absolute",left:"50%",transform:"translateX(-50%)"}}>{active ? <>{t('imagemapPage.openButton')}</> : <>{t('imagemapPage.closeButton')}</>}</div>
           </button>
           
           <ChatBot imagemap1={nodeEdgeInfo}/>

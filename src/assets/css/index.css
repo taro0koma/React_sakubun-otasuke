@@ -680,7 +680,6 @@ td{
 }
 .container h3{
   margin: 10px 0 0 0;
-  display: inline;
   font-size: 3rem;
 }
 .container:has(.zengamen) {
@@ -1286,8 +1285,7 @@ html {
   }
   .container h3{
     margin: 10px 0 0 0;
-    display: inline;
-    font-size: 1.2em;
+    font-size: 1.6em;
   }
 }
 .genkouimage img{
@@ -1826,4 +1824,9 @@ td:last-child{
 
 .submit-button {
   margin: 40px 0 !important;
+}
+
+.content-block .mini-text,.content-blocktwo .mini-text{
+    text-align: left;
+    width: 400px;
 }

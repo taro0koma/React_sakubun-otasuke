@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import Tabs from "../component/Tabs";
 import ModalFrame from "../component/ModalFrame";
 import PreviousAndNext from "../component/PreviousAndNext";
@@ -9,6 +10,7 @@ import Footer from "./Footer";
 import { GiRhinocerosHorn } from "react-icons/gi";
 
 const StylePage = () => {
+  const { t } = useTranslation();
 
   const copyToClipboard = (textToCopy) => {
     navigator.clipboard.writeText(textToCopy)
@@ -97,7 +99,7 @@ const StylePage = () => {
     } について書くための段落の組み立てアイデアを作ってみます。`;
     // addAnswer(userMemo, false);
     setLoading([...loading, { role: 'ai', content: <div className="loading yomikomihyougen"> <div style={{height:"80%",maxWidth:"100vw"}}><AnimationKomawanPage /></div>
-            <p style={{fontSize:20,fontWeight:900}}><h2><b>SAKUBUN OTASUKE</b></h2>読み込み中・・・</p></div> }])
+            <p style={{fontSize:20,fontWeight:900}}><h2><b>SAKUBUN OTASUKE</b></h2>{t('danraku.loading')}</p></div> }])
     
 
     try {
@@ -118,9 +120,7 @@ const StylePage = () => {
       } else {
         setLoading([...loading, { role: 'ai', content:""}])
         const err = await response.text();
-        setMessage(
-          "段落の組み立て作成がうまくいきませんでした。もう一度入力してください。"
-        );
+        setMessage(t('danraku.error'));
         alert(err);
       }
       // const answerArrayString = result.choices[0].text.trim();
@@ -165,12 +165,12 @@ const StylePage = () => {
         <div className="sensei">
         {isModalOpen && (
         <ModalFrame
-          title="サイ先生"
-          buttonName="閉じる"
+          title={t('danraku.teacherSai')}
+          buttonName={t('close')}
           text=""
           onClose={handleModalClose}
           imageSrc="/images/saisensei.png"
-          midashi="ものごとをじゅんじょよくつたえる作文をかんがえるよ"
+          midashi={t('danraku.saiSenseiMidashi')}
           />
       )}
         </div>
@@ -182,12 +182,12 @@ const StylePage = () => {
         <div className="sensei">
         {isModalOpen && (
         <ModalFrame
-          title="リス先生"
-          buttonName="閉じる"
+          title={t('danraku.teacherRisu')}
+          buttonName={t('close')}
           text=""
           onClose={handleModalClose}
           imageSrc="/images/risusensei.png"
-          midashi="いいたいことのまとめをだいじにして作文をかんがえるよ"
+          midashi={t('danraku.risuSenseiMidashi')}
           />
       )}
         </div>
@@ -199,12 +199,12 @@ const StylePage = () => {
         <div className="sensei">
         {isModalOpen && (
         <ModalFrame
-          title="ライオン先生"
-          buttonName="閉じる"
+          title={t('danraku.teacherRaion')}
+          buttonName={t('close')}
           text=""
           onClose={handleModalClose}
           imageSrc="/images/raionsensei.png"
-          midashi="じぶんらしさを出す作文をかんがえるよ"
+          midashi={t('danraku.raionSenseiMidashi')}
           />
       )}
         </div>
@@ -237,21 +237,21 @@ const StylePage = () => {
       //作文の場合
       return (
         <>
-          <h5>テーマを記入してね</h5>
+          <h5>{t('danraku.themeLabel')}</h5>
           <textarea 
           onChange={(e) => {
             InputOnChange("sTheme", e.target.value);
           }}
           value={formObj.sTheme}
-          placeholder="テーマ"
+          placeholder={t('danraku.themePlaceholder')}
           />
-          <h5>そのテーマに合わせて<br/>どんなことを書きたいか4つ記入してね</h5>
+          <h5 dangerouslySetInnerHTML={{ __html: t('danraku.wantsLabel') }} />
           <textarea
             onChange={(e) => {
               InputOnChange("sFirst", e.target.value);
             }}
             value={formObj.sFirst}
-            placeholder="１番目に書きたいこと"
+            placeholder={t('danraku.wants1Placeholder')}
           />
           <br />
           <textarea
@@ -259,7 +259,7 @@ const StylePage = () => {
               InputOnChange("sSecond", e.target.value);
             }}
             value={formObj.sSecond}
-            placeholder="２番目に書きたいこと"
+            placeholder={t('danraku.wants2Placeholder')}
           />
           <br />
           <textarea
@@ -267,7 +267,7 @@ const StylePage = () => {
               InputOnChange("sThird", e.target.value);
             }}
             value={formObj.sThird}
-            placeholder="３番目に書きたいこと"
+            placeholder={t('danraku.wants3Placeholder')}
           />
           <br/>
           <textarea
@@ -275,7 +275,7 @@ const StylePage = () => {
               InputOnChange("sFo", e.target.value);
             }}
             value={formObj.sFo}
-            placeholder="４番目に書きたいこと"
+            placeholder={t('danraku.wants4Placeholder')}
           />
         </>
       );
@@ -298,87 +298,67 @@ const StylePage = () => {
       }以下の年齢の子供が読んだり書いたりできるようにリライトする。 5.必ず"一つ一つ"の提案を「～～のようなことを書く段落にするのはどうでしょうか」と書く。）、const answer=[];の形式で日本語の値のみの配列を記載してください(これ一番大事！)。配列のコード以外の文章やアドバイスは完全に省いてください。`;
       return (
         <>
-        <h5>本の種類を選んでね</h5>
+        <h5>{t('danraku.bookTypeLabel')}</h5>
           <select
             onChange={(e) => {
               InputOnChange("bookReviewFirst", e.target.value);
             }}
             value={formObj.bookReviewFirst}
           >
-            <option value="">本の種類</option>
-            <option value="愉快な内容の本">愉快な内容の本</option>
-            <option value="有名な人物の伝記の本">有名な人物の伝記の本</option>
-            <option value="実際にあった話">実際にあった話</option>
-            <option value="冒険をする本">冒険をする本</option>
-            <option value="悲しいことが起こる本">悲しいことが起こる本</option>
-            <option value="怖い怪談についての本">怖い怪談についての本</option>
-            <option value="困りごとに立ち向かう本">
-              困りごとに立ち向かう本
-            </option>
-            <option value="食べ物の作り方">食べ物の作り方</option>
-            <option value="科学について書かれた本">
-              科学について書かれた本
-            </option>
-            <option value="地球や環境について書かれた本">
-              地球や環境について書かれた本
-            </option>
-            <option value="歴史について書かれた本">
-              歴史について書かれた本
-            </option>
-            <option value="ワクワクする本">ワクワクする本</option>
-            <option value="自分に似た人物が登場する本">
-              自分に似た人物が登場する本
-            </option>
-            <option value="図鑑">図鑑</option>
-            <option value="クイズの本">クイズの本</option>
-            <option value="想像上の人物の日常が描かれた本">
-              想像上の人物の日常が描かれた本
-            </option>
-            <option value="不思議な世界に行く話">不思議な世界に行く話</option>
+            <option value="">{t('danraku.bookTypeDefault')}</option>
+            <option value="愉快な内容の本">{t('danraku.bookType1')}</option>
+            <option value="有名な人物の伝記の本">{t('danraku.bookType2')}</option>
+            <option value="実際にあった話">{t('danraku.bookType3')}</option>
+            <option value="冒険をする本">{t('danraku.bookType4')}</option>
+            <option value="悲しいことが起こる本">{t('danraku.bookType5')}</option>
+            <option value="怖い怪談についての本">{t('danraku.bookType6')}</option>
+            <option value="困りごとに立ち向かう本">{t('danraku.bookType7')}</option>
+            <option value="食べ物の作り方">{t('danraku.bookType8')}</option>
+            <option value="科学について書かれた本">{t('danraku.bookType9')}</option>
+            <option value="地球や環境について書かれた本">{t('danraku.bookType10')}</option>
+            <option value="歴史について書かれた本">{t('danraku.bookType11')}</option>
+            <option value="ワクワクする本">{t('danraku.bookType12')}</option>
+            <option value="自分に似た人物が登場する本">{t('danraku.bookType13')}</option>
+            <option value="図鑑">{t('danraku.bookType14')}</option>
+            <option value="クイズの本">{t('danraku.bookType15')}</option>
+            <option value="想像上の人物の日常が描かれた本">{t('danraku.bookType16')}</option>
+            <option value="不思議な世界に行く話">{t('danraku.bookType17')}</option>
           </select>
-
-          {/* <textarea
-          onChange={(e) => {
-            InputOnChange("bookReviewFirst", e.target.value);
-          }}
-          value={formObj.bookReviewFirst}
-          placeholder="本の内容"
-        /> */}
           <br />
-          <h5>その本にはどんなことが書かれていたかな</h5>
+          <h5>{t('danraku.arasujiLabel')}</h5>
           <textarea onChange={(e)=>{
              InputOnChange("bookReviewArasuji", e.target.value);
           }}
           cols="10"//横幅
           rows="5"//行数
-          placeholder="あらすじ" />
-          <h5>心に残った部分は何かな</h5>
+          placeholder={t('danraku.arasujiPlaceholder')} />
+          <h5>{t('danraku.kokoroLabel')}</h5>
           <textarea
             onChange={(e) => {
               InputOnChange("bookReviewSecond", e.target.value);
             }}
             value={formObj.bookReviewSecond}
-            placeholder="印象に残ったところ"
+            placeholder={t('danraku.kokoroPlaceholder')}
           />
           <br />
           <br />
-          <h5>本の表紙または<br/>読む前に題名から考えたこと<br/>について書いてね</h5>
+          <h5 dangerouslySetInnerHTML={{ __html: t('danraku.hyoushiLabel') }} />
           <textarea
             onChange={(e) => {
               InputOnChange("bookReviewThing", e.target.value);
             }}
             value={formObj.bookReviewThing}
-            placeholder="表紙の様子/本の題名から考えたこと"
+            placeholder={t('danraku.hyoushiPlaceholder')}
           />
           <br />
           <br />
-          <h5>上のほかに書きたいことを記入してね</h5>
+          <h5>{t('danraku.otherLabel')}</h5>
           <textarea
             onChange={(e) => {
               InputOnChange("bookReviewThird", e.target.value);
             }}
             value={formObj.bookReviewThird}
-            placeholder="書きたいこと"
+            placeholder={t('danraku.otherPlaceholder')}
           />
         </>
       );
@@ -417,8 +397,8 @@ const StylePage = () => {
         <table>
           <thead>
             <tr>
-              <th style={{ whiteSpace: "nowrap" }} className="kakusitai">段落番号</th>
-              <th>こんな内容をふくらませて段落を書いてみるのがおすすめ！</th>
+              <th style={{ whiteSpace: "nowrap" }} className="kakusitai">{t('danraku.tableHeader1')}</th>
+              <th>{t('danraku.tableHeader2')}</th>
             </tr>
           </thead>
           <tbody id="danraku-answer">
@@ -426,13 +406,13 @@ const StylePage = () => {
           <tr key={index} className="animated-row">
             {index === 0 && (
               <>
-              <td className="td-index"><span className="danraku-theme">テーマ<br/><div style={{fontSize:15}}>おすすめ</div></span></td>
+              <td className="td-index"><span className="danraku-theme">{t('danraku.tableTheme')}<br/><div style={{fontSize:15}}>{t('danraku.tableThemeRecommend')}</div></span></td>
               <td className="td-item">
                 {item}
                 <br />
                 {/**indexが0ではないときだけボタンを表示させる */}
                 {index > 0 && (
-                  <button onClick={() => copyToClipboard(item)} style={{ marginLeft: "10px" }}>この段落をコピーする</button>
+                  <button onClick={() => copyToClipboard(item)} style={{ marginLeft: "10px" }}>{t('danraku.copyButton')}</button>
                 )}
                 
               </td>
@@ -447,7 +427,7 @@ const StylePage = () => {
                 <br />
                 {/**indexが0ではないときだけボタンを表示させる */}
                 {index > 0 && (
-                  <button onClick={() => copyToClipboard(item)} style={{ marginLeft: "10px" }}>この段落をコピーする</button>
+                  <button onClick={() => copyToClipboard(item)} style={{ marginLeft: "10px" }}>{t('danraku.copyButton')}</button>
                 )}
                 
               </td>
@@ -455,15 +435,6 @@ const StylePage = () => {
             )}
           </tr>
         ))}
-            {/* {dataArray.map((item, index) => (
-          // setTimeout(() =>{
-            <tr key={index} className={"danrakumoji"+index}>
-            <td className="k">{index + 1}</td>
-            <td className="d">{item}</td>
-          </tr>
-          // },1000)
-          
-        ))} */}
           </tbody>
         </table>
       );
@@ -471,8 +442,7 @@ const StylePage = () => {
   };
   const honbun = (
     <>
-      何を書くかわかんないときはマップがおすすめ！<br />
-      試しにやってみよう！
+      <span dangerouslySetInnerHTML={{ __html: t('danraku.prevNextHonbun') }} />
     </>
   );
 
@@ -481,28 +451,28 @@ const StylePage = () => {
   return (
     <div className="container">
       <Helmet>
-        <title>段落の組み立て | 作文おたすけアプリ</title>
+        <title>{t('danraku.helmet')}</title>
       </Helmet>
       {loading.map((chat, index) => (
           <div key={index} className="loadingDanraku">
             <p>{chat.content}</p>
           </div>
         ))}
-      <Tabs pageTitle="段落の組み立て" contents="danraku"/>
-      <p>イメージマップなどで書きたいことが決まったら<br/>書きたいことをどんな順番で書けばいいか教えてもらおう</p>
+      <Tabs pageTitle={t('danraku.title')} contents="danraku"/>
+      <p>{t('danraku.intro1')}<br/>{t('danraku.intro2')}</p>
       {isModalOpen&&formObj.sensei===" " && (
         <ModalFrame
-          title="段落の組み立て"
-          text="イメージマップなどで書きたいことが決まったら書きたいことをどんな順番で書けばいいか教えてもらおう"
+          title={t('danraku.modalTitle')}
+          text={t('danraku.modalText')}
           onClose={handleModalClose}
           imageSrc="/images/danrakuwan.png"
-          midashi="書きたいことが決まったら自分のぴったりの文の書き方を見つけよう"
+          midashi={t('danraku.modalMidashi')}
           />
       )}
-      <b><p>気に入ったものはどこかにコピーしておこう！</p></b>
+      <b><p>{t('danraku.copyInfo')}</p></b>
       <br />
       <form onSubmit={FormSubmit}>
-        <h5>あなたは何年生ですか？</h5>
+        <h5>{t('danraku.gradeLabel')}</h5>
         <select
           onChange={(e) => {
             InputOnChange("grade", e.target.value);
@@ -510,21 +480,21 @@ const StylePage = () => {
           value={formObj.grade}
           required
         >
-          <option value="grade">学年</option>
-          <option value="s1">小学1年生</option>
-          <option value="s2">小学2年生</option>
-          <option value="s3">小学3年生</option>
-          <option value="s4">小学4年生</option>
-          <option value="s5">小学5年生</option>
-          <option value="s6">小学6年生</option>
-          <option value="t1">中学1年生</option>
-          <option value="t2">中学2年生</option>
-          <option value="t3">中学3年生</option>
-          <option value="k1">高校1年生</option>
-          <option value="k2">高校2年生</option>
-          <option value="k3">高校3年生</option>
+          <option value="grade">{t('danraku.gradeDefault')}</option>
+          <option value="s1">{t('zinbutsu.s1')}</option>
+          <option value="s2">{t('zinbutsu.s2')}</option>
+          <option value="s3">{t('zinbutsu.s3')}</option>
+          <option value="s4">{t('zinbutsu.s4')}</option>
+          <option value="s5">{t('zinbutsu.s5')}</option>
+          <option value="s6">{t('zinbutsu.s6')}</option>
+          <option value="t1">{t('zinbutsu.t1')}</option>
+          <option value="t2">{t('zinbutsu.t2')}</option>
+          <option value="t3">{t('zinbutsu.t3')}</option>
+          <option value="k1">{t('zinbutsu.k1')}</option>
+          <option value="k2">{t('zinbutsu.k2')}</option>
+          <option value="k3">{t('zinbutsu.k3')}</option>
         </select>
-        <h5>アドバイスもらう先生</h5>
+        <h5>{t('danraku.teacherLabel')}</h5>
         <select
           onChange={(e) => {
             InputOnChange("sensei", e.target.value);
@@ -532,20 +502,17 @@ const StylePage = () => {
           value={formObj.sensei}
           required
         >
-          <option value="未入力状態">選択</option>
-          <option value="DESC法">
-            <img src="../assets/images/rhino_simple.svg" width="24" height="24" alt="" />
-            サイ先生
-            </option>
-          <option value="PREP法">🐿️リス先生</option> {/**PREP法？ */}
-          <option value="一段落目が個性的なPREP法">🦁ライオン先生</option> {/**個性的が好きなライオン先生 */}
+          <option value="未入力状態">{t('danraku.teacherDefault')}</option>
+          <option value="DESC法">{t('danraku.teacherSai')}</option>
+          <option value="PREP法">{t('danraku.teacherRisu')}</option>
+          <option value="一段落目が個性的なPREP法">{t('danraku.teacherRaion')}</option>
         </select>
         <br />
           <div className="sensei">
             {senseierabi()}
           </div>
         <br />
-        <h5>作文のタイプ</h5>
+        <h5>{t('danraku.typeLabel')}</h5>
         <select
           onChange={(e) => {
             InputOnChange("type", e.target.value);
@@ -553,22 +520,22 @@ const StylePage = () => {
           value={formObj.type}
           required
         >
-          <option value="">選択</option>
-          <option value="bookReview">読書感想文</option>
-          <option value="composition">テーマのある作文</option>
+          <option value="">{t('danraku.typeDefault')}</option>
+          <option value="bookReview">{t('danraku.typeBookReview')}</option>
+          <option value="composition">{t('danraku.typeComposition')}</option>
         </select>
         <br />
         {renderAdditionalQuestions()}
 
         <br />
         <br />
-        <button type="submit">段落の組み立て教えて！</button>
+        <button type="submit">{t('danraku.submitButton')}</button>
         <p>{messages}</p>
       </form>
 
       {hyou()}
       <NextPageLink imairu="danraku1"/>
-      <PreviousAndNext midashi="書きたいことが決まっていない？" honbun={honbun} buttontext="▶　マップ作ってみる" buttonurl="/map"/>
+      <PreviousAndNext midashi={t('danraku.prevNextMidashi')} honbun={honbun} buttontext={t('danraku.prevNextButton')} buttonurl="/map"/>
       <div className="spacer" style={{height:400}}></div>
       <Footer/>
     </div>

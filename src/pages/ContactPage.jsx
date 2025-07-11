@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { createClient } from "@supabase/supabase-js";
 import Tabs from "../component/Tabs";
 import ModalFrame from "../component/ModalFrame";
@@ -51,6 +52,7 @@ const getMockAIResponse = (option, grade) => {
 };
 
 const ContactPage = () => {
+  const { t } = useTranslation();
   const [dataArray, setDataArray] = useState([]);
   const [visibleRows, setVisibleRows] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(true);
@@ -122,10 +124,10 @@ const ContactPage = () => {
             return line.replace(/^["']|["']$/g, '');
           });
         
-        return lines.length > 0 ? lines : ["データの解析に失敗しました"];
+        return lines.length > 0 ? lines : [t('contact.errorParse')];
       } catch (fallbackError) {
         console.error("代替解析もエラー:", fallbackError);
-        return ["データの解析に失敗しました"];
+        return [t('contact.errorParse')];
       }
     }
   };
@@ -157,7 +159,7 @@ const ContactPage = () => {
 
       if (error) {
         console.error("フェッチでエラーが発生しました：", error);
-        setDataArray(["データの取得に失敗しました。"]);
+        setDataArray([t('contact.errorFetch')]);
         setIsLoading(false);
       } else {
         setKimochis(data);
@@ -165,13 +167,13 @@ const ContactPage = () => {
           const examples = data.map((kimochi) => kimochi.examples).join("\n");
           await fetchAIResponse(option, grade, examples);
         } else {
-          setDataArray(["該当するデータが見つかりませんでした。"]);
+          setDataArray([t('contact.errorNoData')]);
           setIsLoading(false);
         }
       }
     } catch (error) {
       console.error("データベースアクセスエラー：", error);
-      setDataArray(["データの取得中にエラーが発生しました。"]);
+      setDataArray([t('contact.errorAccess')]);
       setIsLoading(false);
     }
   }
@@ -210,15 +212,11 @@ const ContactPage = () => {
         
       } else {
         console.error("AIのレスポンスの取得に失敗しました。");
-        setDataArray([
-          "AIからの回答を取得できませんでした。しばらくしてからもう一度お試しください。"
-        ]);
+        setDataArray([t('contact.errorAIResponse')]);
       }
     } catch (error) {
       console.error("AIのレスポンス取得中にエラーが発生しました：", error);
-      setDataArray([
-        "AIとの通信中にエラーが発生しました。ネットワーク接続をご確認ください。"
-      ]);
+      setDataArray([t('contact.errorAIComm')]);
     } finally {
       setIsLoading(false);
     }
@@ -245,24 +243,24 @@ const ContactPage = () => {
       <div className="noise-background"></div>
 
       <Helmet>
-        <title>気持ちや感想のいいかえ | 作文おたすけアプリ</title>
+        <title>{t('contact.helmet')}</title>
       </Helmet>
 
-      <Tabs pageTitle="気持ちや感想のいいかえ" contents="kimoti" />
+      <Tabs pageTitle={t('contact.title')} contents="kimoti" />
 
       {isModalOpen && (
         <ModalFrame
-          title="気持ちや感想のいいかえの使い方"
-          text="「気持ちや感想のいいかえ」で、 どんないいかえ かをを知ることができます。自分の書いてみた文章の中にいいかえてみたい言葉はありますか？"
+          title={t('contact.modalTitle')}
+          text={t('contact.modalText')}
           onClose={handleModalClose}
           imageSrc="/images/dousiyowan.png"
         />
       )}
 
       <p className="intro-text">
-        自分の使っている言葉のほかにいいかえを知って、
+        {t('contact.introText1')}
         <br />
-        気に入るものがあったら、自分の作文に使ってみよう。
+        {t('contact.introText2')}
       </p>
 
       {/* Local環境の場合は環境表示 */}
@@ -277,7 +275,7 @@ const ContactPage = () => {
             fontSize: "14px",
           }}
         >
-          <strong>開発環境モード:</strong> 仮データを使用しています
+          <strong>{t('contact.devMode')}</strong>
         </div>
       )}
 
@@ -285,7 +283,7 @@ const ContactPage = () => {
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="dropdownOption" className="form-label">
-              知りたい気持ち・感想はなにか選んでね！
+              {t('contact.formLabel1')}
             </label>
             <select
               id="dropdownOption"
@@ -294,18 +292,18 @@ const ContactPage = () => {
               className="form-select"
               required
             >
-              <option value="">気持ちや感想を選択してね</option>
-              <option value="ほっとした">ほっとした</option>
-              <option value="おどろいた">おどろいた</option>
-              <option value="うれしい">うれしい</option>
-              <option value="感激">感激</option>
-              <option value="こわい">こわい</option>
+              <option value="">{t('contact.formSelect1Default')}</option>
+              <option value="ほっとした">{t('contact.formSelect1Option1')}</option>
+              <option value="おどろいた">{t('contact.formSelect1Option2')}</option>
+              <option value="うれしい">{t('contact.formSelect1Option3')}</option>
+              <option value="感激">{t('contact.formSelect1Option4')}</option>
+              <option value="こわい">{t('contact.formSelect1Option5')}</option>
             </select>
           </div>
 
           <div className="form-group">
             <label htmlFor="dropdownGrade" className="form-label">
-              あなたは何年生ですか？
+              {t('contact.formLabel2')}
             </label>
             <select
               id="dropdownGrade"
@@ -314,39 +312,35 @@ const ContactPage = () => {
               className="form-select"
               required
             >
-              <option value="">学年を選択してね</option>
-              <option value="s1">小学1年生</option>
-              <option value="s2">小学2年生</option>
-              <option value="s3">小学3年生</option>
-              <option value="s4">小学4年生</option>
-              <option value="s5">小学5年生</option>
-              <option value="s6">小学6年生</option>
-              <option value="t1">中学1年生</option>
-              <option value="t2">中学2年生</option>
-              <option value="t3">中学3年生</option>
-              <option value="k1">高校1年生</option>
-              <option value="k2">高校2年生</option>
-              <option value="k3">高校3年生</option>
-              <option value="oldPeople">大人</option>
+              <option value="">{t('contact.formSelect2Default')}</option>
+              <option value="s1">{t('contact.formSelect2Option1')}</option>
+              <option value="s2">{t('contact.formSelect2Option2')}</option>
+              <option value="s3">{t('contact.formSelect2Option3')}</option>
+              <option value="s4">{t('contact.formSelect2Option4')}</option>
+              <option value="s5">{t('contact.formSelect2Option5')}</option>
+              <option value="s6">{t('contact.formSelect2Option6')}</option>
+              <option value="t1">{t('contact.formSelect2Option7')}</option>
+              <option value="t2">{t('contact.formSelect2Option8')}</option>
+              <option value="t3">{t('contact.formSelect2Option9')}</option>
+              <option value="k1">{t('contact.formSelect2Option10')}</option>
+              <option value="k2">{t('contact.formSelect2Option11')}</option>
+              <option value="k3">{t('contact.formSelect2Option12')}</option>
+              <option value="oldPeople">{t('contact.formSelect2Option13')}</option>
             </select>
           </div>
 
           <button type="submit" className="submit-button" disabled={isLoading}>
-            {isLoading ? "かんがえ中" : "送信！"}
+            {isLoading ? t('contact.submitButtonLoading') : t('contact.submitButton')}
           </button>
         </form>
 
         {submittedOption && (
           <div className="ai-response-container">
             <h2 className="ai-response-header">
-              「<strong>{submittedOption}</strong>」をいいかえてみる！
+              {t('contact.responseHeader', { submittedOption })}
             </h2>
             {isLoading ? (
-              <div className="loading-message">
-                かんがえ中だよ💭
-                <br />
-                ちょっと待ってね。
-              </div>
+              <div className="loading-message" dangerouslySetInnerHTML={{ __html: t('contact.loadingMessage') }} />
             ) : (
               <div className="ai-response-content">
                 {dataArray.map((item, index) => (
