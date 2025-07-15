@@ -158,6 +158,7 @@ const ContactPage = () => {
         setKimochis(data);
         if (data.length > 0) {
           const examples = data.map((kimochi) => t("language")=="ja"?kimochi.examples_ja:(t("language")=="en"? kimochi.examples_en:kimochi.examples_zh)).join("\n");
+          console.log(`データベースの中身${examples}`);
           await fetchAIResponse(option, grade, examples);
         } else {
           setDataArray([t('contact.errorNoData')]);
@@ -172,7 +173,9 @@ const ContactPage = () => {
   }
 
   async function fetchAIResponse(option, grade, examples) {
+    console.log(`データベースの中身${examples}`);
     const userMessage = `${t("contact.prompt",{option:option})}：\n\n${examples}`;
+    console.log(`プロンプト：${userMessage}`)
 
     try {
       const response = await fetch(
