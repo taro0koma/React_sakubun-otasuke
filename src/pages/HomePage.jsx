@@ -19,40 +19,43 @@ const HomePage = () => {
     {
       imgSrc: `/images/wantyan1.png`,
       id: "komawanpoint1",
+      url: "/map",
+      url2: "/imagemapmake",
       isKomawan: true
     },
     {
       imgSrc: `/images/mapwaku.png`,
-      url: "/map",
-      url2: "/imagemapmake",
       id: "mapfinish",
       isKomawan: false
     },
     {
       imgSrc: `/images/wantyan2.png`,
       id: "komawanpoint2",
+      url: "/danraku",
       isKomawan: true
     },
     {
       imgSrc: "/images/wakatta.png",
-      url: "/danraku",
       id: "uwao",
       isKomawan: false
     },
     {
       imgSrc: "/images/wantyan3.png",
       id: "komawanpoint3",
+      url: "/osusume",
       isKomawan: true
     },
     {
       imgSrc: "/images/uwao.png",
-      url: "/osusume",
       id: "surassura",
       isKomawan: false
     },
     {
       imgSrc: "/images/wantyan4.png",
       id: "komawanpoint4",
+      url: "/hyougen",
+      url2: "/kimoti",
+      url3: "/zinbutsu",
       isKomawan: true
     },
     {
@@ -62,9 +65,6 @@ const HomePage = () => {
     },
     {
       imgSrc: "/images/iikaeniodoroki.png",
-      url: "/hyougen",
-      url2: "/kimoti",
-      url3: "/zinbutsu",
       id: "konoiikaeyoi",
       isKomawan: false
     },
@@ -96,7 +96,7 @@ const HomePage = () => {
       <Tabs contents="home" />
       <section className="hero-section"> {/* 新しいセクションを追加 */}
         <div className="hero-content">
-          <img src="/images/coma.png" alt="ロゴ" className="app-logo" /> {/* app-logo クラスを追加 */}
+          <img src="/images/spacer.png" alt="ロゴ" className="app-logo" style={{height:180}} /> {/* app-logo クラスを追加 */}
           <h1>{t('homeTitle')}</h1> {/* h2をh1に変更し、より目立たせる */}
           <p>
             {t('homeDescription')}

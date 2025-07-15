@@ -212,6 +212,10 @@ h1, h2, h3 {
   transition: background-color 0.3s ease, transform 0.2s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   font-weight: bold;
+  white-space: normal;
+  word-break: break-word;
+  max-width: 100%;
+  line-height: 1.5;
 }
 
 .tobubutton:hover {
@@ -255,6 +259,7 @@ h1, h2, h3 {
 
   .content-text {
     font-size: 0.96em;
+    padding: 0px 42px;
   }
 
   .button-group {

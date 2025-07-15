@@ -1,5 +1,6 @@
 {
-  "homeTitle": "Let's make writing essays more fun for everyone.",
+  "language":"en",
+  "homeTitle": "Let's make writing essays more fun.",
   "homeDescription": "This is an app like a writing class that helps you when you are not good at writing.You might even start to enjoy writing essays and book reports that you didn't like before!",
   "tabs": {
     "home": "Home",
@@ -30,47 +31,48 @@
         "titleText": "Komawan-chan Point 1",
         "altText": "Komawan-chan Point 1",
         "heading": "So, Komawan-chan came to teach the points.\n'First, let's draw a map.'",
-        "text": "Let's expand the content by connecting things that come to mind from a single theme on the map!\nYou will come up with what to write one after another."
+        "text": "Let's expand the content by connecting things that come to mind from a single theme on the map!\nYou will come up with what to write one after another.",
+        "urlText": "▶ To how to make a map",
+        "urlText2": "▶ Let's try making an image map"
       },
       {
         "titleText": "Image Map",
         "altText": "I'm starting to get ideas of what I want to write!",
         "heading": "\" I'm starting to get ideas of what I want to write!\" says K.\n\nK started drawing a map enthusiastically.",
-        "text": "When you write one theme in the middle, it becomes easier to get an image than when you are thinking in your head, and every time you add one, related words spring up.",
-        "urlText": "▶ To how to make a map",
-        "urlText2": "▶ Let's try making an image map"
+        "text": "When you write one theme in the middle, it becomes easier to get an image than when you are thinking in your head, and every time you add one, related words spring up."
       },
       {
         "titleText": "Komawan-chan Point 2",
         "altText": "Komawan-chan Point 2",
         "heading": "Komawan-chan's point!\n\nLet's decide what to write in each paragraph of the essay by assembling the paragraphs.",
-        "text": "Even if you decide what to write, you don't know how to write it... We will help you with the app."
+        "text": "Even if you decide what to write, you don't know how to write it... We will help you with the app.",
+        "urlText": "▶ Try using paragraph assembly"
       },
       {
         "titleText": "Paragraph Assembly",
         "altText": "I figured out how to write it",
         "heading": "'I figured out how to write it!' says K.",
-        "text": "Even if you know what to write, you get stuck because you don't know how to write it.\nSo, it would be convenient to have something to teach you.",
-        "urlText": "▶ Try using paragraph assembly"
-      },
+        "text": "Even if you know what to write, you get stuck because you don't know how to write it.\nSo, it would be convenient to have something to teach you."      },
       {
         "titleText": "Komawan-chan Point 3",
         "altText": "Komawan-chan Point 3",
         "heading": "Komawan-chan's point!\n\nLet's try writing a sentence using what we've just done!",
-        "text": "To revise your own sentence, you have to write it first, so let's just try writing a sentence for now."
+        "text": "To revise your own sentence, you have to write it first, so let's just try writing a sentence for now.",
+        "urlText": "▶ About the manuscript paper creation sheet"
       },
       {
         "titleText": "Manuscript Paper Creation Sheet",
         "altText": "I feel like I can write more smoothly and better than before!!",
         "heading": "'I feel like I can write more smoothly and better than before!!' says K. Their hand movements are fast.",
-        "text": "Essays and book reports have a limit on the number of pages and characters. At such times, if there is a site where you can write as if you were writing on manuscript paper, you can easily check it.",
-        "urlText": "▶ About the manuscript paper creation sheet"
-      },
+        "text": "Essays and book reports have a limit on the number of pages and characters. At such times, if there is a site where you can write as if you were writing on manuscript paper, you can easily check it."      },
       {
         "titleText": "Komawan-chan Point 4",
         "altText": "Komawan-chan Point 4",
         "heading": "Komawan-chan's point 4!\n'Let's find simple words from 'Finding the perfect expression' and 'Feelings and impressions'!'",
-        "text": "I can only think of simple words, and even though I know they are simple, I often don't know cool words."
+        "text": "I can only think of simple words, and even though I know they are simple, I often don't know cool words.",
+        "urlText": "▶ Finding the perfect expression",
+        "urlText2": "▶ Feelings and impressions",
+        "urlText3": "▶ Words to describe a character's personality"
       },
       {
         "titleText": "Realization",
@@ -81,10 +83,7 @@
         "titleText": "Paraphrasing",
         "altText": "This paraphrase is great!! I didn't know there was such a way of writing.",
         "heading": "'This paraphrase is great!!\nI didn't know there was such a way of writing.'",
-        "text": "By using 'Finding the perfect expression' and 'Paraphrasing feelings and impressions', the essay became easier to understand.\nYour vocabulary will also increase!",
-        "urlText": "▶ Finding the perfect expression",
-        "urlText2": "▶ Feelings and impressions",
-        "urlText3": "▶ Words to describe a character's personality"
+        "text": "By using 'Finding the perfect expression' and 'Paraphrasing feelings and impressions', the essay became easier to understand.\nYour vocabulary will also increase!"
       },
       {
         "titleText": "The End",
@@ -93,7 +92,9 @@
       },
       {
         "heading": "Try using K's recommended tools too!",
-        "urlText": "▶ Check recommended tools"
+        "urlText": "▶ Check recommended tools",
+        "text": "There's a cute app that lets you easily write on digital manuscript paper and create image maps."
+
       }
     ],
     "nav": [
@@ -165,14 +166,15 @@
     "formSelect2Option13": "Adult",
     "submitButton": "Send!",
     "submitButtonLoading": "Thinking",
-    "responseHeader": "Let's try paraphrasing '{submittedOption}'!",
+    "responseHeader": "Let's try paraphrasing '{{submittedOption}}'!",
     "loadingMessage": "Thinking...💭\nPlease wait a moment.",
     "errorFetch": "Failed to retrieve data.",
     "errorNoData": "No corresponding data found.",
     "errorAccess": "An error occurred while retrieving data.",
     "errorAIResponse": "Failed to get a response from the AI. Please try again later.",
     "errorAIComm": "An error occurred while communicating with the AI. Please check your network connection.",
-    "errorParse": "Failed to parse data"
+    "errorParse": "Failed to parse data",
+    "prompt": "Please create 10 expanded phrases that can be used in any situation with the nuance of '{{option}}', and list them in a JavaScript array format 'const answer = [];' with only Japanese values. For example, please fill in placeholders like '3. 〇〇' (e.g., '3. Your text') or '-〇〇な〇〇-' (e.g., '-A [type of] [noun]-') where appropriate in the output."
   },
   "hyougen": {
     "helmet": "Find the perfect expression | Essay Helper App",
@@ -325,6 +327,24 @@
       { "theme": "Let's try typing", "text": "Let's type what you want to write (first the theme) in the input field." },
       { "theme": "Let's delete unnecessary parts of the image map", "text": "Click on the unnecessary square part. Then click the 'Back Space (Windows)' button.\n*For Mac, please click 'DELETE'." },
       { "theme": "Let's use the chat function!", "text": "This chat function is for asking questions when you can't think of anything and expanding the map! First, select your grade and choose whether you want to write an essay or a book report! Next, answer the questions that appear after that. That's all the questions! Next, let's actually use the chat function. Choose one of the three that suits you and send it!" }
+    ],
+    "chatBot": {
+      "label": "Which one do you want to create an imagemap with?",
+      "select1": "Composition",
+      "select2": "Book Report",
+      "backSelectGrade": "Back to Grade Selection"
+    }
+  },
+  "thumbnail":{
+    "title":"What should we try next?",
+    "list": [
+      {"title": "Image Map", "text": "If you can't think of any content, try creating an image map!"},
+      {"title": "Paragraph Construction", "text": "If you don't know how to write, use paragraph construction!"},
+      {"title": "Rephrasing Feelings and Impressions", "text": "When you want to rephrase words, use rephrasing feelings and impressions!"},
+      {"title": "Words to Express Character Personalities", "text": "When you want to rephrase characters, use words that express character personalities!"},
+      {"title": "Cool Opening Line Fortune Slip", "text": "When you want a cool opening, try the opening line fortune slip!"},
+      {"title": "Recommended Tools", "text": "Introducing useful tools for checking character count/page count and creating image maps!"},
+      {"title": "Tips for Essay Writing", "text": "We'll introduce steps and tips!"}
     ]
   }
 }

@@ -168,9 +168,9 @@ const Tabs = ({ pageTitle, contents }) => {
           </h1>
         </a>
         <div>
-          <button onClick={() => changeLanguage('ja')}>日本語</button>
-          <button onClick={() => changeLanguage('en')}>English</button>
-          <button onClick={() => changeLanguage('zh')}>中文</button>
+          <button onClick={() => changeLanguage('ja')} style={{margin:"2px"}}>日本語</button>
+          <button onClick={() => changeLanguage('en')} style={{margin:"2px"}}>English</button>
+          <button onClick={() => changeLanguage('zh')} style={{margin:"2px"}}>中文</button>
         </div>
         <div className="menu-container">
           <div className="menu-toggle" onClick={toggleMenu}>

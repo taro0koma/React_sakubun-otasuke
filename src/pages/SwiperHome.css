@@ -59,17 +59,20 @@
 }
 
 .swiper.swiper-initialized.swiper-horizontal.swiper-backface-hidden{
-  width: 56%;
+  width: 100%;
 }
 .contentsmei{
   font-weight: bold;
   margin: 0 auto;
   margin-bottom: 2px;
   margin-top: 20px;
+  font-size: 1.3em;
 }
 .contentssetumei{
   margin: 0 auto 30px auto;
   line-height: 27px;
+      width: 400px;
+    max-width: 90%;
 }
 p.img{
   margin: auto;
@@ -85,6 +88,6 @@ a{
       height: auto !important;
   }
   .swiper.swiper-initialized.swiper-horizontal.swiper-backface-hidden{
-  width: 80%;
+  width: 100%;
 }
 }

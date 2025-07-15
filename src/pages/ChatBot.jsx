@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import ChatWithOpenAI from '../component/ChatWithOpenAI';  // ChatWithOpenAI コンポーネントをインポート
 import GradeSelection from '../component/AgeSelection';  // GradeSelection コンポーネントをインポート
+import { t } from 'i18next';
 
 const ChatBot = ({imagemap1}) => {
   const [age, setAge] = useState(null);
@@ -34,11 +35,11 @@ const ChatBot = ({imagemap1}) => {
       )}
       {step === 1 && (
         <form onSubmit={handleThemeSubmit}>
-          <label>どっちでイメージマップを作りたい？</label>
-          <button value={theme} onClick={(e) => setTheme("作文")} type="submit">作文</button>
-          <button value={theme} onClick={(e) => setTheme("読書感想文")} type="submit">読書感想文</button>
+          <label>{t("imagemapPage.chatBot.label")}</label>
+          <button value={theme} onClick={(e) => setTheme("作文")} type="submit">{t("imagemapPage.chatBot.select1")}</button>
+          <button value={theme} onClick={(e) => setTheme("読書感想文")} type="submit">{t("imagemapPage.chatBot.select2")}</button>
           <br />
-          <button type="submit" onClick={backSubmit}>学年えらびにもどる</button>
+          <button type="submit" onClick={backSubmit}>{t("imagemapPage.chatBot.backSelectGrade")}</button>
         </form>
       )}
       {step === 2 && (

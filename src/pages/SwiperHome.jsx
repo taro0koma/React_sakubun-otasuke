@@ -69,15 +69,29 @@ const SwiperHome = ({  }) => {
         modules={[Navigation, Autoplay]}
         speed={500}
         loop={true}
-        slidesPerView={1.5}
+        
         centeredSlides={true}
         spaceBetween={40}
         autoplay={{ delay: 3000 }}
         navigation
+        breakpoints={{
+        // 481pxから768pxまでの画面幅の場合
+        481: {
+          slidesPerView:1.5
+        },
+        // 769pxから1024pxまでの画面幅の場合
+        769: {
+          slidesPerView:2
+        },
+        1020: {
+          slidesPerView:2.5
+        },
+      }}
       >
         <SwiperSlide>
         <a href="#komawanpoint1">
-          <p className="img"><img src={text["imagemap"][2]} alt="スライド1" className="popup" /><p className="contentsmei">{text["imagemap"][0]}</p>
+          <p className="img"><img src={text["imagemap"][2]} alt="スライド1" className="popup" />
+          <p className="contentsmei">{text["imagemap"][0]}</p>
           <p className="contentssetumei">{text["imagemap"][1]}</p></p>
           </a>
         </SwiperSlide>

@@ -25,30 +25,17 @@ const isLocalEnvironment = () => {
   );
 };
 
-// Local環境用の仮データ
+// Local環境用の仮データ（文字列形式で返す）
 const getMockAIResponse = (option, grade) => {
   const mockResponses = {
-    ほっとした: [
-      `const answer=["a","b","c","d","e","a","a","a","a","a",]`,
-    ],
-    おどろいた: [
-      `const answer=["a","b","c","d","e","a","a","a","a","a",]`
-    ],
-    うれしい: [
-      `const answer=["a","b","c","d","e","a","a","a","a","a",]`
-    ],
-    感激: [
-      `const answer=["a","b","c","d","e","a","a","a","a","a",]`
-    ],
-    こわい: [
-      `const answer=["a","b","c","d","e","a","a","a","a","a",]`
-    ],
+    ほっとした: `const answer=["ほっとした","安心した","気が楽になった","心配がなくなった","落ち着いた","安堵した","肩の荷が下りた","緊張がほぐれた","穏やかになった","平和な気持ちになった"];`,
+    おどろいた: `const answer=["おどろいた","びっくりした","驚愕した","衝撃を受けた","仰天した","目を丸くした","度肝を抜かれた","驚嘆した","呆気にとられた","唖然とした"];`,
+    うれしい: `const answer=["うれしい","喜んだ","幸せな気持ち","満足した","楽しい","心が弾む","嬉しくてたまらない","喜びに満ちた","わくわくする","心が躍る"];`,
+    感激: `const answer=["感激した","感動した","心を打たれた","胸が熱くなった","涙が出そうになった","深く感じ入った","心に響いた","魂が震えた","感慨深い","心が震えた"];`,
+    こわい: `const answer=["こわい","恐ろしい","怖くてたまらない","ゾッとした","身震いした","不安になった","恐怖を感じた","背筋が寒くなった","びくびくした","怖がった"];`,
   };
 
-  return mockResponses[option] || [
-    "該当する言い換えが見つかりません",
-    "別の選択肢をお試しください",
-  ];
+  return mockResponses[option] || `const answer=["該当する言い換えが見つかりません","別の選択肢をお試しください"];`;
 };
 
 const ContactPage = () => {
@@ -140,11 +127,17 @@ const ContactPage = () => {
     // Local環境の場合は仮データを使用
     if (isLocalEnvironment()) {
       console.log("Local環境のため仮データを使用します");
-      const mockResponse = getMockAIResponse(option, grade);
-      setDataArray(mockResponse);
+      const mockResponseString = getMockAIResponse(option, grade);
+      console.log("Mock AI Response:", mockResponseString);
+      
+      // 文字列を配列に変換
+      const resultArray = parseAIResponse(mockResponseString);
+      console.log("解析結果:", resultArray);
+      
+      setDataArray(resultArray);
       // アニメーション開始
       setTimeout(() => {
-        setVisibleRows(mockResponse.length);
+        setVisibleRows(resultArray.length);
       }, 100);
       setIsLoading(false);
       return;
@@ -164,7 +157,7 @@ const ContactPage = () => {
       } else {
         setKimochis(data);
         if (data.length > 0) {
-          const examples = data.map((kimochi) => kimochi.examples).join("\n");
+          const examples = data.map((kimochi) => t("language")=="ja"?kimochi.examples_ja:(t("language")=="en"? kimochi.examples_en:kimochi.examples_zh)).join("\n");
           await fetchAIResponse(option, grade, examples);
         } else {
           setDataArray([t('contact.errorNoData')]);
@@ -179,7 +172,7 @@ const ContactPage = () => {
   }
 
   async function fetchAIResponse(option, grade, examples) {
-    const userMessage = `下記の言葉を${option}という意味合いでどんなときにも使える拡張した言葉を10個つくり、const answer=[];の形式で日本語の値のみの配列を記載してください。3.〇〇や-〇〇な〇〇-のような当てはめるべきところは当てはめて出力してください。：\n\n${examples}`;
+    const userMessage = `${t("contact.prompt",{option:option})}：\n\n${examples}`;
 
     try {
       const response = await fetch(
@@ -337,7 +330,7 @@ const ContactPage = () => {
         {submittedOption && (
           <div className="ai-response-container">
             <h2 className="ai-response-header">
-              {t('contact.responseHeader', { submittedOption })}
+              {t('contact.responseHeader', { submittedOption:submittedOption })}
             </h2>
             {isLoading ? (
               <div className="loading-message" dangerouslySetInnerHTML={{ __html: t('contact.loadingMessage') }} />
