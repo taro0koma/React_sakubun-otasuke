@@ -59,6 +59,14 @@ const ContactPage = () => {
     setSelectedGrade(e.target.value);
   };
 
+  const selectList = {
+    "ほっとした":t("contact.formSelect1Option1"),
+    "おどろいた":t("contact.formSelect1Option2"),
+    "うれしい":t("contact.formSelect1Option3"),
+    "感激":t("contact.formSelect1Option4"),
+    "こわい":t("contact.formSelect1Option5"),
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmittedOption(selectedOption);
@@ -174,7 +182,7 @@ const ContactPage = () => {
 
   async function fetchAIResponse(option, grade, examples) {
     console.log(`データベースの中身${examples}`);
-    const userMessage = `${t("contact.prompt",{option:option})}：\n\n${examples}`;
+    const userMessage = `${t("contact.prompt",{option:selectList[option]})}：\n\n${examples}`;
     console.log(`プロンプト：${userMessage}`)
 
     try {
