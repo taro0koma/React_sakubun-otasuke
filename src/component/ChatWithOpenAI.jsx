@@ -175,6 +175,14 @@ const ChatWithOpenAI = ({ age, theme, goal, imagemap1 }) => {
 
   const animation = useStateMachineInput(rive, STATE_MACHINE_NAME, INPUT_NAME);
 
+  // アニメーションを強制的にリセットする関数
+  const forceResetAnimation = () => {
+    if (animation) {
+      animation.value = 4;
+      console.log("Animation force reset to default state (4)");
+    }
+  };
+
   // 初期化時に標準状態を設定
   useEffect(() => {
     if (animation && rive) {
@@ -440,13 +448,17 @@ const ChatWithOpenAI = ({ age, theme, goal, imagemap1 }) => {
           mode: "cors",
         }
       );
+
+      // 自動スクロール実行
       if (scrollableDivRef.current) {
         scrollableDivRef.current.scrollTop =
           scrollableDivRef.current.scrollHeight;
+        
+        // 自動スクロール実行後、少し遅延を入れてからアニメーションを強制リセット
+        setTimeout(() => {
+          forceResetAnimation();
+        }, 200);
       }
-
-      animation.value = 4;
-      console.log("Auto-scroll: Animation reset to default state (4)");
 
       const aiResponse = await response.json();
       console.log("AI Response:", aiResponse);
@@ -494,6 +506,16 @@ const ChatWithOpenAI = ({ age, theme, goal, imagemap1 }) => {
         }
         return newHistory;
       });
+      
+      // エラー時も自動スクロールとアニメーションリセット
+      if (scrollableDivRef.current) {
+        scrollableDivRef.current.scrollTop =
+          scrollableDivRef.current.scrollHeight;
+        
+        setTimeout(() => {
+          forceResetAnimation();
+        }, 200);
+      }
     } finally {
       // AI読み込み終了
       setIsLoadingAI(false);
