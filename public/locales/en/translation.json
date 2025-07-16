@@ -174,7 +174,7 @@
     "errorAIResponse": "Failed to get a response from the AI. Please try again later.",
     "errorAIComm": "An error occurred while communicating with the AI. Please check your network connection.",
     "errorParse": "Failed to parse data",
-    "prompt": "Please create 10 expanded phrases that can be used in any situation with the nuance of '{{option}}', and list them in a JavaScript array format 'const answer = [];' with only Japanese values. For example, please fill in placeholders like '3. 〇〇' (e.g., '3. Your text') or '-〇〇な〇〇-' (e.g., '-A [type of] [noun]-') where appropriate in the output."
+    "prompt": "Please create 10 expanded phrases that can be used in any situation with the nuance of '{{option}}', and list them in a JavaScript array format 'const answer = [];' with only Japanese values. For example, please fill in placeholders like '3. 〇〇' (e.g., '3. Your text') or '(--〇〇〇〇--)' (e.g., '-A [type of] [noun]-') where appropriate in the output."
   },
   "hyougen": {
     "helmet": "Find the perfect expression | Essay Helper App",

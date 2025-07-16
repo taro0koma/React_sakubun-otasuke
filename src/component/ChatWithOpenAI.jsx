@@ -248,6 +248,7 @@ const ChatWithOpenAI = ({ age, theme, goal, imagemap1 }) => {
       };
     }
   }, [rive]);
+  const scrollableDivRef = useRef(null);
 
   // 修正されたhandleRadioChange関数
   const handleRadioChange = async (event) => { // asyncを追加
@@ -258,7 +259,6 @@ const ChatWithOpenAI = ({ age, theme, goal, imagemap1 }) => {
 
     // ボタンクリックアニメーションを実行し、完了を待つ
     await triggerAnimation(); // awaitを追加
-
     // メッセージ送信
     sendMessage(value); // setTimeoutを削除
   };
@@ -366,6 +366,9 @@ const ChatWithOpenAI = ({ age, theme, goal, imagemap1 }) => {
         body: JSON.stringify({ prompt: feedbackPrompt, gakunen: age }),
         mode: "cors"
       });
+      if (scrollableDivRef.current){
+      scrollableDivRef.current.scrollTop = scrollableDivRef.current.scrollHeight;
+    }
 
       const aiResponse = await response.json();
       console.log('AI Response:', aiResponse);
@@ -412,7 +415,7 @@ const ChatWithOpenAI = ({ age, theme, goal, imagemap1 }) => {
       <div className={showFrame ? "background" : ""}>
         {showFrame && <FloatingFrame steps={steps} onClose={handleCloseFrame} />}
       </div>
-      <div className="chat-history">
+      <div className="chat-history" ref={scrollableDivRef}>
         <div className={`chat-bubble user`}>
           <p>私は {gradeJapan[age]} だよ。<br />{theme}についてのイメージマップを書いてるよ。<br />テーマは {goal} についてだよ。</p>
           <div className='blinking'><p><FaDownLong /> 下へ</p></div>

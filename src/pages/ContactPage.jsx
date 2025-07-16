@@ -341,7 +341,7 @@ const ContactPage = () => {
         {submittedOption && (
           <div className="ai-response-container">
             <h2 className="ai-response-header">
-              {t('contact.responseHeader', { submittedOption:submittedOption })}
+              {t('contact.responseHeader', { submittedOption:selectList[submittedOption] })}
             </h2>
             {isLoading ? (
               <div className="loading-message" dangerouslySetInnerHTML={{ __html: t('contact.loadingMessage') }} />
