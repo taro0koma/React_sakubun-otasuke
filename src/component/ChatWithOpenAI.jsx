@@ -370,6 +370,11 @@ const ChatWithOpenAI = ({ age, theme, goal, imagemap1 }) => {
       scrollableDivRef.current.scrollTop = scrollableDivRef.current.scrollHeight;
     }
 
+    if (animation && !isAnimating) {
+    animation.value = 4;
+    console.log('Auto-scroll: Animation reset to default state (4)');
+  }
+
       const aiResponse = await response.json();
       console.log('AI Response:', aiResponse);
 
