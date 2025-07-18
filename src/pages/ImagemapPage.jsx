@@ -63,7 +63,7 @@ const initialNodes = [
   {
     id: "0",
     type: "input",
-    data: { label: "アイデア" },
+    data: { label: "t('imagemapPage.idea')" },
     position: { x: 0, y: 50 },
   },
 ];
@@ -128,7 +128,7 @@ const AddNodeOnEdgeDrop = () => {
             x: event.clientX,
             y: event.clientY,
           }),
-          data: { label: `アイデア ${id}` },
+          data: { label: `${t('imagemapPage.idea')} ${id}` },
         };
 
         setNodes((nds) => nds.concat(newNode));
@@ -173,7 +173,7 @@ const AddNodeOnEdgeDrop = () => {
         const newNode = {
           id: getId(),
           position: screenToFlowPosition({ x: clientX, y: clientY }),
-          data: { label: `アイデア ${id}` },
+          data: { label: `${t('imagemapPage.idea')} ${id}` },
         };
         setNodes((nds) => nds.concat(newNode));
         setNodeAdded(true);

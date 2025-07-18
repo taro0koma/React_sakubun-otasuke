@@ -193,7 +193,7 @@ const ZinbutsuPage = () => {
           {loading && !loadingComplete ? (
             <div className='yomikomihyougen svgtoka LoadingSvg'>
             <AnimationKomawanPage />
-            <h1><b>SAKUBUN OTASUKE</b></h1>
+            <h1><b>{t('zinbutsu.loadingText')}</b></h1>
             </div>
           ) : (
             messages.map((msg) => (

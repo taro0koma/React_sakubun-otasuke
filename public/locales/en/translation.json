@@ -198,6 +198,7 @@
     "placeholder": "e.g. kind / shy",
     "button": "Find expressions for this word!",
     "error": "An error occurred. Please enter again.",
+    "loadingText": "SAKUBUN OTASUKE",
     "s1": "1st grade elementary",
     "s2": "2nd grade elementary",
     "s3": "3rd grade elementary",
@@ -278,7 +279,11 @@
     "prevNextButton": "▶ Try making a map",
     "saiSenseiMidashi": "I'll think of an essay that conveys things in an orderly manner.",
     "risuSenseiMidashi": "I'll think of an essay that values the summary of what you want to say.",
-    "raionSenseiMidashi": "I'll think of an essay that brings out your personality."
+    "raionSenseiMidashi": "I'll think of an essay that brings out your personality.",
+    "loadingText": "SAKUBUN OTASUKE",
+    "userMemo": "Let's create paragraph construction ideas for {{type}} for {{grade}} to write about {{fName}}, {{nName}}, and {{lName}}.",
+    "compositionPrompt": "Hello, ChatGPT. The theme is '{{sTheme}}'. I would like your help in thinking about the structure. I am creating an essay for {{type}} for {{grade}}. Please be sure to first output a recommended theme for the essay that will be a hint for the title. Of course, please insert a line break for the next line. Set the second element to {{sFirst}}, the third element to '{{sSecond}}', the fourth element to '{{sThird}}', and the fifth element to '{{sFo}}', and create a '{{sensei}}' framework for a 1600-character essay that describes your own thoughts and experiences about the theme, configured to be a summary proposal of 5 paragraphs (please be sure to address the following 5 points: 1. Make each item over 150 characters. 2. The first and last paragraphs should be important summary paragraphs that convey what you want to say. 3. Rewrite the sentences to express the culture and worldview of children of {{grade}} age and younger. 4. Rewrite the sentences so that children of {{grade}} age and younger can read and write them. 5. The synopsis is as follows. {{bookReviewArasuji}} 6. Be sure to write a simple example sentence and finally, briefly add 'How about making it a paragraph that writes about something like ~~' to each proposal.), please describe the array of only Japanese values in the format const answer=[];. Please completely omit sentences and advice other than the array code. If there is not much information, please do not make up a story on your own. Be bold!",
+    "bookReviewPrompt": "Hello, ChatGPT. I would like your help in thinking about the structure of a book report for a book I read. I am creating an essay for {{type}} for {{grade}}. Please be sure to first output a recommended theme for the essay that will be a hint for the title as the first element. Of course, please insert a line break for the next line. Set the content of the book to {{bookReviewFirst}}, the second element to '{{bookReviewSecond}}', and the third element to '{{bookReviewThird}}', and create a '{{sensei}}' framework for a 1600-character essay that describes your own thoughts and experiences about the theme, configured to be a summary proposal of 5 paragraphs (please be sure to address the following 5 points: 1. Make each item over 150 characters. 2. The first and last paragraphs should be important summary paragraphs that convey what you want to say. 3. Rewrite the sentences to express the culture and worldview of children of {{grade}} age and younger. 4. What I thought from the cover/title of the book is as follows. {{bookReviewThing}} Rewrite the sentences so that children of {{grade}} age and younger can read and write them. 5. Be sure to write 'How about making it a paragraph that writes about something like ~~' for each proposal.), please describe the array of only Japanese values in the format const answer=[]; (this is the most important!). Please completely omit sentences and advice other than the array code."
   },
   "genkouyoshi": {
     "helmet": "Recommended Tools | Essay Helper App",
@@ -307,6 +312,7 @@
     "openButton": "◀ Open ◀",
     "closeButton": "▶ Close ▶",
     "imagemapKeep": "Save the image map!",
+    "idea": "Idea",
     "s1": " 6 y.o",
     "s2": " 7 y.o",
     "s3": " 8 y.o",
@@ -321,6 +327,17 @@
     "k3": " 17 y.o",
     "subWindowSubTitle": "Get image \nmap advice!",
     "subWindowTitle": "How old are you?",
+    "chatBot": {
+      "label": "Which sentence do you want to write?",
+      "select1": "Essay",
+      "select2": "Book report",
+      "backSelectGrade": "Back to grade selection",
+      "themeQuestion": "Tell me the theme you want to write about.",
+      "bookQuestion1": "Tell me the title of the book you read, or",
+      "bookQuestion2": "what kind of book it was.",
+      "submit": "Create an image map together",
+      "back": "Go back"
+    },
     "steps": [
       { "theme": "Screen that appears when you open it", "text": "When you open it, there's a square that says 'Idea' in the middle!" },
       { "theme": "Let's get ready to type", "text": "When you click the square in the middle, the text of the square (idea) will be displayed in the input field above." },
@@ -328,7 +345,7 @@
       { "theme": "Let's delete unnecessary parts of the image map", "text": "Click on the unnecessary square part. Then click the 'Back Space (Windows)' button.\n*For Mac, please click 'DELETE'." },
       { "theme": "Let's use the chat function!", "text": "This chat function is for asking questions when you can't think of anything and expanding the map! First, select your grade and choose whether you want to write an essay or a book report! Next, answer the questions that appear after that. That's all the questions! Next, let's actually use the chat function. Choose one of the three that suits you and send it!" }
     ],
-    "chatBot": {
+    "chatBotTwo": {
       "label": "Which one do you want to create an imagemap with?",
       "select1": "Composition",
       "select2": "Book Report",

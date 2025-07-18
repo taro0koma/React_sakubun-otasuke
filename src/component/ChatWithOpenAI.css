@@ -25,6 +25,7 @@
   width: 100%;
   line-height: 1.8;
   font-weight:500;
+  text-align: left;
 }
 
 .chat-bubble.user {

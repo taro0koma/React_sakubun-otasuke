@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import ChatWithOpenAI from '../component/ChatWithOpenAI';  // ChatWithOpenAI コンポーネントをインポート
 import GradeSelection from '../component/AgeSelection';  // GradeSelection コンポーネントをインポート
 import { t } from 'i18next';
@@ -46,14 +47,14 @@ const ChatBot = ({imagemap1}) => {
         <form onSubmit={handleGoalSubmit}>
           <label>
             {theme === "作文"
-            ? 'あなたの書きたいテーマを聞かせてね'
-            : <>あなたの読んだ本の題名、または、<br/>どんな本か聞かせてね</>
+            ? t("imagemapPage.chatBot.themeQuestion")
+            : <>{t("imagemapPage.chatBot.bookQuestion1")}<br/>{t("imagemapPage.chatBot.bookQuestion2")}</>
             }
           </label>
           <input value={goal} onChange={(e) => setGoal(e.target.value)} />
-          <button type="submit">一緒にイメージマップを作る</button>
+          <button type="submit">{t("imagemapPage.chatBot.submit")}</button>
           <br />
-          <button type="submit" onClick={backSubmit}>前にもどる</button>
+          <button type="submit" onClick={backSubmit}>{t("imagemapPage.chatBot.back")}</button>
         </form>
       )}
       {step === 3 &&(

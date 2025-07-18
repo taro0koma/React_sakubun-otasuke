@@ -33,29 +33,6 @@ const StylePage = () => {
   const [dataArray, setDataArray] = useState([]);
   const regex = /\[([\s\S]*?)\]/; // 「[」から「]」までの部分にマッチする正規表現
 
-  const gradeJapan = {
-    grade: "とくに制限なし",
-    s1: "小学１年生",
-    s2: "小学２年生",
-    s3: "小学３年生",
-    s4: "小学４年生",
-    s5: "小学５年生",
-    s6: "小学６年生",
-    t1: "中学１年生",
-    t2: "中学２年生",
-    t3: "中学３年生",
-    k1: "高校１年生",
-    k2: "高校２年生",
-    k3: "高校３年生",
-    d1: "大学１年生",
-    d2: "大学２年生",
-    d3: "大学３年生",
-  };
-  const typeJapan = {
-    type: "特に制限なし",
-    bookReview: "読書感想文",
-    composition: "作文",
-  };
   const [formObj, setFormObj] = useState({
     fName: "",
     nName: "",
@@ -87,19 +64,19 @@ const StylePage = () => {
       [property]: value,
     }));
   };
-  let userMessage = ` `; // ${typeJapan[formObj.type]}のための${gradeJapan[formObj.grade]} が作成する作文の準備をするため、主題を ${formObj.fName} に設定し、第2要素は「 ${formObj.nName} 」､第3要素は「 ${formObj.lName} 」として、テーマについて自分の考えや経験を描く1600文字程度の作文のための「PREP+」のフレームワークを５～６個の段落の概要提案になるように構成し（次の5点に必ず対応してください。 1.項目ごと150文字以上にする。2.最初の段落と最終の段落が自分の言いたいことを伝える重要なまとめの段落とする。 3. ${gradeJapan[formObj.grade]} 以下の年齢の子供の文化や世界観を表現できる文章にリライトする。 4. ${gradeJapan[formObj.grade]} 以下の年齢の子供が読んだり書いたりできるようにリライトする。 5.必ず一つ一つの提案の最後に「～～のようなことを書く段落にするのはどうでしょうか」と書く。）、const answer=[];の形式で日本語の値のみの配列を記載してください。配列のコード以外の文章やアドバイスは完全に省いてください。
+  let userMessage = ` `;
   const FormSubmit = async (e) => {
-    // 送信ボタンを使用不可にする
     e.preventDefault();
 
-    let userMemo = `${typeJapan[formObj.type]}のための${
-      gradeJapan[formObj.grade]
-    } 向けに${formObj.fName}と ${formObj.nName} と ${
-      formObj.lName
-    } について書くための段落の組み立てアイデアを作ってみます。`;
-    // addAnswer(userMemo, false);
+    let userMemo = t('danraku.userMemo', {
+      type: t('danraku.type' + formObj.type),
+      grade: t('zinbutsu.' + formObj.grade),
+      fName: formObj.fName,
+      nName: formObj.nName,
+      lName: formObj.lName,
+    });
     setLoading([...loading, { role: 'ai', content: <div className="loading yomikomihyougen"> <div style={{height:"80%",maxWidth:"100vw"}}><AnimationKomawanPage /></div>
-            <p style={{fontSize:20,fontWeight:900}}><h2><b>SAKUBUN OTASUKE</b></h2>{t('danraku.loading')}</p></div> }])
+            <p style={{fontSize:20,fontWeight:900}}><h2><b>{t('danraku.loadingText')}</b></h2>{t('danraku.loading')}</p></div> }])
     
 
     try {
@@ -123,10 +100,8 @@ const StylePage = () => {
         setMessage(t('danraku.error'));
         alert(err);
       }
-      // const answerArrayString = result.choices[0].text.trim();
       if (answers.length > 0) {
         const answerArray = JSON.parse(
-          // answerArrayString.match(/const answer=\[(.*)\];/)[1]
           answers.value.match(/const answer=\[(.*)\];/)[1]
         );
         setData(answerArray);
@@ -138,8 +113,8 @@ const StylePage = () => {
 
   const addAnswer = (value) => {
     let match = value.match(regex);
-    let extractedArrayString = match[0]; // マッチした部分全体を取得
-    let array = eval(extractedArrayString); // evalで文字列を配列として評価
+    let extractedArrayString = match[0];
+    let array = eval(extractedArrayString);
     console.log(array[1]);
     setAnswer(array);
     setDataArray(array);
@@ -161,7 +136,6 @@ const StylePage = () => {
   const senseierabi = () => {
     if (formObj.sensei === "DESC法") {
       return (
-        // <img src="/images/saisensei.png" alt="担当してくれるAI先生(サイ)" />
         <div className="sensei">
         {isModalOpen && (
         <ModalFrame
@@ -178,7 +152,6 @@ const StylePage = () => {
     }
     else if (formObj.sensei === "PREP法") {
       return (
-        // <img src="/images/risusensei.png" alt="担当してくれるAI先生(リス)" />
         <div className="sensei">
         {isModalOpen && (
         <ModalFrame
@@ -195,7 +168,6 @@ const StylePage = () => {
     }
     if (formObj.sensei === "一段落目が個性的なPREP法") {
       return (
-        // <img src="/images/raionsensei.png" alt="担当してくれるAI先生(ライオン)" />
         <div className="sensei">
         {isModalOpen && (
         <ModalFrame
@@ -214,27 +186,17 @@ const StylePage = () => {
 
   const renderAdditionalQuestions = () => {
     if (formObj.type === "composition") {
-      userMessage = `こんにちは、ChatGPT。テーマは「${formObj.sTheme
-      }」です。構成を考える手助けをお願いしたいです。${
-        typeJapan[formObj.type]
-      }のための${
-        gradeJapan[formObj.grade]
-      } が作成する作文をつくります。必ず、最初に題名のヒントとなるその作文のおすすめのテーマを出力してください。もちろん次の行は改行を入れてください。第２要素は${
-        formObj.sFirst
-      } に設定し、第３要素は「 ${
-        formObj.sSecond
-      } 」､第４要素は「 ${
-        formObj.sThird
-      } 」、第５要素は「${
-        formObj.sFo
-      }」として、テーマについて自分の考えや経験を描く1600文字程度の作文のための「${formObj.sensei}」のフレームワークを５個の段落の概要提案になるように構成し（次の5点に"必ず"対応してください。 1.項目ごと150文字以上にする。2.最初の段落と最終の段落が自分の言いたいことを伝える重要なまとめの段落とする。 3. ${
-        gradeJapan[formObj.grade]
-      } 以下の年齢の子供の文化や世界観を表現できる文章にリライトする。 4. ${
-        gradeJapan[formObj.grade]
-      } 以下の年齢の子供が読んだり書いたりできるようにリライトする。 5.あらすじは下記とする。${
-        formObj.bookReviewArasuji
-      }6.必ず、一文くらいの例文と最後に簡単に"一つ一つ"の提案に「～～のようなことを書く段落にするのはどうでしょうか」と書く。）、const answer=[];の形式で日本語の値のみの配列を記載してください。配列のコード以外の文章やアドバイスは”完全に省いて”ください。あまり情報がなかった場合、勝手にお話を作らないでください。大胆でいいんです！`;
-      //作文の場合
+      userMessage = t('danraku.compositionPrompt', {
+        sTheme: formObj.sTheme,
+        type: t('danraku.typeComposition'),
+        grade: t('zinbutsu.' + formObj.grade),
+        sFirst: formObj.sFirst,
+        sSecond: formObj.sSecond,
+        sThird: formObj.sThird,
+        sFo: formObj.sFo,
+        sensei: formObj.sensei,
+        bookReviewArasuji: formObj.bookReviewArasuji,
+      });
       return (
         <>
           <h5>{t('danraku.themeLabel')}</h5>
@@ -280,22 +242,15 @@ const StylePage = () => {
         </>
       );
     } else if (formObj.type === "bookReview") {
-      //読書感想文の場合
-      userMessage = `こんにちは、ChatGPT。私が読んだ本について、読書感想文の構成を考える手助けをお願いしたいです。${
-        typeJapan[formObj.type]
-      }のための${
-        gradeJapan[formObj.grade]
-      } が作成する作文をつくります。第１要素目に必ず最初に題名のヒントとなるその作文のおすすめのテーマを出力してください。もちろん次の行は改行を入れてください。本の内容は ${
-        formObj.bookReviewFirst
-      } に設定し、第2要素は「 ${formObj.bookReviewSecond} 」､第3要素は「 ${
-        formObj.bookReviewThird
-      } 」として、テーマについて自分の考えや経験を描く1600文字程度の作文のための「${formObj.sensei}」のフレームワークを５個の段落の概要提案になるように構成し（次の5点に"必ず"対応してください。 1.項目ごと150文字以上にする。2.最初の段落と最終の段落が自分の言いたいことを伝える重要なまとめの段落とする。 3. ${
-        gradeJapan[formObj.grade]
-      } 以下の年齢の子供の文化や世界観を表現できる文章にリライトする。 4. ${
-        gradeJapan[formObj.grade]
-      }表紙の様子/本の題名から考えたことは下記です。${
-        formObj.bookReviewThing
-      }以下の年齢の子供が読んだり書いたりできるようにリライトする。 5.必ず"一つ一つ"の提案を「～～のようなことを書く段落にするのはどうでしょうか」と書く。）、const answer=[];の形式で日本語の値のみの配列を記載してください(これ一番大事！)。配列のコード以外の文章やアドバイスは完全に省いてください。`;
+      userMessage = t('danraku.bookReviewPrompt', {
+        type: t('danraku.typeBookReview'),
+        grade: t('zinbutsu.' + formObj.grade),
+        bookReviewFirst: formObj.bookReviewFirst,
+        bookReviewSecond: formObj.bookReviewSecond,
+        bookReviewThird: formObj.bookReviewThird,
+        sensei: formObj.sensei,
+        bookReviewThing: formObj.bookReviewThing,
+      });
       return (
         <>
         <h5>{t('danraku.bookTypeLabel')}</h5>
@@ -306,23 +261,23 @@ const StylePage = () => {
             value={formObj.bookReviewFirst}
           >
             <option value="">{t('danraku.bookTypeDefault')}</option>
-            <option value="愉快な内容の本">{t('danraku.bookType1')}</option>
-            <option value="有名な人物の伝記の本">{t('danraku.bookType2')}</option>
-            <option value="実際にあった話">{t('danraku.bookType3')}</option>
-            <option value="冒険をする本">{t('danraku.bookType4')}</option>
-            <option value="悲しいことが起こる本">{t('danraku.bookType5')}</option>
-            <option value="怖い怪談についての本">{t('danraku.bookType6')}</option>
-            <option value="困りごとに立ち向かう本">{t('danraku.bookType7')}</option>
-            <option value="食べ物の作り方">{t('danraku.bookType8')}</option>
-            <option value="科学について書かれた本">{t('danraku.bookType9')}</option>
-            <option value="地球や環境について書かれた本">{t('danraku.bookType10')}</option>
-            <option value="歴史について書かれた本">{t('danraku.bookType11')}</option>
-            <option value="ワクワクする本">{t('danraku.bookType12')}</option>
-            <option value="自分に似た人物が登場する本">{t('danraku.bookType13')}</option>
-            <option value="図鑑">{t('danraku.bookType14')}</option>
-            <option value="クイズの本">{t('danraku.bookType15')}</option>
-            <option value="想像上の人物の日常が描かれた本">{t('danraku.bookType16')}</option>
-            <option value="不思議な世界に行く話">{t('danraku.bookType17')}</option>
+            <option value={t('danraku.bookType1')}>{t('danraku.bookType1')}</option>
+            <option value={t('danraku.bookType2')}>{t('danraku.bookType2')}</option>
+            <option value={t('danraku.bookType3')}>{t('danraku.bookType3')}</option>
+            <option value={t('danraku.bookType4')}>{t('danraku.bookType4')}</option>
+            <option value={t('danraku.bookType5')}>{t('danraku.bookType5')}</option>
+            <option value={t('danraku.bookType6')}>{t('danraku.bookType6')}</option>
+            <option value={t('danraku.bookType7')}>{t('danraku.bookType7')}</option>
+            <option value={t('danraku.bookType8')}>{t('danraku.bookType8')}</option>
+            <option value={t('danraku.bookType9')}>{t('danraku.bookType9')}</option>
+            <option value={t('danraku.bookType10')}>{t('danraku.bookType10')}</option>
+            <option value={t('danraku.bookType11')}>{t('danraku.bookType11')}</option>
+            <option value={t('danraku.bookType12')}>{t('danraku.bookType12')}</option>
+            <option value={t('danraku.bookType13')}>{t('danraku.bookType13')}</option>
+            <option value={t('danraku.bookType14')}>{t('danraku.bookType14')}</option>
+            <option value={t('danraku.bookType15')}>{t('danraku.bookType15')}</option>
+            <option value={t('danraku.bookType16')}>{t('danraku.bookType16')}</option>
+            <option value={t('danraku.bookType17')}>{t('danraku.bookType17')}</option>
           </select>
           <br />
           <h5>{t('danraku.arasujiLabel')}</h5>
@@ -410,7 +365,6 @@ const StylePage = () => {
               <td className="td-item">
                 {item}
                 <br />
-                {/**indexが0ではないときだけボタンを表示させる */}
                 {index > 0 && (
                   <button onClick={() => copyToClipboard(item)} style={{ marginLeft: "10px" }}>{t('danraku.copyButton')}</button>
                 )}
@@ -418,14 +372,12 @@ const StylePage = () => {
               </td>
               </>
             )}
-            {/**indexが0じゃないときの条件分岐 */}
             {index > 0 && (
               <>
               <td className="td-index"><span>{index}</span></td>
               <td className="td-item">
                 {item}
                 <br />
-                {/**indexが0ではないときだけボタンを表示させる */}
                 {index > 0 && (
                   <button onClick={() => copyToClipboard(item)} style={{ marginLeft: "10px" }}>{t('danraku.copyButton')}</button>
                 )}
