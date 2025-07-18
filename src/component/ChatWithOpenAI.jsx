@@ -175,6 +175,8 @@ const ChatWithOpenAI = ({ age, theme, goal, imagemap1 }) => {
 
   const animation = useStateMachineInput(rive, STATE_MACHINE_NAME, INPUT_NAME);
 
+  const scrollableDivRef = useRef(null);
+
   // アニメーションを強制的にリセットする関数
   const forceResetAnimation = () => {
     if (animation) {
@@ -199,9 +201,7 @@ const ChatWithOpenAI = ({ age, theme, goal, imagemap1 }) => {
     if (animation) {
       if (isAnimating) {
         // ボタンアニメーションが優先されるため、AI読み込み中はアニメーション値を変更しない
-        console.log(
-          "Button animation active, AI loading animation suppressed."
-        );
+        console.log("Button animation active, AI loading animation suppressed.");
       } else if (isLoadingAI) {
         // AI読み込み中はアニメーション値を5に設定（ループアニメーション）
         animation.value = 5;
@@ -209,20 +209,17 @@ const ChatWithOpenAI = ({ age, theme, goal, imagemap1 }) => {
       } else {
         // AI読み込みもボタンアニメーションも実行中でない場合はデフォルトに戻す
         animation.value = 4;
-        console.log(
-          "AI not loading, no button animation: Animation reset to 4"
-        );
+        console.log("AI not loading, no button animation: Animation reset to 4");
       }
     }
-  }, [isLoadingAI, animation, isAnimating]); // isAnimatingも依存配列に追加
+  }, [isLoadingAI, animation, isAnimating]);
 
   // アニメーション実行関数を分離 (ボタンクリック用)
   const triggerAnimation = () => {
     return new Promise((resolve) => {
-      // Promiseを返すように変更
       if (!animation || !rive) {
         console.warn("Animation or Rive instance not available");
-        resolve(); // アニメーションがない場合も解決
+        resolve();
         return;
       }
 
@@ -237,23 +234,10 @@ const ChatWithOpenAI = ({ age, theme, goal, imagemap1 }) => {
 
         setTimeout(() => {
           if (animation) {
-            // ボタンアニメーションが終了したら、まずリセット状態に戻す
-            animation.value = 4;
-            console.log(
-              "Animation reset to default state (4) after button click animation."
-            );
-
-            // 短い遅延を挟んでから、AI読み込み状態に応じてアニメーションを設定
-            setTimeout(() => {
-              if (isLoadingAI) {
-                // ここでisLoadingAIの状態を再確認
-                animation.value = 5; // AI読み込み中のループアニメーション
-                console.log("Transitioning to AI loading animation (5).");
-              }
-              setIsAnimating(false); // ボタンアニメーションのフラグを解除
-              console.log("Button animation sequence completed.");
-              resolve();
-            }, 100); // 短いリセット期間
+            // ボタンアニメーションが終了したらフラグを解除
+            setIsAnimating(false);
+            console.log("Button animation sequence completed.");
+            resolve();
           } else {
             setIsAnimating(false);
             resolve();
@@ -262,20 +246,16 @@ const ChatWithOpenAI = ({ age, theme, goal, imagemap1 }) => {
       } catch (error) {
         console.error("Button animation trigger failed:", error);
         setIsAnimating(false);
-        resolve(); // エラー時も解決
+        resolve();
       }
     });
   };
 
-  // Riveアニメーションの状態を監視するカスタムフック (既存のまま)
+  // Riveアニメーションの状態を監視するカスタムフック
   useEffect(() => {
     if (rive) {
       const handleRiveEvent = (event) => {
         console.log("Rive event:", event);
-        // アニメーション完了時の処理
-        if (event.type === "stop" || event.type === "pause") {
-          // setIsAnimating(false); // この行はtriggerAnimation内で制御するため削除
-        }
       };
 
       // イベントリスナーの追加（利用可能な場合）
@@ -293,20 +273,18 @@ const ChatWithOpenAI = ({ age, theme, goal, imagemap1 }) => {
       };
     }
   }, [rive]);
-  const scrollableDivRef = useRef(null);
 
   // 修正されたhandleRadioChange関数
   const handleRadioChange = async (event) => {
-    // asyncを追加
     const value = event.target.value;
     setSelectedRadio(value);
 
     console.log("Radio changed, value:", value);
 
     // ボタンクリックアニメーションを実行し、完了を待つ
-    await triggerAnimation(); // awaitを追加
+    await triggerAnimation();
     // メッセージ送信
-    sendMessage(value); // setTimeoutを削除
+    sendMessage(value);
   };
 
   const sendMessage = async (selectedValueFromRadio) => {
@@ -449,17 +427,6 @@ const ChatWithOpenAI = ({ age, theme, goal, imagemap1 }) => {
         }
       );
 
-      // 自動スクロール実行
-      if (scrollableDivRef.current) {
-        scrollableDivRef.current.scrollTop =
-          scrollableDivRef.current.scrollHeight;
-        
-        // 自動スクロール実行後、少し遅延を入れてからアニメーションを強制リセット
-        setTimeout(() => {
-          forceResetAnimation();
-        }, 200);
-      }
-
       const aiResponse = await response.json();
       console.log("AI Response:", aiResponse);
 
@@ -484,6 +451,14 @@ const ChatWithOpenAI = ({ age, theme, goal, imagemap1 }) => {
 
       console.log("Final feedback prompt:", feedbackPrompt);
       imagemapMaeRef.current = JSON.stringify(result, null, 2);
+      
+      // AI応答完了後、自動スクロール実行
+      setTimeout(() => {
+        if (scrollableDivRef.current) {
+          scrollableDivRef.current.scrollTop = scrollableDivRef.current.scrollHeight;
+        }
+      }, 100);
+
     } catch (error) {
       console.error("API request failed", error);
       // エラー発生時もスピナーをエラーメッセージで置き換える
@@ -507,19 +482,21 @@ const ChatWithOpenAI = ({ age, theme, goal, imagemap1 }) => {
         return newHistory;
       });
       
-      // エラー時も自動スクロールとアニメーションリセット
-      if (scrollableDivRef.current) {
-        scrollableDivRef.current.scrollTop =
-          scrollableDivRef.current.scrollHeight;
-        
-        setTimeout(() => {
-          forceResetAnimation();
-        }, 200);
-      }
+      // エラー時も自動スクロール
+      setTimeout(() => {
+        if (scrollableDivRef.current) {
+          scrollableDivRef.current.scrollTop = scrollableDivRef.current.scrollHeight;
+        }
+      }, 100);
+
     } finally {
       // AI読み込み終了
       setIsLoadingAI(false);
-      forceResetAnimation();//変になったら消す
+      
+      // AI読み込み完了後、少し遅延をつけてアニメーションを確実に初期状態に戻す
+      setTimeout(() => {
+        forceResetAnimation();
+      }, 500);
     }
   };
 
