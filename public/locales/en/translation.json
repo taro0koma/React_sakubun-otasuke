@@ -325,6 +325,7 @@
     "k1": " 15 y.o",
     "k2": " 16 y.o",
     "k3": " 17 y.o",
+    "prompt":"I am {{grade}}.\nI am writing an image map about {{theme}}.\nThe theme is about {{goal}}.",
     "subWindowSubTitle": "Get image \nmap advice!",
     "subWindowTitle": "How old are you?",
     "chatBot": {

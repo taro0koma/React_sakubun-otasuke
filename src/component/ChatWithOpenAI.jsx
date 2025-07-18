@@ -6,6 +6,8 @@ import { Canvas as ThreeCanvas, useFrame } from "@react-three/fiber"; // 名前�
 import { FaDownLong } from "react-icons/fa6";
 import { useGLTF, OrbitControls, Stats } from "@react-three/drei";
 import { useRive, useStateMachineInput } from "@rive-app/react-canvas"; // useStateMachineInputを追加
+import { t } from "i18next";
+import { string } from "three/tsl";
 
 const steps = [
   {
@@ -510,11 +512,12 @@ const ChatWithOpenAI = ({ age, theme, goal, imagemap1 }) => {
       <div className="chat-history" ref={scrollableDivRef}>
         <div className={`chat-bubble user`}>
           <p>
-            私は {gradeJapan[age]} だよ。
+            {/* 私は {gradeJapan[age]} だよ。
             <br />
             {theme}についてのイメージマップを書いてるよ。
             <br />
-            テーマは {goal} についてだよ。
+            テーマは {goal} についてだよ。 */}
+            {t("imagemapPage.prompt",{grade:t(`imagemapPage.${String(age)}`),theme:theme,goal:goal})}
           </p>
           <div className="blinking">
             <p>

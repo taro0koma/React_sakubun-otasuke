@@ -310,6 +310,7 @@
     "k1": "高中一年级",
     "k2": "高中二年级",
     "k3": "高中三年级",
+    "prompt":"我是{{grade}}。\n我正在写{{theme}}的意象图。\n主题是关于{{goal}}的。",
     "subWindowSubTitle": "获取图像地图建议！",
     "subWindowTitle": "你是几年级？",
     "chatBot": {
