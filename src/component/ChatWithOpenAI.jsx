@@ -214,6 +214,17 @@ const ChatWithOpenAI = ({ age, theme, goal, imagemap1 }) => {
     }
   }, [isLoadingAI, animation, isAnimating]);
 
+  // AI読み込み完了時の専用useEffect
+  useEffect(() => {
+    if (!isLoadingAI && !isAnimating && animation) {
+      // AI読み込みが完了し、ボタンアニメーションも実行中でない場合に確実にリセット
+      setTimeout(() => {
+        animation.value = 4;
+        console.log("AI loading completed: Animation definitively reset to 4");
+      }, 100);
+    }
+  }, [isLoadingAI, isAnimating, animation]);
+
   // アニメーション実行関数を分離 (ボタンクリック用)
   const triggerAnimation = () => {
     return new Promise((resolve) => {
@@ -491,12 +502,16 @@ const ChatWithOpenAI = ({ age, theme, goal, imagemap1 }) => {
 
     } finally {
       // AI読み込み終了
+      console.log("AI loading completed, setting isLoadingAI to false");
       setIsLoadingAI(false);
       
       // AI読み込み完了後、少し遅延をつけてアニメーションを確実に初期状態に戻す
       setTimeout(() => {
-        forceResetAnimation();
-      }, 500);
+        if (animation) {
+          animation.value = 4;
+          console.log("Final animation reset to 4 in finally block");
+        }
+      }, 200);
     }
   };
 
