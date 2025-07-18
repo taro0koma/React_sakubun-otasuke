@@ -209,6 +209,8 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  word-wrap: break-word;
+  white-space: normal !important;
 }
 
 button:disabled {
