@@ -519,7 +519,7 @@ const ChatWithOpenAI = ({ age, theme, goal, imagemap1 }) => {
     } finally {
       // AI読み込み終了
       setIsLoadingAI(false);
-      forceResetAnimation();
+      forceResetAnimation();//変になったら消す
     }
   };
 
