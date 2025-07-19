@@ -151,6 +151,11 @@ const ChatWithOpenAI = ({ age, theme, goal, imagemap1 }) => {
     d3: "大学３年生",
   };
 
+  const bookReviewCulturalEssay = {
+    読書感想文: { en: "Essay", zh: "你想写哪种文章？" },
+    作文: { en: "Book report", zh: "作文" },
+  };
+
   // Riveアニメーション設定
   const STATE_MACHINE_NAME = "State Machine 1";
   const INPUT_NAME = "rating"; // 実際のRiveファイル内のInput名に合わせて変更してください
@@ -203,7 +208,9 @@ const ChatWithOpenAI = ({ age, theme, goal, imagemap1 }) => {
     if (animation) {
       if (isAnimating) {
         // ボタンアニメーションが優先されるため、AI読み込み中はアニメーション値を変更しない
-        console.log("Button animation active, AI loading animation suppressed.");
+        console.log(
+          "Button animation active, AI loading animation suppressed."
+        );
       } else if (isLoadingAI) {
         // AI読み込み中はアニメーション値を5に設定（ループアニメーション）
         animation.value = 5;
@@ -211,7 +218,9 @@ const ChatWithOpenAI = ({ age, theme, goal, imagemap1 }) => {
       } else {
         // AI読み込みもボタンアニメーションも実行中でない場合はデフォルトに戻す
         animation.value = 4;
-        console.log("AI not loading, no button animation: Animation reset to 4");
+        console.log(
+          "AI not loading, no button animation: Animation reset to 4"
+        );
       }
     }
   }, [isLoadingAI, animation, isAnimating]);
@@ -453,14 +462,14 @@ const ChatWithOpenAI = ({ age, theme, goal, imagemap1 }) => {
 
       console.log("Final feedback prompt:", feedbackPrompt);
       imagemapMaeRef.current = JSON.stringify(result, null, 2);
-      
+
       // AI応答完了後、自動スクロール実行
       setTimeout(() => {
         if (scrollableDivRef.current) {
-          scrollableDivRef.current.scrollTop = scrollableDivRef.current.scrollHeight;
+          scrollableDivRef.current.scrollTop =
+            scrollableDivRef.current.scrollHeight;
         }
       }, 100);
-
     } catch (error) {
       console.error("API request failed", error);
       // エラー発生時もスピナーをエラーメッセージで置き換える
@@ -483,18 +492,18 @@ const ChatWithOpenAI = ({ age, theme, goal, imagemap1 }) => {
         }
         return newHistory;
       });
-      
+
       // エラー時も自動スクロール
       setTimeout(() => {
         if (scrollableDivRef.current) {
-          scrollableDivRef.current.scrollTop = scrollableDivRef.current.scrollHeight;
+          scrollableDivRef.current.scrollTop =
+            scrollableDivRef.current.scrollHeight;
         }
       }, 100);
-
     } finally {
       // AI読み込み終了
       setIsLoadingAI(false);
-      
+
       // AI読み込み完了後、少し遅延をつけてアニメーションを確実に初期状態に戻す
       setTimeout(() => {
         forceResetAnimation();
@@ -517,11 +526,20 @@ const ChatWithOpenAI = ({ age, theme, goal, imagemap1 }) => {
             {theme}についてのイメージマップを書いてるよ。
             <br />
             テーマは {goal} についてだよ。 */}
-            {t("imagemapPage.prompt",{grade:t(`imagemapPage.${String(age)}`),theme:theme,goal:goal})}
+            {t("imagemapPage.prompt", {
+              grade: t(`imagemapPage.${String(age)}`),
+              theme:
+                t("language") == "ja"
+                  ? theme
+                  : t("language") == "zh"
+                  ? bookReviewCulturalEssay[theme]["zh"]
+                  : bookReviewCulturalEssay[theme]["en"],
+              goal: goal,
+            })}
           </p>
           <div className="blinking">
             <p>
-              <FaDownLong /> 下へ
+              <FaDownLong /> {t("imagemapPage.down")}
             </p>
           </div>
         </div>
@@ -529,9 +547,9 @@ const ChatWithOpenAI = ({ age, theme, goal, imagemap1 }) => {
           <p>
             では、ひだりのイメージマップツールを使ってあなたの{theme}の{goal}
             について思いつくことをまずひとつかいてみよう！
+            <br />
+            つかい方がわからないときは下のつかい方ボタンをクリックしてね！
           </p>
-          <br />
-          <p>つかい方がわからないときは下のつかい方ボタンをクリックしてね！</p>
           <div
             className={`notimagemap app-container ${
               showFrame ? "blur-background" : ""
