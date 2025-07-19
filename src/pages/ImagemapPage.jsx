@@ -20,6 +20,7 @@ import FloatingFrame from "../component/FloatingFrame";
 import NextPageLink from "../component/NextPageLink";
 import { Helmet } from "react-helmet-async";
 import Footer from "./Footer";
+import { t } from "i18next";
 
 const materialColors = [
   "#F44336",
@@ -59,11 +60,13 @@ const CustomEdge = ({ id, sourceX, sourceY, targetX, targetY, style }) => {
   );
 };
 
+const nodeDataInital = t('imagemapPage.idea');
+
 const initialNodes = [
   {
     id: "0",
     type: "input",
-    data: { label: "t('imagemapPage.idea')" },
+    data: { label: nodeDataInital},
     position: { x: 0, y: 50 },
   },
 ];
