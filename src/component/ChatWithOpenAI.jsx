@@ -545,10 +545,19 @@ const ChatWithOpenAI = ({ age, theme, goal, imagemap1 }) => {
         </div>
         <div className={`chat-bubble ai`}>
           <p>
-            では、ひだりのイメージマップツールを使ってあなたの{theme}の{goal}
+            {/* では、ひだりのイメージマップツールを使ってあなたの{theme}の{goal}
             について思いつくことをまずひとつかいてみよう！
             <br />
-            つかい方がわからないときは下のつかい方ボタンをクリックしてね！
+            つかい方がわからないときは下のつかい方ボタンをクリックしてね！ */}
+            {t("imagemapPage.HowToUse", {
+              goal: goal,
+              theme:
+                t("language") == "ja"
+                  ? theme
+                  : t("language") == "zh"
+                  ? bookReviewCulturalEssay[theme]["zh"]
+                  : bookReviewCulturalEssay[theme]["en"],
+            })}
           </p>
           <div
             className={`notimagemap app-container ${
