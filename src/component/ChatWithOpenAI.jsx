@@ -565,7 +565,7 @@ const ChatWithOpenAI = ({ age, theme, goal, imagemap1 }) => {
             }`}
             style={{ textAlign: "center" }}
           >
-            <button onClick={handleShowFrame}>つかい方</button>
+            <button onClick={handleShowFrame}>{t("imagemapPage.howToUseButton")}</button>
           </div>
         </div>
         {chatHistory.map((chat, index) => (

@@ -341,6 +341,12 @@
       "submit": "Create an image map together",
       "back": "Go back"
     },
+    "RadioButton": {
+      "think":"I can't think of anything",
+      "look":"Please refer to the image map",
+      "know":"I'm not sure how to use it"
+    },
+    "howToUseButton": "How to use",
     "steps": [
       { "theme": "Screen that appears when you open it", "text": "When you open it, there's a square that says 'Idea' in the middle!" },
       { "theme": "Let's get ready to type", "text": "When you click the square in the middle, the text of the square (idea) will be displayed in the input field above." },

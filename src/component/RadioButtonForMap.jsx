@@ -1,5 +1,6 @@
 import React from 'react';
 import "./RadioButtonForMap.css";
+import { t } from 'i18next';
 
 const RadioButtonForMap = ({ selectedValue, onChange }) => {
   return (
@@ -12,7 +13,7 @@ const RadioButtonForMap = ({ selectedValue, onChange }) => {
         onChange({ target: { value: "思い浮かびません" } })
       }
     >
-      思いつかないよ
+      {t("imagemapPage.RadioButton.think")}
     </button>
     <button
       type="button"
@@ -21,7 +22,7 @@ const RadioButtonForMap = ({ selectedValue, onChange }) => {
         onChange({ target: { value: "イメージマップを見てください" } })
       }
     >
-      イメージマップを見てほしい
+      {t("imagemapPage.RadioButton.look")}
     </button>
     <button
       type="button"
@@ -30,7 +31,7 @@ const RadioButtonForMap = ({ selectedValue, onChange }) => {
         onChange({ target: { value: "使い方がよくわかりません" } })
       }
     >
-      つかい方がよくわかりません
+      {t("imagemapPage.RadioButton.know")}
     </button>
     
   </div>
