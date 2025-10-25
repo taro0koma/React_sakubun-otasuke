@@ -19,6 +19,27 @@ const NextPageLink = ({ imairu }) => {
     "/images/benrituru.png",
     "/images/sakubunkotsu.png"
   ];
+  const linkList = [
+    "/map",
+    "/danraku",
+    "/kimoti",
+    "/hyougen",
+    "/zinbutsu",
+    "/omikuji",
+    "/osusume",
+    "/"
+  ];
+  const classnameList = [
+    "imagemap1",
+    "danraku1",
+    "kimochi1",
+    "hyougen1",
+    "zinbutu1",
+    "kakidashi1",
+    "benri1",
+    "home"
+  ];
+
   return (
     <div>
       <style>{style}</style>
@@ -28,8 +49,8 @@ const NextPageLink = ({ imairu }) => {
         </h4>
         <div className="row">
           {t("thumbnail.list", { returnObjects: true }).map((step, index) => (
-            <div className="column column-25 imagemap1" key={index}>
-              <a href="/map" className="box-link">
+            <div className={`column column-25 ${classnameList[index]}`} key={index}>
+              <a href={linkList[index]} className="box-link">
                 <div className="box">
                   <img
                     src={imageList[index]}

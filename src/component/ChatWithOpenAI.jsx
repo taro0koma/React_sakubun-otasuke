@@ -526,7 +526,7 @@ const ChatWithOpenAI = ({ age, theme, goal, imagemap1 }) => {
             {theme}についてのイメージマップを書いてるよ。
             <br />
             テーマは {goal} についてだよ。 */}
-            {t("imagemapPage.prompt", {
+            {t("imagemapPage.premise", {
               grade: t(`imagemapPage.${String(age)}`),
               theme:
                 t("language") == "ja"
