@@ -1,194 +1,393 @@
-import React, { useCallback, useRef, useState, useEffect } from "react";
-import { useTranslation } from "react-i18next";
+import React, { useState, useCallback, useRef, useEffect } from 'react';
 import {
   ReactFlow,
   useNodesState,
   useEdgesState,
   addEdge,
-  useReactFlow,
-  ReactFlowProvider,
   Controls,
+  Background,
+  Handle,
+  ReactFlowProvider,
+  useReactFlow,
+  NodeResizer,
   MiniMap,
-} from "@xyflow/react";
-import "@xyflow/react/dist/style.css";
+} from '@xyflow/react';
+import '@xyflow/react/dist/style.css';
+import ChatBot from './ChatBot'; // ChatBotコンポーネントをインポート
+import { t } from 'i18next';
+import FloatingFrame from '../component/FloatingFrame';
 
-import "./map.css"; // 必要なCSSファイルのパスを指定
-import Tabs from "./../component/Tabs";
-import ChatBot from "./ChatBot";
-import DownloadButton from "../component/DownloadButton";
-import FloatingFrame from "../component/FloatingFrame";
-import NextPageLink from "../component/NextPageLink";
-import { Helmet } from "react-helmet-async";
-import Footer from "./Footer";
-import { t } from "i18next";
-
-const materialColors = [
-  "#F44336",
-  "#E91E63",
-  "#9C27B0",
-  "#673AB7",
-  "#3F51B5",
-  "#2196F3",
-  "#03A9F4",
-  "#00BCD4",
-  "#009688",
-  "#4CAF50",
-  "#8BC34A",
-  "#CDDC39",
-  "#FFEB3B",
-  "#FFC107",
-  "#FF9800",
-  "#FF5722",
-  "#795548",
-  "#9E9E9E",
-  "#607D8B",
+const steps = [
+  {
+    theme: "開いたら出てくる画面",
+    gif: "/images/anm_image1.gif",
+    text: "開いたらまず真ん中くらいに「アイデア」と書いてある四角があるよ！",
+  },
+  {
+    theme: "入力する用意をしよう",
+    gif: "/images/anm_image2.gif",
+    text: "真ん中にある四角をクリックすると上の入力らんに四角（アイデア）の文字が表示されるよ",
+  },
+  {
+    theme: "入力してみよう",
+    gif: "/images/anm_image3.gif",
+    text: "入力らんに書きたいこと（まずはテーマ）を入力しよう",
+  },
+  {
+    theme: "イメージマップでいらないところを削除しよう",
+    gif: "/images/anm_image4.gif",
+    text: "いらない四角の部分をクリックしよう。そのあと「Back Space（Windows）」ボタンをクリックしよう\n※Macの場合は「DELETE」をクリックしてください。",
+  },
+  {
+    theme: "チャット機能を使おう！",
+    gif: "/images/anm_image5.gif",
+    text: "このチャット機能は、思いつかないときに質問してマップをどんどんふくらませるためにあるよ！まず、学年を選択して、作文か読書感想文どちらを書きたいか選ぼう！次に、それぞれそのあとに出てきた質問に対して答えよう。これで質問は終わりだよ！次にチャット機能を実際に使おう。３つの中から自分に合ったものを選んで送ろう！",
+  },
+  // 追加のステップも自由にここに入れられる
 ];
+// カスタムノードコンポーネント (変更なし)
+const CustomNode = ({ data, id, selected }) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [label, setLabel] = useState(data.label);
+  const { deleteElements } = useReactFlow();
 
-const getColorById = (id) =>
-  materialColors[Math.abs(parseInt(id, 10)) % materialColors.length];
-
-const CustomEdge = ({ id, sourceX, sourceY, targetX, targetY, style }) => {
-  const color = getColorById(id);
+  const handleDelete = useCallback(() => {
+    deleteElements({ nodes: [{ id }] });
+  }, [id, deleteElements]);
+  
+  const handleStyle = { borderRadius: '50%', backgroundColor: '#555' };
 
   return (
-    <path
-      id={id}
-      className="react-flow__edge-path"
-      d={`M ${sourceX} ${sourceY} L ${targetX} ${targetY}`}
-      style={{ ...style, stroke: color, strokeWidth: 2 }}
-    />
+    <>
+      <NodeResizer
+        isVisible={selected}
+        minWidth={100}
+        minHeight={50}
+        handleStyle={{
+          width: 10,
+          height: 10,
+          borderRadius: '50%',
+          backgroundColor: '#3b82f6',
+        }}
+        lineStyle={{
+          borderWidth: 2,
+          borderColor: '#3b82f6',
+        }}
+      />
+      <div style={{
+        padding: 10,
+        border: selected ? '3px solid #3b82f6' : '2px solid #555',
+        borderRadius: 8,
+        background: 'white',
+        width: '100%',
+        height: '100%',
+        textAlign: 'center',
+        display: 'flex',
+        alignItems: 'flex-start',
+        justifyContent: 'center',
+        transition: 'all 0.2s ease',
+        boxSizing: 'border-box',
+        position: 'relative',
+      }}>
+        <Handle type="target" position="top" style={handleStyle} />
+        <Handle type="target" position="left" style={handleStyle} />
+        <Handle type="target" position="right" style={handleStyle} />
+        <Handle type="target" position="bottom" style={handleStyle} />
+        
+        {isEditing ? (
+          <textarea
+            autoFocus
+            value={label}
+            onChange={(e) => {
+              setLabel(e.target.value);
+              data.label = e.target.value;
+            }}
+            onBlur={() => setIsEditing(false)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                setIsEditing(false);
+              }
+            }}
+            style={{
+              border: 'none',
+              outline: 'none',
+              textAlign: 'center',
+              width: '100%',
+              height: '100%',
+              background: 'transparent',
+              resize: 'none',
+              fontFamily: 'inherit',
+              fontSize: 'inherit',
+              padding: 0,
+              boxSizing: 'border-box'
+            }}
+          />
+        ) : (
+          <div
+            onClick={() => setIsEditing(true)}
+            style={{
+              cursor: 'text',
+              width: '100%',
+              height: '100%',
+              wordWrap: 'break-word',
+              whiteSpace: 'pre-wrap',
+              overflow: 'hidden',
+              WebkitMaskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)',
+              maskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)',
+            }}
+          >
+            {label}
+          </div>
+        )}
+        
+        {selected && (
+          <button
+            onClick={handleDelete}
+            className='delete'
+            style={{
+              position: 'absolute',
+              top: -30,
+              left: '100%',
+              transform: 'translateX(-50%)',
+              width: "70px",
+              border: 'none',
+              borderRadius: 4,
+              backgroundColor: '#4e4e4eff',
+              color: 'white',
+              fontSize: 10,
+              fontWeight: 'bold',
+              cursor: 'pointer',
+              zIndex: 100,
+              boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            けす
+          </button>
+        )}
+
+        <Handle type="source" position="bottom" style={handleStyle} />
+        <Handle type="source" position="left" style={handleStyle} />
+        <Handle type="source" position="right" style={handleStyle} />
+        <Handle type="source" position="top" style={handleStyle} />
+      </div>
+    </>
   );
 };
 
-const nodeDataInital = t('imagemapPage.idea');
 
-const initialNodes = [
-  {
-    id: "0",
-    type: "input",
-    data: { label: nodeDataInital},
-    position: { x: 0, y: 50 },
-  },
-];
+const nodeTypes = {
+  custom: CustomNode,
+};
 
 let id = 1;
 const getId = () => `${id++}`;
 
-const AddNodeOnEdgeDrop = () => {
-  const { t } = useTranslation();
-  const steps = t('imagemapPage.steps', { returnObjects: true }).map((step, index) => ({
-    ...step,
-    gif: `/images/anm_image${index + 1}.gif`
-  }));
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
-  const [selectedNodeId, setSelectedNodeId] = useState(null); // 選択されたノードのID
-  const [nodeLabel, setNodeLabel] = useState(""); // ノードのラベルを管理するステート
-  const { screenToFlowPosition, getEdges, getNodes } = useReactFlow();
-  const reactFlowWrapper = useRef(null);
+function MindMapFlow() {
+  const [nodes, setNodes, onNodesChange] = useNodesState([
+    {
+      id: '0',
+      type: 'custom',
+      position: { x: 250, y: 250 },
+      data: { label: 'メインアイデア\n' },
+      style: { width: 180, height: 100 },
+    }
+  ]);
+  const [edges, setEdges, onEdgesState] = useEdgesState([]);
+  const { screenToFlowPosition, deleteElements } = useReactFlow();
   const connectingNodeId = useRef(null);
-  const [nodeEdgeInfo, setNodeEdgeInfo] = useState(""); // ノードとエッジ情報を表示するためのステート
-  const [active, setActive] = useState(false);
-  const [zenactive, setZenactive] = useState(false);
+  const [isOverTrash, setIsOverTrash] = useState(false);
+  const [deletingNodeId, setDeletingNodeId] = useState(null);
+  const reactFlowWrapper = useRef(null);
+  const draggingNodeId = useRef(null);
+  const deleteTimeoutRef = useRef(null);
   const [nodeAdded, setNodeAdded] = useState(false);
-  const [showFrame, setShowFrame] = useState(false); // フレームの表示状態を管理
+  
+  const [isChatOpen, setIsChatOpen] = useState(true);
+  const [isChatVisible, setIsChatVisible] = useState(true);
+  const CHAT_PANEL_WIDTH = 400;
+  const TOGGLE_BUTTON_WIDTH_OPEN = 40;
+  const TOGGLE_BUTTON_WIDTH_CLOSED = 50;
+  const TOGGLE_BUTTON_HEIGHT = 100;
+  const [showFrame, setShowFrame] = useState(false);
 
-  const handleShowFrame = () => {
-    setShowFrame(true); // ボタンを押したらフレームを表示
-  };
-  const handleCloseFrame = () => {
-    setShowFrame(false);
-  }
+  // ノードとエッジ情報を文字列化する関数
+  const getNodeEdgeInfo = useCallback(() => {
+    const nodesInfo = nodes
+      .map(
+        (node) =>
+          `Node ID: ${node.id}, Label: ${node.data.label}, Position: (${node.position.x}, ${node.position.y})`
+      )
+      .join("\n");
+    const edgesInfo = edges
+      .map(
+        (edge) =>
+          `Edge ID: ${edge.id}, Source: ${edge.source}, Target: ${edge.target}`
+      )
+      .join("\n");
+    return `${nodesInfo}\n\n${edgesInfo}`;
+  }, [nodes, edges]);
 
-  const classToggle = () => {
-    setActive(!active);
-  };
-  const zenGamen = () => {
-    setZenactive(!zenactive);
-  };
+  const onNodeClick = useCallback(
+    (event, node) => {
+      setNodes((nds) =>
+        nds.map((n) => ({
+          ...n,
+          selected: n.id === node.id,
+        }))
+      );
+    },
+    [setNodes]
+  );
+  
   const onConnect = useCallback((params) => {
     connectingNodeId.current = null;
-    setEdges((eds) => addEdge(params, eds));
+    setEdges((eds) => addEdge({ ...params, animated: true }, eds));
     setNodeAdded(false);
-  }, []);
-
-  const onConnectStart = useCallback((_, { nodeId }) => {
-    connectingNodeId.current = nodeId;
+  }, [setEdges]);
+  
+  const onConnectStart = useCallback((_, { nodeId, handleType }) => {
+    connectingNodeId.current = { nodeId, handleType };
   }, []);
 
   const onConnectEnd = useCallback(
     (event) => {
       if (!connectingNodeId.current || nodeAdded) return;
-      if (!connectingNodeId.current) return;
 
-      const targetIsPane = event.target.classList.contains("react-flow__pane");
+      const targetIsPane = event.target.classList.contains('react-flow__pane');
 
       if (targetIsPane) {
-        const id = getId();
+        const { nodeId, handleType } = connectingNodeId.current;
+        const newId = getId();
         const newNode = {
-          id,
+          id: newId,
+          type: 'custom',
           position: screenToFlowPosition({
             x: event.clientX,
             y: event.clientY,
           }),
-          data: { label: `${t('imagemapPage.idea')} ${id}` },
+          data: { label: `アイデア ${newId}` },
+          style: { width: 150, height: 80 },
+          selected: true,
         };
-
-        setNodes((nds) => nds.concat(newNode));
-        setEdges((eds) =>
-          eds.concat({
-            id: `e${connectingNodeId.current}-${id}`,
-            source: connectingNodeId.current,
-            target: id,
-          })
-        );
+        
+        setNodes((nds) => nds.map(n => ({ ...n, selected: false })).concat(newNode));
+        
+        const newEdge = handleType === 'source' 
+          ? {
+              id: `e${nodeId}-${newId}`,
+              source: nodeId,
+              target: newId,
+              animated: true,
+            }
+          : {
+              id: `e${newId}-${nodeId}`,
+              source: newId,
+              target: nodeId,
+              animated: true,
+            };
+        
+        setEdges((eds) => eds.concat(newEdge));
         setNodeAdded(true);
       }
+      
+      connectingNodeId.current = null;
     },
-    [screenToFlowPosition,nodeAdded]
+    [screenToFlowPosition, setNodes, setEdges, nodeAdded]
   );
 
-  const onNodeClick = useCallback((event, node) => {
-    setSelectedNodeId(node.id);
-    setNodeLabel(node.data.label); // 選択されたノードのラベルを設定
+  const onNodeDragStart = useCallback((event, node) => {
+    draggingNodeId.current = node.id;
   }, []);
 
-  const onLabelChange = useCallback(
+  const onNodeDrag = useCallback((event) => {
+    if (!draggingNodeId.current) return;
+
+    const leftPanelRect = document.getElementById('left-panel')?.getBoundingClientRect();
+    if (leftPanelRect) {
+      const isOver = event.clientX < leftPanelRect.right;
+      
+      if (isOver && !isOverTrash) {
+        setIsOverTrash(true);
+      } else if (!isOver && isOverTrash) {
+        setIsOverTrash(false);
+      }
+    }
+  }, [isOverTrash]);
+
+  const onNodeDragStop = useCallback((event, node) => {
+    // if (!draggingNodeId.current) return;
+
+    // const leftPanelRect = document.getElementById('left-panel')?.getBoundingClientRect();
+    // if (leftPanelRect && event.clientX < leftPanelRect.right) {
+    //   setDeletingNodeId(node.id);
+    //   setNodes((nds) => nds.map(n => 
+    //     n.id === node.id 
+    //       ? { ...n, style: { ...n.style, transition: 'all 0.6s ease-out', transform: 'scale(0)', opacity: 0 } }
+    //       : n
+    //   ));
+      
+    //   deleteTimeoutRef.current = setTimeout(() => {
+    //     deleteElements({ nodes: [{ id: node.id }] });
+    //     setDeletingNodeId(null);
+    //   }, 600);
+    // }
+    
+    setIsOverTrash(false);
+    draggingNodeId.current = null;
+  // }, [setNodes, deleteElements]);
+  }, []);
+
+  const onDragOver = useCallback((event) => {
+    event.preventDefault();
+    event.dataTransfer.dropEffect = 'move';
+  }, []);
+
+  const onDrop = useCallback(
     (event) => {
-      setNodeLabel(event.target.value);
-      setNodes((nds) =>
-        nds.map((node) =>
-          node.id === selectedNodeId
-            ? { ...node, data: { label: event.target.value } }
-            : node
-        )
-      );
+      event.preventDefault();
+
+      const type = event.dataTransfer.getData('application/reactflow');
+
+      if (typeof type === 'undefined' || !type) {
+        return;
+      }
+
+      const position = screenToFlowPosition({
+        x: event.clientX,
+        y: event.clientY,
+      });
+      const newId = getId();
+      const newNode = {
+        id: newId,
+        type,
+        position,
+        data: { label: `アイデア ${newId}` },
+        style: { width: 150, height: 80 },
+        selected: true,
+      };
+
+      setNodes((nds) => nds.map(n => ({ ...n, selected: false })).concat(newNode));
     },
-    [selectedNodeId, setNodes]
+    [screenToFlowPosition, setNodes]
   );
 
-  const onPaneClick = useCallback(
-    (event) => {
-      if (nodeAdded) return;
-      const targetIsPane = event.target.classList.contains("react-flow__pane");
-      if (targetIsPane) {
-        const { clientX, clientY } = event;
-        const newNode = {
-          id: getId(),
-          position: screenToFlowPosition({ x: clientX, y: clientY }),
-          data: { label: `${t('imagemapPage.idea')} ${id}` },
-        };
-        setNodes((nds) => nds.concat(newNode));
-        setNodeAdded(true);
-      }
-    },
-    [screenToFlowPosition,nodeAdded]
-  );
+  const onDragStart = (event, nodeType) => {
+    event.dataTransfer.setData('application/reactflow', nodeType);
+    event.dataTransfer.effectAllowed = 'move';
+  };
+  const handleShowFrame = () => {
+    setShowFrame(true);
+  };
+  const handleCloseFrame = () => {
+    setShowFrame(false);
+  };
 
   const onKeyDown = useCallback(
     (event) => {
-      if (event.key === "Backspace") {
-        const selectedEdges = getEdges().filter((edge) => edge.selected);
+      if (event.key === "Backspace" || event.key === "Delete") {
+        const selectedEdges = edges.filter((edge) => edge.selected);
         if (selectedEdges.length) {
           setEdges((eds) =>
             eds.filter((edge) => !selectedEdges.includes(edge))
@@ -196,32 +395,12 @@ const AddNodeOnEdgeDrop = () => {
         }
       }
     },
-    [getEdges]
+    [edges, setEdges]
   );
+
   useEffect(() => {
     setNodeAdded(false);
-  },[nodes,edges]);
-
-  // 定期的にノードとエッジの情報を更新
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      const nodesInfo = getNodes()
-        .map(
-          (node) =>
-            `Node ID: ${node.id}, Label: ${node.data.label}, Position: (${node.position.x}, ${node.position.y})`
-        )
-        .join("\n");
-      const edgesInfo = getEdges()
-        .map(
-          (edge) =>
-            `Edge ID: ${edge.id}, Source: ${edge.source}, Target: ${edge.target}`
-        )
-        .join("\n");
-      setNodeEdgeInfo(`${nodesInfo}\n\n${edgesInfo}`);
-    }, 1000);
-
-    return () => clearInterval(intervalId);
-  }, [getNodes, getEdges]);  
+  }, [nodes, edges]);
 
   useEffect(() => {
     window.addEventListener("keydown", onKeyDown);
@@ -233,7 +412,7 @@ const AddNodeOnEdgeDrop = () => {
   useEffect(() => {
     const handleBeforeUnload = (event) => {
       event.preventDefault();
-      event.returnValue = ""; // Chromeでの警告表示に必要
+      event.returnValue = "";
     };
 
     window.addEventListener("beforeunload", handleBeforeUnload);
@@ -242,94 +421,217 @@ const AddNodeOnEdgeDrop = () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
   }, []);
-  const style = `
-   .notimagemap{
-    display: ${zenactive ? "none" : ""};
-  }
-  .react-flow{
-    width:${zenactive ? "100%" :"100%"} !important;
-    height:${zenactive ? "110%" :"100%"} !important;
-    max-width:300%;
-  }
-  `
+  
+  const handleChatToggle = () => {
+    if (isChatOpen) {
+      setIsChatOpen(false);
+    } else {
+      setIsChatVisible(true);
+      requestAnimationFrame(() => {
+        setIsChatOpen(true);
+      }, 0);
+    }
+  };
+
+  const onChatPanelTransitionEnd = (event) => {
+    if (event.propertyName === 'width') {
+      if (!isChatOpen) {
+        setIsChatVisible(false);
+      }
+    }
+  };
+  
+  useEffect(() => {
+    return () => {
+      if (deleteTimeoutRef.current) {
+        clearTimeout(deleteTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  const trashIconStyle = { 
+    fontSize: 80,
+    textAlign: 'center',
+    fontFamily: 'Noto Emoji, "Segoe UI Emoji", "Apple Color Emoji", sans-serif',
+  };
+
+  const dragBlockHandleStyle = {
+    position: 'absolute',
+    width: 8,
+    height: 8,
+    borderRadius: '50%',
+    backgroundColor: '#555',
+  };
 
   return (
-    <div style={{position:"absolute"}} className={`imagemapimagemap ${zenactive ? "zengamen" : ""}`}>
-      <Helmet><title>{t('imagemapPage.helmet')}</title></Helmet>
-      <style>{style}</style>
+    <div style={{ height: '100vh', width: '100%', position: 'relative', display: 'flex' }}>
       <div className={showFrame ? "background" : ""}>
-      {showFrame && <FloatingFrame steps={steps} onClose={handleCloseFrame}/>}</div>
-      <div className="notimagemap">
-      <Tabs pageTitle={t('imagemapPage.title')} contents="imagemapmake" />
+        {showFrame && (
+          <FloatingFrame steps={steps} onClose={handleCloseFrame} />
+        )}
       </div>
-      <div
-        className="wrapper"
-        ref={reactFlowWrapper}
-        style={{ width: "100%", height: "500px", position: "relative" }}
-      > <div className={`notimagemap app-container ${showFrame ? 'blur-background' : ''}`} style={{textAlign:"center"}}>
-        <button onClick={handleShowFrame} className="howa">
-          {t('imagemapPage.howToButton')}
-        </button>
-        </div>
-        <div className="node-input" style={{textAlign:"center"}}>
-          <label htmlFor="node-label" style={{ textAlign: "center" }}>
-            {t('imagemapPage.inputLabel')}
-          </label>
-          <input
-            id="node-label"
-            type="text"
-            value={nodeLabel}
-            onChange={onLabelChange}
-            placeholder={t('imagemapPage.inputPlaceholder')}
-            disabled={selectedNodeId === null} // ノードが選択されていないときは入力を無効にする
-            className="nodebox"
-          />
-        </div>
+      {/* 左パネル */}
+      <div 
+        id="left-panel"
+        style={{
+          // width: 180,
+          background:  '#f4f4f4ff',
+          padding: 20,
+          boxShadow: '2px 0 10px rgba(0,0,0,0.1)',
+          zIndex: 1,
+          position: 'relative',
+          overflowY: 'auto',
+          transition: 'background 0.3s ease',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: isOverTrash ? 'center' : 'flex-start',
+          pointerEvents: 'auto',
+          borderRight: 'solid 6px #b3b3b3ff',
+          position: 'absolute',
+          bottom: '30px',
+          width: '90%',
+          left: '50%',
+          transform: 'translateX(-50%)'
+        }}
+      >
+        
+          <>
+            <h3 style={{ color: 'rgba(48, 48, 48, 0.9)', marginTop: 0, fontSize: 18, fontWeight: 'bold', width: '100%' }}>
+              ブロック
+            </h3>
+            <p style={{ color: 'rgba(48, 48, 48, 0.9)', fontSize: 15, marginBottom: 20, fontWeight:"bold",width: '100%' }}>
+              ひっぱって、もってくる
+            </p>
+            
+            <div
+              onDragStart={(event) => onDragStart(event, 'custom')}
+              // onPointerDown={(event) => {setType('input'); onDragStart(event, createAddNewNode('input'));}}
+              draggable
+              style={{
+                padding: '15px 0px',
+                background: 'white',
+                borderRadius: 8,
+                marginBottom: 10,
+                cursor: 'grab',
+                textAlign: 'center',
+                fontWeight: 'bold',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
+                transition: 'transform 0.2s',
+                width: '100%',
+                border: "solid #555 2px",
+                position: 'relative',
+                boxSizing: 'border-box',
+                maxWidth:"200px"
+              }}
+              className='ideabutton'
+              onMouseDown={(e) => e.currentTarget.style.transform = 'scale(0.95)'}
+              onMouseUp={(e) => e.currentTarget.style.transform = 'scale(1)'}
+            >
+              <div style={{ ...dragBlockHandleStyle, top: -4, left: '50%', transform: 'translateX(-50%)',border: "1px solid white" }} />
+              <div style={{ ...dragBlockHandleStyle, bottom: -4, left: '50%', transform: 'translateX(-50%)',border: "1px solid white" }} />
+              <div style={{ ...dragBlockHandleStyle, left: -4, top: '50%', transform: 'translateY(-50%)',border: "1px solid white" }} />
+              <div style={{ ...dragBlockHandleStyle, right: -4, top: '50%', transform: 'translateY(-50%)',border: "1px solid white" }} />
+              
+              アイデア
+            </div>
+            <h3 style={{ color: 'rgba(48, 48, 48, 0.9)', marginTop: "auto", fontSize: 18, fontWeight: 'bold', width: '100%' }}>
+              つかい方がわからない？
+            </h3>
+            <button onClick={handleShowFrame} style={{padding:"10px 5px"}}>{t("imagemapPage.howToUseButton")}</button>
+          </>
+
+      </div>
+
+      {/* ReactFlowメインキャンバス */}
+      <div ref={reactFlowWrapper} style={{ flexGrow: 1, position: 'relative', zIndex: 0 }}>
         <ReactFlow
           nodes={nodes}
           edges={edges}
           onNodesChange={onNodesChange}
-          onEdgesChange={onEdgesChange}
+          onEdgesChange={onEdgesState}
           onConnect={onConnect}
           onConnectStart={onConnectStart}
           onConnectEnd={onConnectEnd}
-          onPaneClick={onPaneClick}
-          onNodeClick={onNodeClick}
+          onNodeClick={onNodeClick} 
+          onNodeDragStart={onNodeDragStart}
+          onNodeDrag={onNodeDrag}
+          onNodeDragStop={onNodeDragStop}
+          onDrop={onDrop}
+          onDragOver={onDragOver}
+          nodeTypes={nodeTypes}
           fitView
-          fitViewOptions={{ padding: 2 }}
-          nodeOrigin={[0.5, 0]}
-          edgeTypes={{ custom: CustomEdge }}
+          style={{ background: '#f5f5f5' }}
+          snapToGrid={true}
+          snapGrid={[15, 15]}
+          elevateNodesOnSelect={true}
+          proOptions={{ hideAttribution: true }}
         >
+          <Background color="#ddd" variant="lines" />
           <Controls />
+          {/* <Background color="#ddd" gap={20} /> */}
           <MiniMap />
-          <DownloadButton/>
-          <button onClick={zenGamen} style={{left:0,zIndex:"2147483647",position:"absolute"}}>{zenactive ? t('imagemapPage.exitFullscreenButton') : t('imagemapPage.fullscreenButton')}</button>
         </ReactFlow>
-        <div className="notimagemap">
-        <div
-          className={active ? "node-edge-info sideOutLeft" : "node-edge-info sideOutRight"} style={{borderRadius:"1em",boxShadow:"0 0 8px #00000033",border:"1px solid #ffffff"}}
-        >
-          {/* {nodeEdgeInfo} */}
-           <button onClick={classToggle} className="akesimebutton" style={{height:"100%",textAlign:"center",position:"relative"}}>
-            <div style={{display:"inline-block",writingMode:"vertical-rl",position:"absolute",left:"50%",transform:"translateX(-50%)"}}>{active ? <>{t('imagemapPage.openButton')}</> : <>{t('imagemapPage.closeButton')}</>}</div>
-          </button>
-          
-          <ChatBot imagemap1={nodeEdgeInfo}/>
-        </div></div>
       </div>
-      <br />
-      <div style={{marginTop:300}}>
-      <NextPageLink imairu="hyougen1"/>
+
+      {/* チャットパネル - ChatBotコンポーネントを使用 */}
+      <div
+        style={{
+          width: isChatOpen ? CHAT_PANEL_WIDTH : 0,
+          minWidth: isChatOpen ? CHAT_PANEL_WIDTH : 0,
+          background: 'white',
+          boxShadow: '-2px 0 10px rgba(0,0,0,0.1)',
+          zIndex: 1,
+          position: 'relative',
+          transition: 'width 0.3s ease-in-out',
+          overflow: 'hidden',
+          display: isChatVisible ? 'block' : 'none',
+          padding:"60px 0px"
+        }}
+        onTransitionEnd={onChatPanelTransitionEnd}
+        className='node-edge-info'
+      >
+        {isChatVisible && isChatOpen && (
+          <ChatBot imagemap1={getNodeEdgeInfo()} />
+        )}
       </div>
-      <Footer/>
+
+      {/* チャット開閉ボタン */}
+      <button
+        onClick={handleChatToggle}
+        style={{
+          position: 'absolute',
+          top: '50%',
+          right: isChatOpen ? CHAT_PANEL_WIDTH : 0,
+          transform: 'translateY(-50%)',
+          width: isChatOpen ? TOGGLE_BUTTON_WIDTH_OPEN : TOGGLE_BUTTON_WIDTH_CLOSED,
+          height: TOGGLE_BUTTON_HEIGHT,
+          border: 'none',
+          backgroundColor: '#3b82f6',
+          color: 'white',
+          fontWeight: 'bold',
+          cursor: 'pointer',
+          zIndex: 0,
+          borderRadius: isChatOpen ? '8px 0 0 8px' : '8px 0 0 8px',
+          transition: 'right 0.3s ease-in-out, width 0.3s ease-in-out, background-color 0.2s',
+          writingMode: 'vertical-rl',
+          textOrientation: 'upright',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        {isChatOpen ? 'チャットを閉じる' : 'チャットを開く'}
+      </button>
+
     </div>
   );
-};
+}
 
-const ImagemapPage = () => (
-  <ReactFlowProvider>
-    <AddNodeOnEdgeDrop />
-  </ReactFlowProvider>
-);
-
-export default ImagemapPage;
+export default function MindMapTool() {
+  return (
+    <ReactFlowProvider>
+      <MindMapFlow />
+    </ReactFlowProvider>
+  );
+}

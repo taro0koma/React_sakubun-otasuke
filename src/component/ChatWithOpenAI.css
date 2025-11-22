@@ -3,6 +3,7 @@
   flex-direction: column;
   background-color: #ffffff;
   width: 410px;
+  height: 100%;
 }
 
 .chat-history {
@@ -106,7 +107,7 @@
 .chat-bubble.ai:before {
   display: inline-block;
   margin-top: -36px;
-  margin-left: -23px;
+  margin-left: -190px;
   vertical-align: middle;
   font-size: 18px;
   content: "🤖";
@@ -119,7 +120,7 @@
 .chat-bubble.user:before {
   display: inline-block;
   margin-top: -36px;
-  margin-left: -23px;
+  margin-left: -120px;
   vertical-align: middle;
   font-size: 18px;
   content: "😀　あなた";

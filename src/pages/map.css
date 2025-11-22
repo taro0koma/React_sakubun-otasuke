@@ -223,7 +223,7 @@
   background-color: #FFFFFF;
 }
 .react-flow__pane.draggable{
-  background: url("/images/bg_hougan.png");
+  background: url("/images/bg_hougan.png") !important;
 }
 .download-btn{
   left: 0 !important;

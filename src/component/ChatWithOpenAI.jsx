@@ -577,7 +577,7 @@ const ChatWithOpenAI = ({ age, theme, goal, imagemap1 }) => {
           </div>
         ))}
       </div>
-      <div style={{ zIndex: 100 }}>
+      <div style={{ zIndex: 100,margin:"20px" }}>
         <RadioButtonForMap
           selectedValue={selectedRadio}
           onChange={handleRadioChange}
@@ -590,7 +590,7 @@ const ChatWithOpenAI = ({ age, theme, goal, imagemap1 }) => {
       {/* Riveアニメーションを表示するコンテナ */}
       <div
         className="komawan"
-        style={{ marginTop: "20px", textAlign: "center" }}
+        style={{ marginTop: "20px", textAlign: "center",marginBottom: "90px",marginLeft: "-90px" }}
       >
         {RiveComponent && (
           <RiveComponent style={{ width: "180px", height: "180px" }} />

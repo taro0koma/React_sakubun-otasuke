@@ -299,6 +299,18 @@ h6{
   /* padding-right: 4px !important; */
   margin: auto;
 }
+
+.delete {
+  padding: 11px 0px !important
+}
+
+.ideabutton {
+  transition: all 0.3s ease;
+}
+.ideabutton:hover{
+  transform: scale(1.15,1.15);
+  cursor: pointer;
+}
 @media (min-width: 1200px) {/* 1200px以上*/
   .hazinogazou {
     margin: 0 0 0 30px;
