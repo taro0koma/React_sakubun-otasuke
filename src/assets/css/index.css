@@ -300,6 +300,11 @@ h6{
   margin: auto;
 }
 
+.react-flow__controls-button svg path{
+  stroke-width: 1px !important;
+  stroke:black;
+}
+
 .delete {
   padding: 11px 0px !important
 }
@@ -311,6 +316,43 @@ h6{
   transform: scale(1.15,1.15);
   cursor: pointer;
 }
+@import url('../../pages/xy-theme.css');
+
+html,
+body {
+  margin: 0;
+  font-family: sans-serif;
+  box-sizing: border-box;
+}
+
+#app {
+  width: 100vw;
+  height: 100vh;
+}
+
+.react-flow__node {
+  padding: 0;
+  border: none;
+}
+
+.tool-overlay {
+  pointer-events: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 4;
+  height: 100%;
+  width: 100%;
+  transform-origin: top left;
+  cursor: copy;
+  touch-action: none;
+}
+
+.rectangle-preview {
+  position: absolute;
+  z-index: 10;
+}
+
 @media (min-width: 1200px) {/* 1200px以上*/
   .hazinogazou {
     margin: 0 0 0 30px;

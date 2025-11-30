@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
     "@react-three/drei": "^9.121.4",
     "@react-three/fiber": "^8.17.14",
     "@reactour/tour": "^3.8.0",
@@ -31,6 +33,7 @@
     "react-helmet-async": "^2.0.5",
     "react-i18next": "^15.6.0",
     "react-icons": "^5.2.1",
+    "react-joyride": "^2.9.3",
     "react-router-dom": "^6.24.1",
     "react-svg-draw": "^0.0.12",
     "react-to-print": "^2.15.1",
