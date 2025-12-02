@@ -353,6 +353,12 @@ body {
   z-index: 10;
 }
 
+.react-flow__handle{
+  width: 15px !important;
+  height: 15px !important;
+  border: white 3px solid !important;
+}
+
 @media (min-width: 1200px) {/* 1200px以上*/
   .hazinogazou {
     margin: 0 0 0 30px;

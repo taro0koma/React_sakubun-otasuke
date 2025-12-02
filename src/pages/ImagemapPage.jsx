@@ -3,7 +3,6 @@ import React, {
   useCallback,
   useRef,
   useEffect,
-  useMemo,
   forwardRef,
 } from "react";
 import {
@@ -17,19 +16,15 @@ import {
   ReactFlowProvider,
   useReactFlow,
   NodeResizer,
-  MiniMap,
-  Panel,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
-import ChatBot from "./ChatBot"; // ChatBotコンポーネントをインポート
+import ChatBot from './ChatBot';
 import { t } from "i18next";
 import Joyride from "react-joyride";
 import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
-import { RectangleNode } from "../component/RectangleNode";
-import { RectangleTool } from "../component/RectangleTool";
-import { div } from "three/tsl";
-// カスタムノードコンポーネント (変更なし)
+
+// カスタムノードコンポーネント - 上下のハンドルを両方source/targetに！
 const CustomNode = ({ data, id, selected }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [label, setLabel] = useState(data.label);
@@ -39,7 +34,13 @@ const CustomNode = ({ data, id, selected }) => {
     deleteElements({ nodes: [{ id }] });
   }, [id, deleteElements]);
 
-  const handleStyle = { borderRadius: "50%", backgroundColor: "#555" };
+  // ハンドルのスタイル
+  const handleStyle = { 
+    borderRadius: "50%", 
+    backgroundColor: "#555",
+    width: 10,
+    height: 10,
+  };
 
   return (
     <>
@@ -75,10 +76,33 @@ const CustomNode = ({ data, id, selected }) => {
           position: "relative",
         }}
       >
-        <Handle type="target" position="top" style={handleStyle} />
-        <Handle type="target" position="left" style={handleStyle} />
-        <Handle type="target" position="right" style={handleStyle} />
-        <Handle type="target" position="bottom" style={handleStyle} />
+        {/* 上のハンドル - sourceとtargetの両方 */}
+        <Handle 
+          type="source" 
+          position="top" 
+          id="top-source"
+          style={handleStyle} 
+        />
+        <Handle 
+          type="target" 
+          position="top" 
+          id="top-target"
+          style={handleStyle} 
+        />
+        
+        {/* 下のハンドル - sourceとtargetの両方 */}
+        <Handle 
+          type="source" 
+          position="bottom" 
+          id="bottom-source"
+          style={handleStyle} 
+        />
+        <Handle 
+          type="target" 
+          position="bottom" 
+          id="bottom-target"
+          style={handleStyle} 
+        />
 
         {isEditing ? (
           <textarea
@@ -119,10 +143,6 @@ const CustomNode = ({ data, id, selected }) => {
               wordWrap: "break-word",
               whiteSpace: "pre-wrap",
               overflow: "hidden",
-              WebkitMaskImage:
-                "linear-gradient(to bottom, black 85%, transparent 100%)",
-              maskImage:
-                "linear-gradient(to bottom, black 85%, transparent 100%)",
             }}
           >
             {label}
@@ -132,7 +152,6 @@ const CustomNode = ({ data, id, selected }) => {
         {selected && (
           <button
             onClick={handleDelete}
-            className="delete"
             style={{
               position: "absolute",
               top: -30,
@@ -154,11 +173,6 @@ const CustomNode = ({ data, id, selected }) => {
             けす
           </button>
         )}
-
-        <Handle type="source" position="bottom" style={handleStyle} />
-        <Handle type="source" position="left" style={handleStyle} />
-        <Handle type="source" position="right" style={handleStyle} />
-        <Handle type="source" position="top" style={handleStyle} />
       </div>
     </>
   );
@@ -178,23 +192,22 @@ function MindMapFlow() {
     },
   ]);
   const [edges, setEdges, onEdgesState] = useEdgesState([]);
-  const { screenToFlowPosition, deleteElements } = useReactFlow();
+  const { screenToFlowPosition } = useReactFlow();
   const connectingNodeId = useRef(null);
-  const [isOverTrash, setIsOverTrash] = useState(false);
-  const [deletingNodeId, setDeletingNodeId] = useState(null);
-  const reactFlowWrapper = useRef(null);
-  const draggingNodeId = useRef(null);
-  const deleteTimeoutRef = useRef(null);
   const [nodeAdded, setNodeAdded] = useState(false);
+  
+  // ドラッグ状態の管理
+  const [isDraggingNewNode, setIsDraggingNewNode] = useState(false);
+  const [dragGhostPosition, setDragGhostPosition] = useState({ x: 0, y: 0 });
+  const dragStartButtonPos = useRef({ x: 0, y: 0 });
 
+  // チャットパネルの状態管理
   const [isChatOpen, setIsChatOpen] = useState(true);
   const [isChatVisible, setIsChatVisible] = useState(true);
   const CHAT_PANEL_WIDTH = 400;
   const TOGGLE_BUTTON_WIDTH_OPEN = 40;
   const TOGGLE_BUTTON_WIDTH_CLOSED = 50;
   const TOGGLE_BUTTON_HEIGHT = 100;
-  const [showFrame, setShowFrame] = useState(false);
-  const [isRectangleActive, setIsRectangleActive] = useState(true);
 
   // ノードとエッジ情報を文字列化する関数
   const getNodeEdgeInfo = useCallback(() => {
@@ -228,14 +241,14 @@ function MindMapFlow() {
   const onConnect = useCallback(
     (params) => {
       connectingNodeId.current = null;
-      setEdges((eds) => addEdge({ ...params, animated: true }, eds));
+      setEdges((eds) => addEdge({ ...params, animated: true, type: "smoothstep" }, eds));
       setNodeAdded(false);
     },
     [setEdges]
   );
 
-  const onConnectStart = useCallback((_, { nodeId, handleType }) => {
-    connectingNodeId.current = { nodeId, handleType };
+  const onConnectStart = useCallback((_, { nodeId, handleId, handleType }) => {
+    connectingNodeId.current = { nodeId, handleId, handleType };
   }, []);
 
   const onConnectEnd = useCallback(
@@ -245,7 +258,7 @@ function MindMapFlow() {
       const targetIsPane = event.target.classList.contains("react-flow__pane");
 
       if (targetIsPane) {
-        const { nodeId, handleType } = connectingNodeId.current;
+        const { nodeId, handleId, handleType } = connectingNodeId.current;
         const newId = getId();
         const newNode = {
           id: newId,
@@ -263,19 +276,27 @@ function MindMapFlow() {
           nds.map((n) => ({ ...n, selected: false })).concat(newNode)
         );
 
+        // 接続元のハンドル位置に基づいて新しいノードの適切なハンドルを選択
+        const sourceHandleId = handleId || (handleType === "source" ? "top-source" : "top-target");
+        const targetHandleId = sourceHandleId.includes("top") ? "bottom-target" : "top-target";
+
         const newEdge =
           handleType === "source"
             ? {
                 id: `e${nodeId}-${newId}`,
                 source: nodeId,
+                sourceHandle: sourceHandleId,
                 target: newId,
+                targetHandle: targetHandleId,
                 animated: true,
                 type: "smoothstep",
               }
             : {
                 id: `e${newId}-${nodeId}`,
                 source: newId,
+                sourceHandle: targetHandleId.replace("target", "source"),
                 target: nodeId,
+                targetHandle: sourceHandleId.replace("source", "target"),
                 animated: true,
                 type: "smoothstep",
               };
@@ -289,146 +310,97 @@ function MindMapFlow() {
     [screenToFlowPosition, setNodes, setEdges, nodeAdded]
   );
 
-  const onNodeDragStart = useCallback((event, node) => {
-    draggingNodeId.current = node.id;
+  // 新規ノード追加ボタンのドラッグ開始
+  const handleNewNodeDragStart = useCallback((e) => {
+    e.preventDefault();
+    const button = e.currentTarget;
+    const rect = button.getBoundingClientRect();
+    
+    dragStartButtonPos.current = {
+      x: rect.left + rect.width / 2,
+      y: rect.top + rect.height / 2,
+    };
+    
+    const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+    const clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
+    
+    setIsDraggingNewNode(true);
+    setDragGhostPosition({ x: clientX, y: clientY });
   }, []);
 
-  const onNodeDrag = useCallback(
-    (event) => {
-      if (!draggingNodeId.current) return;
+  // ドラッグ中
+  const handleNewNodeDragMove = useCallback((e) => {
+    if (!isDraggingNewNode) return;
+    
+    const clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+    const clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
+    
+    setDragGhostPosition({ x: clientX, y: clientY });
+  }, [isDraggingNewNode]);
 
-      const leftPanelRect = document
-        .getElementById("left-panel")
-        ?.getBoundingClientRect();
-      if (leftPanelRect) {
-        const isOver = event.clientX < leftPanelRect.right;
+  // ドラッグ終了
+  const handleNewNodeDragEnd = useCallback((e) => {
+    if (!isDraggingNewNode) return;
+    
+    const clientX = e.type === 'touchend' ? e.changedTouches[0].clientX : e.clientX;
+    const clientY = e.type === 'touchend' ? e.changedTouches[0].clientY : e.clientY;
+    
+    // ReactFlowキャンバス内かチェック
+    const reactFlowPane = document.querySelector('.react-flow__pane');
+    if (reactFlowPane) {
+      const rect = reactFlowPane.getBoundingClientRect();
+      if (
+        clientX >= rect.left &&
+        clientX <= rect.right &&
+        clientY >= rect.top &&
+        clientY <= rect.bottom
+      ) {
+        // ノードを作成
+        const flowPosition = screenToFlowPosition({ x: clientX, y: clientY });
+        const newId = getId();
+        const newNode = {
+          id: newId,
+          type: "custom",
+          position: flowPosition,
+          data: { label: `アイデア ${newId}` },
+          style: { width: 150, height: 80 },
+          selected: true,
+        };
 
-        if (isOver && !isOverTrash) {
-          setIsOverTrash(true);
-        } else if (!isOver && isOverTrash) {
-          setIsOverTrash(false);
-        }
+        setNodes((nds) =>
+          nds.map((n) => ({ ...n, selected: false })).concat(newNode)
+        );
       }
-    },
-    [isOverTrash]
-  );
+    }
+    
+    setIsDraggingNewNode(false);
+  }, [isDraggingNewNode, screenToFlowPosition, setNodes]);
 
-  const onNodeDragStop = useCallback((event, node) => {
-    // if (!draggingNodeId.current) return;
-
-    // const leftPanelRect = document.getElementById('left-panel')?.getBoundingClientRect();
-    // if (leftPanelRect && event.clientX < leftPanelRect.right) {
-    //   setDeletingNodeId(node.id);
-    //   setNodes((nds) => nds.map(n =>
-    //     n.id === node.id
-    //       ? { ...n, style: { ...n.style, transition: 'all 0.6s ease-out', transform: 'scale(0)', opacity: 0 } }
-    //       : n
-    //   ));
-
-    //   deleteTimeoutRef.current = setTimeout(() => {
-    //     deleteElements({ nodes: [{ id: node.id }] });
-    //     setDeletingNodeId(null);
-    //   }, 600);
-    // }
-
-    setIsOverTrash(false);
-    draggingNodeId.current = null;
-    // }, [setNodes, deleteElements]);
-  }, []);
-
-  const onDragOver = useCallback((event) => {
-    event.preventDefault();
-    event.dataTransfer.dropEffect = "move";
-  }, []);
-
-  const onDrop = useCallback(
-    (event) => {
-      event.preventDefault();
-
-      const type = event.dataTransfer.getData("application/reactflow");
-
-      if (typeof type === "undefined" || !type) {
-        return;
-      }
-
-      const position = screenToFlowPosition({
-        x: event.clientX,
-        y: event.clientY,
-      });
-      const newId = getId();
-      const newNode = {
-        id: newId,
-        type,
-        position,
-        data: { label: `アイデア ${newId}` },
-        style: { width: 150, height: 80 },
-        selected: true,
+  // グローバルイベントリスナー
+  useEffect(() => {
+    if (isDraggingNewNode) {
+      const handleMove = (e) => {
+        e.preventDefault();
+        handleNewNodeDragMove(e);
+      };
+      const handleEnd = (e) => {
+        e.preventDefault();
+        handleNewNodeDragEnd(e);
       };
 
-      setNodes((nds) =>
-        nds.map((n) => ({ ...n, selected: false })).concat(newNode)
-      );
-    },
-    [screenToFlowPosition, setNodes]
-  );
+      document.addEventListener('mousemove', handleMove);
+      document.addEventListener('mouseup', handleEnd);
+      document.addEventListener('touchmove', handleMove, { passive: false });
+      document.addEventListener('touchend', handleEnd, { passive: false });
 
-  const onDragStart = (event, nodeType) => {
-    event.dataTransfer.setData("application/reactflow", nodeType);
-    event.dataTransfer.effectAllowed = "move";
-  };
-  // const handleShowFrame = () => {
-  //   setShowFrame(true);
-  // };
-  // const handleCloseFrame = () => {
-  //   setShowFrame(false);
-  // };
-  const steps = [
-    {
-      target: ".ideabutton",
-      content: "これを上にひっぱる",
-    },
-    {
-      target:
-        ".react-flow__node.react-flow__node-custom.nopan.selectable.draggable",
-      content: "This another awesome feature!",
-    },
-  ];
-  const pulse = keyframes`
-  0% {
-    transform: scale(1);
-  }
-
-  55% {
-    background-color: rgba(255, 100, 100, 0.9);
-    transform: scale(1.6);
-  }
-`;
-  const Beacon = styled.span`
-    animation: ${pulse} 1s ease-in-out infinite;
-    background-color: rgba(255, 27, 14, 0.6);
-    border-radius: 50%;
-    display: inline-block;
-    height: 3rem;
-    width: 3rem;
-  `;
-  const BeaconComponent = forwardRef((props, ref) => {
-    return <Beacon ref={ref} {...props} />;
-  });
-
-  // Joyride の実行状態を管理
-  const [run, setRun] = useState(true);
-
-  const handleJoyrideCallback = (data) => {
-    const { status } = data;
-    // チュートリアルの完了やスキップを処理
-    if (["finished", "skipped"].includes(status)) {
-      setRun(false);
+      return () => {
+        document.removeEventListener('mousemove', handleMove);
+        document.removeEventListener('mouseup', handleEnd);
+        document.removeEventListener('touchmove', handleMove);
+        document.removeEventListener('touchend', handleEnd);
+      };
     }
-  };
-
-  const handleRestartTutorial = () => {
-    setRun(true);
-  };
+  }, [isDraggingNewNode, handleNewNodeDragMove, handleNewNodeDragEnd]);
 
   const onKeyDown = useCallback(
     (event) => {
@@ -455,19 +427,6 @@ function MindMapFlow() {
     };
   }, [onKeyDown]);
 
-  useEffect(() => {
-    const handleBeforeUnload = (event) => {
-      event.preventDefault();
-      event.returnValue = "";
-    };
-
-    window.addEventListener("beforeunload", handleBeforeUnload);
-
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, []);
-
   const handleChatToggle = () => {
     if (isChatOpen) {
       setIsChatOpen(false);
@@ -487,18 +446,8 @@ function MindMapFlow() {
     }
   };
 
-  useEffect(() => {
-    return () => {
-      if (deleteTimeoutRef.current) {
-        clearTimeout(deleteTimeoutRef.current);
-      }
-    };
-  }, []);
-
-  const trashIconStyle = {
-    fontSize: 80,
-    textAlign: "center",
-    fontFamily: 'Noto Emoji, "Segoe UI Emoji", "Apple Color Emoji", sans-serif',
+  const nodeTypes = {
+    custom: CustomNode,
   };
 
   const dragBlockHandleStyle = {
@@ -508,9 +457,54 @@ function MindMapFlow() {
     borderRadius: "50%",
     backgroundColor: "#555",
   };
-  const nodeTypes = {
-    rectangle: RectangleNode,
-    custom: CustomNode,
+
+  // Joyride用のステップとスタイル
+  const steps = [
+    {
+      target: ".ideabutton",
+      content: "これを上にひっぱる",
+    },
+    {
+      target: ".react-flow__node.react-flow__node-custom.nopan.draggable",
+      content: "クリックして文字をうってみよう！",
+    },
+  ];
+
+  const pulse = keyframes`
+    0% {
+      transform: scale(1);
+    }
+    55% {
+      background-color: rgba(255, 100, 100, 0.9);
+      transform: scale(1.6);
+    }
+  `;
+
+  const Beacon = styled.span`
+    animation: ${pulse} 1s ease-in-out infinite;
+    background-color: rgba(255, 27, 14, 0.6);
+    border-radius: 50%;
+    display: inline-block;
+    height: 3rem;
+    width: 3rem;
+  `;
+
+  const BeaconComponent = forwardRef((props, ref) => {
+    return <Beacon ref={ref} {...props} />;
+  });
+
+  // Joyride の実行状態を管理
+  const [run, setRun] = useState(true);
+
+  const handleJoyrideCallback = (data) => {
+    const { status } = data;
+    if (["finished", "skipped"].includes(status)) {
+      setRun(false);
+    }
+  };
+
+  const handleRestartTutorial = () => {
+    setRun(true);
   };
 
   return (
@@ -531,33 +525,21 @@ function MindMapFlow() {
         showProgress={true}
         beaconComponent={BeaconComponent}
       />
-      <div className={showFrame ? "background" : ""}>
-        {showFrame && (
-          <FloatingFrame steps={steps} onClose={handleCloseFrame} />
-        )}
-      </div>
-      {/* 左パネル */}
+      {/* 左パネル - 新規ノード追加ボタン */}
       <div
-        id="left-panel"
         style={{
-          // width: 180,
           background: "#f4f4f4ff",
           padding: 20,
           boxShadow: "2px 0 10px rgba(0,0,0,0.1)",
           zIndex: 1,
-          position: "relative",
-          overflowY: "auto",
-          transition: "background 0.3s ease",
+          position: "absolute",
+          bottom: "20px",
+          left: "100px",
+          borderRadius: "10px",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          justifyContent: isOverTrash ? "center" : "flex-start",
-          pointerEvents: "auto",
-          position: "absolute",
-          bottom: "20px",
-          width: "400px",
-          left: "100px",
-          borderRadius: "10px"
+          gap: "16px",
         }}
       >
         <div
@@ -568,36 +550,30 @@ function MindMapFlow() {
           }}
         >
           <div
-            onDragStart={(event) => onDragStart(event, "custom")}
-            // onPointerDown={(event) => {setType('input'); onDragStart(event, createAddNewNode('input'));}}
-            draggable
+            onMouseDown={handleNewNodeDragStart}
+            onTouchStart={handleNewNodeDragStart}
+            className="ideabutton"
             style={{
-              padding: "15px 0px",
+              padding: "15px 20px",
               background: "white",
               borderRadius: 8,
-              marginBottom: 10,
-              cursor: "grab",
+              cursor: isDraggingNewNode ? "grabbing" : "grab",
               textAlign: "center",
               fontWeight: "bold",
               boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
-              transition: "transform 0.2s",
+              transition: isDraggingNewNode ? "none" : "transform 0.2s",
               width: "150px",
               border: "solid #555 2px",
               position: "relative",
               boxSizing: "border-box",
-              maxWidth: "400px",
-              flex: 1 /* 同じサイズに伸ばす */,
-              height: "70px" /* 必要に応じて調整OK */,
+              height: "70px",
               display: "flex",
-              justifyContent: "center" /* テキスト横中央 */,
-              alignItems: "center" /* テキスト縦中央 */,
-              textAlign: "center",
+              justifyContent: "center",
+              alignItems: "center",
+              userSelect: "none",
+              touchAction: "none",
+              transform: isDraggingNewNode ? "scale(0.95)" : "scale(1)",
             }}
-            className="ideabutton"
-            onMouseDown={(e) =>
-              (e.currentTarget.style.transform = "scale(0.95)")
-            }
-            onMouseUp={(e) => (e.currentTarget.style.transform = "scale(1)")}
           >
             <div
               style={{
@@ -617,24 +593,6 @@ function MindMapFlow() {
                 border: "1px solid white",
               }}
             />
-            <div
-              style={{
-                ...dragBlockHandleStyle,
-                left: -4,
-                top: "50%",
-                transform: "translateY(-50%)",
-                border: "1px solid white",
-              }}
-            />
-            <div
-              style={{
-                ...dragBlockHandleStyle,
-                right: -4,
-                top: "50%",
-                transform: "translateY(-50%)",
-                border: "1px solid white",
-              }}
-            />
             アイデア
           </div>
           <button
@@ -646,11 +604,36 @@ function MindMapFlow() {
         </div>
       </div>
 
+      {/* ドラッグ中のゴーストノード */}
+      {isDraggingNewNode && (
+        <div
+          style={{
+            position: "fixed",
+            left: dragGhostPosition.x,
+            top: dragGhostPosition.y,
+            transform: "translate(-50%, -50%)",
+            width: "150px",
+            height: "80px",
+            padding: "10px",
+            background: "rgba(255, 255, 255, 0.95)",
+            border: "3px dashed #3b82f6",
+            borderRadius: 8,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            fontWeight: "bold",
+            pointerEvents: "none",
+            zIndex: 10000,
+            boxShadow: "0 8px 20px rgba(59, 130, 246, 0.4)",
+            animation: "pulse 1s ease-in-out infinite",
+          }}
+        >
+          新しいアイデア
+        </div>
+      )}
+
       {/* ReactFlowメインキャンバス */}
-      <div
-        ref={reactFlowWrapper}
-        style={{ flexGrow: 1, position: "relative", zIndex: 0 }}
-      >
+      <div style={{ flexGrow: 1, position: "relative", zIndex: 0 }}>
         <ReactFlow
           nodes={nodes}
           edges={edges}
@@ -660,11 +643,6 @@ function MindMapFlow() {
           onConnectStart={onConnectStart}
           onConnectEnd={onConnectEnd}
           onNodeClick={onNodeClick}
-          onNodeDragStart={onNodeDragStart}
-          onNodeDrag={onNodeDrag}
-          onNodeDragStop={onNodeDragStop}
-          onDrop={onDrop}
-          onDragOver={onDragOver}
           nodeTypes={nodeTypes}
           fitView
           style={{ background: "#f5f5f5" }}
@@ -675,29 +653,6 @@ function MindMapFlow() {
         >
           <Background color="#ddd" variant="lines" />
           <Controls />
-          {/* {isRectangleActive && <RectangleTool />}
-
-          <Panel position="top-left">
-            <div className="xy-theme__button-group">
-              <button
-                className={`xy-theme__button ${
-                  isRectangleActive ? "active" : ""
-                }`}
-                onClick={() => setIsRectangleActive(true)}
-              >
-                Rectangle Mode
-              </button>
-              <button
-                className={`xy-theme__button ${
-                  !isRectangleActive ? "active" : ""
-                }`}
-                onClick={() => setIsRectangleActive(false)}
-              >
-                Selection Mode
-              </button>
-            </div>
-          </Panel> */}
-          {/* <Background color="#ddd" gap={20} /> */}
         </ReactFlow>
       </div>
 
@@ -740,7 +695,7 @@ function MindMapFlow() {
           color: "white",
           fontWeight: "bold",
           cursor: "pointer",
-          zIndex: 0,
+          zIndex: 2,
           borderRadius: isChatOpen ? "8px 0 0 8px" : "8px 0 0 8px",
           transition:
             "right 0.3s ease-in-out, width 0.3s ease-in-out, background-color 0.2s",
@@ -753,6 +708,19 @@ function MindMapFlow() {
       >
         {isChatOpen ? "チャットを閉じる" : "チャットを開く"}
       </button>
+
+      <style>{`
+        @keyframes pulse {
+          0%, 100% {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+          }
+          50% {
+            opacity: 0.8;
+            transform: translate(-50%, -50%) scale(1.05);
+          }
+        }
+      `}</style>
     </div>
   );
 }
