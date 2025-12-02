@@ -153,25 +153,9 @@ const CustomNode = ({ data, id, selected }) => {
         {selected && (
           <button
             onClick={handleDelete}
-            style={{
-              position: "absolute",
-              top: -30,
-              left: "100%",
-              transform: "translateX(-50%)",
-              width: "70px",
-              border: "none",
-              borderRadius: 4,
-              backgroundColor: "#4e4e4eff",
-              color: "white",
-              fontSize: 10,
-              fontWeight: "bold",
-              cursor: "pointer",
-              zIndex: 100,
-              boxShadow: "0 2px 4px rgba(0,0,0,0.2)",
-              whiteSpace: "nowrap",
-            }}
+            className="trash"
           >
-            けす
+            <img src="images\trash_icon.svg" alt="" width="64" height="64" />
           </button>
         )}
       </div>

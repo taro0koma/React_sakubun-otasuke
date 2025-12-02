@@ -358,6 +358,25 @@ body {
   border: white 3px solid !important;
 }
 
+.trash{
+  position: absolute;
+  top: -30px;
+  left: 100%;
+  transform: translateX(-50%);
+  width: 30px;
+  border: none;
+  border-radius: 50%;
+  background-color: rgb(78, 78, 78);
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 100;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px;
+  white-space: nowrap;
+  padding: 9px !important;
+}
+
 @media (min-width: 1200px) {/* 1200px以上*/
   .hazinogazou {
     margin: 0 0 0 30px;
