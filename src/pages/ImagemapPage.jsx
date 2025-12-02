@@ -23,6 +23,7 @@ import { t } from "i18next";
 import Joyride from "react-joyride";
 import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
+import DownloadButton from './../component/DownloadButton';
 
 // カスタムノードコンポーネント - 上下のハンドルを両方source/targetに！
 const CustomNode = ({ data, id, selected }) => {
@@ -653,6 +654,7 @@ function MindMapFlow() {
         >
           <Background color="#ddd" variant="lines" />
           <Controls />
+          <DownloadButton/>
         </ReactFlow>
       </div>
 
