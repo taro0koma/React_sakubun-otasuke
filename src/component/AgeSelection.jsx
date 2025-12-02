@@ -21,16 +21,6 @@ const GradeSelection = ({ onSubmit }) => {
   const [selectedGrade, setSelectedGrade] = useState(null); // 選択された学年
 
   const handleClick = (grade) => {
-    const payload = {
-      prompt: 'just say "A"!',
-      gakunen: "s6",
-    };
-    const response = fetch(process.env.REACT_APP_API_URL + "/api/azure", {
-      method: "POST",
-      contentType: "application/json",
-      payload:JSON.stringify(payload)
-    });
-    console.log(response);
     setSelectedGrade(grade); // 選択された学年を保存
     onSubmit(grade.age); // 対応する年齢を渡す
   };
