@@ -15,6 +15,7 @@ const SwiperPage = lazy(() => import("./pages/swiperPage"));
 const ImagemapPage = lazy(() => import("./pages/ImagemapPage"));
 const ZinbutsuPage = lazy(() => import("./pages/ZinbutsuPage"));
 const GenkoyoshiPage = lazy(() => import("./pages/GenkoyoshiPage"));
+const ImagemapMakePage = lazy(() => import("./pages/tepia_exhibit/ImagemapMakePage"));
 import HomePage from "./pages/HomePage";
 import NotFound from "./pages/NotFound";
 import MyComponent from "./pages/ScreenshotPage";
@@ -44,9 +45,10 @@ const App = () => {
               <Route path="/animewan" element={<AnimationKomawanPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/osusume" element={<GenkoyoshiPage />} />
-              <Route path="/swiper" element={<SwiperPage />} />
-              <Route path="/sksyo" element={<MyComponent />} />
-              <Route path="/chatBot" element={<ChatBot />} />
+              {/* <Route path="/swiper" element={<SwiperPage />} /> */}
+              {/* <Route path="/sksyo" element={<MyComponent />} /> */}
+              {/* <Route path="/chatBot" element={<ChatBot />} /> */}
+              <Route path="/tepiaimagemap" element={<ImagemapMakePage />} />
               <Route path="/*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

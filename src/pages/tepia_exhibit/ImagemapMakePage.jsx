@@ -18,14 +18,12 @@ import {
   NodeResizer,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
-import ChatBot from './ChatBot';
 import { t } from "i18next";
 import Joyride from "react-joyride";
 import { keyframes } from "@emotion/react";
 import styled from "@emotion/styled";
-import DownloadButton from './../component/DownloadButton';
-import NextPageLink from "../component/NextPageLink";
-import Tabs from "../component/Tabs";
+import ChatBot from './../ChatBot';
+import DownloadButton from './../../component/DownloadButton';
 
 // カスタムノードコンポーネント - 上下のハンドルを両方source/targetに！
 const CustomNode = ({ data, id, selected }) => {
@@ -509,7 +507,6 @@ function MindMapFlow() {
 
   return (
     <>
-    <Tabs pageTitle={t('danraku.title')} contents="imagemapmake"/>
     <div
       style={{
         height: "100vh",
@@ -725,7 +722,6 @@ function MindMapFlow() {
         }
       `}</style>
     </div>
-    <NextPageLink imairu="imagemap"/>
     </>
   );
 }
