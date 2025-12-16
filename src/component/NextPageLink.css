@@ -3,9 +3,9 @@ section.container {
   padding: 2rem 0;
 }
 .contentsmei{
-  font-size:1em;
+  font-size: 1.2em;
   font-weight: bold;
-  margin: 8px 2px;
+  margin: 24px 2px 8px;
   text-align: left;
 }
 .contentssetumei{

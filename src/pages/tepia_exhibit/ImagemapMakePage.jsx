@@ -527,25 +527,23 @@ function MindMapFlow() {
       {/* 左パネル - 新規ノード追加ボタン */}
       <div
         style={{
-          background: "#f4f4f4ff",
+          background: "#fcfcfc",
           padding: 20,
-          boxShadow: "2px 0 10px rgba(0,0,0,0.1)",
           zIndex: 1,
           position: "absolute",
-          bottom: "20px",
-          left: "100px",
+          top: "20px",
+          left: "20px",
           borderRadius: "10px",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           gap: "16px",
+          border:"3px solid #f2f2f2"
         }}
       >
         <div
           style={{
-            display: "flex",
             alignItems: "center",
-            gap: "32px",
           }}
         >
           <div
@@ -572,6 +570,7 @@ function MindMapFlow() {
               userSelect: "none",
               touchAction: "none",
               transform: isDraggingNewNode ? "scale(0.95)" : "scale(1)",
+              marginBottom:"20px"
             }}
           >
             <div
@@ -684,14 +683,14 @@ function MindMapFlow() {
         style={{
           position: "absolute",
           top: "50%",
-          right: isChatOpen ? CHAT_PANEL_WIDTH : 0,
+          right: isChatOpen ? 370 : 0,
           transform: "translateY(-50%)",
           width: isChatOpen
             ? TOGGLE_BUTTON_WIDTH_OPEN
             : TOGGLE_BUTTON_WIDTH_CLOSED,
           height: TOGGLE_BUTTON_HEIGHT,
           border: "none",
-          backgroundColor: "#3b82f6",
+          backgroundColor: "rgb(59, 130, 246)",
           color: "white",
           fontWeight: "bold",
           cursor: "pointer",
@@ -706,7 +705,7 @@ function MindMapFlow() {
           justifyContent: "center",
         }}
       >
-        {isChatOpen ? "チャットを閉じる" : "チャットを開く"}
+        {isChatOpen ? ">" : "<"}
       </button>
 
       <style>{`

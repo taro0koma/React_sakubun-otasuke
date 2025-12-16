@@ -60,6 +60,7 @@
 
 .modal-header {
   margin-bottom: 20px;
+  text-align: center;
 }
 
 .modal-header h2 {
@@ -80,6 +81,7 @@
   scrollbar-color: rgb(171, 171, 171) rgb(238, 238, 238);
   scrollbar-width: thin;
   height: 130px;
+  text-align: left;
 }
 
 .hazinogazou img {

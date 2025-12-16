@@ -300,9 +300,18 @@ h6{
   margin: auto;
 }
 
+.react-flow__controls-button svg{
+  max-height: 20px !important;
+  max-width: 20px !important;
+  fill: white !important;
+}
 .react-flow__controls-button svg path{
   stroke-width: 1px !important;
-  stroke:black;
+  stroke:white;
+  width: 300px !important;
+  height: 300px !important;
+  max-width: 300px !important;
+  max-height: 300px !important;
 }
 
 .delete {
@@ -375,6 +384,32 @@ body {
   box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px;
   white-space: nowrap;
   padding: 9px !important;
+}
+
+.react-flow__controls-button{
+  padding: 0px !important;
+  width: 90px !important;
+  height: 60px !important;
+}
+
+.react-flow__controls-zoomin{
+  background-color: #ffb300 !important;
+}
+
+.react-flow__controls-zoomout{
+  background-color: #ffb300 !important;
+}
+
+.react-flow__controls-fitview{
+  background-color: rgb(59, 130, 246) !important;
+}
+
+.react-flow__controls-interactive{
+  background-color: rgb(67 26 131) !important;
+}
+
+.react-flow__controls-zoomin:disabled{
+  background-color: #454545 !important;
 }
 
 @media (min-width: 1200px) {/* 1200px以上*/

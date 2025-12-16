@@ -45,12 +45,16 @@ const grades = {
 //⇑まだ文を比べて並び替えしてないから仮として
 const typesnakami = [
   "この本を選んだ理由を、行動に例える",
-  "自分の意見から入る",
+  "自分の意見からはじめる",
   "この本を選んだ理由",
-  "疑問から入る",
-  "自分の経験から入る",
+  "疑問からはじめる",
+  "セリフからはじめる",
+  "自分の経験からはじめる",
   "本を取ったきっかけ",
-  "自分の気持ちから入る",
+  "自分の気持ちからはじめる",
+  "例えからはじめる",
+  "音からはじめる",
+  "物語のようにはじめる",
 ];
 
 function getRandomInt(max) {
@@ -231,9 +235,28 @@ const ConsolePage = () => {
                 </option>
               ))}
             </select>
-            <button type="submit">送信</button>
             {formError && (
               <p style={{ color: "red" }}>学年を選択してください。</p>
+            )}
+          </form>
+        )}
+        
+        <p>作文の種類を選んでね！</p>
+        {isFormVisible && (
+          <form onSubmit={handleSubmit} className="grade-form">
+            <select
+              value={selectedGrade}
+              onChange={(e) => setSelectedGrade(e.target.value)}
+              style={{ border: formError ? "2px solid red" : "1px solid #ccc" }}
+              required
+            >
+              <option value="">作文の種類を選んでね！</option>
+              <option value="true">読書感想文</option>
+              <option value="false">作文</option>
+            </select>
+            <button type="submit">送信</button>
+            {formError && (
+              <p style={{ color: "red" }}>学年と作文の種類どちらも選択してください。</p>
             )}
           </form>
         )}
