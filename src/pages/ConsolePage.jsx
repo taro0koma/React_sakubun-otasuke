@@ -73,6 +73,7 @@ const ConsolePage = () => {
   const [aiResponses, setAiResponses] = useState([]);
   const [isAiLoading, setIsAiLoading] = useState(false);
   const [selectedGrade, setSelectedGrade] = useState("");
+  const [isBook, setIsBook] = useState("");
   const [formError, setFormError] = useState(false);
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [isBoxClicked, setIsBoxClicked] = useState(false);
@@ -83,10 +84,22 @@ const ConsolePage = () => {
 
   const fetchSupabaseData = async () => {
     try {
-      const { data, error } = await supabase
+      // 1. まずベースとなるクエリを変数に入れる
+      let query = supabase
         .from("sakubunKakidashi")
         .select("*")
         .eq("types", randomType);
+
+      // 2. 条件（isBookが"true"）に一致する場合のみ .eq() を追加
+      if (isBook === "true") {
+        query = query.eq("is_bookReview", true);
+      } else {
+        query = query.eq("is_bookReview", false);
+      }
+
+      // 3. 最後に await して実行する
+      const { data, error } = await query;
+
       if (error) {
         console.error("Supabaseデータの取得に失敗しました:", error);
         return null;
@@ -107,15 +120,18 @@ const ConsolePage = () => {
       supabaseData
     )}`;
     try {
-      const response = await fetch(process.env.REACT_APP_API_URL + "/api/azure", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt: userMessage,gakunen:selectedGrade }),
-        mode:"cors"
-      });
+      const response = await fetch(
+        process.env.REACT_APP_API_URL + "/api/azure",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ prompt: userMessage, gakunen: selectedGrade }),
+          mode: "cors",
+        }
+      );
 
       if (response.ok) {
-        console.log(userMessage,selectedGrade);
+        console.log(userMessage, selectedGrade);
         const data = await response.json();
         const parsedData = data.bot.trim();
         const timestamp = new Date().toLocaleTimeString();
@@ -140,6 +156,7 @@ const ConsolePage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(selectedGrade, isBook);
     if (!selectedGrade) {
       setFormError(true);
       return;
@@ -187,23 +204,26 @@ const ConsolePage = () => {
 
   return (
     <div>
-      <Helmet><title>かっこいい書き出しおみくじ | 作文おたすけアプリ</title></Helmet>
-      <Tabs pageTitle="かっこいい書き出しおみくじ" contents="kakidashi"/>
+      <Helmet>
+        <title>かっこいい書き出しおみくじ | 作文おたすけアプリ</title>
+      </Helmet>
+      <Tabs pageTitle="かっこいい書き出しおみくじ" contents="kakidashi" />
       <h3 className="setumei">
         おみくじ箱をクリックして、
         <br />
         かっこいい書き出しを発見！
       </h3>
-      
+
       {isModalOpen && (
         <div className="saisyonihyouzisuruhurothinghuremu">
-        <ModalFrame
-          title="かっこいい書き出しおみくじ"
-          text="どうやったらかっこいい書き出しになるのかわからない・・・そんな時はおみくじをつかってお気に入りの書き出しを見つけよう。自分の作文に合わせた言葉が変えられるように例文もついているよ。"
-          onClose={handleModalClose}
-          imageSrc="/images/kakenaiwan.png"
-          midashi="作文の書き出しがかっこいいとなんかうれしい"
-        ></ModalFrame></div>
+          <ModalFrame
+            title="かっこいい書き出しおみくじ"
+            text="どうやったらかっこいい書き出しになるのかわからない・・・そんな時はおみくじをつかってお気に入りの書き出しを見つけよう。自分の作文に合わせた言葉が変えられるように例文もついているよ。"
+            onClose={handleModalClose}
+            imageSrc="/images/kakenaiwan.png"
+            midashi="作文の書き出しがかっこいいとなんかうれしい"
+          ></ModalFrame>
+        </div>
       )}
       <img
         ref={myImg}
@@ -240,13 +260,13 @@ const ConsolePage = () => {
             )}
           </form>
         )}
-        
+
         <p>作文の種類を選んでね！</p>
         {isFormVisible && (
           <form onSubmit={handleSubmit} className="grade-form">
             <select
-              value={selectedGrade}
-              onChange={(e) => setSelectedGrade(e.target.value)}
+              value={isBook}
+              onChange={(e) => setIsBook(e.target.value)}
               style={{ border: formError ? "2px solid red" : "1px solid #ccc" }}
               required
             >
@@ -256,7 +276,9 @@ const ConsolePage = () => {
             </select>
             <button type="submit">送信</button>
             {formError && (
-              <p style={{ color: "red" }}>学年と作文の種類どちらも選択してください。</p>
+              <p style={{ color: "red" }}>
+                学年と作文の種類どちらも選択してください。
+              </p>
             )}
           </form>
         )}
@@ -270,8 +292,10 @@ const ConsolePage = () => {
       <div className="ai-response" ref={adviceRef}>
         {isAiLoading ? (
           <div className="LoadingSvg yomikomihyougen">
-            <div className="svgtoka"><AnimationKomawanPage/></div>
-            
+            <div className="svgtoka">
+              <AnimationKomawanPage />
+            </div>
+
             <h2>SAKUBUN OTASUKE</h2>
             <p>読み込み中...</p>
           </div>
@@ -279,7 +303,6 @@ const ConsolePage = () => {
           aiResponses.map((responseObj, index) => (
             <div>
               <div key={index} className="response-box">
-                
                 <div className="response-type-tab">{responseObj.types}</div>
                 <div className="sakubunyosi">
                   <div style={{ padding: "10px", marginLeft: "10px" }}>
@@ -296,7 +319,7 @@ const ConsolePage = () => {
                       えば
                     </p>
                   </div>
-                  <ul className="kajougaki" style={{textAlign:"left"}}>
+                  <ul className="kajougaki" style={{ textAlign: "left" }}>
                     <li className="example-sentencee">
                       {responseObj.examplesentence}
                     </li>
@@ -310,8 +333,8 @@ const ConsolePage = () => {
         )}
         {kakidashis.length === 0 && !isAiLoading && <p></p>}
       </div>
-      <NextPageLink imairu="kakidashi1"/>
-      <Footer/>
+      <NextPageLink imairu="kakidashi1" />
+      <Footer />
     </div>
   );
 };

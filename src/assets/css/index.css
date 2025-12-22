@@ -404,12 +404,30 @@ body {
   background-color: rgb(59, 130, 246) !important;
 }
 
-.react-flow__controls-interactive{
-  background-color: rgb(67 26 131) !important;
+button.react-flow__controls-interactive{
+  display: none;
 }
 
 .react-flow__controls-zoomin:disabled{
-  background-color: #454545 !important;
+  background-color: #848484 !important;
+  opacity: 1 !important;
+}
+
+.react-flow__controls-zoomin:disabled svg{
+  opacity: 0.8 !important;
+  stroke-opacity: 0 !important;
+}
+
+/* zoomout */
+
+.react-flow__controls-zoomout:disabled{
+  background-color: #848484 !important;
+  opacity: 1 !important;
+}
+
+.react-flow__controls-zoomout:disabled svg{
+  opacity: 0.8 !important;
+  stroke-opacity: 0 !important;
 }
 
 @media (min-width: 1200px) {/* 1200px以上*/
@@ -1529,7 +1547,7 @@ td:last-child{
   .modal-content {
     flex-direction: column; /* 縦並びに変更 */
       padding: 80px; /* パディングの調整 */
-      height: 80%; /* 高さを自動調整 */
+      height: 90%; /* 高さを自動調整 */
       border-left: none;
   }
   .modal-header{

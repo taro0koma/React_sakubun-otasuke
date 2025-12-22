@@ -726,6 +726,12 @@ function MindMapFlow() {
 }
 
 export default function MindMapTool() {
+  const GAS_URL = "https://script.google.com/macros/s/AKfycbxhenDsjZpkq5rJ7ZILlJrCpuhh4dvD5OdPc1999COQc7V02kuCczGToSXHZo-ikU7k7g/exec";
+  useEffect(() => {
+    // ページ表示時に1回だけ叩く
+    fetch(GAS_URL).catch(() => {});
+    console.log("GASを叩いたよ")
+  }, []);
   return (
     <ReactFlowProvider>
       <MindMapFlow />
