@@ -176,7 +176,7 @@ const ConsolePage = () => {
   }
 
   const handleSubmit = async () => {
-    console.log("選択された学年:", selectedGrade, "作文の種類:", isBook,"ランダムタイプ",randomType);
+    console.log("選択された学年:", selectedGrade, "作文の種類:", isBook,"ランダムタイプ:",randomType);
     
     // 両方の項目が選択されているかチェック
     if (!selectedGrade || !isBook) {
