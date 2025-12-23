@@ -33,6 +33,7 @@ const bookOnlyTypes = [
   "この本を選んだ理由を、行動に例える",
   "この本を選んだ理由",
   "本を取ったきっかけ",
+  "自分の気持ちからはじめる",
 ];
 
 // 作文・読書感想文共通の書き出しタイプ
@@ -41,7 +42,6 @@ const commonTypes = [
   "疑問からはじめる",
   "セリフからはじめる",
   "自分の経験からはじめる",
-  "自分の気持ちからはじめる",
   "例えからはじめる",
   "音からはじめる",
   "物語のようにはじめる",
@@ -346,7 +346,7 @@ const ConsolePage = () => {
                 <div className="sakubunyosi">
                   <div style={{ padding: "10px", marginLeft: "10px" }}>
                     <div className="sakubun" contentEditable="true">
-                      <p>{"\u3000" + responseObj.header}</p>
+                      <p style={{textAlign:"left"}}>{"\u3000" + responseObj.header}</p>
                     </div>
                   </div>
                 </div>
