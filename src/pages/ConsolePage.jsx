@@ -272,6 +272,7 @@ const ConsolePage = () => {
       <div
         ref={whiteBoxRef}
         className={`white-box ${isFormVisible ? "show" : ""}`}
+        style={{margin:"auto"}}
       >
         {isFormVisible && (
           <div className="grade-form">
@@ -279,7 +280,7 @@ const ConsolePage = () => {
             <select
               value={selectedGrade}
               onChange={(e) => setSelectedGrade(e.target.value)}
-              style={{ border: formError && !selectedGrade ? "2px solid red" : "1px solid #ccc" }}
+              style={{ border: formError && !selectedGrade ? "2px solid #ff9494" : "1px solid #ccc" }}
             >
               <option value="">学年を選んでね!</option>
               {Object.keys(grades).map((key) => (
@@ -302,7 +303,7 @@ const ConsolePage = () => {
                   setRandomType(getRandomTypeForCategory(false));
                 }
               }}
-              style={{ border: formError && !isBook ? "2px solid red" : "1px solid #ccc" }}
+              style={{ border: formError && !isBook ? "2px solid #ff9494" : "1px solid #ccc" }}
             >
               <option value="">作文の種類を選んでね!</option>
               <option value="true">読書感想文</option>
@@ -310,7 +311,7 @@ const ConsolePage = () => {
             </select>
             
             {formError && (
-              <p style={{ color: "red" }}>
+              <p style={{ color: "#ff9494" }}>
                 学年と作文の種類どちらも選択してください。
               </p>
             )}
