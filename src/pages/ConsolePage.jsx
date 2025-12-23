@@ -28,37 +28,36 @@ const grades = {
   k3: "高校3年生",
 };
 
-// const sakkamei = {
-//   s1: "松谷みよ子",
-//   s2: "あんびるやすこ",
-//   s3: "安西水丸",
-//   s4: "角野栄子",
-//   s5: "ヨシタケシンスケ",
-//   s6: "宮沢賢治",
-//   t1: "重松清",
-//   t2: "森絵都",
-//   t3: "住野よる",
-//   k1: "小川洋子",
-//   k2: "梨木香歩",
-//   k3: "あさのあつこ",
-// };
-//⇑まだ文を比べて並び替えしてないから仮として
-const typesnakami = [
+// 読書感想文専用の書き出しタイプ
+const bookOnlyTypes = [
   "この本を選んだ理由を、行動に例える",
-  "自分の意見からはじめる",
   "この本を選んだ理由",
+  "本を取ったきっかけ",
+];
+
+// 作文・読書感想文共通の書き出しタイプ
+const commonTypes = [
+  "自分の意見からはじめる",
   "疑問からはじめる",
   "セリフからはじめる",
   "自分の経験からはじめる",
-  "本を取ったきっかけ",
   "自分の気持ちからはじめる",
   "例えからはじめる",
   "音からはじめる",
   "物語のようにはじめる",
 ];
 
+// 全ての書き出しタイプ(読書感想文用)
+const allTypes = [...commonTypes, ...bookOnlyTypes];
+
 function getRandomInt(max) {
   return Math.floor(Math.random() * max);
+}
+
+// 作文の種類に応じて適切な書き出しタイプを取得
+function getRandomTypeForCategory(isBookReview) {
+  const availableTypes = isBookReview ? allTypes : commonTypes;
+  return availableTypes[getRandomInt(availableTypes.length)];
 }
 
 const ConsolePage = () => {
@@ -66,9 +65,7 @@ const ConsolePage = () => {
   const whiteBoxRef = useRef();
   const adviceRef = useRef();
   const [isModalOpen, setIsModalOpen] = useState(true);
-  const [randomType, setRandomType] = useState(
-    typesnakami[getRandomInt(typesnakami.length)]
-  );
+  const [randomType, setRandomType] = useState("");
   const [kakidashis, setKakidashis] = useState([]);
   const [aiResponses, setAiResponses] = useState([]);
   const [isAiLoading, setIsAiLoading] = useState(false);
@@ -90,7 +87,7 @@ const ConsolePage = () => {
         .select("*")
         .eq("types", randomType);
 
-      // 2. 条件（isBookが"true"）に一致する場合のみ .eq() を追加
+      // 2. 条件(isBookが"true")に一致する場合のみ .eq() を追加
       if (isBook === "true") {
         query = query.eq("is_bookReview", true);
       } else {
@@ -102,24 +99,45 @@ const ConsolePage = () => {
 
       if (error) {
         console.error("Supabaseデータの取得に失敗しました:", error);
-        return null;
+        throw new Error("Supabaseデータの取得に失敗しました");
       }
+
+      // データが空の場合のチェック
+      if (!data || data.length === 0) {
+        console.error("該当するデータが見つかりませんでした");
+        throw new Error("該当するデータが見つかりませんでした");
+      }
+
+      console.log("取得したデータ:", data);
       return data;
+      
     } catch (error) {
       console.error("Supabaseデータの取得中にエラーが発生しました:", error);
-      return null;
+      throw error; // エラーを上位に伝播
     }
   };
 
   async function fetchAIResponse(type) {
     setIsAiLoading(true);
-    const supabaseData = await fetchSupabaseData();
-    const userMessage = `${
-      grades[selectedGrade]
-    }向けに適切な作文の書き出し例を提供してください。ただし、1つに絞ること。また最初のわかりました的なことは言わないこと。とにかく、必要なことのみ述べてください。あくまで参考として渡します。同じものを返えすことは許されません！参考データ（実際にはこの中にある〇〇が書かれている文章の〇〇に文字を入れる形で回答してください）: ${JSON.stringify(
-      supabaseData
-    )}`;
+    
     try {
+      // Supabaseデータの取得を確実に待つ
+      const supabaseData = await fetchSupabaseData();
+      
+      // データが正しく取得できたかチェック
+      if (!supabaseData || supabaseData.length === 0) {
+        console.error("Supabaseデータが空です");
+        alert("データの取得に失敗しました。もう一度お試しください。");
+        setIsAiLoading(false);
+        return;
+      }
+
+      const userMessage = `${
+        grades[selectedGrade]
+      }向けに適切な作文の書き出し例を提供してください。ただし、1つに絞ること。また最初のわかりました的なことは言わないこと。とにかく、必要なことのみ述べてください。あくまで参考として渡します。同じものを返えすことは許されません!参考データ(実際にはこの中にある〇〇が書かれている文章の〇〇に文字を入れる形で回答してください): ${JSON.stringify(
+        supabaseData
+      )}`;
+
       const response = await fetch(
         process.env.REACT_APP_API_URL + "/api/azure",
         {
@@ -131,7 +149,7 @@ const ConsolePage = () => {
       );
 
       if (response.ok) {
-        console.log(userMessage, selectedGrade);
+        console.log("送信したメッセージ:", userMessage, "学年:", selectedGrade);
         const data = await response.json();
         const parsedData = data.bot.trim();
         const timestamp = new Date().toLocaleTimeString();
@@ -147,20 +165,25 @@ const ConsolePage = () => {
         ]);
       } else {
         console.error("AIのレスポンスの取得に失敗しました。");
+        alert("AIの応答取得に失敗しました。もう一度お試しください。");
       }
     } catch (error) {
-      console.error("AIのレスポンス取得中にエラーが発生しました：", error);
+      console.error("AIのレスポンス取得中にエラーが発生しました:", error);
+      alert("エラーが発生しました。もう一度お試しください。");
+    } finally {
+      setIsAiLoading(false);
     }
-    setIsAiLoading(false);
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log(selectedGrade, isBook);
-    if (!selectedGrade) {
+  const handleSubmit = async () => {
+    console.log("選択された学年:", selectedGrade, "作文の種類:", isBook);
+    
+    // 両方の項目が選択されているかチェック
+    if (!selectedGrade || !isBook) {
       setFormError(true);
       return;
     }
+    
     setFormError(false);
     setIsFormVisible(false);
     await fetchAIResponse(randomType);
@@ -174,8 +197,19 @@ const ConsolePage = () => {
   };
 
   const handleClickBox = () => {
-    const newRandomType = typesnakami[getRandomInt(typesnakami.length)];
-    setRandomType(newRandomType); // 毎回ランダムタイプを設定
+    // まだ作文の種類が選択されていない場合は共通タイプから選択
+    // 既に選択されている場合はそれに応じたタイプを選択
+    let newRandomType;
+    if (isBook === "true") {
+      newRandomType = getRandomTypeForCategory(true);
+    } else if (isBook === "false") {
+      newRandomType = getRandomTypeForCategory(false);
+    } else {
+      // まだ選択されていない場合は共通タイプから選択
+      newRandomType = commonTypes[getRandomInt(commonTypes.length)];
+    }
+    
+    setRandomType(newRandomType);
     setIsFormVisible(true);
     whiteBoxRef.current.classList.add("show");
 
@@ -211,7 +245,7 @@ const ConsolePage = () => {
       <h3 className="setumei">
         おみくじ箱をクリックして、
         <br />
-        かっこいい書き出しを発見！
+        かっこいい書き出しを発見!
       </h3>
 
       {isModalOpen && (
@@ -239,52 +273,57 @@ const ConsolePage = () => {
         ref={whiteBoxRef}
         className={`white-box ${isFormVisible ? "show" : ""}`}
       >
-        <p>学年を選んでね！</p>
         {isFormVisible && (
-          <form onSubmit={handleSubmit} className="grade-form">
+          <div className="grade-form">
+            <p>学年を選んでね!</p>
             <select
               value={selectedGrade}
               onChange={(e) => setSelectedGrade(e.target.value)}
-              style={{ border: formError ? "2px solid red" : "1px solid #ccc" }}
-              required
+              style={{ border: formError && !selectedGrade ? "2px solid red" : "1px solid #ccc" }}
             >
-              <option value="">学年を選んでね！</option>
+              <option value="">学年を選んでね!</option>
               {Object.keys(grades).map((key) => (
                 <option key={key} value={key}>
                   {grades[key]}
                 </option>
               ))}
             </select>
-            {formError && (
-              <p style={{ color: "red" }}>学年を選択してください。</p>
-            )}
-          </form>
-        )}
 
-        <p>作文の種類を選んでね！</p>
-        {isFormVisible && (
-          <form onSubmit={handleSubmit} className="grade-form">
+            <p>作文の種類を選んでね!</p>
             <select
               value={isBook}
-              onChange={(e) => setIsBook(e.target.value)}
-              style={{ border: formError ? "2px solid red" : "1px solid #ccc" }}
-              required
+              onChange={(e) => {
+                const newIsBook = e.target.value;
+                setIsBook(newIsBook);
+                // 作文の種類が変更されたら、適切なランダムタイプを再設定
+                if (newIsBook === "true") {
+                  setRandomType(getRandomTypeForCategory(true));
+                } else if (newIsBook === "false") {
+                  setRandomType(getRandomTypeForCategory(false));
+                }
+              }}
+              style={{ border: formError && !isBook ? "2px solid red" : "1px solid #ccc" }}
             >
-              <option value="">作文の種類を選んでね！</option>
+              <option value="">作文の種類を選んでね!</option>
               <option value="true">読書感想文</option>
               <option value="false">作文</option>
             </select>
-            <button type="submit">送信</button>
+            
             {formError && (
               <p style={{ color: "red" }}>
                 学年と作文の種類どちらも選択してください。
               </p>
             )}
-          </form>
+            
+            <button type="button" onClick={handleSubmit}>送信</button>
+          </div>
         )}
         <button
           className="close-button"
-          onClick={() => setIsFormVisible(false)}
+          onClick={() => {
+            setIsFormVisible(false);
+            whiteBoxRef.current.classList.remove("show");
+          }}
         >
           ✖️
         </button>
@@ -301,12 +340,12 @@ const ConsolePage = () => {
           </div>
         ) : (
           aiResponses.map((responseObj, index) => (
-            <div>
-              <div key={index} className="response-box">
+            <div key={index}>
+              <div className="response-box">
                 <div className="response-type-tab">{responseObj.types}</div>
                 <div className="sakubunyosi">
                   <div style={{ padding: "10px", marginLeft: "10px" }}>
-                    <div className="sakubun" contenteditable="true">
+                    <div className="sakubun" contentEditable="true">
                       <p>{"\u3000" + responseObj.header}</p>
                     </div>
                   </div>
