@@ -50,6 +50,9 @@ const GradeSelection = ({ onSubmit }) => {
               className={`grade-button ${
                 selectedGrade === grade ? "selected" : ""
               }`}
+              style={{
+                margin:"8px 8px"
+              }}
             >
               {grade.label}
             </button>

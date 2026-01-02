@@ -1,0 +1,473 @@
+import React, { useState, useEffect } from 'react';
+import Card from '@mui/material/Card';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+
+// 基本的な質問設定
+const baseFormConfig = [
+  {
+    id: 'page1',
+    image: 'images/yochiensei.png',
+    question: 'あなたは何年生ですか?',
+    type: 'select',
+    label: '学年',
+    options: ['小学1年生', '小学2年生', '小学3年生', '小学4年生', '小学5年生', '小学6年生','中学1年生','中学2年生','中学3年生','高校1年生','高校2年生','高校3年生' ]
+  },
+  {
+    id: 'page2',
+    image: 'images/anonymousTeacher.png',
+    question: 'アドバイスをもらう先生',
+    type: 'select',
+    label: '先生',
+    options: ['🦏サイ先生','🐿️リス先生',"🦁ライオン先生"]
+  },
+  {
+    id: 'page3',
+    image: 'https://via.placeholder.com/400x200/E89E3D/ffffff?text=Step+3',
+    question: '作文のタイプ',
+    type: 'select',
+    label: 'タイプ',
+    options: ['読書感想文', 'テーマのある作文']
+  }
+];
+
+// 読書感想文用の追加質問
+const bookReviewConfig = [
+  {
+    id: 'bookType',
+    image: 'https://via.placeholder.com/400x200/3498db/ffffff?text=Book+Type',
+    question: '本のタイプを選択してください',
+    type: 'select',
+    label: '本のタイプ',
+    options: [
+      '物語・小説',
+      '伝記・自伝',
+      '歴史・社会',
+      'ノンフィクション',
+      'エッセイ',
+      '詩・短歌・俳句',
+      '科学・技術',
+      '自然・環境',
+      '哲学・思想',
+      '芸術・音楽',
+      'スポーツ',
+      '冒険・探検',
+      'ミステリー・推理',
+      'ファンタジー',
+      'SF・未来',
+      '日常・学園',
+      'その他'
+    ]
+  },
+  {
+    id: 'arasuji',
+    image: 'https://via.placeholder.com/400x200/2ecc71/ffffff?text=Story',
+    question: '本のあらすじを教えてください',
+    type: 'textarea',
+    placeholder: 'どんなお話でしたか？簡単に教えてください'
+  },
+  {
+    id: 'kokoro',
+    image: 'https://via.placeholder.com/400x200/e74c3c/ffffff?text=Impression',
+    question: '心に残ったことを教えてください',
+    type: 'textarea',
+    placeholder: '本を読んで心に残ったことや感じたことを教えてください'
+  },
+  {
+    id: 'hyoushi',
+    image: 'https://via.placeholder.com/400x200/f39c12/ffffff?text=Details',
+    question: '表紙や絵について印象に残ったことはありますか？',
+    type: 'textarea',
+    placeholder: '表紙や挿絵について印象に残ったことがあれば教えてください'
+  },
+  {
+    id: 'other',
+    image: 'https://via.placeholder.com/400x200/9b59b6/ffffff?text=Other',
+    question: 'その他に伝えたいことはありますか？',
+    type: 'textarea',
+    placeholder: 'その他に感じたことや考えたことがあれば自由に書いてください'
+  }
+];
+
+// テーマのある作文用の追加質問
+const compositionConfig = [
+  {
+    id: 'theme',
+    image: 'https://via.placeholder.com/400x200/1abc9c/ffffff?text=Theme',
+    question: '作文のテーマを教えてください',
+    type: 'textarea',
+    placeholder: '例：将来の夢、大切な思い出、好きなこと など'
+  },
+  {
+    id: 'want1',
+    image: 'https://via.placeholder.com/400x200/3498db/ffffff?text=Point+1',
+    question: '伝えたいこと（1つ目）',
+    type: 'textarea',
+    placeholder: 'テーマについて伝えたいことの1つ目を書いてください'
+  },
+  {
+    id: 'want2',
+    image: 'https://via.placeholder.com/400x200/2ecc71/ffffff?text=Point+2',
+    question: '伝えたいこと（2つ目）',
+    type: 'textarea',
+    placeholder: 'テーマについて伝えたいことの2つ目を書いてください'
+  },
+  {
+    id: 'want3',
+    image: 'https://via.placeholder.com/400x200/e74c3c/ffffff?text=Point+3',
+    question: '伝えたいこと（3つ目）',
+    type: 'textarea',
+    placeholder: 'テーマについて伝えたいことの3つ目を書いてください'
+  },
+  {
+    id: 'want4',
+    image: 'https://via.placeholder.com/400x200/f39c12/ffffff?text=Point+4',
+    question: '伝えたいこと（4つ目）※任意',
+    type: 'textarea',
+    placeholder: '（任意）4つ目があれば書いてください',
+    optional: true
+  }
+];
+
+export default function DanrakuCard({ onSubmit }) {
+  const [currentPage, setCurrentPage] = useState(0);
+  const [formData, setFormData] = useState({});
+  const [errorMessage, setErrorMessage] = useState('');
+  const [formConfig, setFormConfig] = useState(baseFormConfig);
+
+  // page3の選択が変更されたときにformConfigを更新
+  useEffect(() => {
+    const selectedType = formData['page3'];
+    if (selectedType) {
+      let additionalConfig = [];
+      
+      if (selectedType === '読書感想文') {
+        additionalConfig = bookReviewConfig;
+      } else if (selectedType === 'テーマのある作文') {
+        additionalConfig = compositionConfig;
+      }
+      
+      // 追加の質問がある場合のみ更新
+      if (additionalConfig.length > 0) {
+        setFormConfig([...baseFormConfig, ...additionalConfig]);
+      }
+    }
+  }, [formData['page3']]);
+
+  const totalPages = formConfig.length;
+  const progress = ((currentPage + 1) / totalPages) * 100;
+
+  const handleNext = () => {
+    const currentConfig = formConfig[currentPage];
+    const currentValue = formData[currentConfig.id];
+    
+    // 任意の項目（want4など）はスキップ可能
+    if (!currentConfig.optional && (!currentValue || currentValue.trim() === '')) {
+      setErrorMessage('入力または選択してください');
+      return;
+    }
+    
+    setErrorMessage('');
+    
+    if (currentPage < formConfig.length - 1) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handleBack = () => {
+    setErrorMessage('');
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleInputChange = (pageId, value) => {
+    setFormData({
+      ...formData,
+      [pageId]: value
+    });
+    setErrorMessage('');
+  };
+
+  const handleSubmit = () => {
+    // 学年の変換マップ
+    const gradeMap = {
+      '小学1年生': 's1',
+      '小学2年生': 's2',
+      '小学3年生': 's3',
+      '小学4年生': 's4',
+      '小学5年生': 's5',
+      '小学6年生': 's6',
+      '中学1年生': 't1',
+      '中学2年生': 't2',
+      '中学3年生': 't3',
+      '高校1年生': 'k1',
+      '高校2年生': 'k2',
+      '高校3年生': 'k3'
+    };
+
+    // 先生の変換マップ
+    const teacherMap = {
+      '🦏サイ先生': 'DESC法',
+      '🐿️リス先生': 'PREP法',
+      '🦁ライオン先生': '一段落目が個性的なPREP法'
+    };
+
+    // タイプの変換マップ
+    const typeMap = {
+      '読書感想文': 'bookReview',
+      'テーマのある作文': 'composition'
+    };
+
+    const selectedType = formData['page3'];
+    
+    // 変換されたデータを作成
+    const result = {
+      timestamp: new Date().toISOString(),
+      grade: gradeMap[formData['page1']] || formData['page1'],
+      sensei: teacherMap[formData['page2']] || formData['page2'],
+      type: typeMap[selectedType] || selectedType,
+      responses: {}
+    };
+
+    // タイプに応じてデータを整形
+    if (selectedType === '読書感想文') {
+      result.responses = {
+        bookReviewFirst: formData['bookType'] || '',
+        bookReviewArasuji: formData['arasuji'] || '',
+        bookReviewSecond: formData['kokoro'] || '',
+        bookReviewThing: formData['hyoushi'] || '',
+        bookReviewThird: formData['other'] || ''
+      };
+    } else if (selectedType === 'テーマのある作文') {
+      result.responses = {
+        sTheme: formData['theme'] || '',
+        sFirst: formData['want1'] || '',
+        sSecond: formData['want2'] || '',
+        sThird: formData['want3'] || '',
+        sFo: formData['want4'] || ''
+      };
+    }
+    
+    console.log('送信データ:', JSON.stringify(result, null, 2));
+    
+    if (onSubmit) {
+      onSubmit(result);
+    } else {
+      alert('フォームが送信されました!\n\n' + JSON.stringify(result, null, 2));
+    }
+  };
+
+  const handleClose = () => {
+    if (onSubmit) {
+      onSubmit(null);
+    }
+  };
+
+  const currentConfig = formConfig[currentPage];
+  const currentValue = formData[currentConfig.id] || '';
+
+  const getTeacherImage = () => {
+    if (currentConfig.id === 'page2') {
+      const selectedTeacher = formData['page2'];
+      if (selectedTeacher === '🦏サイ先生') {
+        return 'images/saisensei.png';
+      } else if (selectedTeacher === '🐿️リス先生') {
+        return 'images/risusensei.png';
+      } else if (selectedTeacher === '🦁ライオン先生') {
+        return 'images/raionsensei.png';
+      }
+    }
+    return currentConfig.image;
+  };
+
+  // 最後のページかどうかを判定（formConfigの長さで判定）
+  const isLastPage = currentPage === formConfig.length - 1;
+
+  return (
+    <Box>
+      <Card 
+        variant='outlined' 
+        style={{
+          position: "fixed",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: "80%",
+          maxWidth: "600px",
+          height: "80%",
+          maxHeight: "700px",
+          borderRadius: "16px",
+          boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+          border: "3px solid rgba(0,0,0,0.1)",
+          padding: "24px",
+          display: "flex",
+          flexDirection: "column",
+          zIndex: 1000
+        }}
+      >
+        <Button
+          onClick={handleClose}
+          style={{
+            position: "absolute",
+            top: "7px",
+            right: "16px",
+            minWidth: "40px",
+            width: "40px",
+            height: "40px",
+            borderRadius: "50%",
+            padding: 0,
+            color: "#666",
+            fontSize: "24px"
+          }}
+          className='close'
+        >
+          ×
+        </Button>
+
+        <progress 
+          value={progress} 
+          max="100" 
+          style={{
+            width: "100%",
+            height: "8px",
+            borderRadius: "10px",
+            marginBottom: "24px"
+          }}
+        />
+
+        <Box style={{ flex: 1, overflowY: "auto", display: "flex", flexDirection: "column", gap: "24px" }}>
+          <img 
+            src={getTeacherImage()} 
+            alt={`Step ${currentPage + 1}`}
+            style={{
+              width: "100%",
+              height: "200px",
+              objectFit: "cover",
+              borderRadius: "12px"
+            }}
+          />
+
+          <h2 style={{ margin: 0, fontSize: "24px", fontWeight: "600" }}>
+            {currentConfig.question}
+          </h2>
+
+          {currentConfig.type === 'text' && (
+            <TextField
+              fullWidth
+              variant="outlined"
+              placeholder={currentConfig.placeholder}
+              value={currentValue}
+              onChange={(e) => handleInputChange(currentConfig.id, e.target.value)}
+            />
+          )}
+
+          {currentConfig.type === 'textarea' && (
+            <TextField
+              fullWidth
+              multiline
+              rows={4}
+              variant="outlined"
+              placeholder={currentConfig.placeholder}
+              value={currentValue}
+              onChange={(e) => handleInputChange(currentConfig.id, e.target.value)}
+            />
+          )}
+
+          {currentConfig.type === 'radio' && (
+            <FormControl component="fieldset">
+              <RadioGroup
+                value={currentValue}
+                onChange={(e) => handleInputChange(currentConfig.id, e.target.value)}
+              >
+                {currentConfig.options.map((option, index) => (
+                  <FormControlLabel
+                    key={index}
+                    value={option}
+                    control={<Radio />}
+                    label={option}
+                  />
+                ))}
+              </RadioGroup>
+            </FormControl>
+          )}
+
+          {currentConfig.type === 'select' && (
+            <FormControl fullWidth>
+              <InputLabel
+              style={{
+                fontSize:"15px",
+                fontWeight:"bold"
+              }}>{currentConfig.label}</InputLabel>
+              <Select
+                value={currentValue}
+                label={currentConfig.label}
+                style={{
+                  fontSize:"15px",
+                  fontWeight:"bold"
+                }}
+                onChange={(e) => handleInputChange(currentConfig.id, e.target.value)}
+              >
+                {currentConfig.options.map((option, index) => (
+                  <MenuItem key={index} value={option}>
+                    {option}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          )}
+        </Box>
+
+        {errorMessage && (
+          <Box style={{ 
+            color: '#FF1493', 
+            fontSize: '14px', 
+            marginTop: '8px',
+            textAlign: 'center',
+            fontWeight: '600'
+          }}>
+            {errorMessage}
+          </Box>
+        )}
+
+        <Box style={{ display: "flex", justifyContent: "center", marginTop: "24px" }}>
+          <Button
+            variant="outlined"
+            onClick={handleBack}
+            disabled={currentPage === 0}
+            style={{ minWidth: "100px",marginRight: "16px",backgroundColor:"black",color:"white" }}
+          >
+            もどる
+          </Button>
+
+          {isLastPage ? (
+            <Button
+              variant="contained"
+              color="success"
+              onClick={handleSubmit}
+              style={{ minWidth: "100px",marginLeft: "16px",backgroundColor:"black" }}
+            >
+              送信
+            </Button>
+          ) : (
+            <Button
+              variant="contained"
+              onClick={handleNext}
+              style={{ minWidth: "100px",marginLeft: "16px",backgroundColor:"black" }}
+            >
+              つぎへ
+            </Button>
+          )}
+        </Box>
+      </Card>
+    </Box>
+  );
+}

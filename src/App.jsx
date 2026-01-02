@@ -16,6 +16,7 @@ const ImagemapPage = lazy(() => import("./pages/ImagemapPage"));
 const ZinbutsuPage = lazy(() => import("./pages/ZinbutsuPage"));
 const GenkoyoshiPage = lazy(() => import("./pages/GenkoyoshiPage"));
 const ImagemapMakePage = lazy(() => import("./pages/tepia_exhibit/ImagemapMakePage"));
+const TepiaDanraku = lazy(() => import("./pages/tepia_exhibit/DanrakuKumitatePage"));
 import HomePage from "./pages/HomePage";
 import NotFound from "./pages/NotFound";
 import MyComponent from "./pages/ScreenshotPage";
@@ -49,6 +50,7 @@ const App = () => {
               {/* <Route path="/sksyo" element={<MyComponent />} /> */}
               {/* <Route path="/chatBot" element={<ChatBot />} /> */}
               <Route path="/tepiaimagemap" element={<ImagemapMakePage />} />
+              <Route path="/tepiadanraku" element={< TepiaDanraku/>} />
               <Route path="/*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

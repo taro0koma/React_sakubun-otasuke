@@ -1,67 +1,72 @@
-import React, { useRef, useEffect } from "react";
+import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
-import './SwiperHome.css';
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation'; // ナビゲーションボタン用のスタイル
+import "./SwiperHome.css";
+import "swiper/css";
+import "swiper/css/navigation";
 
-const SwiperHome = ({  }) => {
-  const modalRef = useRef(null);
-  const modalImgRef = useRef(null);
-  const closeSpanRef = useRef(null);
-  const text = {
-    "imagemap":["イメージマップ","内容が思いつかないときはイメージマップを作ってみよう！","/images/imagemapsenden2.png"],
-    "danraku":["段落の組み立て","書き方がわからないときは段落の組み立てを使おう！","/images/danrakusenden.png"],
-    "kimochi":["気持ちや感想のいいかえ","言葉をいいかえたいときは気持ちや感想のいいかえを使おう！","/images/iikaesenden2.png"],
-    "hyougen":["表現ぴったり探し","カッコよい表現にしたいときは表現ぴったり探しを使ってみよう！","/images/iikaesenden.png"],
-    "zinbutsu":["登場人物の性格を表す言葉","人物をいいかえたいときは登場人物の性格を表す言葉！","/images/iikaeniodoroki2.png"],
-    "kakidashi":["かっこいい書き出しおみくじ","書き出しをカッコよくしたいときは書き出しおみくじを使おう!","/images/link_omikuji.png"],
-    "osusume":["おすすめツール","文字数・枚数確認できたり、イメージマップを作るのに便利なツールを紹介するよ！","/images/benrituru.png"],
-    "home":["もくじ","手順やコツを紹介するよ！","/images/sakubunkotsu.png"],
-  }
-  useEffect(() => {
-    const modal = modalRef.current;
-    const modalImg = modalImgRef.current;
-    const closeSpan = closeSpanRef.current;
-    const imgs = document.querySelectorAll('.popup');
+// データを配列に集約
+const SLIDE_DATA = [
+  {
+    id: "imagemap",
+    link: "/imagemapmake",
+    title: "イメージマップ",
+    desc: "内容が思いつかないときはイメージマップを作ってみよう！",
+    img: "/images/imagemapsenden2.png",
+  },
+  {
+    id: "danraku",
+    link: "/danraku",
+    title: "段落の組み立て",
+    desc: "書き方がわからないときは段落の組み立てを使おう！",
+    img: "/images/danrakusenden.png",
+  },
+  {
+    id: "kimochi",
+    link: "/kimoti",
+    title: "気持ちや感想のいいかえ",
+    desc: "言葉をいいかえたいときは気持ちや感想のいいかえを使おう！",
+    img: "/images/iikaesenden2.png",
+  },
+  {
+    id: "hyougen",
+    link: "/hyougen",
+    title: "表現ぴったり探し",
+    desc: "カッコよい表現にしたいときは表現ぴったり探しを使ってみよう！",
+    img: "/images/iikaesenden.png",
+  },
+  {
+    id: "zinbutsu",
+    link: "/zinbutsu",
+    title: "登場人物の性格を表す言葉",
+    desc: "人物をいいかえたいときは登場人物の性格を表す言葉！",
+    img: "/images/iikaeniodoroki2.png",
+  },
+  {
+    id: "kakidashi",
+    link: "/omikuji",
+    title: "かっこいい書き出しおみくじ",
+    desc: "書き出しをカッコよくしたいときは書き出しおみくじを使おう!",
+    img: "/images/link_omikuji.png",
+  },
+  {
+    id: "osusume",
+    link: "/osusume",
+    title: "おすすめツール",
+    desc: "文字数・枚数確認できたり、イメージマップを作るのに便利なツールを紹介するよ！",
+    img: "/images/benrituru.png",
+  },
+  {
+    id: "home",
+    link: "#contents-top",
+    title: "もくじ",
+    desc: "手順やコツを紹介するよ！",
+    img: "/images/sakubunkotsu.png",
+  },
+];
 
-    const openModal = (imgSrc) => {
-      modal.style.opacity = "1";
-      modal.style.visibility = "visible";
-      modalImg.src = imgSrc;
-    };
-
-    const closeModal = () => {
-      modal.style.opacity = "0";
-      modal.style.visibility = "hidden";
-    };
-
-    imgs.forEach(img => {
-      img.addEventListener('click', () => openModal(img.src));
-    });
-
-    closeSpan.addEventListener('click', closeModal);
-
-    window.addEventListener('click', (event) => {
-      if (event.target === modal) {
-        closeModal();
-      }
-    });
-
-    // Cleanup
-    return () => {
-      imgs.forEach(img => {
-        img.removeEventListener('click', () => openModal(img.src));
-      });
-      closeSpan.removeEventListener('click', closeModal);
-      window.removeEventListener('click', (event) => {
-        if (event.target === modal) {
-          closeModal();
-        }
-      });
-    };
-  }, []);
+const SwiperHome = () => {
+  const [modalImg, setModalImg] = useState(null);
 
   return (
     <>
@@ -69,77 +74,48 @@ const SwiperHome = ({  }) => {
         modules={[Navigation, Autoplay]}
         speed={500}
         loop={true}
-        
         centeredSlides={true}
         spaceBetween={40}
         autoplay={{ delay: 3000 }}
         navigation
         breakpoints={{
-        // 481pxから768pxまでの画面幅の場合
-        481: {
-          slidesPerView:1.5
-        },
-        // 769pxから1024pxまでの画面幅の場合
-        769: {
-          slidesPerView:2
-        },
-        1020: {
-          slidesPerView:2.5
-        },
-      }}
+          481: { slidesPerView: 1.5 },
+          769: { slidesPerView: 2 },
+          1020: { slidesPerView: 2.5 },
+        }}
       >
-        <SwiperSlide>
-        <a href="#komawanpoint1">
-          <p className="img"><img src={text["imagemap"][2]} alt="スライド1" className="popup" />
-          <p className="contentsmei">{text["imagemap"][0]}</p>
-          <p className="contentssetumei">{text["imagemap"][1]}</p></p>
-          </a>
-        </SwiperSlide>
-        <SwiperSlide>
-        <a href="#komawanpoint2">
-          <p className="img"><img src={text["danraku"][2]} alt="スライド2" className="popup" /><p className="contentsmei">{text["danraku"][0]}</p>
-          <p className="contentssetumei">{text["danraku"][1]}</p></p></a>
-        </SwiperSlide>
-        <SwiperSlide>
-        <a href="#komawanpoint4">
-          <p className="img"><img src={text["kimochi"][2]} alt="スライド3" className="popup" /><p className="contentsmei">{text["kimochi"][0]}</p>
-          <p className="contentssetumei">{text["kimochi"][1]}!</p></p>
-          </a>
-        </SwiperSlide>
-        <SwiperSlide>
-        <a href="#komawanpoint4">
-          <p className="img"><img src={text["hyougen"][2]} alt="スライド4" className="popup" /><p className="contentsmei">{text["hyougen"][0]}</p>
-          <p className="contentssetumei">{text["hyougen"][1]}!</p></p>
-          </a>
-        </SwiperSlide>
-        <SwiperSlide>
-        <a href="#komawanpoint4">
-          <p className="img"><img src={text["zinbutsu"][2]} alt="スライド1" className="popup" /><p className="contentsmei">{text["zinbutsu"][0]}</p>
-          <p className="contentssetumei">{text["zinbutsu"][1]}!</p></p>
-          </a>
-        </SwiperSlide>
-        <SwiperSlide>
-        <a href="#komawanpoint1">
-          <p className="img"><img src={text["kakidashi"][2]} alt="スライド2" className="popup" /><p className="contentsmei">{text["kakidashi"][0]}</p>
-          <p className="contentssetumei">{text["kakidashi"][1]}!</p></p>
-          </a>
-        </SwiperSlide>
-        <SwiperSlide>
-          <a href="#osusume">
-          <p className="img"><img src={text["osusume"][2]} alt="スライド3" className="popup" /><p className="contentsmei">{text["osusume"][0]}</p>
-          <p className="contentssetumei">{text["osusume"][1]}</p></p>
-          </a>
-        </SwiperSlide>
-        <SwiperSlide>
-        <a href="#contents-top">
-          <p className="img"><img src={text["home"][2]} alt="スライド4" className="popup" /><p className="contentsmei">{text["home"][0]}</p>
-          <p className="contentssetumei">{text["home"][1]}</p></p>
-          </a>
-        </SwiperSlide>
+        {/* map関数で繰り返し処理 */}
+        {SLIDE_DATA.map((item, index) => (
+          <SwiperSlide key={item.id}>
+            <a href={item.link}>
+              <div className="img">
+                <img
+                  src={item.img}
+                  alt={`スライド${index + 1}`}
+                  className="popup"
+                  /* onClick内の e.preventDefault() を削除しました。
+             これで画像をクリックしてもリンク先へ飛ぶようになります。
+          */
+                />
+                <p className="contentsmei">{item.title}</p>
+                <p className="contentssetumei">{item.desc}</p>
+              </div>
+            </a>
+          </SwiperSlide>
+        ))}
       </Swiper>
-      <div id="" ref={modalRef} className="">
-        <span id="" ref={closeSpanRef}></span>
-      </div>
+
+      {/* Reactのステートを使ったモーダル表示 */}
+      {modalImg && (
+        <div className="modal-overlay" onClick={() => setModalImg(null)}>
+          <div className="modal-content">
+            <img src={modalImg} alt="拡大表示" />
+            <span className="close-btn" onClick={() => setModalImg(null)}>
+              &times;
+            </span>
+          </div>
+        </div>
+      )}
       <br />
     </>
   );

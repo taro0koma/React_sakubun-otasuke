@@ -18,6 +18,37 @@ select{
   margin-top: 10px;
   padding-left: 20px;
 }
+progress {
+  appearance: none; /* プログレスバーのスタイルをリセット */
+  -moz-appearance: none; /* プログレスバーのスタイルをリセット */
+  background-color: rgb(199, 238, 255); /* プログレスバーの背景色/-moz- 用 */
+  border-radius: 30px;
+}
+.close{
+  font-size: 50px !important;
+  font-weight: 100 !important;
+  padding: 2px !important;
+}
+.close:hover{
+  background-color: #4b4b4b;
+  color: white !important;
+}
+li.MuiMenuItem-gutters{
+  font-size: 15px;
+  font-weight: bold;
+}
+::-webkit-progress-bar {
+  background-color: rgb(199, 238, 255); /* プログレスバーの背景色/-webkit- 用 */
+  border-radius: 30px;
+}
+::-webkit-progress-value {
+  background-color: rgb(113, 212, 255); /* プログレスバーの進捗部分色/-webkit- 用 */
+  border-radius: 30px;
+}
+::-moz-progress-bar {
+  background-color: rgb(113, 212, 255); /* プログレスバーの進捗部分色/-moz- 用 */
+  border-radius: 30px;
+}
 input{
   padding: 25px 15px !important;
   width: 50vw;

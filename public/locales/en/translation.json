@@ -216,6 +216,7 @@
     "helmet": "Paragraph Assembly | Essay Helper App",
     "title": "Paragraph Assembly",
     "loading": "Loading...",
+    "close": "close",
     "error": "Failed to create paragraph assembly. Please try again.",
     "intro1": "Once you've decided what you want to write using an image map, etc.",
     "intro2": "Let's get some advice on what order to write things in.",

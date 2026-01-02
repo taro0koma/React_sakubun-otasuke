@@ -140,7 +140,7 @@ const StylePage = () => {
         {isModalOpen && (
         <ModalFrame
           title={t('danraku.teacherSai')}
-          buttonName={t('close')}
+          buttonName={t('danraku.close')}
           text=""
           onClose={handleModalClose}
           imageSrc="/images/saisensei.png"
@@ -156,7 +156,7 @@ const StylePage = () => {
         {isModalOpen && (
         <ModalFrame
           title={t('danraku.teacherRisu')}
-          buttonName={t('close')}
+          buttonName={t('danraku.close')}
           text=""
           onClose={handleModalClose}
           imageSrc="/images/risusensei.png"
@@ -172,7 +172,7 @@ const StylePage = () => {
         {isModalOpen && (
         <ModalFrame
           title={t('danraku.teacherRaion')}
-          buttonName={t('close')}
+          buttonName={t('danraku.close')}
           text=""
           onClose={handleModalClose}
           imageSrc="/images/raionsensei.png"

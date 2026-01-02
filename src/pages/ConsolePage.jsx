@@ -326,7 +326,7 @@ const ConsolePage = () => {
             whiteBoxRef.current.classList.remove("show");
           }}
         >
-          ✖️
+          ×
         </button>
       </div>
       <div className="ai-response" ref={adviceRef}>
