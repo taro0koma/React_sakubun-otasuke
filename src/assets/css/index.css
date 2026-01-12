@@ -999,6 +999,11 @@ p{
   font-size: 17px;
 }
 
+.danraku-anquette-button{
+  font-size: 30px !important;
+  padding: 30px 30px !important;
+}
+
 .grade-form {
   display: flex;
   flex-direction: column;

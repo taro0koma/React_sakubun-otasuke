@@ -249,15 +249,16 @@ const DanrakuKumitatePage = () => {
       {dataArray.length === 0 && (
         <button onClick={showCards} style={{
           padding: "15px 30px",
-          fontSize: "18px",
+          fontSize: "30px",
           fontWeight: "bold",
-          backgroundColor: "#4CAF50",
+          backgroundColor: "black",
           color: "white",
           border: "none",
           borderRadius: "8px",
           cursor: "pointer",
           marginBottom: "20px"
-        }}>
+        }} className="danraku-anquette-button">
+          段落の組み立てアンケートを
           はじめる！
         </button>
       )}
