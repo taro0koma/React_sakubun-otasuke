@@ -10,7 +10,8 @@ select{
   background-color: #f0f0f0;
   border: white;
   color: #757575;
-  font-family: "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック体", YuGothic, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 400;
   margin-bottom: 20px;
   height: 64px;
   border: 3px solid rgb(149, 149, 149);
@@ -57,7 +58,8 @@ input{
   color: #757575;
   border: 3px solid rgb(149, 149, 149) !important;
   font-size: 20px;
-  font-family: "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック体", YuGothic, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 400;
   justify-content: center;
   align-items: center;
   border-radius: 10px !important;
@@ -102,7 +104,8 @@ input{
   color: black !important;
 }
 textarea{
-  font-family: "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック体", YuGothic, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 400;
 }
 h5{
   margin-bottom: 1em;
@@ -274,7 +277,8 @@ body{
   margin: 0 auto;
   letter-spacing: 2px;
   color: #000000;
-  font-family: "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック体", YuGothic, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 400;
   text-align: center;
 }
 
@@ -360,7 +364,8 @@ h6{
 html,
 body {
   margin: 0;
-  font-family: sans-serif;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 400;
   box-sizing: border-box;
 }
 
@@ -972,7 +977,7 @@ td{
   color: #888;
 }
 .setumei{
-  font-weight: bold;
+  font-weight: 400;
   text-align: center;
   display: block !important;
   font-size: 5vw;
@@ -980,7 +985,7 @@ td{
 .pagetitle{
   text-align: center;
   display: block !important;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 3.5rem;
 }
 #inputarea{
@@ -1730,7 +1735,8 @@ td:last-child{
   text-decoration: none;
   text-transform: uppercase;
   white-space: nowrap;
-  font-family: "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック体", YuGothic, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, sans-serif;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 400;
 }
 
 /* AIレスポンス部分のスタイリング */

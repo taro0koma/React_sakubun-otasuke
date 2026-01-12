@@ -15,7 +15,7 @@ import InputLabel from '@mui/material/InputLabel';
 const baseFormConfig = [
   {
     id: 'page1',
-    image: 'images/yochiensei.png',
+    image: '/images/yochiensei.png',
     question: 'あなたは何年生ですか?',
     type: 'select',
     label: '学年',
@@ -23,7 +23,7 @@ const baseFormConfig = [
   },
   {
     id: 'page2',
-    image: 'images/anonymousTeacher.png',
+    image: '/images/anonymousTeacher.png',
     question: 'アドバイスをもらう先生',
     type: 'select',
     label: '先生',
@@ -31,7 +31,7 @@ const baseFormConfig = [
   },
   {
     id: 'page3',
-    image: 'https://via.placeholder.com/400x200/E89E3D/ffffff?text=Step+3',
+    image: '/images/SentenceType.png',
     question: '作文のタイプ',
     type: 'select',
     label: 'タイプ',
@@ -43,57 +43,57 @@ const baseFormConfig = [
 const bookReviewConfig = [
   {
     id: 'bookType',
-    image: 'https://via.placeholder.com/400x200/3498db/ffffff?text=Book+Type',
-    question: '本のタイプを選択してください',
+    image: '/images/bookType.png',
+    question: '本の種類を選んでね',
     type: 'select',
-    label: '本のタイプ',
+    label: '本の種類',
     options: [
-      '物語・小説',
-      '伝記・自伝',
-      '歴史・社会',
-      'ノンフィクション',
-      'エッセイ',
-      '詩・短歌・俳句',
-      '科学・技術',
-      '自然・環境',
-      '哲学・思想',
-      '芸術・音楽',
-      'スポーツ',
-      '冒険・探検',
-      'ミステリー・推理',
-      'ファンタジー',
-      'SF・未来',
-      '日常・学園',
-      'その他'
+      'ゆかいな内容の本',
+      '有名な人物の伝記の本',
+      'じっさいにあった話',
+      'ぼうけんをする本',
+      'かなしいことが起こる本',
+      'こわい話についての本',
+      'こまりごとに立ち向かう本',
+      '食べ物の作り方の本',
+      '科学について書かれた本',
+      '地球や環境について書かれた本',
+      '歴史について書かれた本',
+      'ワクワクする本',
+      '自分に似た人物が登場する本',
+      'ずかん',
+      'クイズの本',
+      '想像上の人物の日常が書かれたb本',
+      '不思議な世界に行く話'
     ]
   },
   {
     id: 'arasuji',
-    image: 'https://via.placeholder.com/400x200/2ecc71/ffffff?text=Story',
-    question: '本のあらすじを教えてください',
+    image: '/images/bookContents.png',
+    question: 'その本にはどんなことがかかれていたかな',
     type: 'textarea',
-    placeholder: 'どんなお話でしたか？簡単に教えてください'
+    placeholder: 'あらすじ'
   },
   {
     id: 'kokoro',
-    image: 'https://via.placeholder.com/400x200/e74c3c/ffffff?text=Impression',
-    question: '心に残ったことを教えてください',
+    image: '/images/bookType.png',
+    question: '心にのこった部分は何かな',
     type: 'textarea',
-    placeholder: '本を読んで心に残ったことや感じたことを教えてください'
+    placeholder: '印象に残ったところ'
   },
   {
     id: 'hyoushi',
-    image: 'https://via.placeholder.com/400x200/f39c12/ffffff?text=Details',
-    question: '表紙や絵について印象に残ったことはありますか？',
+    image: '/images/bookType.png',
+    question: '本の表紙または\n読む前に題名から考えたこと\nについて書いてね',
     type: 'textarea',
-    placeholder: '表紙や挿絵について印象に残ったことがあれば教えてください'
+    placeholder: '表紙の様子/本の題名から考えたこと'
   },
   {
     id: 'other',
-    image: 'https://via.placeholder.com/400x200/9b59b6/ffffff?text=Other',
-    question: 'その他に伝えたいことはありますか？',
+    image: '/images/bookType.png',
+    question: '上のほかに書きたいことを記入してね',
     type: 'textarea',
-    placeholder: 'その他に感じたことや考えたことがあれば自由に書いてください'
+    placeholder: '書きたいこと'
   }
 ];
 
@@ -102,40 +102,90 @@ const compositionConfig = [
   {
     id: 'theme',
     image: 'https://via.placeholder.com/400x200/1abc9c/ffffff?text=Theme',
-    question: '作文のテーマを教えてください',
+    question: 'テーマを記入してね',
     type: 'textarea',
-    placeholder: '例：将来の夢、大切な思い出、好きなこと など'
+    placeholder: 'テーマ'
   },
   {
     id: 'want1',
     image: 'https://via.placeholder.com/400x200/3498db/ffffff?text=Point+1',
-    question: '伝えたいこと（1つ目）',
+    question: '伝えたいことの1つめを教えてね',
     type: 'textarea',
-    placeholder: 'テーマについて伝えたいことの1つ目を書いてください'
+    placeholder: '１つめにかきたいこと'
   },
   {
     id: 'want2',
     image: 'https://via.placeholder.com/400x200/2ecc71/ffffff?text=Point+2',
-    question: '伝えたいこと（2つ目）',
+    question: '伝えたいことの２つめを教えてね',
     type: 'textarea',
-    placeholder: 'テーマについて伝えたいことの2つ目を書いてください'
+    placeholder: '２つめにかきたいこと'
   },
   {
     id: 'want3',
     image: 'https://via.placeholder.com/400x200/e74c3c/ffffff?text=Point+3',
-    question: '伝えたいこと（3つ目）',
+    question: '伝えたいことの３つめを教えてね',
     type: 'textarea',
-    placeholder: 'テーマについて伝えたいことの3つ目を書いてください'
+    placeholder: '３つめにかきたいこと'
   },
   {
     id: 'want4',
     image: 'https://via.placeholder.com/400x200/f39c12/ffffff?text=Point+4',
-    question: '伝えたいこと（4つ目）※任意',
+    question: '伝えたいことの４つめを教えてね\n（なかったらとばしてもいいよ）',
     type: 'textarea',
-    placeholder: '（任意）4つ目があれば書いてください',
+    placeholder: '４つめにかきたいこと',
     optional: true
   }
 ];
+
+// ステップインジケーターコンポーネント
+const StepIndicator = ({ currentStep, totalSteps }) => {
+  return (
+    <Box style={{ 
+      display: 'flex', 
+      alignItems: 'center', 
+      justifyContent: 'center',
+      marginBottom: '32px',
+      padding: '0 20px'
+    }}>
+      {Array.from({ length: totalSteps }).map((_, index) => (
+        <React.Fragment key={index}>
+          <Box
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: index === currentStep ? '36px' : '28px',
+              height: index === currentStep ? '36px' : '28px',
+              borderRadius: '50%',
+              backgroundColor: index <= currentStep ? '#000' : '#e0e0e0',
+              color: index <= currentStep ? '#fff' : '#999',
+              fontWeight: '600',
+              fontSize: index === currentStep ? '14px' : '12px',
+              transition: 'all 0.3s ease',
+              border: index === currentStep ? '3px solid #666' : 'none',
+              paddingLeft: '2px',
+              paddingBottom: '1px'
+            }}
+          >
+            {index + 1}
+          </Box>
+          {index < totalSteps - 1 && (
+            <Box
+              style={{
+                flex: 1,
+                height: '3px',
+                backgroundColor: index < currentStep ? '#000' : '#e0e0e0',
+                margin: '0 6px',
+                transition: 'all 0.3s ease',
+                maxWidth: '80px'
+              }}
+            />
+          )}
+        </React.Fragment>
+      ))}
+    </Box>
+  );
+};
 
 export default function DanrakuCard({ onSubmit }) {
   const [currentPage, setCurrentPage] = useState(0);
@@ -163,7 +213,6 @@ export default function DanrakuCard({ onSubmit }) {
   }, [formData['page3']]);
 
   const totalPages = formConfig.length;
-  const progress = ((currentPage + 1) / totalPages) * 100;
 
   const handleNext = () => {
     const currentConfig = formConfig[currentPage];
@@ -279,11 +328,11 @@ export default function DanrakuCard({ onSubmit }) {
     if (currentConfig.id === 'page2') {
       const selectedTeacher = formData['page2'];
       if (selectedTeacher === '🦏サイ先生') {
-        return 'images/saisensei.png';
+        return '/images/saisensei.png';
       } else if (selectedTeacher === '🐿️リス先生') {
-        return 'images/risusensei.png';
+        return '/images/risusensei.png';
       } else if (selectedTeacher === '🦁ライオン先生') {
-        return 'images/raionsensei.png';
+        return '/images/raionsensei.png';
       }
     }
     return currentConfig.image;
@@ -333,16 +382,7 @@ export default function DanrakuCard({ onSubmit }) {
           ×
         </Button>
 
-        <progress 
-          value={progress} 
-          max="100" 
-          style={{
-            width: "100%",
-            height: "8px",
-            borderRadius: "10px",
-            marginBottom: "24px"
-          }}
-        />
+        <StepIndicator currentStep={currentPage} totalSteps={totalPages} />
 
         <Box style={{ flex: 1, overflowY: "auto", display: "flex", flexDirection: "column", gap: "24px" }}>
           <img 

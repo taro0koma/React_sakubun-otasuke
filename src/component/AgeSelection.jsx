@@ -39,7 +39,7 @@ const GradeSelection = ({ onSubmit }) => {
         {t("imagemapPage.subWindowSubTitle")}
       </div>
       <div>
-        <h2 style={{ backgroundColor: "white", fontWeight: "bold",fontSize:"25px",color:"black" }}>
+        <h2 style={{ backgroundColor: "white", fontWeight: "500",fontSize:"25px",color:"black" }}>
           {t("imagemapPage.subWindowTitle")}
         </h2>
         <div className="grade-buttons">

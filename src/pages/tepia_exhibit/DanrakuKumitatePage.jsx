@@ -219,7 +219,7 @@ const DanrakuKumitatePage = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container" style={{minHeight:"100vh"}}>
       <Helmet>
         <title>{t('danraku.helmet')}</title>
       </Helmet>
@@ -272,28 +272,6 @@ const DanrakuKumitatePage = () => {
 
       {/* 結果テーブル */}
       {hyou()}
-      
-      {/* 結果が表示されている場合、もう一度やるボタンを表示 */}
-      {dataArray.length > 0 && (
-        <button onClick={() => {
-          setDataArray([]);
-          setVisibleRows(0);
-          setCurrentSensei(" ");
-          showCards();
-        }} style={{
-          padding: "15px 30px",
-          fontSize: "18px",
-          fontWeight: "bold",
-          backgroundColor: "#2196F3",
-          color: "white",
-          border: "none",
-          borderRadius: "8px",
-          cursor: "pointer",
-          marginTop: "20px"
-        }}>
-          もう一度作成する
-        </button>
-      )}
     </div>
   );
 };

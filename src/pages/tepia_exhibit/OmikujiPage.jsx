@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
 import { createClient } from "@supabase/supabase-js";
-import "../assets/css/index.css";
-import Tabs from "../component/Tabs";
-import ModalFrame from "../component/ModalFrame";
-import AnimationKomawanPage from "./AnimationKomawanPage";
+import "../../assets/css/index.css";
 import { Helmet } from "react-helmet-async";
-import NextPageLink from "../component/NextPageLink";
-import Footer from "./Footer";
+import Tabs from "./../../component/Tabs";
+import ModalFrame from "./../../component/ModalFrame";
+import AnimationKomawanPage from "./../AnimationKomawanPage";
+import NextPageLink from "./../../component/NextPageLink";
+import Footer from "./../Footer";
 
 const supabase = createClient(
   process.env.REACT_APP_SUPABASE_URL,
@@ -30,9 +30,7 @@ const grades = {
 
 // 読書感想文専用の書き出しタイプ
 const bookOnlyTypes = [
-  "この本を選んだ理由を、行動に例える",
   "この本を選んだ理由",
-  "本を取ったきっかけ",
   "自分の気持ちからはじめる",
 ];
 
@@ -60,7 +58,7 @@ function getRandomTypeForCategory(isBookReview) {
   return availableTypes[getRandomInt(availableTypes.length)];
 }
 
-const ConsolePage = () => {
+const OmikujiPage = () => {
   const myImg = useRef();
   const whiteBoxRef = useRef();
   const adviceRef = useRef();
@@ -110,7 +108,6 @@ const ConsolePage = () => {
 
       console.log("取得したデータ:", data);
       return data;
-      
     } catch (error) {
       console.error("Supabaseデータの取得中にエラーが発生しました:", error);
       throw error; // エラーを上位に伝播
@@ -119,11 +116,11 @@ const ConsolePage = () => {
 
   async function fetchAIResponse(type) {
     setIsAiLoading(true);
-    
+
     try {
       // Supabaseデータの取得を確実に待つ
       const supabaseData = await fetchSupabaseData();
-      
+
       // データが正しく取得できたかチェック
       if (!supabaseData || supabaseData.length === 0) {
         console.error("Supabaseデータが空です");
@@ -132,41 +129,43 @@ const ConsolePage = () => {
         return;
       }
 
-      // ローカル開発用: AIの代わりにダミーデータを使用
-      const dummyResponse = "これはローカル開発用のダミーテキストです。実際の環境ではAIが生成した文章がここに表示されます。";
-      
-      // 本番環境でAI APIを使用する場合は以下のコメントを解除
-      /*
-      const userMessage = `${
-        grades[selectedGrade]
-      }向けに適切な作文の書き出し例を提供してください。ただし、1つに絞ること。また最初のわかりました的なことは言わないこと。とにかく、必要なことのみ述べてください。あくまで参考として渡します。同じものを返えすことは許されません!参考データ(実際にはこの中にある〇〇が書かれている文章の〇〇に文字を入れる形で回答してください): ${JSON.stringify(
-        supabaseData
-      )}`;
+      let parsedData;
 
-      const response = await fetch(
-        process.env.REACT_APP_API_URL + "/api/azure",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ prompt: userMessage, gakunen: selectedGrade }),
-          mode: "cors",
+      // 環境判定: developmentならローカル、productionなら本番
+      if (process.env.NODE_ENV === 'development') {
+        // ローカル開発環境: ダミーデータを使用
+        parsedData = "これはローカル開発用のダミーテキストです。実際の環境ではAIが生成した文章がここに表示されます。";
+        console.log("ローカル環境でダミーデータを使用");
+      } else {
+        // 本番環境: AI APIを使用
+        const userMessage = `${
+          grades[selectedGrade]
+        }向けに適切な作文の書き出し例を提供してください。ただし、1つに絞ること。また最初のわかりました的なことは言わないこと。とにかく、必要なことのみ述べてください。あくまで参考として渡します。同じものを返えすことは許されません!参考データ(実際にはこの中にある〇〇が書かれている文章の〇〇に文字を入れる形で回答してください): ${JSON.stringify(
+          supabaseData
+        )}`;
+
+        const response = await fetch(
+          process.env.REACT_APP_API_URL + "/api/azure",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ prompt: userMessage, gakunen: selectedGrade }),
+            mode: "cors",
+          }
+        );
+
+        if (!response.ok) {
+          console.error("AIのレスポンスの取得に失敗しました。");
+          alert("AIの応答取得に失敗しました。もう一度お試しください。");
+          setIsAiLoading(false);
+          return;
         }
-      );
 
-      if (!response.ok) {
-        console.error("AIのレスポンスの取得に失敗しました。");
-        alert("AIの応答取得に失敗しました。もう一度お試しください。");
-        setIsAiLoading(false);
-        return;
+        const data = await response.json();
+        parsedData = data.bot.trim();
+        console.log("本番環境でAI APIを使用");
       }
 
-      const data = await response.json();
-      const parsedData = data.bot.trim();
-      */
-
-      // ローカル開発用のダミーデータを使用
-      const parsedData = dummyResponse;
-      
       const timestamp = new Date().toLocaleTimeString();
       setAiResponses((prevResponses) => [
         {
@@ -178,7 +177,6 @@ const ConsolePage = () => {
         },
         ...prevResponses,
       ]);
-      
     } catch (error) {
       console.error("AIのレスポンス取得中にエラーが発生しました:", error);
       alert("エラーが発生しました。もう一度お試しください。");
@@ -188,14 +186,21 @@ const ConsolePage = () => {
   }
 
   const handleSubmit = async () => {
-    console.log("選択された学年:", selectedGrade, "作文の種類:", isBook,"ランダムタイプ:",randomType);
-    
+    console.log(
+      "選択された学年:",
+      selectedGrade,
+      "作文の種類:",
+      isBook,
+      "ランダムタイプ:",
+      randomType
+    );
+
     // 両方の項目が選択されているかチェック
     if (!selectedGrade || !isBook) {
       setFormError(true);
       return;
     }
-    
+
     setFormError(false);
     setIsFormVisible(false);
     await fetchAIResponse(randomType);
@@ -220,7 +225,7 @@ const ConsolePage = () => {
       // まだ選択されていない場合は共通タイプから選択
       newRandomType = commonTypes[getRandomInt(commonTypes.length)];
     }
-    
+
     setRandomType(newRandomType);
     setIsFormVisible(true);
     whiteBoxRef.current.classList.add("show");
@@ -253,7 +258,14 @@ const ConsolePage = () => {
       <Helmet>
         <title>かっこいい書き出しおみくじ | 作文おたすけアプリ</title>
       </Helmet>
-      <Tabs pageTitle="かっこいい書き出しおみくじ" contents="kakidashi" />
+      <h2
+        className="pagetitle"
+        style={{
+          marginTop: "100px",
+        }}
+      >
+        かっこいい書き出しおみくじ
+      </h2>
       <h3 className="setumei">
         おみくじ箱をクリックして、
         <br />
@@ -284,7 +296,7 @@ const ConsolePage = () => {
       <div
         ref={whiteBoxRef}
         className={`white-box ${isFormVisible ? "show" : ""}`}
-        style={{margin:"auto"}}
+        style={{ margin: "auto" }}
       >
         {isFormVisible && (
           <div className="grade-form">
@@ -292,7 +304,12 @@ const ConsolePage = () => {
             <select
               value={selectedGrade}
               onChange={(e) => setSelectedGrade(e.target.value)}
-              style={{ border: formError && !selectedGrade ? "2px solid #ff9494" : "1px solid #ccc" }}
+              style={{
+                border:
+                  formError && !selectedGrade
+                    ? "2px solid #ff9494"
+                    : "1px solid #ccc",
+              }}
             >
               <option value="">学年を選んでね!</option>
               {Object.keys(grades).map((key) => (
@@ -315,20 +332,25 @@ const ConsolePage = () => {
                   setRandomType(getRandomTypeForCategory(false));
                 }
               }}
-              style={{ border: formError && !isBook ? "2px solid #ff9494" : "1px solid #ccc" }}
+              style={{
+                border:
+                  formError && !isBook ? "2px solid #ff9494" : "1px solid #ccc",
+              }}
             >
               <option value="">作文の種類を選んでね!</option>
               <option value="true">読書感想文</option>
               <option value="false">作文</option>
             </select>
-            
+
             {formError && (
               <p style={{ color: "#ff9494" }}>
                 学年と作文の種類どちらも選択してください。
               </p>
             )}
-            
-            <button type="button" onClick={handleSubmit}>送信</button>
+
+            <button type="button" onClick={handleSubmit}>
+              送信
+            </button>
           </div>
         )}
         <button
@@ -358,8 +380,14 @@ const ConsolePage = () => {
                 <div className="response-type-tab">{responseObj.types}</div>
                 <div className="sakubunyosi">
                   <div style={{ padding: "10px", marginLeft: "10px" }}>
-                    <div className="sakubun" contentEditable="true">
-                      <p style={{textAlign:"left"}}>{"\u3000" + responseObj.header}</p>
+                    <div
+                      className="sakubun"
+                      contentEditable="true"
+                      suppressContentEditableWarning={true}
+                    >
+                      <p style={{ textAlign: "left" }}>
+                        {"\u3000" + responseObj.header}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -385,10 +413,8 @@ const ConsolePage = () => {
         )}
         {kakidashis.length === 0 && !isAiLoading && <p></p>}
       </div>
-      <NextPageLink imairu="kakidashi1" />
-      <Footer />
     </div>
   );
 };
 
-export default ConsolePage;
+export default OmikujiPage;

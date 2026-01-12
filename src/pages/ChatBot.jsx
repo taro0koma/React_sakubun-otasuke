@@ -37,10 +37,14 @@ const ChatBot = ({imagemap1}) => {
       {step === 1 && (
         <form onSubmit={handleThemeSubmit}>
           <label>{t("imagemapPage.chatBot.label")}</label>
-          <button value={theme} onClick={(e) => setTheme("作文")} type="submit">{t("imagemapPage.chatBot.select1")}</button>
+          <button value={theme} onClick={(e) => setTheme("作文")} type="submit" style={{
+            marginRight:"10px"
+          }}>{t("imagemapPage.chatBot.select1")}</button>
           <button value={theme} onClick={(e) => setTheme("読書感想文")} type="submit">{t("imagemapPage.chatBot.select2")}</button>
           <br />
-          <button type="submit" onClick={backSubmit}>{t("imagemapPage.chatBot.backSelectGrade")}</button>
+          <button type="submit" onClick={backSubmit} style={{
+            marginTop:"10px"
+          }}>{t("imagemapPage.chatBot.backSelectGrade")}</button>
         </form>
       )}
       {step === 2 && (
