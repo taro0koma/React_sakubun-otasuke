@@ -246,6 +246,7 @@ const DanrakuKumitatePage = () => {
       <br />
       
       {/* 結果が表示されていない場合のみボタンを表示 */}
+      {/* {dataArray.length === 0 && ( */}
         <button onClick={showCards} style={{
           padding: "15px 30px",
           fontSize: "30px",
@@ -260,6 +261,11 @@ const DanrakuKumitatePage = () => {
           段落の組み立てアンケートを
           はじめる！
         </button>
+      {/* )} */}
+
+      {dataArray.length === 0 && (
+        <img src="/images/danrakuLook.png" alt="" className="danrakuLook" />
+      )}
       
       {/* DanrakuCardコンポーネント */}
       {showDanrakuCards && <DanrakuCard onSubmit={handleFormSubmit} />}

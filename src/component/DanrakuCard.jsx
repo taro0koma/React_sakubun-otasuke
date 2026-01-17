@@ -101,35 +101,35 @@ const bookReviewConfig = [
 const compositionConfig = [
   {
     id: 'theme',
-    image: 'https://via.placeholder.com/400x200/1abc9c/ffffff?text=Theme',
+    image: '/images/danrakuQtheme.png',
     question: 'テーマを記入してね',
     type: 'textarea',
     placeholder: 'テーマ'
   },
   {
     id: 'want1',
-    image: 'https://via.placeholder.com/400x200/3498db/ffffff?text=Point+1',
+    image: '/images/danraku1.png',
     question: '伝えたいことの1つめを教えてね',
     type: 'textarea',
     placeholder: '１つめにかきたいこと'
   },
   {
     id: 'want2',
-    image: 'https://via.placeholder.com/400x200/2ecc71/ffffff?text=Point+2',
+    image: '/images/danraku2.png',
     question: '伝えたいことの２つめを教えてね',
     type: 'textarea',
     placeholder: '２つめにかきたいこと'
   },
   {
     id: 'want3',
-    image: 'https://via.placeholder.com/400x200/e74c3c/ffffff?text=Point+3',
+    image: '/images/danraku3.png',
     question: '伝えたいことの３つめを教えてね',
     type: 'textarea',
     placeholder: '３つめにかきたいこと'
   },
   {
     id: 'want4',
-    image: 'https://via.placeholder.com/400x200/f39c12/ffffff?text=Point+4',
+    image: '/images/danraku4.png',
     question: '伝えたいことの４つめを教えてね\n（なかったらとばしてもいいよ）',
     type: 'textarea',
     placeholder: '４つめにかきたいこと',
@@ -343,6 +343,14 @@ export default function DanrakuCard({ onSubmit }) {
 
   return (
     <Box>
+      <div style={{
+        width:"100vw",
+        height:"100vh",
+        position:"fixed",
+        top:0,
+        left:0,
+        backgroundColor:"rgba(0,0,0,0.5)",
+      }} />
       <Card 
         variant='outlined' 
         style={{

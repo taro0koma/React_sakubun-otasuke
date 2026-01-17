@@ -34,6 +34,13 @@ progress {
   background-color: #4b4b4b;
   color: white !important;
 }
+.danrakuLook{
+  overflow: hidden;
+  position: fixed;
+  width: 720px;
+  height: auto;
+  right: 0px;
+}
 li.MuiMenuItem-gutters{
   font-size: 15px;
   font-weight: bold;
