@@ -86,9 +86,7 @@ const OmikujiPage = () => {
         .eq("types", randomType);
 
       // 2. 条件(isBookが"true")に一致する場合のみ .eq() を追加
-      if (isBook === "true") {
-        query = query.eq("is_bookReview", true);
-      } else {
+      if (isBook === "false") {
         query = query.eq("is_bookReview", false);
       }
 

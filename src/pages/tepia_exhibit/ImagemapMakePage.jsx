@@ -155,7 +155,7 @@ const CustomNode = ({ data, id, selected }) => {
             onClick={handleDelete}
             className="trash"
           >
-            <img src="images\trash_icon.svg" alt="" width="64" height="64" />
+            <img src="\images\trash_icon.svg" alt="" width="64" height="64" />
           </button>
         )}
       </div>
