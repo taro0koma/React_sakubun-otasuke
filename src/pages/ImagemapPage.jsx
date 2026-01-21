@@ -1,739 +1,532 @@
-import React, {
-  useState,
-  useCallback,
-  useRef,
-  useEffect,
-  forwardRef,
-} from "react";
-import {
-  ReactFlow,
-  useNodesState,
-  useEdgesState,
-  addEdge,
-  Controls,
-  Background,
-  Handle,
-  ReactFlowProvider,
-  useReactFlow,
-  NodeResizer,
-} from "@xyflow/react";
-import "@xyflow/react/dist/style.css";
-import ChatBot from './ChatBot';
-import { t } from "i18next";
-import Joyride from "react-joyride";
-import { keyframes } from "@emotion/react";
-import styled from "@emotion/styled";
-import DownloadButton from './../component/DownloadButton';
-import NextPageLink from "../component/NextPageLink";
-import Tabs from "../component/Tabs";
+import React, { useState, useEffect } from 'react';
+import Card from '@mui/material/Card';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
 
-// カスタムノードコンポーネント - 上下のハンドルを両方source/targetに！
-const CustomNode = ({ data, id, selected }) => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [label, setLabel] = useState(data.label);
-  const { deleteElements } = useReactFlow();
+// 基本的な質問設定
+const baseFormConfig = [
+  {
+    id: 'page1',
+    image: '/images/yochiensei.png',
+    question: 'あなたは何年生ですか?',
+    type: 'select',
+    label: '学年',
+    options: ['小学1年生', '小学2年生', '小学3年生', '小学4年生', '小学5年生', '小学6年生','中学1年生','中学2年生','中学3年生','高校1年生','高校2年生','高校3年生' ]
+  },
+  {
+    id: 'page2',
+    image: '/images/anonymousTeacher.png',
+    question: 'アドバイスをもらう先生',
+    type: 'select',
+    label: '先生',
+    options: ['🦏サイ先生', '🐿️リス先生', "🦁ライオン先生"]
+  },
+  {
+    id: 'page3',
+    image: '/images/SentenceType.png',
+    question: '作文のタイプ',
+    type: 'select',
+    label: 'タイプ',
+    options: ['読書感想文', 'テーマのある作文']
+  }
+];
 
-  const handleDelete = useCallback(() => {
-    deleteElements({ nodes: [{ id }] });
-  }, [id, deleteElements]);
+// 読書感想文用の追加質問
+const bookReviewConfig = [
+  {
+    id: 'bookType',
+    image: '/images/bookType.png',
+    question: '本の種類を選んでね',
+    type: 'select',
+    label: '本の種類',
+    options: [
+      'ゆかいな内容の本',
+      '有名な人物の伝記の本',
+      'じっさいにあった話',
+      'ぼうけんをする本',
+      'かなしいことが起こる本',
+      'こわい話についての本',
+      'こまりごとに立ち向かう本',
+      '食べ物の作り方の本',
+      '科学について書かれた本',
+      '地球や環境について書かれた本',
+      '歴史について書かれた本',
+      'ワクワクする本',
+      '自分に似た人物が登場する本',
+      'ずかん',
+      'クイズの本',
+      '想像上の人物の日常が書かれたb本',
+      '不思議な世界に行く話'
+    ]
+  },
+  {
+    id: 'arasuji',
+    image: '/images/bookContents.png',
+    question: 'その本にはどんなことがかかれていたかな',
+    type: 'textarea',
+    placeholder: 'あらすじ'
+  },
+  {
+    id: 'kokoro',
+    image: '/images/bookType.png',
+    question: '心にのこった部分は何かな',
+    type: 'textarea',
+    placeholder: '印象に残ったところ'
+  },
+  {
+    id: 'hyoushi',
+    image: '/images/bookType.png',
+    question: '本の表紙または\n読む前に題名から考えたこと\nについて書いてね',
+    type: 'textarea',
+    placeholder: '表紙の様子/本の題名から考えたこと'
+  },
+  {
+    id: 'other',
+    image: '/images/bookType.png',
+    question: '上のほかに書きたいことを記入してね',
+    type: 'textarea',
+    placeholder: '書きたいこと'
+  }
+];
 
-  // ハンドルのスタイル
-  const handleStyle = { 
-    borderRadius: "50%", 
-    backgroundColor: "#555",
-    width: 10,
-    height: 10,
-  };
+// テーマのある作文用の追加質問
+const compositionConfig = [
+  {
+    id: 'theme',
+    image: '/images/danrakuQtheme.png',
+    question: 'テーマを記入してね',
+    type: 'textarea',
+    placeholder: 'テーマ'
+  },
+  {
+    id: 'want1',
+    image: '/images/danraku1.png',
+    question: '伝えたいことの1つめを教えてね',
+    type: 'textarea',
+    placeholder: '１つめにかきたいこと'
+  },
+  {
+    id: 'want2',
+    image: '/images/danraku2.png',
+    question: '伝えたいことの２つめを教えてね',
+    type: 'textarea',
+    placeholder: '２つめにかきたいこと'
+  },
+  {
+    id: 'want3',
+    image: '/images/danraku3.png',
+    question: '伝えたいことの３つめを教えてね',
+    type: 'textarea',
+    placeholder: '３つめにかきたいこと'
+  },
+  {
+    id: 'want4',
+    image: '/images/danraku4.png',
+    question: '伝えたいことの４つめを教えてね\n（なかったらとばしてもいいよ）',
+    type: 'textarea',
+    placeholder: '４つめにかきたいこと',
+    optional: true
+  }
+];
 
+// ステップインジケーターコンポーネント
+const StepIndicator = ({ currentStep, totalSteps }) => {
   return (
-    <>
-      <NodeResizer
-        isVisible={selected}
-        minWidth={100}
-        minHeight={50}
-        handleStyle={{
-          width: 10,
-          height: 10,
-          borderRadius: "50%",
-          backgroundColor: "#3b82f6",
-        }}
-        lineStyle={{
-          borderWidth: 2,
-          borderColor: "#3b82f6",
-        }}
-      />
-      <div
-        style={{
-          padding: 10,
-          border: selected ? "3px solid #3b82f6" : "2px solid #555",
-          borderRadius: 8,
-          background: "white",
-          width: "100%",
-          height: "100%",
-          textAlign: "center",
-          display: "flex",
-          alignItems: "flex-start",
-          justifyContent: "center",
-          transition: "all 0.2s ease",
-          boxSizing: "border-box",
-          position: "relative",
-        }}
-      >
-        {/* 上のハンドル - sourceとtargetの両方 */}
-        <Handle 
-          type="source" 
-          position="top" 
-          id="top-source"
-          style={handleStyle} 
-        />
-        <Handle 
-          type="target" 
-          position="top" 
-          id="top-target"
-          style={handleStyle} 
-        />
-        
-        {/* 下のハンドル - sourceとtargetの両方 */}
-        <Handle 
-          type="source" 
-          position="bottom" 
-          id="bottom-source"
-          style={handleStyle} 
-        />
-        <Handle 
-          type="target" 
-          position="bottom" 
-          id="bottom-target"
-          style={handleStyle} 
-        />
-
-        {isEditing ? (
-          <textarea
-            autoFocus
-            value={label}
-            onChange={(e) => {
-              setLabel(e.target.value);
-              data.label = e.target.value;
-            }}
-            onBlur={() => setIsEditing(false)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && !e.shiftKey) {
-                e.preventDefault();
-                setIsEditing(false);
-              }
-            }}
+    <Box style={{ 
+      display: 'flex', 
+      alignItems: 'center', 
+      justifyContent: 'center',
+      marginBottom: '32px',
+      padding: '0 20px'
+    }}>
+      {Array.from({ length: totalSteps }).map((_, index) => (
+        <React.Fragment key={index}>
+          <Box
             style={{
-              border: "none",
-              outline: "none",
-              textAlign: "center",
-              width: "100%",
-              height: "100%",
-              background: "transparent",
-              resize: "none",
-              fontFamily: "inherit",
-              fontSize: "inherit",
-              padding: 0,
-              boxSizing: "border-box",
-            }}
-          />
-        ) : (
-          <div
-            onClick={() => setIsEditing(true)}
-            style={{
-              cursor: "text",
-              width: "100%",
-              height: "100%",
-              wordWrap: "break-word",
-              whiteSpace: "pre-wrap",
-              overflow: "hidden",
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: index === currentStep ? '36px' : '28px',
+              height: index === currentStep ? '36px' : '28px',
+              borderRadius: '50%',
+              backgroundColor: index <= currentStep ? '#000' : '#e0e0e0',
+              color: index <= currentStep ? '#fff' : '#999',
+              fontWeight: '600',
+              fontSize: index === currentStep ? '14px' : '12px',
+              transition: 'all 0.3s ease',
+              border: index === currentStep ? '3px solid #666' : 'none',
+              paddingLeft: '2px',
+              paddingBottom: '1px'
             }}
           >
-            {label}
-          </div>
-        )}
-
-        {selected && (
-          <button
-            onClick={handleDelete}
-            className="trash"
-          >
-            <img src="images\trash_icon.svg" alt="" width="64" height="64" />
-          </button>
-        )}
-      </div>
-    </>
+            {index + 1}
+          </Box>
+          {index < totalSteps - 1 && (
+            <Box
+              style={{
+                flex: 1,
+                height: '3px',
+                backgroundColor: index < currentStep ? '#000' : '#e0e0e0',
+                margin: '0 6px',
+                transition: 'all 0.3s ease',
+                maxWidth: '80px'
+              }}
+            />
+          )}
+        </React.Fragment>
+      ))}
+    </Box>
   );
 };
 
-let id = 1;
-const getId = () => `${id++}`;
+export default function DanrakuCard({ onSubmit }) {
+  const [currentPage, setCurrentPage] = useState(0);
+  const [formData, setFormData] = useState({});
+  const [errorMessage, setErrorMessage] = useState('');
+  const [formConfig, setFormConfig] = useState(baseFormConfig);
 
-function MindMapFlow() {
-  const [nodes, setNodes, onNodesChange] = useNodesState([
-    {
-      id: "0",
-      type: "custom",
-      position: { x: 250, y: 250 },
-      data: { label: "メインアイデア\n" },
-      style: { width: 180, height: 100 },
-    },
-  ]);
-  const [edges, setEdges, onEdgesState] = useEdgesState([]);
-  const { screenToFlowPosition } = useReactFlow();
-  const connectingNodeId = useRef(null);
-  const [nodeAdded, setNodeAdded] = useState(false);
-  
-  // ドラッグ状態の管理
-  const [isDraggingNewNode, setIsDraggingNewNode] = useState(false);
-  const [dragGhostPosition, setDragGhostPosition] = useState({ x: 0, y: 0 });
-  const dragStartButtonPos = useRef({ x: 0, y: 0 });
-
-  // チャットパネルの状態管理
-  const [isChatOpen, setIsChatOpen] = useState(true);
-  const [isChatVisible, setIsChatVisible] = useState(true);
-  const CHAT_PANEL_WIDTH = 400;
-  const TOGGLE_BUTTON_WIDTH_OPEN = 40;
-  const TOGGLE_BUTTON_WIDTH_CLOSED = 50;
-  const TOGGLE_BUTTON_HEIGHT = 100;
-
-  // ノードとエッジ情報を文字列化する関数
-  const getNodeEdgeInfo = useCallback(() => {
-    const nodesInfo = nodes
-      .map(
-        (node) =>
-          `Node ID: ${node.id}, Label: ${node.data.label}, Position: (${node.position.x}, ${node.position.y})`
-      )
-      .join("\n");
-    const edgesInfo = edges
-      .map(
-        (edge) =>
-          `Edge ID: ${edge.id}, Source: ${edge.source}, Target: ${edge.target}`
-      )
-      .join("\n");
-    return `${nodesInfo}\n\n${edgesInfo}`;
-  }, [nodes, edges]);
-
-  const onNodeClick = useCallback(
-    (event, node) => {
-      setNodes((nds) =>
-        nds.map((n) => ({
-          ...n,
-          selected: n.id === node.id,
-        }))
-      );
-    },
-    [setNodes]
-  );
-
-  const onConnect = useCallback(
-    (params) => {
-      connectingNodeId.current = null;
-      setEdges((eds) => addEdge({ ...params, animated: true, type: "smoothstep" }, eds));
-      setNodeAdded(false);
-    },
-    [setEdges]
-  );
-
-  const onConnectStart = useCallback((_, { nodeId, handleId, handleType }) => {
-    connectingNodeId.current = { nodeId, handleId, handleType };
-  }, []);
-
-  const onConnectEnd = useCallback(
-    (event) => {
-      if (!connectingNodeId.current || nodeAdded) return;
-
-      const targetIsPane = event.target.classList.contains("react-flow__pane");
-
-      if (targetIsPane) {
-        const { nodeId, handleId, handleType } = connectingNodeId.current;
-        const newId = getId();
-        const newNode = {
-          id: newId,
-          type: "custom",
-          position: screenToFlowPosition({
-            x: event.clientX,
-            y: event.clientY,
-          }),
-          data: { label: `アイデア ${newId}` },
-          style: { width: 150, height: 80 },
-          selected: true,
-        };
-
-        setNodes((nds) =>
-          nds.map((n) => ({ ...n, selected: false })).concat(newNode)
-        );
-
-        // 接続元のハンドル位置に基づいて新しいノードの適切なハンドルを選択
-        const sourceHandleId = handleId || (handleType === "source" ? "top-source" : "top-target");
-        const targetHandleId = sourceHandleId.includes("top") ? "bottom-target" : "top-target";
-
-        const newEdge =
-          handleType === "source"
-            ? {
-                id: `e${nodeId}-${newId}`,
-                source: nodeId,
-                sourceHandle: sourceHandleId,
-                target: newId,
-                targetHandle: targetHandleId,
-                animated: true,
-                type: "smoothstep",
-              }
-            : {
-                id: `e${newId}-${nodeId}`,
-                source: newId,
-                sourceHandle: targetHandleId.replace("target", "source"),
-                target: nodeId,
-                targetHandle: sourceHandleId.replace("source", "target"),
-                animated: true,
-                type: "smoothstep",
-              };
-
-        setEdges((eds) => eds.concat(newEdge));
-        setNodeAdded(true);
+  // page3の選択が変更されたときにformConfigを更新
+  useEffect(() => {
+    const selectedType = formData['page3'];
+    if (selectedType) {
+      let additionalConfig = [];
+      
+      if (selectedType === '読書感想文') {
+        additionalConfig = bookReviewConfig;
+      } else if (selectedType === 'テーマのある作文') {
+        additionalConfig = compositionConfig;
       }
+      
+      // 追加の質問がある場合のみ更新
+      if (additionalConfig.length > 0) {
+        setFormConfig([...baseFormConfig, ...additionalConfig]);
+      }
+    }
+  }, [formData['page3']]);
 
-      connectingNodeId.current = null;
-    },
-    [screenToFlowPosition, setNodes, setEdges, nodeAdded]
-  );
+  // ここにSupabaseで「列AがTrue」かつ「特定のタイプ」を取得する例をイメージとして追記します
+  /* const fetchData = async (randomType) => {
+    const { data, error } = await supabase
+      .from('your_table')
+      .select('*')
+      .eq('types', randomType)
+      .eq('A', true); // 列AがTrueのものだけ
+  };
+  */
 
-  // 新規ノード追加ボタンのドラッグ開始
-  const handleNewNodeDragStart = useCallback((e) => {
-    e.preventDefault();
-    const button = e.currentTarget;
-    const rect = button.getBoundingClientRect();
+  const totalPages = formConfig.length;
+
+  const handleNext = () => {
+    const currentConfig = formConfig[currentPage];
+    const currentValue = formData[currentConfig.id];
     
-    dragStartButtonPos.current = {
-      x: rect.left + rect.width / 2,
-      y: rect.top + rect.height / 2,
+    // 任意の項目（want4など）はスキップ可能
+    if (!currentConfig.optional && (!currentValue || currentValue.trim() === '')) {
+      setErrorMessage('入力または選択してください');
+      return;
+    }
+    
+    setErrorMessage('');
+    
+    if (currentPage < formConfig.length - 1) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handleBack = () => {
+    setErrorMessage('');
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleInputChange = (pageId, value) => {
+    setFormData({
+      ...formData,
+      [pageId]: value
+    });
+    setErrorMessage('');
+  };
+
+  const handleSubmit = () => {
+    // 学年の変換マップ
+    const gradeMap = {
+      '小学1年生': 's1',
+      '小学2年生': 's2',
+      '小学3年生': 's3',
+      '小学4年生': 's4',
+      '小学5年生': 's5',
+      '小学6年生': 's6',
+      '中学1年生': 't1',
+      '中学2年生': 't2',
+      '中学3年生': 't3',
+      '高校1年生': 'k1',
+      '高校2年生': 'k2',
+      '高校3年生': 'k3'
     };
-    
-    const clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
-    const clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
-    
-    setIsDraggingNewNode(true);
-    setDragGhostPosition({ x: clientX, y: clientY });
-  }, []);
 
-  // ドラッグ中
-  const handleNewNodeDragMove = useCallback((e) => {
-    if (!isDraggingNewNode) return;
-    
-    const clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
-    const clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
-    
-    setDragGhostPosition({ x: clientX, y: clientY });
-  }, [isDraggingNewNode]);
-
-  // ドラッグ終了
-  const handleNewNodeDragEnd = useCallback((e) => {
-    if (!isDraggingNewNode) return;
-    
-    const clientX = e.type === 'touchend' ? e.changedTouches[0].clientX : e.clientX;
-    const clientY = e.type === 'touchend' ? e.changedTouches[0].clientY : e.clientY;
-    
-    // ReactFlowキャンバス内かチェック
-    const reactFlowPane = document.querySelector('.react-flow__pane');
-    if (reactFlowPane) {
-      const rect = reactFlowPane.getBoundingClientRect();
-      if (
-        clientX >= rect.left &&
-        clientX <= rect.right &&
-        clientY >= rect.top &&
-        clientY <= rect.bottom
-      ) {
-        // ノードを作成
-        const flowPosition = screenToFlowPosition({ x: clientX, y: clientY });
-        const newId = getId();
-        const newNode = {
-          id: newId,
-          type: "custom",
-          position: flowPosition,
-          data: { label: `アイデア ${newId}` },
-          style: { width: 150, height: 80 },
-          selected: true,
-        };
-
-        setNodes((nds) =>
-          nds.map((n) => ({ ...n, selected: false })).concat(newNode)
-        );
-      }
-    }
-    
-    setIsDraggingNewNode(false);
-  }, [isDraggingNewNode, screenToFlowPosition, setNodes]);
-
-  // グローバルイベントリスナー
-  useEffect(() => {
-    if (isDraggingNewNode) {
-      const handleMove = (e) => {
-        e.preventDefault();
-        handleNewNodeDragMove(e);
-      };
-      const handleEnd = (e) => {
-        e.preventDefault();
-        handleNewNodeDragEnd(e);
-      };
-
-      document.addEventListener('mousemove', handleMove);
-      document.addEventListener('mouseup', handleEnd);
-      document.addEventListener('touchmove', handleMove, { passive: false });
-      document.addEventListener('touchend', handleEnd, { passive: false });
-
-      return () => {
-        document.removeEventListener('mousemove', handleMove);
-        document.removeEventListener('mouseup', handleEnd);
-        document.removeEventListener('touchmove', handleMove);
-        document.removeEventListener('touchend', handleEnd);
-      };
-    }
-  }, [isDraggingNewNode, handleNewNodeDragMove, handleNewNodeDragEnd]);
-
-  const onKeyDown = useCallback(
-    (event) => {
-      if (event.key === "Backspace" || event.key === "Delete") {
-        const selectedEdges = edges.filter((edge) => edge.selected);
-        if (selectedEdges.length) {
-          setEdges((eds) =>
-            eds.filter((edge) => !selectedEdges.includes(edge))
-          );
-        }
-      }
-    },
-    [edges, setEdges]
-  );
-
-  useEffect(() => {
-    setNodeAdded(false);
-  }, [nodes, edges]);
-
-  useEffect(() => {
-    window.addEventListener("keydown", onKeyDown);
-    return () => {
-      window.removeEventListener("keydown", onKeyDown);
+    // 先生の変換マップ
+    const teacherMap = {
+      '🦏サイ先生': 'DESC法',
+      '🐿️リス先生': 'PREP法',
+      '🦁ライオン先生': '一段落目が個性的なPREP法'
     };
-  }, [onKeyDown]);
 
-  // ページ読み込み時にReactFlowキャンバスへ自動スクロール
-  useEffect(() => {
-    const reactFlowElement = document.querySelector('.react-flow');
-    if (reactFlowElement) {
-      setTimeout(() => {
-        reactFlowElement.scrollIntoView({ 
-          behavior: 'smooth', 
-          block: 'start' 
-        });
-      }, 100);
+    // タイプの変換マップ
+    const typeMap = {
+      '読書感想文': 'bookReview',
+      'テーマのある作文': 'composition'
+    };
+
+    const selectedType = formData['page3'];
+    
+    // 変換されたデータを作成
+    const result = {
+      timestamp: new Date().toISOString(),
+      grade: gradeMap[formData['page1']] || formData['page1'],
+      sensei: teacherMap[formData['page2']] || formData['page2'],
+      type: typeMap[selectedType] || selectedType,
+      responses: {}
+    };
+
+    // タイプに応じてデータを整形
+    if (selectedType === '読書感想文') {
+      result.responses = {
+        bookReviewFirst: formData['bookType'] || '',
+        bookReviewArasuji: formData['arasuji'] || '',
+        bookReviewSecond: formData['kokoro'] || '',
+        bookReviewThing: formData['hyoushi'] || '',
+        bookReviewThird: formData['other'] || ''
+      };
+    } else if (selectedType === 'テーマのある作文') {
+      result.responses = {
+        sTheme: formData['theme'] || '',
+        sFirst: formData['want1'] || '',
+        sSecond: formData['want2'] || '',
+        sThird: formData['want3'] || '',
+        sFo: formData['want4'] || ''
+      };
     }
-  }, []);
-
-  const handleChatToggle = () => {
-    if (isChatOpen) {
-      setIsChatOpen(false);
+    
+    console.log('送信データ:', JSON.stringify(result, null, 2));
+    
+    if (onSubmit) {
+      onSubmit(result);
     } else {
-      setIsChatVisible(true);
-      requestAnimationFrame(() => {
-        setIsChatOpen(true);
-      }, 0);
+      alert('フォームが送信されました!\n\n' + JSON.stringify(result, null, 2));
     }
   };
 
-  const onChatPanelTransitionEnd = (event) => {
-    if (event.propertyName === "width") {
-      if (!isChatOpen) {
-        setIsChatVisible(false);
+  const handleClose = () => {
+    if (onSubmit) {
+      onSubmit(null);
+    }
+  };
+
+  const currentConfig = formConfig[currentPage];
+  const currentValue = formData[currentConfig.id] || '';
+
+  const getTeacherImage = () => {
+    if (currentConfig.id === 'page2') {
+      const selectedTeacher = formData['page2'];
+      if (selectedTeacher === '🦏サイ先生') {
+        return '/images/saisensei.png';
+      } else if (selectedTeacher === '🐿️リス先生') {
+        return '/images/risusensei.png';
+      } else if (selectedTeacher === '🦁ライオン先生') {
+        return '/images/raionsensei.png';
       }
     }
+    return currentConfig.image;
   };
 
-  const nodeTypes = {
-    custom: CustomNode,
-  };
-
-  const dragBlockHandleStyle = {
-    position: "absolute",
-    width: 8,
-    height: 8,
-    borderRadius: "50%",
-    backgroundColor: "#555",
-  };
-
-  // Joyride用のステップとスタイル
-  const steps = [
-    {
-      target: ".ideabutton",
-      content: "これを上にひっぱる",
-    },
-    {
-      target: ".react-flow__node.react-flow__node-custom.nopan.draggable",
-      content: "クリックして文字をうってみよう！",
-    },
-  ];
-
-  const pulse = keyframes`
-    0% {
-      transform: scale(1);
-    }
-    55% {
-      background-color: rgba(255, 100, 100, 0.9);
-      transform: scale(1.6);
-    }
-  `;
-
-  const Beacon = styled.span`
-    animation: ${pulse} 1s ease-in-out infinite;
-    background-color: rgba(255, 27, 14, 0.6);
-    border-radius: 50%;
-    display: inline-block;
-    height: 3rem;
-    width: 3rem;
-  `;
-
-  const BeaconComponent = forwardRef((props, ref) => {
-    return <Beacon ref={ref} {...props} />;
-  });
-
-  // Joyride の実行状態を管理
-  const [run, setRun] = useState(true);
-
-  const handleJoyrideCallback = (data) => {
-    const { status } = data;
-    if (["finished", "skipped"].includes(status)) {
-      setRun(false);
-    }
-  };
-
-  const handleRestartTutorial = () => {
-    setRun(true);
-  };
+  // 最後のページかどうかを判定（formConfigの長さで判定）
+  const isLastPage = currentPage === formConfig.length - 1;
 
   return (
-    <>
-    <Tabs pageTitle={t('danraku.title')} contents="imagemapmake"/>
-    <div
-      style={{
-        height: "100vh",
-        width: "100%",
-        position: "relative",
-        display: "flex",
-      }}
-    >
-      <Joyride
-        steps={steps}
-        run={run}
-        callback={handleJoyrideCallback}
-        continuous={true}
-        showSkipButton={true}
-        showProgress={true}
-        beaconComponent={BeaconComponent}
-      />
-      {/* 左パネル - 新規ノード追加ボタン */}
-      <div
+    <Box>
+      <div style={{
+        width:"100vw",
+        height:"100vh",
+        position:"fixed",
+        top:0,
+        left:0,
+        backgroundColor:"rgba(0,0,0,0.5)",
+        zIndex:1
+      }} />
+      <Card 
+        variant='outlined' 
         style={{
-          background: "#f4f4f4ff",
-          padding: 20,
-          boxShadow: "2px 0 10px rgba(0,0,0,0.1)",
-          zIndex: 1,
-          position: "absolute",
-          bottom: "20px",
-          left: "100px",
-          borderRadius: "10px",
+          position: "fixed",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: "80%",
+          maxWidth: "600px",
+          height: "80%",
+          maxHeight: "700px",
+          borderRadius: "16px",
+          boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+          border: "3px solid rgba(0,0,0,0.1)",
+          padding: "24px",
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
-          gap: "16px",
+          zIndex: 1000
         }}
       >
-        <div
+        <Button
+          onClick={handleClose}
           style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "32px",
+            position: "absolute",
+            top: "7px",
+            right: "16px",
+            minWidth: "40px",
+            width: "40px",
+            height: "40px",
+            borderRadius: "50%",
+            padding: 0,
+            color: "#666",
+            fontSize: "24px"
           }}
+          className='close'
         >
-          <div
-            onMouseDown={handleNewNodeDragStart}
-            onTouchStart={handleNewNodeDragStart}
-            className="ideabutton"
+          ×
+        </Button>
+
+        <StepIndicator currentStep={currentPage} totalSteps={totalPages} />
+
+        <Box style={{ flex: 1, overflowY: "auto", display: "flex", flexDirection: "column", gap: "24px" }}>
+          <img 
+            src={getTeacherImage()} 
+            alt={`Step ${currentPage + 1}`}
             style={{
-              padding: "15px 20px",
-              background: "white",
-              borderRadius: 8,
-              cursor: isDraggingNewNode ? "grabbing" : "grab",
-              textAlign: "center",
-              fontWeight: "bold",
-              boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
-              transition: isDraggingNewNode ? "none" : "transform 0.2s",
-              width: "150px",
-              border: "solid #555 2px",
-              position: "relative",
-              boxSizing: "border-box",
-              height: "70px",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              userSelect: "none",
-              touchAction: "none",
-              transform: isDraggingNewNode ? "scale(0.95)" : "scale(1)",
+              width: "100%",
+              height: "200px",
+              objectFit: "cover",
+              borderRadius: "12px"
             }}
-          >
-            <div
-              style={{
-                ...dragBlockHandleStyle,
-                top: -4,
-                left: "50%",
-                transform: "translateX(-50%)",
-                border: "1px solid white",
-              }}
+          />
+
+          <h2 style={{ margin: 0, fontSize: "24px", fontWeight: "600" }}>
+            {currentConfig.question}
+          </h2>
+
+          {currentConfig.type === 'text' && (
+            <TextField
+              fullWidth
+              variant="outlined"
+              placeholder={currentConfig.placeholder}
+              value={currentValue}
+              onChange={(e) => handleInputChange(currentConfig.id, e.target.value)}
             />
-            <div
-              style={{
-                ...dragBlockHandleStyle,
-                bottom: -4,
-                left: "50%",
-                transform: "translateX(-50%)",
-                border: "1px solid white",
-              }}
+          )}
+
+          {currentConfig.type === 'textarea' && (
+            <TextField
+              fullWidth
+              multiline
+              rows={4}
+              variant="outlined"
+              placeholder={currentConfig.placeholder}
+              value={currentValue}
+              onChange={(e) => handleInputChange(currentConfig.id, e.target.value)}
             />
-            アイデア
-          </div>
-          <button
-            onClick={handleRestartTutorial}
-            style={{ padding: "10px 5px" }}
-          >
-            {t("imagemapPage.howToUseButton")}
-          </button>
-        </div>
-      </div>
+          )}
 
-      {/* ドラッグ中のゴーストノード */}
-      {isDraggingNewNode && (
-        <div
-          style={{
-            position: "fixed",
-            left: dragGhostPosition.x,
-            top: dragGhostPosition.y,
-            transform: "translate(-50%, -50%)",
-            width: "150px",
-            height: "80px",
-            padding: "10px",
-            background: "rgba(255, 255, 255, 0.95)",
-            border: "3px dashed #3b82f6",
-            borderRadius: 8,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            fontWeight: "bold",
-            pointerEvents: "none",
-            zIndex: 10000,
-            boxShadow: "0 8px 20px rgba(59, 130, 246, 0.4)",
-            animation: "pulse 1s ease-in-out infinite",
-          }}
-        >
-          新しいアイデア
-        </div>
-      )}
+          {currentConfig.type === 'radio' && (
+            <FormControl component="fieldset">
+              <RadioGroup
+                value={currentValue}
+                onChange={(e) => handleInputChange(currentConfig.id, e.target.value)}
+              >
+                {currentConfig.options.map((option, index) => (
+                  <FormControlLabel
+                    key={index}
+                    value={option}
+                    control={<Radio />}
+                    label={option}
+                  />
+                ))}
+              </RadioGroup>
+            </FormControl>
+          )}
 
-      {/* ReactFlowメインキャンバス */}
-      <div style={{ flexGrow: 1, position: "relative", zIndex: 0 }}>
-        <ReactFlow
-          nodes={nodes}
-          edges={edges}
-          onNodesChange={onNodesChange}
-          onEdgesChange={onEdgesState}
-          onConnect={onConnect}
-          onConnectStart={onConnectStart}
-          onConnectEnd={onConnectEnd}
-          onNodeClick={onNodeClick}
-          nodeTypes={nodeTypes}
-          fitView
-          style={{ background: "#f5f5f5" }}
-          snapToGrid={true}
-          snapGrid={[15, 15]}
-          elevateNodesOnSelect={true}
-          proOptions={{ hideAttribution: true }}
-        >
-          <Background color="#ddd" variant="lines" />
-          <Controls />
-          <DownloadButton/>
-        </ReactFlow>
-      </div>
+          {currentConfig.type === 'select' && (
+            <FormControl fullWidth>
+              <InputLabel
+              style={{
+                fontSize:"15px",
+                fontWeight:"bold"
+              }}>{currentConfig.label}</InputLabel>
+              <Select
+                value={currentValue}
+                label={currentConfig.label}
+                style={{
+                  fontSize:"15px",
+                  fontWeight:"bold"
+                }}
+                onChange={(e) => handleInputChange(currentConfig.id, e.target.value)}
+              >
+                {currentConfig.options.map((option, index) => (
+                  <MenuItem key={index} value={option}>
+                    {option}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          )}
+        </Box>
 
-      {/* チャットパネル - ChatBotコンポーネントを使用 */}
-      <div
-        style={{
-          width: isChatOpen ? CHAT_PANEL_WIDTH : 0,
-          minWidth: isChatOpen ? CHAT_PANEL_WIDTH : 0,
-          background: "white",
-          boxShadow: "-2px 0 10px rgba(0,0,0,0.1)",
-          zIndex: 1,
-          position: "relative",
-          transition: "width 0.3s ease-in-out",
-          overflow: "hidden",
-          display: isChatVisible ? "block" : "none",
-          padding: "60px 0px",
-        }}
-        onTransitionEnd={onChatPanelTransitionEnd}
-        className="node-edge-info"
-      >
-        {isChatVisible && isChatOpen && (
-          <ChatBot imagemap1={getNodeEdgeInfo()} />
+        {errorMessage && (
+          <Box style={{ 
+            color: '#FF1493', 
+            fontSize: '14px', 
+            marginTop: '8px',
+            textAlign: 'center',
+            fontWeight: '600'
+          }}>
+            {errorMessage}
+          </Box>
         )}
-      </div>
 
-      {/* チャット開閉ボタン */}
-      <button
-        onClick={handleChatToggle}
-        style={{
-          position: "absolute",
-          top: "50%",
-          right: isChatOpen ? CHAT_PANEL_WIDTH : 0,
-          transform: "translateY(-50%)",
-          width: isChatOpen
-            ? TOGGLE_BUTTON_WIDTH_OPEN
-            : TOGGLE_BUTTON_WIDTH_CLOSED,
-          height: TOGGLE_BUTTON_HEIGHT,
-          border: "none",
-          backgroundColor: "#3b82f6",
-          color: "white",
-          fontWeight: "bold",
-          cursor: "pointer",
-          zIndex: 2,
-          borderRadius: isChatOpen ? "8px 0 0 8px" : "8px 0 0 8px",
-          transition:
-            "right 0.3s ease-in-out, width 0.3s ease-in-out, background-color 0.2s",
-          writingMode: "vertical-rl",
-          textOrientation: "upright",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        {isChatOpen ? "チャットを閉じる" : "チャットを開く"}
-      </button>
+        <Box style={{ display: "flex", justifyContent: "center", marginTop: "24px" }}>
+          <Button
+            variant="outlined"
+            onClick={handleBack}
+            disabled={currentPage === 0}
+            style={{ minWidth: "100px",marginRight: "16px",backgroundColor:"black",color:"white" }}
+          >
+            もどる
+          </Button>
 
-      <style>{`
-        @keyframes pulse {
-          0%, 100% {
-            opacity: 1;
-            transform: translate(-50%, -50%) scale(1);
-          }
-          50% {
-            opacity: 0.8;
-            transform: translate(-50%, -50%) scale(1.05);
-          }
-        }
-      `}</style>
-    </div>
-    <NextPageLink imairu="imagemap"/>
-    </>
-  );
-}
-
-export default function MindMapTool() {
-  return (
-    <ReactFlowProvider>
-      <MindMapFlow />
-    </ReactFlowProvider>
+          {isLastPage ? (
+            <Button
+              variant="contained"
+              color="success"
+              onClick={handleSubmit}
+              style={{ minWidth: "100px",marginLeft: "16px",backgroundColor:"black" }}
+            >
+              送信
+            </Button>
+          ) : (
+            <Button
+              variant="contained"
+              onClick={handleNext}
+              style={{ minWidth: "100px",marginLeft: "16px",backgroundColor:"black" }}
+            >
+              つぎへ
+            </Button>
+          )}
+        </Box>
+      </Card>
+    </Box>
   );
 }
