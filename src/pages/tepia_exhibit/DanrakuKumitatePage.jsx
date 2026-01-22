@@ -29,6 +29,15 @@ const DanrakuKumitatePage = () => {
 
   const chatContainerRef = useRef(null);
 
+  // Markdown形式の太字をHTMLに変換する関数
+  const convertMarkdownBold = (text) => {
+    // **text** を <strong>text</strong> に変換
+    let converted = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    // *text* を <strong>text</strong> に変換（**の変換後に実行）
+    converted = converted.replace(/\*(.+?)\*/g, '<strong>$1</strong>');
+    return converted;
+  };
+
   // APIを呼び出す関数
   const callAPI = async (formData) => {
     let userMessage = "";
@@ -106,8 +115,12 @@ const DanrakuKumitatePage = () => {
     if (match) {
       let extractedArrayString = match[0];
       let array = eval(extractedArrayString);
-      console.log(array);
-      setDataArray(array);
+      
+      // 配列の各要素をMarkdown太字からHTMLに変換
+      const convertedArray = array.map(item => convertMarkdownBold(item));
+      
+      console.log(convertedArray);
+      setDataArray(convertedArray);
       scrollChatToBottom();
     }
   };
@@ -170,7 +183,7 @@ const DanrakuKumitatePage = () => {
                       </span>
                     </td>
                     <td className="td-item">
-                      {item}
+                      <span dangerouslySetInnerHTML={{ __html: item }} />
                     </td>
                   </>
                 )}
@@ -178,7 +191,7 @@ const DanrakuKumitatePage = () => {
                   <>
                     <td className="td-index"><span>{index}</span></td>
                     <td className="td-item">
-                      {item}
+                      <span dangerouslySetInnerHTML={{ __html: item }} />
                       <br />
                       <button onClick={() => copyToClipboard(item)} style={{ marginLeft: "10px" }}>
                         {t('danraku.copyButton')}
