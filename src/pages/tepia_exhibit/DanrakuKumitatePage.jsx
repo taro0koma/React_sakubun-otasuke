@@ -34,10 +34,19 @@ const DanrakuKumitatePage = () => {
 
   const chatContainerRef = useRef(null);
 
-  // Markdown形式の太字をHTMLに変換し、スラッシュを改行に変換する関数
+  // Markdown形式の太字をHTMLに変換し、スラッシュと改行文字を改行に変換する関数
   const convertMarkdownBold = (text) => {
-    // スラッシュ（/）を改行（<br/>）に変換
-    let converted = text.replace(/\//g, '<br/>');
+    let converted = text;
+    
+    // \nを<br/>に変換
+    converted = converted.replace(/\\n/g, '<br/>');
+    
+    // 実際の改行文字も<br/>に変換
+    converted = converted.replace(/\n/g, '<br/>');
+    
+    // スラッシュ（/）を<br/>に変換
+    converted = converted.replace(/\//g, '<br/>');
+    
     return converted;
   };
 
@@ -119,7 +128,7 @@ const DanrakuKumitatePage = () => {
       let extractedArrayString = match[0];
       let array = eval(extractedArrayString);
       
-      // 配列の各要素をスラッシュを改行に変換
+      // 配列の各要素をスラッシュと改行文字を改行に変換
       const convertedArray = array.map(item => convertMarkdownBold(item));
       
       console.log(convertedArray);
