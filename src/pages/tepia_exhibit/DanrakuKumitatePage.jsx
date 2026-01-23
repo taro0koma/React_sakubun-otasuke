@@ -36,21 +36,8 @@ const DanrakuKumitatePage = () => {
 
   // Markdown形式の太字をHTMLに変換し、スラッシュを改行に変換する関数
   const convertMarkdownBold = (text) => {
-    // まず既存の<strong>タグをエスケープして保護
-    let converted = text.replace(/<strong>/g, '___STRONG_OPEN___');
-    converted = converted.replace(/<\/strong>/g, '___STRONG_CLOSE___');
-    
-    // **text** を <strong>text</strong> に変換
-    converted = converted.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-    // *text* を <strong>text</strong> に変換（**の変換後に実行）
-    converted = converted.replace(/\*(.+?)\*/g, '<strong>$1</strong>');
-    
-    // エスケープしたタグを元に戻す
-    converted = converted.replace(/___STRONG_OPEN___/g, '<strong>');
-    converted = converted.replace(/___STRONG_CLOSE___/g, '</strong>');
-    
     // スラッシュ（/）を改行（<br/>）に変換
-    converted = converted.replace(/\//g, '<br/>');
+    let converted = text.replace(/\//g, '<br/>');
     return converted;
   };
 
@@ -132,7 +119,7 @@ const DanrakuKumitatePage = () => {
       let extractedArrayString = match[0];
       let array = eval(extractedArrayString);
       
-      // 配列の各要素をMarkdown太字からHTMLに変換し、スラッシュを改行に変換
+      // 配列の各要素をスラッシュを改行に変換
       const convertedArray = array.map(item => convertMarkdownBold(item));
       
       console.log(convertedArray);
