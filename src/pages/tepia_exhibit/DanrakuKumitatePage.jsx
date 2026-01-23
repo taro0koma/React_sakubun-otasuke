@@ -9,9 +9,14 @@ const DanrakuKumitatePage = () => {
   const { t } = useTranslation();
 
   const copyToClipboard = (textToCopy) => {
-    navigator.clipboard.writeText(textToCopy)
+    // HTMLタグを除去してプレーンテキストとしてコピー
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = textToCopy;
+    const plainText = tempDiv.textContent || tempDiv.innerText || '';
+    
+    navigator.clipboard.writeText(plainText)
       .then(() => {
-        console.log("Text copied to clipboard:", textToCopy);
+        console.log("Text copied to clipboard:", plainText);
       })
       .catch(err => {
         console.error("Failed to copy text: ", err);
@@ -29,12 +34,14 @@ const DanrakuKumitatePage = () => {
 
   const chatContainerRef = useRef(null);
 
-  // Markdown形式の太字をHTMLに変換する関数
+  // Markdown形式の太字をHTMLに変換し、スラッシュを改行に変換する関数
   const convertMarkdownBold = (text) => {
     // **text** を <strong>text</strong> に変換
     let converted = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
     // *text* を <strong>text</strong> に変換（**の変換後に実行）
     converted = converted.replace(/\*(.+?)\*/g, '<strong>$1</strong>');
+    // スラッシュ（/）を改行（<br/>）に変換
+    converted = converted.replace(/\//g, '<br/>');
     return converted;
   };
 
@@ -116,7 +123,7 @@ const DanrakuKumitatePage = () => {
       let extractedArrayString = match[0];
       let array = eval(extractedArrayString);
       
-      // 配列の各要素をMarkdown太字からHTMLに変換
+      // 配列の各要素をMarkdown太字からHTMLに変換し、スラッシュを改行に変換
       const convertedArray = array.map(item => convertMarkdownBold(item));
       
       console.log(convertedArray);
