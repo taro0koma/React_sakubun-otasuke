@@ -34,19 +34,23 @@ const DanrakuKumitatePage = () => {
 
   const chatContainerRef = useRef(null);
 
-  // Markdown形式の太字をHTMLに変換し、スラッシュと改行文字を改行に変換する関数
+  // Markdown形式の太字をHTMLに変換し、スラッシュを改行に変換する関数
   const convertMarkdownBold = (text) => {
-    let converted = text;
+    // まず既存の<strong>タグをエスケープして保護
+    let converted = text.replace(/<strong>/g, '___STRONG_OPEN___');
+    converted = converted.replace(/<\/strong>/g, '___STRONG_CLOSE___');
     
-    // \nを<br/>に変換
-    converted = converted.replace(/\\n/g, '<br/>');
+    // **text** を <strong>text</strong> に変換
+    converted = converted.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    // *text* を <strong>text</strong> に変換（**の変換後に実行）
+    converted = converted.replace(/\*(.+?)\*/g, '<strong>$1</strong>');
     
-    // 実際の改行文字も<br/>に変換
-    converted = converted.replace(/\n/g, '<br/>');
+    // エスケープしたタグを元に戻す
+    converted = converted.replace(/___STRONG_OPEN___/g, '<strong>');
+    converted = converted.replace(/___STRONG_CLOSE___/g, '</strong>');
     
-    // スラッシュ（/）を<br/>に変換
+    // スラッシュ（/）を改行（<br/>）に変換
     converted = converted.replace(/\//g, '<br/>');
-    
     return converted;
   };
 
@@ -128,7 +132,7 @@ const DanrakuKumitatePage = () => {
       let extractedArrayString = match[0];
       let array = eval(extractedArrayString);
       
-      // 配列の各要素をスラッシュと改行文字を改行に変換
+      // 配列の各要素をMarkdown太字からHTMLに変換し、スラッシュを改行に変換
       const convertedArray = array.map(item => convertMarkdownBold(item));
       
       console.log(convertedArray);
