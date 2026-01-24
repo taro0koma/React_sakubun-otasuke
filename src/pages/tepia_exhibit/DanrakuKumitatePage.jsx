@@ -41,16 +41,20 @@ const DanrakuKumitatePage = () => {
     converted = converted.replace(/<\/strong>/g, '___STRONG_CLOSE___');
     
     // **text** を <strong>text</strong> に変換
-    converted = converted.replace(/\*\*(.+?)\*\*/gs, '<strong>$1</strong>');
+    // converted = converted.replace(/\*\*(.+?)\*\*/gs, '<strong>$1</strong>');
+    converted = converted.replace(/\*\*([\s\S]+?)\*\*/g, '<strong>$1</strong>');
+
     // *text* を <strong>text</strong> に変換（**の変換後に実行）
-    converted = converted.replace(/\*(.+?)\*/gs, '<strong>$1</strong>');
+    // converted = converted.replace(/\*(.+?)\*/gs, '<strong>$1</strong>');
+    converted = converted.replace(/\*([\s\S]+?)\*/g, '<strong>$1</strong>');
     
     // エスケープしたタグを元に戻す
     converted = converted.replace(/___STRONG_OPEN___/g, '<strong>');
     converted = converted.replace(/___STRONG_CLOSE___/g, '</strong>');
     
     // スラッシュ（/）を改行（<br/>）に変換
-    converted = converted.replace(/\//g, '<br/>');
+    // converted = converted.replace(/\//g, '<br/>');
+    converted = converted.replace(/\/n/g, '<br/>');
     return converted;
   };
 
