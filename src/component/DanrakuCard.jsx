@@ -109,28 +109,28 @@ const compositionConfig = [
   {
     id: 'want1',
     image: '/images/danraku1.png',
-    question: '伝えたいことの1つめを教えてね',
+    question: 'つたえたいことの1つめを教えてね',
     type: 'textarea',
     placeholder: '１つめにかきたいこと'
   },
   {
     id: 'want2',
     image: '/images/danraku2.png',
-    question: '伝えたいことの２つめを教えてね',
+    question: 'つたえたいことの２つめを教えてね',
     type: 'textarea',
     placeholder: '２つめにかきたいこと'
   },
   {
     id: 'want3',
     image: '/images/danraku3.png',
-    question: '伝えたいことの３つめを教えてね',
+    question: 'つたえたいことの３つめを教えてね',
     type: 'textarea',
     placeholder: '３つめにかきたいこと'
   },
   {
     id: 'want4',
     image: '/images/danraku4.png',
-    question: '伝えたいことの４つめを教えてね\n（なかったらとばしてもいいよ）',
+    question: 'つたえたいことの４つめを教えてね\n（なかったらとばしてもいいよ）',
     type: 'textarea',
     placeholder: '４つめにかきたいこと',
     optional: true
