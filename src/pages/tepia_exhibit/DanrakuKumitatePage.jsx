@@ -127,6 +127,7 @@ const DanrakuKumitatePage = () => {
   };
 
   const addAnswer = (value) => {
+    console.log("生のAIデーター", value);
     let match = value.match(regex);
     if (match) {
       let extractedArrayString = match[0];
@@ -209,7 +210,7 @@ const DanrakuKumitatePage = () => {
                     <td className="td-item">
                       <span dangerouslySetInnerHTML={{ __html: item }} />
                       <br />
-                      <button onClick={() => copyToClipboard(item)} style={{ marginLeft: "10px" }}>
+                      <button onClick={() => copyToClipboard(item)} style={{ marginLeft: "10px",marginTop:"30px",boxShadow:"1px 1px 2px rgba(0,0,0,0.2)" }}>
                         {t('danraku.copyButton')}
                       </button>
                     </td>
@@ -260,7 +261,7 @@ const DanrakuKumitatePage = () => {
       ))}
       
       <h2 className="pagetitle" style={{marginTop:"100px"}}>{t("tabs.danraku")}</h2>
-      <p>{t('danraku.intro1')}<br/>{t('danraku.intro2')}</p>
+      <p style={{lineHeight:"200%",fontWeight:"bold",fontSize:"19px"}}>{t('danraku.intro1')}<br/>{t('danraku.intro2')}</p>
       
       {isModalOpen && currentSensei === " " && (
         <ModalFrame
