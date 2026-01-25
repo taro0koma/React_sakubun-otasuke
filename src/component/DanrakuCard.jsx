@@ -70,7 +70,7 @@ const bookReviewConfig = [
   {
     id: 'arasuji',
     image: '/images/bookContents.png',
-    question: 'その本にはどんなことがかかれていたかな',
+    question: 'その本にはどんなことが\nかかれていたかな',
     type: 'textarea',
     placeholder: 'あらすじ'
   },
@@ -393,7 +393,7 @@ export default function DanrakuCard({ onSubmit }) {
 
         <StepIndicator currentStep={currentPage} totalSteps={totalPages} />
 
-        <Box style={{ flex: 1, overflowY: "auto", display: "flex", flexDirection: "column", gap: "24px" }}>
+        <Box style={{ flex: 1, overflowY: "auto", display: "flex", flexDirection: "column", gap: "24px", width:"400px", margin:"auto" }}>
           <img 
             src={getTeacherImage()} 
             alt={`Step ${currentPage + 1}`}
