@@ -72,7 +72,7 @@ const bookReviewConfig = [
     image: '/images/bookContents.png',
     question: 'その本にはどんなことが\nかかれていたかな',
     type: 'textarea',
-    placeholder: 'あらすじ'
+    placeholder: '川でひろった もも から生まれた 桃太郎 が、きびだんご をもって・・・'
   },
   {
     id: 'kokoro',

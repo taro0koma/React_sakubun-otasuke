@@ -113,6 +113,7 @@ input{
 textarea{
   font-family: "Noto Sans JP", sans-serif;
   font-weight: 400;
+  line-height: 1.5 !important;
 }
 h5{
   margin-bottom: 1em;
@@ -1744,7 +1745,7 @@ td:last-child{
   font-weight: 700 !important;
   height: auto;
   letter-spacing: .1rem;
-  line-height: 1.8rem;
+  line-height: 1.3;
   padding: 1.8rem 3.0rem !important;
   text-align: center;
   text-decoration: none;
@@ -1752,6 +1753,10 @@ td:last-child{
   white-space: nowrap;
   font-family: "Noto Sans JP", sans-serif;
   font-weight: 400;
+}
+
+.MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-colorPrimary.MuiInputBase-fullWidth.MuiInputBase-formControl.MuiInputBase-multiline.css-zsp0bh-MuiInputBase-root-MuiOutlinedInput-root{
+  line-height: 1.3;
 }
 
 /* AIレスポンス部分のスタイリング */
